@@ -22,4 +22,8 @@ public class UserService {
 	public User authenticate(String username, String password){
 		return userDAO.authenticate(username, password);
 	}
+	
+	public User getUser(int id){
+		return userDAO.getUser(id);
+	}
 }

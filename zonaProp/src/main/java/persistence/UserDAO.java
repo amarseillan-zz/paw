@@ -23,9 +23,9 @@ public class UserDAO extends DAO {
 
 			ResultSet results = stmt.executeQuery();
 			if (results.next()) {
-				user = new User(id, results.getString(1), results.getString(2),
-						results.getString(3), results.getString(4),
-						results.getString(5), results.getString(6));
+				user = new User(id, results.getString(2), results.getString(3),
+						results.getString(4), results.getString(5),
+						results.getString(6), results.getString(7));
 			}
 			connection.close();
 		} catch (SQLException e) {
