@@ -37,6 +37,10 @@ public class PublicationService {
 		return pDAO.getAll(userId);
 	}
 	
+	public List<Publication> advancedSearch(int type, int operation_type, int maxPrice, int minPrice){
+		return pDAO.advancedSearch(type, operation_type, maxPrice, minPrice);
+	}
+	
 	public void update(Publication p){
 		pDAO.updatePublication(p);
 	}

@@ -5,16 +5,17 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import transfer.bussiness.Publication;
 
 public class PublicationDAO extends DAO {
-
+	public static final int EMPTY=-1;
 	public PublicationDAO() {
 		super();
 	}
-	
+
 	public Publication getPublication(int pid) {
 		Publication p = null;
 		try {
@@ -40,8 +41,8 @@ public class PublicationDAO extends DAO {
 		return p;
 	}
 
-	
-	
+
+
 	public Publication createPublication(Publication p) {
 		try {
 			Connection connection = manager.getConnection();
@@ -74,35 +75,35 @@ public class PublicationDAO extends DAO {
 			ResultSet results = stmt.executeQuery();
 			if (results.next()) {
 				p = new Publication( results.getInt(1),
-				p.getUserId(),
-				p.getType(),
-				p.getOperation_type(),
-				p.getAddress(),
-				p.getCity(),
-				p.getPrice(),
-				p.getEnvironments(),
-				p.getCovered(),
-				p.getUncovered(),
-				p.getAge(),
-				p.isCable(),
-				p.isPhone(),
-				p.isPool(),
-				p.isLiving(),
-				p.isPaddle(),
-				p.isBarbecue(),
-				p.getDescription());
+						p.getUserId(),
+						p.getType(),
+						p.getOperation_type(),
+						p.getAddress(),
+						p.getCity(),
+						p.getPrice(),
+						p.getEnvironments(),
+						p.getCovered(),
+						p.getUncovered(),
+						p.getAge(),
+						p.isCable(),
+						p.isPhone(),
+						p.isPool(),
+						p.isLiving(),
+						p.isPaddle(),
+						p.isBarbecue(),
+						p.getDescription());
 			}
-			
+
 			connection.close();
 		} catch (SQLException e) {
 			throw new DatabaseException(e.getMessage(), e);
 		}
 		return p;
 	}
-	
+
 	public List<Publication> getAll(int userId) {
 		List<Publication> pList = new ArrayList<Publication>();
-		
+
 		try {
 			Connection connection = manager.getConnection();
 			PreparedStatement stmt = connection
@@ -126,8 +127,59 @@ public class PublicationDAO extends DAO {
 		}
 		return pList;
 	}
-	
-	
+
+	public List<Publication> advancedSearch(int type,int operation_type, int maxPrice, int minPrice) {
+		List<Publication> pList = new ArrayList<Publication>();
+
+		try {
+			Connection connection = manager.getConnection();
+			PreparedStatement stmt ;
+			LinkedList<String> l = new LinkedList<String>();
+			if(type!=EMPTY){
+				l.add("type = " + type);
+			}
+			if(operation_type!=EMPTY){
+				l.add("operation_type = " + operation_type);
+			}
+			if(maxPrice!=EMPTY){
+				l.add("price <= " + maxPrice);
+			}
+			if(minPrice!=EMPTY){
+				l.add("price >= " + minPrice);
+			}
+			String aux = "SELECT * FROM PUBLICATION";
+			if(l.size()>0){
+				int i=0;
+				while(i<l.size()){
+					if(i==0){
+						aux.concat(" where ");
+					}else{
+						aux.concat(" and ");
+					}
+					aux.concat(l.get(i));
+				}
+			}
+			stmt=connection
+					.prepareStatement(aux);
+
+			ResultSet results = stmt.executeQuery();
+			while (results.next()) {
+				Publication p = new Publication(results.getInt(1), results.getInt(2),
+						results.getInt(3), results.getInt(4),
+						results.getString(5), results.getString(6), results.getFloat(7), results.getInt(8),
+						results.getFloat(9), results.getFloat(10),
+						results.getInt(11), results.getBoolean(12), results.getBoolean(13), results.getBoolean(14),
+						results.getBoolean(15), results.getBoolean(16),
+						results.getBoolean(17), results.getString(18));
+				pList.add(p);
+			}
+			connection.close();
+		} catch (SQLException e) {
+			throw new DatabaseException(e.getMessage(), e);
+		}
+		return pList;
+	}
+
 	public void updatePublication(Publication p) {
 		try {
 			Connection connection = manager.getConnection();
@@ -160,5 +212,5 @@ public class PublicationDAO extends DAO {
 		}
 		return;
 	}
-	
+
 }
