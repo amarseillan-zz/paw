@@ -1,7 +1,7 @@
 package services;
 
 import persistence.UserDAO;
-import transfer.User;
+import transfer.bussiness.User;
 
 public class UserService {
 
@@ -23,12 +23,16 @@ public class UserService {
 		return userDAO.authenticate(username, password);
 	}
 	
-	public User createUser(User user){
+
+	public User createUser(transfer.bussiness.User user){
 		return userDAO.createUser(user);
 	}
 
-	public boolean userAlreadyExist(User user) {
+	public boolean userAlreadyExist(transfer.bussiness.User user) {
 		return userDAO.userAlreadyExist(user);
-		
+	}
+	
+	public User getUser(int id){
+		return userDAO.getUser(id);
 	}
 }

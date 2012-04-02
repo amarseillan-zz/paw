@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import services.UserService;
-import transfer.User;
 
 public class SignUp extends HttpServlet {
 
@@ -24,7 +23,7 @@ public class SignUp extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		
-		User user = null;				
+		transfer.bussiness.User user = null;				
 		String username = req.getParameter("username");
 		String password1 = req.getParameter("password1");
 		String password2 = req.getParameter("password2");
@@ -37,7 +36,7 @@ public class SignUp extends HttpServlet {
 		
 		if( user != null ){
 			req.getSession().setAttribute("user", user);
-			resp.sendRedirect("");
+			resp.sendRedirect("publicationList");
 		} else {
 			req.setAttribute("username", username);
 			req.setAttribute("name", name);
@@ -49,13 +48,13 @@ public class SignUp extends HttpServlet {
 		}
 	}
 	
-	private User createNewUser(String name, String lastName, String email,
+	private transfer.bussiness.User createNewUser(String name, String lastName, String email,
 			String phone, String username, String password1, String password2) {
 		
-		if(!User.validParams(name, lastName, email, phone, username, password1, password2))
+		if(!transfer.bussiness.User.validParams(name, lastName, email, phone, username, password1, password2))
 			return null;
 		
-		User user = new User(0, name, lastName, email, phone, username, password1);	
+		transfer.bussiness.User user = new transfer.bussiness.User(0, name, lastName, email, phone, username, password1);	
 		
 		UserService us = UserService.getInstance();
 		

@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import transfer.User;
+import transfer.bussiness.User;
 
 public class UserDAO extends DAO {
 
@@ -18,14 +18,14 @@ public class UserDAO extends DAO {
 		try {
 			Connection connection = manager.getConnection();
 			PreparedStatement stmt = connection
-					.prepareStatement("SELECT * FROM SYS_USER WHERE id = ?");
+					.prepareStatement("SELECT * FROM SYS_USER WHERE userid = ?");
 			stmt.setInt(1, id);
 
 			ResultSet results = stmt.executeQuery();
 			if (results.next()) {
-				user = new User(id, results.getString(1), results.getString(2),
-						results.getString(3), results.getString(4),
-						results.getString(5), results.getString(6));
+				user = new User(id, results.getString(2), results.getString(3),
+						results.getString(4), results.getString(5),
+						results.getString(6), results.getString(7));
 			}
 			connection.close();
 		} catch (SQLException e) {
@@ -72,7 +72,7 @@ public class UserDAO extends DAO {
 		return false;
 	}
 	
-	public User createUser(User user) {
+	public User createUser(transfer.bussiness.User user) {
 		try {
 			Connection connection = manager.getConnection();
 			PreparedStatement stmt = connection

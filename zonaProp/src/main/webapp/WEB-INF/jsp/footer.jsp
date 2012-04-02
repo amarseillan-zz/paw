@@ -1,3 +1,6 @@
-		<div class="footer">Proyecto de Aplicaciones web</div>
-	</body>
+
+
+</div>
+<div class="footer">Proyecto de Aplicaciones web</div>
+</body>
 </html>

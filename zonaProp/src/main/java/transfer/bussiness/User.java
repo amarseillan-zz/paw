@@ -1,4 +1,4 @@
-package transfer;
+package transfer.bussiness;
 
 public class User {
 
@@ -79,5 +79,4 @@ public class User {
 	public String getPassword() {
 		return password;
 	}
-
 }
