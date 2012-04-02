@@ -1,5 +1,8 @@
 package transfer.forms;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import transfer.bussiness.Publication;
 
 public class PublicationForm {
@@ -7,7 +10,7 @@ public class PublicationForm {
 	private int publicationId;
 	private int userId;
 	private int type;
-	int operation_type;
+	private int operation_type;
 	private String address;
 	private String city;
 	private String price;
@@ -42,6 +45,32 @@ public class PublicationForm {
 		paddle = false;
 		barbecue = false;
 		description = "";
+	}
+
+	public PublicationForm(int publicationId, int userId, int type,
+			int operation_type, String address, String city, String price,
+			int environments, String covered, String uncovered, String age,
+			boolean cable, boolean phone, boolean pool, boolean living,
+			boolean paddle, boolean barbecue, String description) {
+		super();
+		this.publicationId = publicationId;
+		this.userId = userId;
+		this.type = type;
+		this.operation_type = operation_type;
+		this.address = address;
+		this.city = city;
+		this.price = price;
+		this.environments = environments;
+		this.covered = covered;
+		this.uncovered = uncovered;
+		this.age = age;
+		this.cable = cable;
+		this.phone = phone;
+		this.pool = pool;
+		this.living = living;
+		this.paddle = paddle;
+		this.barbecue = barbecue;
+		this.description = description;
 	}
 
 	public PublicationForm(Publication p) {
@@ -218,4 +247,8 @@ public class PublicationForm {
 		this.description = description;
 	}
 
+	public List<String> validate(){
+		List<String> errors = new ArrayList<String>();
+		return errors;
+	}
 }
