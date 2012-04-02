@@ -21,12 +21,16 @@ public class PublicationList extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		
-		int userId = Integer.parseInt(req.getParameter("userId"));
-		PublicationService ps = PublicationService.getInstance();
-		List<PublicationForm> pfList = ps.getAllAsPublicationForms(userId);
-		req.setAttribute("pList", pfList);
-		req.getRequestDispatcher("/WEB-INF/jsp/publicationList.jsp").forward(req, resp);
+		try {
+			int userId = Integer.parseInt(req.getParameter("userId"));
+			PublicationService ps = PublicationService.getInstance();
+			List<PublicationForm> pfList = ps.getAllAsPublicationForms(userId);
+			req.setAttribute("pList", pfList);
+			req.getRequestDispatcher("/WEB-INF/jsp/publicationList.jsp")
+					.forward(req, resp);
+		} catch (NumberFormatException nfe) {
+			resp.sendError(400);
+		}
 	}
 
 }
