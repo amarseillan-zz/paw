@@ -25,25 +25,25 @@ public class User {
 	public static boolean validParams(String name, String lastName, String email,
 			String phone, String username, String password1, String password2) {
 		
-		if(name.length() < 5 || name.length() > 20)
+		if(name.length() < 3 || name.length() > 20)
 				return false;
 		
-		if(lastName.length() < 5 || lastName.length() > 20)
+		if(lastName.length() < 3 || lastName.length() > 20)
 			return false;
 		
-		if(username.length() < 5 || username.length() > 20)
+		if(username.length() < 3 || username.length() > 20)
 			return false;
 		
-		if(email.length() < 5 || email.length() > 40)
+		if(email.length() < 3 || email.length() > 40)
 			return false;
 		
-		if(phone.length() < 5 || phone.length() > 15)
+		if(phone.length() < 3 || phone.length() > 15)
 			return false;
 		
-		if(password1.length() < 5 || password1.length() > 20)
+		if(password1.length() < 6 || password1.length() > 20)
 			return false;
 	
-		if(password2.length() < 5 || password2.length() > 20)
+		if(password2.length() < 6 || password2.length() > 20)
 			return false;
 		
 		if(!password1.equals(password2))

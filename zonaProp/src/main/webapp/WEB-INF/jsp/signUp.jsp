@@ -25,11 +25,11 @@
 	</div>
 	<div class="fieldset">
 		<label for="password">(*)Contrase&ntilde;a:</label>
-		<input type="password1" name="password1"/>
+		<input type="password" name="password1"/>
 	</div>
 	<div class="fieldset">
 		<label for="password">(*)Ingrese contrase&ntilde;a nuevamente:</label>
-		<input type="password2" name="password2"/>
+		<input type="password" name="password2"/>
 	</div>
 	<div class="form-buttons">
 		<input type="submit" name="submit" value="Ingresar" />

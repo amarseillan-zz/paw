@@ -30,4 +30,12 @@ public class Publication extends HttpServlet {
 			resp.sendError(400);
 		}
 	}
+	
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp){
+		System.out.println(req.getParameter("name"));
+		System.out.println(req.getParameter("phone"));
+		System.out.println(req.getParameter("email"));
+		System.out.println(req.getParameter("comment"));
+	}
 }

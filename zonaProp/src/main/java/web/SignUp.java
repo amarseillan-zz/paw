@@ -2,6 +2,8 @@ package web;
 
 import java.io.IOException;
 
+import transfer.bussiness.User;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -12,6 +14,7 @@ import services.UserService;
 public class SignUp extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
+	private static String error = "";
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -23,7 +26,7 @@ public class SignUp extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		
-		transfer.bussiness.User user = null;				
+		User user = null;				
 		String username = req.getParameter("username");
 		String password1 = req.getParameter("password1");
 		String password2 = req.getParameter("password2");
@@ -36,27 +39,31 @@ public class SignUp extends HttpServlet {
 		
 		if( user != null ){
 			req.getSession().setAttribute("user", user);
-			resp.sendRedirect("publicationList");
+			resp.sendRedirect("publicationList?userId=" + user.getId());
 		} else {
 			
-			req.setAttribute("user", new transfer.bussiness.User(0, name, lastName, email,phone, username, ""));
-			req.setAttribute("error", "Datos ingresados incorrectos");
+			req.setAttribute("user", new User(0, name, lastName, email,phone, username, ""));
+			req.setAttribute("error", error);
 			req.getRequestDispatcher("/WEB-INF/jsp/signUp.jsp").forward(req, resp);
 		}
 	}
 	
-	private transfer.bussiness.User createNewUser(String name, String lastName, String email,
+	private User createNewUser(String name, String lastName, String email,
 			String phone, String username, String password1, String password2) {
 		
-		if(!transfer.bussiness.User.validParams(name, lastName, email, phone, username, password1, password2))
+		if(!User.validParams(name, lastName, email, phone, username, password1, password2)){
+			error = "Datos ingresados incorrectos.";
 			return null;
+		}
 		
-		transfer.bussiness.User user = new transfer.bussiness.User(0, name, lastName, email, phone, username, password1);	
+		User user = new User(0, name, lastName, email, phone, username, password1);	
 		
 		UserService us = UserService.getInstance();
 		
-		if(us.userAlreadyExist(user))
-			return null;					
+		if(us.userAlreadyExist(user)){
+			error = "Ya existe un usuario con ese nombre.";
+			return null;				
+		}
 		
 		user = us.createUser(user);
 		

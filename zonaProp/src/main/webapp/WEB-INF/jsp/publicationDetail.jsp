@@ -7,82 +7,78 @@
 								<div class="control-group">
 									<label class="control-label" for="type">Tipo de propiedad</label>
 										<div class="controls">
-              								<select id="type">
-    								            <option>something</option>
-    								            <option>2</option>
-     								  	        <option>3</option>
-    								            <option>4</option>
-    								            <option>5</option>
+              								<select name="type">
+              									<c:forEach items="${typeList}" var="propertyType">
+    								            	<option value="${propertyType.pos}">${propertyType.description}</option>
+												</c:forEach>
      								         </select>
       							      </div>
 								</div>
 								<div class="control-group">
 									<label class="control-label" for="operation_type">Tipo de operaci&oacute;n</label>
 										<div class="controls">
-              								<select id="operation_type">
-    								            <option>something</option>
-    								            <option>2</option>
-     								  	        <option>3</option>
-    								            <option>4</option>
-    								            <option>5</option>
+              								<select name="operation_type">
+              									<c:forEach items="${oTypeList}" var="operationType">
+    								            	<option value="${operationType.pos}">${operationType.description}</option>
+												</c:forEach>
      								         </select>
       							      </div>
 								</div>
 								<div class="control-group">
         						    <label class="control-label" for="address">Direcci&oacute;n</label>
         						    <div class="controls">
-        						    	<input type="text" class="input-xlarge" id="address" value="${publication.address}">
+        						    	<input type="text" class="input-xlarge" name="address" value="${publication.address}">
        							    </div>
           						</div>
 								<div class="control-group">
         						    <label class="control-label" for="city">Ciudad</label>
         						    <div class="controls">
-        						    	<input type="text" class="input-xlarge" id="city" value="${publication.city}">
+        						    	<input type="text" class="input-xlarge" name="city" value="${publication.city}">
        							    </div>
           						</div>
 								<div class="control-group">
         						    <label class="control-label" for="price">Precio</label>
         						    <div class="controls">
-        						    	<input type="text" class="input-xlarge" id="price" value="${publication.price}">
+        						    	<input type="text" class="input-xlarge" name="price" value="${publication.price}">
        							    </div>
           						</div>
 								<div class="control-group">
 									<label class="control-label" for="environments">N&uacute;mero de ambientes</label>
 										<div class="controls">
-              								<select id="enviroments">
-    								            <option>1</option>
-    								            <option>2</option>
-     								  	        <option>3</option>
-    								            <option>4</option>
-    								            <option>5</option>
-    								            <option>6</option>
-    								            <option>7</option>
+              								<select name="environments">
+    								            <option value="1">1</option>
+    								            <option value="2">2</option>
+     								  	        <option value="3">3</option>
+    								            <option value="4">4</option>
+    								            <option value="5">5</option>
+    								            <option value="6">6</option>
+    								            <option value="7">7</option>
      								         </select>
       							      </div>
 								</div>
 								<div class="control-group">
         						    <label class="control-label" for="covered">Superficie cubierta</label>
         						    <div class="controls">
-        						    	<input type="text" class="input-xlarge" id="covered" value="${publication.covered}">
+        						    	<input type="text" class="input-xlarge" name="covered" value="${publication.covered}">
        							    </div>
           						</div>
 								<div class="control-group">
         						    <label class="control-label" for="uncovered">Superficie descubierta</label>
         						    <div class="controls">
-        						    	<input type="text" class="input-xlarge" id="uncovered" value="${publication.uncovered}">
+        						    	<input type="text" class="input-xlarge" name="uncovered" value="${publication.uncovered}">
        							    </div>
 								</div>
 								<div class="control-group">
         						    <label class="control-label" for="age">Antigüedad</label>
         						    <div class="controls">
-        						    	<input type="text" class="input-xlarge" id="age" value="${publication.age}">
+        						    	<input type="text" class="input-xlarge" name="age" value="${publication.age}">
        							    </div>
           						</div>
           						<div class="control-group">
             						<label class="control-label" for="cable">Cable</label>
             						<div class="controls">
               							<label class="checkbox">
-                							<input type="checkbox" id="cable" checked="${publication.cable}">
+                							<input type="checkbox" name="cable" checked="${publication.cable}">
               							</label>
             						</div>
           						</div>
@@ -90,7 +86,7 @@
             						<label class="control-label" for="phone">Tel&eacute;fono</label>
             						<div class="controls">
               							<label class="checkbox">
-                							<input type="checkbox" id="phone" checked="${publication.phone}">
+                							<input type="checkbox" name="phone" checked="${publication.phone}">
               							</label>
             						</div>
           						</div>
@@ -98,7 +94,7 @@
             						<label class="control-label" for="pool">Pileta</label>
             						<div class="controls">
               							<label class="checkbox">
-                							<input type="checkbox" id="pool" checked="${publication.pool}">
+                							<input type="checkbox" name="pool" checked="${publication.pool}">
               							</label>
             						</div>
           						</div>
@@ -106,7 +102,7 @@
             						<label class="control-label" for="living">Sal&oacute;n</label>
             						<div class="controls">
               							<label class="checkbox">
-                							<input type="checkbox" id="living" checked="${publication.living}">
+                							<input type="checkbox" name="living" checked="${publication.living}">
               							</label>
             						</div>
           						</div>
@@ -114,7 +110,7 @@
             						<label class="control-label" for="paddle">Cancha de paddle</label>
             						<div class="controls">
               							<label class="checkbox">
-                							<input type="checkbox" id="paddle" checked="${publication.paddle}">
+                							<input type="checkbox" name="paddle" checked="${publication.paddle}">
               							</label>
             						</div>
           						</div>
@@ -122,14 +118,14 @@
             						<label class="control-label" for="barbecue">Quincho</label>
             						<div class="controls">
               							<label class="checkbox">
-                							<input type="checkbox" id="barbecue" checked="${publication.barbecue}">
+                							<input type="checkbox" name="barbecue" checked="${publication.barbecue}">
               							</label>
             						</div>
           						</div>
 								<div class="control-group">
            							<label class="control-label" for="description">Descripci&oacute;n</label>
             						<div class="controls">
-              							<textarea class="input-xlarge" id="description" rows="3" style="margin-top: 0px; margin-bottom: 0px; height: 54px; margin-left: 0px; margin-right: 0px; width: 533px; ">${publication.description}</textarea>
+              							<textarea class="input-xlarge" name="description" rows="3" style="margin-top: 0px; margin-bottom: 0px; height: 54px; margin-left: 0px; margin-right: 0px; width: 533px; ">${publication.description}</textarea>
          							</div>
         					  	</div>
         					  	
@@ -142,16 +138,3 @@
 							</fieldset>
 						</form>
 <%@ include file="footer.jsp" %>
-
-
-						
-						
-						<%-- 	
-	private String age;
-	private boolean cable;
-	private boolean phone;
-	private boolean pool;
-	private boolean living;
-	private boolean paddle;
-	private boolean barbecue;
-	private String description;--%>
