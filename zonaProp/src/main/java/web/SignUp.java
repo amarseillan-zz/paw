@@ -38,11 +38,8 @@ public class SignUp extends HttpServlet {
 			req.getSession().setAttribute("user", user);
 			resp.sendRedirect("publicationList");
 		} else {
-			req.setAttribute("username", username);
-			req.setAttribute("name", name);
-			req.setAttribute("lastname", lastName);
-			req.setAttribute("mail", email);
-			req.setAttribute("phone", phone);
+			
+			req.setAttribute("user", new transfer.bussiness.User(0, name, lastName, email,phone, username, ""));
 			req.setAttribute("error", "Datos ingresados incorrectos");
 			req.getRequestDispatcher("/WEB-INF/jsp/signUp.jsp").forward(req, resp);
 		}
