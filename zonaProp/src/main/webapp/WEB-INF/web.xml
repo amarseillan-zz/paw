@@ -12,4 +12,20 @@
 		<servlet-name>Login</servlet-name>
 		<url-pattern>/login</url-pattern>
 	</servlet-mapping>
+	<servlet>
+		<servlet-name>PublicationList</servlet-name>
+		<servlet-class>web.PublicationList</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>PublicationList</servlet-name>
+		<url-pattern>/publicationList</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>PublicationABM</servlet-name>
+		<servlet-class>web.PublicationABM</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>PublicationABM</servlet-name>
+		<url-pattern>/publicationDetail</url-pattern>
+	</servlet-mapping>
 </web-app>

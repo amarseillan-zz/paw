@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import transfer.User;
+import transfer.bussiness.User;
 
 public class UserDAO extends DAO {
 
@@ -18,7 +18,7 @@ public class UserDAO extends DAO {
 		try {
 			Connection connection = manager.getConnection();
 			PreparedStatement stmt = connection
-					.prepareStatement("SELECT * FROM SYS_USER WHERE id = ?");
+					.prepareStatement("SELECT * FROM SYS_USER WHERE userid = ?");
 			stmt.setInt(1, id);
 
 			ResultSet results = stmt.executeQuery();

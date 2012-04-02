@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import services.UserService;
-import transfer.User;
+import transfer.bussiness.User;
 
 public class Login extends HttpServlet {
 
@@ -32,7 +32,7 @@ public class Login extends HttpServlet {
 		User user = us.authenticate(username, password);
 		if( user != null ){
 			req.getSession().setAttribute("user", user);
-			resp.sendRedirect("");
+			resp.sendRedirect("publicationList");
 		} else {
 			req.setAttribute("username", username);
 			req.setAttribute("error", "Nombre de usuario o contrase–a inv‡lidos");

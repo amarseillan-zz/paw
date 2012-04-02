@@ -1,7 +1,7 @@
 package services;
 
 import persistence.UserDAO;
-import transfer.User;
+import transfer.bussiness.User;
 
 public class UserService {
 
