@@ -32,10 +32,10 @@ public class Login extends HttpServlet {
 		User user = us.authenticate(username, password);
 		if( user != null ){
 			req.getSession().setAttribute("user", user);
-			resp.sendRedirect("publicationList");
+			resp.sendRedirect("publicationList?userId=" + user.getId());
 		} else {
 			req.setAttribute("username", username);
-			req.setAttribute("error", "Nombre de usuario o contrase–a inv‡lidos");
+			req.setAttribute("error", "Nombre de usuario o contraseï¿½a invï¿½lidos");
 			req.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(req, resp);
 		}
 	}

@@ -1,9 +1,11 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import persistence.PublicationDAO;
 import transfer.bussiness.Publication;
+import transfer.forms.PublicationForm;
 
 public class PublicationService {
 
@@ -35,6 +37,18 @@ public class PublicationService {
 	
 	public List<Publication> getAll(int userId){
 		return pDAO.getAll(userId);
+	}
+	
+	
+	public List<PublicationForm> getAllAsPublicationForms(int userId){
+		
+		List<Publication> pList = pDAO.getAll(userId);
+		List<PublicationForm> pfList = new ArrayList<PublicationForm>();
+		for( Publication p: pList){
+			pfList.add(new PublicationForm(p));
+		}
+		
+		return pfList;
 	}
 	
 	public List<Publication> advancedSearch(int type, int operation_type, int maxPrice, int minPrice){
