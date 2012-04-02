@@ -36,4 +36,12 @@
 		<servlet-name>User</servlet-name>
 		<url-pattern>/user</url-pattern>
 	</servlet-mapping>
+	<servlet>
+		<servlet-name>Publication</servlet-name>
+		<servlet-class>web.Publication</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Publication</servlet-name>
+		<url-pattern>/publication</url-pattern>
+	</servlet-mapping>
 </web-app>
