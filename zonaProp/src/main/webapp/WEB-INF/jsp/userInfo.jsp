@@ -1,5 +1,5 @@
 
-					<div>
+					<div class="well">
 						<h3>
 							Datos del publicador:
 						</h3>

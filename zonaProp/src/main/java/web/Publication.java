@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import services.PublicationService;
+import services.UserService;
 
 public class Publication extends HttpServlet {
 
@@ -31,10 +32,19 @@ public class Publication extends HttpServlet {
 	}
 	
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp){
-		System.out.println(req.getParameter("name"));
-		System.out.println(req.getParameter("phone"));
-		System.out.println(req.getParameter("email"));
-		System.out.println(req.getParameter("comment"));
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+		throws ServletException, IOException{
+		
+		int publicationId = Integer.parseInt(req.getParameter("publicationId"));
+		PublicationService ps = PublicationService.getInstance();
+		req.setAttribute("publication", ps.getPublication(publicationId));
+		
+		int userId = ps.getPublication(publicationId).getUserId();
+		UserService us = UserService.getInstance();
+		req.setAttribute("user", us.getUser(userId));
+		
+		
+		req.getRequestDispatcher("/WEB-INF/jsp/publication.jsp").forward(req,
+				resp);
 	}
 }

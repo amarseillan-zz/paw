@@ -1,12 +1,16 @@
 
 <%@ include file="header.jsp" %>
+				<c:if test="${empty publication}">
+					<h3>
+						La publicacion es inexistente o fue dada de baja.
+					</h3>
+				</c:if>
+				<c:if test="${not empty publication}">
+					<c:if test="${not empty user}">
+						<%@ include file="userInfo.jsp" %>
+					</c:if>
 					
-					<form method="Get" action="publicationList">
-						<input type="hidden" name="userId" value=${publication.userId} class="span3" />
-						<input type="submit" value="Volver" class="btn" />
-					</form> 
-					
-					<div>
+					<div class="well">
 						<h3>
 							Publicacion:
 						</h3>
@@ -33,13 +37,15 @@
 							<label for="email">E-mail:</label>
 							<input type="text" name="email" class="span3" />
 							
+							<input type="hidden" name="publicationId" value="${publication.publicationId}"/>
+							
 							<label for="comment">Comentario:</label>
 							<textarea name="comment" rows="10" cols="20"></textarea>
 							<br/>
 							<input type="submit" name="submit" value="Enviar" class="btn" />
 							<span class="help-inline">${error}</span>
 					</form>
-					
+				</c:if>
 					
 						
 <%@ include file="footer.jsp" %>
