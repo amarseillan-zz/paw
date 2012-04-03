@@ -23,7 +23,10 @@
 		<td>${publication.city}</td>
 		<td>${publication.price}</td>
 		<td>
-			<a href="<c:url value="publicationView"><c:param name="id" value="${publication.publicationId}" /></c:url>">
+			<a href="<c:url value="publication">
+					<c:param name="publicationId" value="${publication.publicationId}" />
+					<c:param name="userId" value="${publication.userId}" />
+				</c:url>">
 				ver
 			</a>
 		</td>
