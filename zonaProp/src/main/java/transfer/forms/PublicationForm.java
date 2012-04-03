@@ -3,6 +3,7 @@ package transfer.forms;
 import java.util.ArrayList;
 import java.util.List;
 
+import services.ComboService;
 import transfer.bussiness.Publication;
 
 public class PublicationForm {
@@ -10,7 +11,9 @@ public class PublicationForm {
 	private int publicationId;
 	private int userId;
 	private int type;
+	private String typeDesc=null;
 	private int operation_type;
+	private String operationTypeDesc=null;
 	private String address;
 	private String city;
 	private String price;
@@ -247,6 +250,28 @@ public class PublicationForm {
 		this.description = description;
 	}
 
+	public String getTypeDesc(){
+		if(typeDesc == null){
+			ComboService cs = ComboService.getInstance();
+			List<Combo> typeList = cs.getTypes();
+			List<Combo> oTypeList = cs.getOperationTypes();
+			typeDesc = typeList.get(type-1).getDescription();
+			operationTypeDesc = oTypeList.get(operation_type-1).getDescription();
+		}
+		return typeDesc;
+	}
+	
+	public String getOperationTypeDesc(){
+		if(operationTypeDesc == null){
+			ComboService cs = ComboService.getInstance();
+			List<Combo> typeList = cs.getTypes();
+			List<Combo> oTypeList = cs.getOperationTypes();
+			typeDesc = typeList.get(type-1).getDescription();
+			operationTypeDesc = oTypeList.get(operation_type-1).getDescription();
+		}
+		return operationTypeDesc;
+	}
+	
 	public List<String> validate(){
 		List<String> errors = new ArrayList<String>();
 		return errors;
