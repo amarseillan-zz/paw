@@ -131,7 +131,7 @@ public class PublicationDAO extends DAO {
 		return pList;
 	}
 
-	public List<Publication> advancedSearch(int type,int operation_type, int maxPrice, int minPrice) {
+	public List<Publication> advancedSearch(int type,int operation_type, int maxPrice, int minPrice, boolean ascending) {
 		List<Publication> pList = new ArrayList<Publication>();
 
 		try {
@@ -155,13 +155,15 @@ public class PublicationDAO extends DAO {
 				int i=0;
 				while(i<l.size()){
 					if(i==0){
-						aux.concat(" where ");
+						aux+=" where ";
 					}else{
-						aux.concat(" and ");
+						aux+=" and ";
 					}
-					aux.concat(l.get(i));
+					aux+=l.get(i++);
 				}
 			}
+			aux+=" order by price";
+			aux+=ascending?" ASC":" DESC";
 			stmt=connection
 					.prepareStatement(aux);
 

@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import persistence.UserDAO;
+
 import services.PublicationService;
 import transfer.bussiness.Publication;
 import transfer.bussiness.User;
@@ -24,19 +26,26 @@ public class PublicationSearchResults extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
+		
 		User user = (User)req.getSession().getAttribute("user");
-		int type = (Integer) (req.getAttribute("type") == null?-1:req.getAttribute("type"));
-		int operation_type = (Integer) (req.getAttribute("operation_type") == null?-1:req.getAttribute("operation_type"));
-		int maxPrice = (Integer) (req.getAttribute("maxPrice") == null?-1:req.getAttribute("maxPrice"));
-		int minPrice = (Integer) (req.getAttribute("minPrice") == null?-1:req.getAttribute("minPrice"));
+		int type = req.getParameter("type") == null || req.getParameter("type").equals("")?-1:Integer.parseInt(req.getParameter("type"));
+		int operation_type = req.getParameter("operation_type") == null || req.getParameter("operation_type").equals("")?-1:Integer.parseInt(req.getParameter("operation_type"));
+		int maxPrice = req.getParameter("maxPrice") == null || req.getParameter("maxPrice").equals("")?-1:Integer.parseInt(req.getParameter("maxPrice"));
+		int minPrice = req.getParameter("minPrice") == null || req.getParameter("minPrice").equals("")?-1:Integer.parseInt(req.getParameter("minPrice"));
+		boolean ascending = (req.getParameter("ascending") == null || req.getParameter("ascending").equals(""))?false:req.getParameter("ascending").equals("on");
 		PublicationService ps = PublicationService.getInstance();
-		List<Publication> pList = ps.advancedSearch(type, operation_type, maxPrice, minPrice);
+		List<Publication> pList = ps.advancedSearch(type, operation_type, maxPrice, minPrice,ascending);
+		// for testing: publicationSearchResults?type=1&operation_type=1&maxPrice=151000&minPrice=149000
+		if(pList.size()==0){
+			req.getRequestDispatcher("/WEB-INF/jsp/publicationNoResultsList.jsp").forward(req, resp);
+		}else{
 		List<PublicationForm> pfList = new ArrayList<PublicationForm>();
 		for( Publication p: pList){
 			pfList.add(new PublicationForm(p));
 		}
 		req.setAttribute("pList", pfList);
 		req.getRequestDispatcher("/WEB-INF/jsp/publicationResultsList.jsp").forward(req, resp);
+		}
 	}
 
 }

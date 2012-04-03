@@ -51,8 +51,8 @@ public class PublicationService {
 		return pfList;
 	}
 	
-	public List<Publication> advancedSearch(int type, int operation_type, int maxPrice, int minPrice){
-		return pDAO.advancedSearch(type, operation_type, maxPrice, minPrice);
+	public List<Publication> advancedSearch(int type, int operation_type, int maxPrice, int minPrice, boolean ascending){
+		return pDAO.advancedSearch(type, operation_type, maxPrice, minPrice, ascending);
 	}
 	
 	public void update(Publication p){
