@@ -20,10 +20,9 @@ public class Publication extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		try {
-			int userId = Integer.parseInt(req.getParameter("userId"));
 			int publicationId = Integer.parseInt(req.getParameter("publicationId"));
 			PublicationService ps = PublicationService.getInstance();
-			req.setAttribute("publication", ps.getPublication(publicationId, userId));
+			req.setAttribute("publication", ps.getPublication(publicationId));
 			req.getRequestDispatcher("/WEB-INF/jsp/publication.jsp").forward(req,
 					resp);
 		} catch (NumberFormatException nfe) {

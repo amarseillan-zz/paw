@@ -27,11 +27,8 @@ public class PublicationService {
 		return pDAO.createPublication(p, userId);
 	}
 	
-	public Publication getPublication(int pid, int userId){
+	public Publication getPublication(int pid){
 		Publication p = pDAO.getPublication(pid);
-		if( p.getUserId() != userId ){
-			p = null;
-		}
 		return p;
 	}
 	

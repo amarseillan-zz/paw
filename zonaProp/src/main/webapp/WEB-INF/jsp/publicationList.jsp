@@ -27,7 +27,6 @@
 			</a>
 			<a href="<c:url value="publication">
 					<c:param name="publicationId" value="${publication.publicationId}" />
-					<c:param name="userId" value="${publication.userId}" />
 				</c:url>">
 				ver
 			</a>
