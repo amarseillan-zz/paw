@@ -45,7 +45,7 @@ public class SignUp extends HttpServlet {
 		}catch(DuplicatedUsernameException due){
 			error="este nombre de usuario ya fue utilizado";
 		}catch(InvalidParameterException ipe){
-			error="ingrese los datos correctamente";
+			error=ipe.getMessage();
 		}
 		
 		
@@ -54,7 +54,14 @@ public class SignUp extends HttpServlet {
 			resp.sendRedirect("publicationList?userId=" + user.getId());
 		} else {
 			
-			req.setAttribute("user", new User(0, name, lastName, email,phone, username, ""));
+			//req.setAttribute("user", new User(0, name, lastName, email,phone, username, ""));
+			req.setAttribute("username", username);
+			req.setAttribute("name", name);
+			req.setAttribute("astName", lastName);
+			req.setAttribute("email", email);
+			req.setAttribute("phone", phone);
+			req.setAttribute("pass1", password1);
+			req.setAttribute("pass2", password2);
 			req.setAttribute("error", error);
 			req.getRequestDispatcher("/WEB-INF/jsp/signUp.jsp").forward(req, resp);
 		}

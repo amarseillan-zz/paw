@@ -5,31 +5,31 @@
 <form class="form" method="POST" action="signUp">
 	<div class="fieldset">
 		<label for="username">(*)Usuario:</label>
-		<input type="text" name="username" value="<c:out value="${user.username}" />" />
+		<input type="text" name="username" value="<c:out value="${username}" />" />
 	</div>
 	<div class="fieldset">
 		<label for="name">(*)Nombre:</label>
-		<input type="text" name="name" value="<c:out value="${user.name}" />" />
+		<input type="text" name="name" value="<c:out value="${name}" />" />
 	</div>
 	<div class="fieldset">
 		<label for="lastname">(*)Apellido:</label>
-		<input type="text" name="lastname" value="<c:out value="${user.lastName}" />" />
+		<input type="text" name="lastname" value="<c:out value="${lastName}" />" />
 	</div>
 	<div class="fieldset">
 		<label for="mail">(*)E-mail:</label>
-		<input type="text" name="mail" value="<c:out value="${user.email}" />" />
+		<input type="text" name="mail" value="<c:out value="${email}" />" />
 	</div>
 	<div class="fieldset">
 		<label for="phone">(*)Nro tel:</label>
-		<input type="text" name="phone" value="<c:out value="${user.phone}" />" />
+		<input type="text" name="phone" value="<c:out value="${phone}" />" />
 	</div>
 	<div class="fieldset">
 		<label for="password">(*)Contrase&ntilde;a:</label>
-		<input type="password" name="password1"/>
+		<input type="password" name="password1" value="<c:out value="${pass1}"/>"/>
 	</div>
 	<div class="fieldset">
 		<label for="password">(*)Ingrese contrase&ntilde;a nuevamente:</label>
-		<input type="password" name="password2"/>
+		<input type="password" name="password2" value="<c:out value="${pass2}"/>"/>
 	</div>
 	<div class="form-buttons">
 		<input type="submit" name="submit" value="Ingresar" />

@@ -43,9 +43,10 @@ public class UserService {
 			String phone, String username, String password1, String password2)
 			throws DuplicatedUsernameException, InvalidParameterException {
 		
-		if(!User.validParams(name, lastName, email, phone, username, password1, password2)){
-			throw new InvalidParameterException();
+		if(!password1.equals(password2)){
+			throw new InvalidParameterException("las contraseñas deben coincidir");
 		}
+		
 		
 		User user = new User(0, name, lastName, email, phone, username, password1);	
 		
