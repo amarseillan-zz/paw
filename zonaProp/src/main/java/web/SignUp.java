@@ -1,6 +1,7 @@
 package web;
 
 import java.io.IOException;
+import java.security.InvalidParameterException;
 
 import transfer.bussiness.User;
 
@@ -9,12 +10,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import exceptions.DuplicatedUsernameException;
+
 import services.UserService;
 
 public class SignUp extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-	private static String error = "";
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -25,6 +27,7 @@ public class SignUp extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
+		String error="";
 		
 		User user = null;				
 		String username = req.getParameter("username");
@@ -35,7 +38,16 @@ public class SignUp extends HttpServlet {
 		String email = req.getParameter("mail");
 		String phone = req.getParameter("phone");
 		
-		user = createNewUser(name, lastName, email, phone, username, password1, password2);		
+		UserService us = UserService.getInstance();
+		
+		try{
+		user = us.createNewUser(name, lastName, email, phone, username, password1, password2);		
+		}catch(DuplicatedUsernameException due){
+			error="este nombre de usuario ya fue utilizado";
+		}catch(InvalidParameterException ipe){
+			error="ingrese los datos correctamente";
+		}
+		
 		
 		if( user != null ){
 			req.getSession().setAttribute("user", user);
@@ -48,29 +60,6 @@ public class SignUp extends HttpServlet {
 		}
 	}
 	
-	private User createNewUser(String name, String lastName, String email,
-			String phone, String username, String password1, String password2) {
-		
-		if(!User.validParams(name, lastName, email, phone, username, password1, password2)){
-			error = "Datos ingresados incorrectos.";
-			return null;
-		}
-		
-		User user = new User(0, name, lastName, email, phone, username, password1);	
-		
-		UserService us = UserService.getInstance();
-		
-		if(us.userAlreadyExist(user)){
-			error = "Ya existe un usuario con ese nombre.";
-			return null;				
-		}
-		
-		user = us.createUser(user);
-		
-		if(user.getId() == 0)
-			return null;
-		
-		return user;		
-	}
+
 
 }
