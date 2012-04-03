@@ -21,8 +21,8 @@ public class PublicationService {
 		pDAO = new PublicationDAO();
 	}
 	
-	public Publication create(Publication p){
-		return pDAO.createPublication(p);
+	public Publication create(Publication p, int userId){
+		return pDAO.createPublication(p, userId);
 	}
 	
 	public Publication getPublication(int pid, int userId){

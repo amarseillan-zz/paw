@@ -42,13 +42,13 @@ public class PublicationDAO extends DAO {
 
 	
 	
-	public Publication createPublication(Publication p) {
+	public Publication createPublication(Publication p, int userId) {
 		try {
 			Connection connection = manager.getConnection();
 			PreparedStatement stmt = connection
-					.prepareStatement("INSERT INTO PUBLICATION('userid','type','operation_type','address','city','price','environments','covered'," +
-							"'uncovered','age','cable','phone','pool','living','paddle','barbecue', 'description')VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-			stmt.setInt(1, p.getUserId());
+					.prepareStatement("INSERT INTO PUBLICATION(userid,type,operation_type,address,city,price,environments,covered," +
+							"uncovered,age,cable,phone,pool,living,paddle,barbecue, description)VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+			stmt.setInt(1, userId);
 			stmt.setInt(2, p.getType());
 			stmt.setInt(3, p.getOperation_type());
 			stmt.setString(4, p.getAddress());
@@ -67,8 +67,8 @@ public class PublicationDAO extends DAO {
 			stmt.setString(17, p.getDescription());
 			stmt.executeUpdate();
 
-			stmt = connection.prepareStatement("SELECT PUBLICATIONID FROM SYS_USER WHERE USERID = ? AND ADDRESS = ? AND TYPE = ?");
-			stmt.setInt(1, p.getUserId());
+			stmt = connection.prepareStatement("SELECT PUBLICATIONID FROM PUBLICATION WHERE USERID = ? AND ADDRESS = ? AND TYPE = ?");
+			stmt.setInt(1, userId);
 			stmt.setString(2, p.getAddress());
 			stmt.setInt(3, p.getType());
 			ResultSet results = stmt.executeQuery();
@@ -92,7 +92,7 @@ public class PublicationDAO extends DAO {
 				p.isBarbecue(),
 				p.getDescription());
 			}
-			
+			connection.commit();
 			connection.close();
 		} catch (SQLException e) {
 			throw new DatabaseException(e.getMessage(), e);
@@ -154,6 +154,7 @@ public class PublicationDAO extends DAO {
 			stmt.setInt(18, p.getPublicationId());
 			stmt.executeUpdate();
 
+			connection.commit();
 			connection.close();
 		} catch (SQLException e) {
 			throw new DatabaseException(e.getMessage(), e);

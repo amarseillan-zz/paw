@@ -22,11 +22,11 @@
 		<td>${publication.price}</td>
 		<td>${publication.age}</td>
 		<td>
-			<a href="<c:url value="publicationView"><c:param name="id" value="${publication.publicationId}" /></c:url>">
+			<a href="<c:url value="publicationDetail"><c:param name="id" value="${publication.publicationId}" /></c:url>">
 				ver
 			</a>
 			<a href="<c:url value="publicationDetail">
-					<c:param name="id" value="${publication.publicationId}" />
+					<c:param name="pid" value="${publication.publicationId}" />
 				</c:url>">
 				editar
 			</a>

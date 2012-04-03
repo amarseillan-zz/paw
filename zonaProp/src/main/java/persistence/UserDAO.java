@@ -78,7 +78,8 @@ public class UserDAO extends DAO {
 						user.getEmail(), user.getPhone(),
 						user.getUsername(), user.getPassword());
 			}
-			
+
+			connection.commit();
 			connection.close();
 		} catch (SQLException e) {
 			throw new DatabaseException(e.getMessage(), e);
