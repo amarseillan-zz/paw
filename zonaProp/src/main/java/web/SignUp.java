@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.security.InvalidParameterException;
 
 import transfer.bussiness.User;
+import transfer.forms.UserForm;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -29,19 +30,14 @@ public class SignUp extends HttpServlet {
 			throws ServletException, IOException {
 		String error="";
 		
-		User user = null;				
-		String username = req.getParameter("username");
-		String password1 = req.getParameter("password1");
-		String password2 = req.getParameter("password2");
-		String name = req.getParameter("name");
-		String lastName = req.getParameter("lastname");
-		String email = req.getParameter("mail");
-		String phone = req.getParameter("phone");
+		User user = null;
+		UserForm uf = new UserForm(req);
+
 		
 		UserService us = UserService.getInstance();
 		
 		try{
-		user = us.createNewUser(name, lastName, email, phone, username, password1, password2);		
+		user = us.createNewUser(uf);		
 		}catch(DuplicatedUsernameException due){
 			error="este nombre de usuario ya fue utilizado";
 		}catch(InvalidParameterException ipe){
@@ -51,17 +47,10 @@ public class SignUp extends HttpServlet {
 		
 		if( user != null ){
 			req.getSession().setAttribute("user", user);
-			resp.sendRedirect("publicationList?userId=" + user.getId());
+			resp.sendRedirect("publicationList");
 		} else {
-			
-			req.setAttribute("username", username);
-			req.setAttribute("name", name);
-			req.setAttribute("astName", lastName);
-			req.setAttribute("email", email);
-			req.setAttribute("phone", phone);
-			req.setAttribute("pass1", password1);
-			req.setAttribute("pass2", password2);
 			req.setAttribute("error", error);
+			req.setAttribute("uf", uf);
 			req.getRequestDispatcher("/WEB-INF/jsp/signUp.jsp").forward(req, resp);
 		}
 	}

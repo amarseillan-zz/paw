@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import services.PublicationService;
 import transfer.forms.PublicationForm;
+import transfer.bussiness.User;
 
 public class PublicationList extends HttpServlet {
 
@@ -22,9 +23,12 @@ public class PublicationList extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		try {
-			int userId = Integer.parseInt(req.getParameter("userId"));
+			User user = (User)req.getSession().getAttribute("user");
+			if(user==null){
+				resp.sendRedirect("login");
+			}
 			PublicationService ps = PublicationService.getInstance();
-			List<PublicationForm> pfList = ps.getAllAsPublicationForms(userId);
+			List<PublicationForm> pfList = ps.getAllAsPublicationForms(user.getId());
 			req.setAttribute("pList", pfList);
 			req.getRequestDispatcher("/WEB-INF/jsp/publicationList.jsp")
 					.forward(req, resp);

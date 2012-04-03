@@ -32,7 +32,7 @@ public class Login extends HttpServlet {
 		User user = us.authenticate(username, password);
 		if( user != null ){
 			req.getSession().setAttribute("user", user);
-			resp.sendRedirect("publicationList?userId=" + user.getId());
+			resp.sendRedirect("publicationList");
 		} else {
 			req.setAttribute("username", username);
 			req.setAttribute("error", "Nombre de usuario o contrase�a inv�lidos");

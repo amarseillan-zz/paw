@@ -5,6 +5,7 @@ import java.security.InvalidParameterException;
 import exceptions.DuplicatedUsernameException;
 import persistence.UserDAO;
 import transfer.bussiness.User;
+import transfer.forms.UserForm;
 
 public class UserService {
 
@@ -39,16 +40,10 @@ public class UserService {
 		return userDAO.getUser(id);
 	}
 	
-	public User createNewUser(String name, String lastName, String email,
-			String phone, String username, String password1, String password2)
+	public User createNewUser(UserForm uf)
 			throws DuplicatedUsernameException, InvalidParameterException {
 		
-		if(!password1.equals(password2)){
-			throw new InvalidParameterException("las contraseñas deben coincidir");
-		}
-		
-		
-		User user = new User(0, name, lastName, email, phone, username, password1);	
+		User user = uf.getUser();
 		
 		if(userAlreadyExist(user)){
 			throw new DuplicatedUsernameException();			

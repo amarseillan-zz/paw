@@ -86,7 +86,7 @@ public class PublicationABM extends HttpServlet {
 			}else{
 				ps.update(pf.toBussiness());
 			}
-			resp.sendRedirect("publicationList?userId="+ user.getId() );
+			resp.sendRedirect("publicationList");
 		}
 		
 	}
