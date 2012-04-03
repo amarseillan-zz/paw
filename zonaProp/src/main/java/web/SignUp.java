@@ -49,6 +49,7 @@ public class SignUp extends HttpServlet {
 			req.getSession().setAttribute("user", user);
 			resp.sendRedirect("publicationList");
 		} else {
+
 			req.setAttribute("error", error);
 			req.setAttribute("uf", uf);
 			req.getRequestDispatcher("/WEB-INF/jsp/signUp.jsp").forward(req, resp);
