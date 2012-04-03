@@ -54,7 +54,6 @@ public class SignUp extends HttpServlet {
 			resp.sendRedirect("publicationList?userId=" + user.getId());
 		} else {
 			
-			//req.setAttribute("user", new User(0, name, lastName, email,phone, username, ""));
 			req.setAttribute("username", username);
 			req.setAttribute("name", name);
 			req.setAttribute("astName", lastName);

@@ -8,12 +8,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import persistence.UserDAO;
-
 import services.PublicationService;
 import transfer.bussiness.Publication;
-import transfer.bussiness.User;
 import transfer.forms.PublicationForm;
 
 public class PublicationSearchResults extends HttpServlet {
@@ -27,7 +23,6 @@ public class PublicationSearchResults extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		
-		User user = (User)req.getSession().getAttribute("user");
 		int type = req.getParameter("type") == null || req.getParameter("type").equals("")?-1:Integer.parseInt(req.getParameter("type"));
 		int operation_type = req.getParameter("operation_type") == null || req.getParameter("operation_type").equals("")?-1:Integer.parseInt(req.getParameter("operation_type"));
 		int maxPrice = req.getParameter("maxPrice") == null || req.getParameter("maxPrice").equals("")?-1:Integer.parseInt(req.getParameter("maxPrice"));
