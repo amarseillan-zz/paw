@@ -8,9 +8,17 @@
 		<servlet-name>Login</servlet-name>
 		<servlet-class>web.Login</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>SignUp</servlet-name>
+		<servlet-class>web.SignUp</servlet-class>
+	</servlet>
 	<servlet-mapping>
 		<servlet-name>Login</servlet-name>
 		<url-pattern>/login</url-pattern>
+	</servlet-mapping>	
+	<servlet-mapping>
+		<servlet-name>SignUp</servlet-name>
+		<url-pattern>/signUp</url-pattern>
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>PublicationList</servlet-name>

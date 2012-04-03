@@ -56,7 +56,23 @@ public class UserDAO extends DAO {
 		return user;
 	}
 
-	public User createUser(User user) {
+	public boolean userAlreadyExist(User user) {
+		try {
+			Connection connection = manager.getConnection();
+			PreparedStatement stmt = connection.prepareStatement("SELECT * FROM SYS_USER WHERE NICK = ?");
+			stmt.setString(1, user.getUsername());
+			ResultSet results = stmt.executeQuery();
+			if (results.next()) {
+				return true;
+			}
+			connection.close();
+		} catch (SQLException e) {
+			throw new DatabaseException(e.getMessage(), e);
+		}
+		return false;
+	}
+	
+	public User createUser(transfer.bussiness.User user) {
 		try {
 			Connection connection = manager.getConnection();
 			PreparedStatement stmt = connection
@@ -78,7 +94,6 @@ public class UserDAO extends DAO {
 						user.getEmail(), user.getPhone(),
 						user.getUsername(), user.getPassword());
 			}
-
 			connection.commit();
 			connection.close();
 		} catch (SQLException e) {

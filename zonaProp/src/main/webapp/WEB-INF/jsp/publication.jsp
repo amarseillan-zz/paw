@@ -1,6 +1,11 @@
 
 <%@ include file="header.jsp" %>
-
+					
+					<form method="Get" action="publicationList">
+						<input type="hidden" name="userId" value=${publication.userId} class="span3" />
+						<input type="submit" value="Volver" class="btn" />
+					</form> 
+					
 					<div>
 						<h3>
 							Publicacion:
