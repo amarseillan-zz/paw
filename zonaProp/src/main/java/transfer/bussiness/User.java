@@ -17,11 +17,11 @@ public class User {
 		super();
 		this.id = id;
 		setUsername(username);
-		setPassword(password);
 		setName(name);
 		setLastName(lastName);
 		setEmail(email);
 		setPhone(phone);
+		setPassword(password);
 	}
 	
 
