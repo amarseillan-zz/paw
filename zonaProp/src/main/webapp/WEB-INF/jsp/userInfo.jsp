@@ -1,7 +1,5 @@
 
-<%@ include file="header.jsp" %>
-
-					<div>
+					<div class="well">
 						<h3>
 							Datos del publicador:
 						</h3>
@@ -12,4 +10,3 @@
 						<b>telefono:</b> ${user.phone}
 					</div>
 						
-<%@ include file="footer.jsp" %>

@@ -37,14 +37,6 @@
 		<url-pattern>/publicationDetail</url-pattern>
 	</servlet-mapping>
 	<servlet>
-		<servlet-name>User</servlet-name>
-		<servlet-class>web.User</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>User</servlet-name>
-		<url-pattern>/user</url-pattern>
-	</servlet-mapping>
-	<servlet>
 		<servlet-name>Publication</servlet-name>
 		<servlet-class>web.Publication</servlet-class>
 	</servlet>

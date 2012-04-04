@@ -31,16 +31,12 @@ public class PublicationSearchResults extends HttpServlet {
 		PublicationService ps = PublicationService.getInstance();
 		List<Publication> pList = ps.advancedSearch(type, operation_type, maxPrice, minPrice,ascending);
 		// for testing: publicationSearchResults?type=1&operation_type=1&maxPrice=151000&minPrice=149000
-		if(pList.size()==0){
-			req.getRequestDispatcher("/WEB-INF/jsp/publicationNoResultsList.jsp").forward(req, resp);
-		}else{
 		List<PublicationForm> pfList = new ArrayList<PublicationForm>();
 		for( Publication p: pList){
 			pfList.add(new PublicationForm(p));
 		}
 		req.setAttribute("pList", pfList);
 		req.getRequestDispatcher("/WEB-INF/jsp/publicationResultsList.jsp").forward(req, resp);
-		}
 	}
 
 }
