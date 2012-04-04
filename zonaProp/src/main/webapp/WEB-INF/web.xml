@@ -67,6 +67,14 @@
 	<servlet-mapping>
 		<servlet-name>Logout</servlet-name>
 		<url-pattern>/logout</url-pattern>
+	</servlet-mapping>	
+	<servlet>
+		<servlet-name>PhotoUpload</servlet-name>
+		<servlet-class>web.PhotoUpload</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>PhotoUpload</servlet-name>
+		<url-pattern>/photoUpload</url-pattern>
 	</servlet-mapping>
 	<filter>
 		<filter-name>LoggedFilter</filter-name>
