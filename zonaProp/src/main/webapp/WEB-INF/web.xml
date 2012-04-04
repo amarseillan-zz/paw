@@ -15,7 +15,7 @@
 	<servlet-mapping>
 		<servlet-name>Login</servlet-name>
 		<url-pattern>/login</url-pattern>
-	</servlet-mapping>	
+	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>SignUp</servlet-name>
 		<url-pattern>/signUp</url-pattern>
@@ -52,7 +52,7 @@
 		<servlet-name>PublicationSearchResults</servlet-name>
 		<url-pattern>/publicationSearchResults</url-pattern>
 	</servlet-mapping>
-		<servlet>
+	<servlet>
 		<servlet-name>PublicationSearch</servlet-name>
 		<servlet-class>web.PublicationSearch</servlet-class>
 	</servlet>
@@ -60,4 +60,20 @@
 		<servlet-name>PublicationSearch</servlet-name>
 		<url-pattern>/publicationSearch</url-pattern>
 	</servlet-mapping>
+	<servlet>
+		<servlet-name>Logout</servlet-name>
+		<servlet-class>web.Logout</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Logout</servlet-name>
+		<url-pattern>/logout</url-pattern>
+	</servlet-mapping>
+	<filter>
+		<filter-name>LoggedFilter</filter-name>
+		<filter-class>filters.LoggedFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>LoggedFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
 </web-app>

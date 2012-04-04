@@ -3,6 +3,7 @@ package web;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -32,6 +33,7 @@ public class Login extends HttpServlet {
 		User user = us.authenticate(username, password);
 		if( user != null ){
 			req.getSession().setAttribute("user", user);
+			resp.addCookie(new Cookie("userid", String.valueOf(user.getId())));
 			resp.sendRedirect("publicationList");
 		} else {
 			req.setAttribute("username", username);
