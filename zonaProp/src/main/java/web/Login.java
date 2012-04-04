@@ -33,7 +33,9 @@ public class Login extends HttpServlet {
 		User user = us.authenticate(username, password);
 		if( user != null ){
 			req.getSession().setAttribute("user", user);
-			resp.addCookie(new Cookie("userid", String.valueOf(user.getId())));
+			if("on".equals(req.getParameter("remember"))){
+				resp.addCookie(new Cookie("userid", String.valueOf(user.getId())));
+			}
 			resp.sendRedirect("publicationList");
 		} else {
 			req.setAttribute("username", username);

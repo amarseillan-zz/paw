@@ -37,13 +37,18 @@ public class LoggedFilter implements Filter{
 			}
 			if (u!=null){
 				req.getSession().setAttribute("user",u);
-				if(req.getRequestURI().contains("login")){ //This is optional but will be probably useful to redirect to the main page.
+				//This is optional but will be probably useful to redirect to the main page.
+				if(req.getRequestURI().contains("login")){ 
 					resp.sendRedirect("publicationList");
 					return;
 				}
 			}
 			arg2.doFilter(request, arg1);
 		} else {
+			if(req.getRequestURI().contains("login")){ 
+				resp.sendRedirect("publicationList");
+				return;
+			}
 			arg2.doFilter(request, arg1);
 		}
 		

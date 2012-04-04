@@ -8,7 +8,7 @@
 							<label for="password">Contrase&ntilde;a</label>
 							<input type="password" name="password" />
 							<label class="checkbox">
-								<input type="checkbox"> Remember me </input>
+								<input type="checkbox" name="remember"> Remember me </input>
 							</label>
 							<input type="submit" name="submit" value="Ingresar" class="btn" />
 							<span class="help-inline">${error}</span>
