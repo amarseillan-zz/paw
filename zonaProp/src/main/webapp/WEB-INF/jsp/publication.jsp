@@ -24,6 +24,11 @@
 						<br/>
 						<b>Precio:</b> ${publication.price} pesos
 						<br/>
+						<div>
+							<b>Ubicacion en el mapa:</b>
+							<br/>
+							<img ALT="Mapa" class="mapa" src="http://maps.google.com/maps/api/staticmap?center=${publication.city}+${publication.address}&zoom=14&size=400x400&maptype=roadmap&markers=${publication.city}+${publication.address}&sensor=false"></img>
+						</div>
 					</div>
 					
 					<form class="well form-horizontal" method="POST" action="publication">
