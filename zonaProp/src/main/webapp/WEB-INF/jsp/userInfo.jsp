@@ -3,10 +3,10 @@
 						<h3>
 							Datos del publicador:
 						</h3>
-						<b>nombre completo:</b> ${user.name} ${user.lastName}
+						<b>nombre completo:</b> ${publication.publisher.name} ${publication.publisher.lastName}
 						<br/>
-						<b>e-mail:</b> ${user.email}
+						<b>e-mail:</b> ${publication.publisher.email}
 						<br/>
-						<b>telefono:</b> ${user.phone}
+						<b>telefono:</b> ${publication.publisher.phone}
 					</div>
 						

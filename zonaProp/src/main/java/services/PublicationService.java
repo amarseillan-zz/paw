@@ -5,7 +5,9 @@ import java.util.List;
 
 import persistence.PublicationDAO;
 import transfer.bussiness.Publication;
+import transfer.bussiness.User;
 import transfer.forms.PublicationForm;
+import transfer.forms.VisitForm;
 
 public class PublicationService {
 
@@ -54,6 +56,11 @@ public class PublicationService {
 	
 	public void update(Publication p){
 		pDAO.updatePublication(p);
+	}
+	
+	public void sendMailToPublisher(Publication p, VisitForm vf){
+		User publisher=p.getPublisher();
+		vf.sendMailTo(publisher);
 	}
 	
 }

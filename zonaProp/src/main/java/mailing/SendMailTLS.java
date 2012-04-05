@@ -17,6 +17,7 @@ import javax.mail.internet.MimeMessage;
 public class SendMailTLS {
 	private static ExecutorService es = Executors.newFixedThreadPool(5);
 	private static Properties p;
+	
 	public static void test() {
 		Properties p = SendMailTLS.getMailProperties("");
 		SendMailTLS sender = new SendMailTLS(p);
@@ -26,6 +27,7 @@ public class SendMailTLS {
 		sender.Stop();
 
 	}
+	
 	public static Properties getMailProperties(String path){
 		if(p!=null){
 			return p;
@@ -54,9 +56,11 @@ public class SendMailTLS {
 
 		return props;
 	}
+	
 	public SendMailTLS(Properties p) {
 		this.p=p;
 	}
+	
 	public void send(final String from,final String to,final String subject,final String text) {
 
 		final String username = p.getProperty("username");
@@ -94,6 +98,7 @@ public class SendMailTLS {
 		}
 
 	}
+	
 	public void Stop(){
 		es.shutdown();
 	}

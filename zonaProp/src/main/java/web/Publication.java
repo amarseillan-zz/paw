@@ -1,6 +1,7 @@
 package web;
 
 import java.io.IOException;
+import java.security.InvalidParameterException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -8,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import services.PublicationService;
-import services.UserService;
+import transfer.forms.VisitForm;
 
 public class Publication extends HttpServlet {
 
@@ -24,6 +25,7 @@ public class Publication extends HttpServlet {
 			int publicationId = Integer.parseInt(req.getParameter("publicationId"));
 			PublicationService ps = PublicationService.getInstance();
 			req.setAttribute("publication", ps.getPublication(publicationId));
+			req.setAttribute("showPublisher", false);
 			req.getRequestDispatcher("/WEB-INF/jsp/publication.jsp").forward(req,
 					resp);
 		} catch (NumberFormatException nfe) {
@@ -35,14 +37,25 @@ public class Publication extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 		throws ServletException, IOException{
 		
+		String error="";
+		
+		VisitForm vf= new VisitForm(req);
+		
 		int publicationId = Integer.parseInt(req.getParameter("publicationId"));
 		PublicationService ps = PublicationService.getInstance();
-		req.setAttribute("publication", ps.getPublication(publicationId));
+		transfer.bussiness.Publication p=ps.getPublication(publicationId);
 		
-		int userId = ps.getPublication(publicationId).getUserId();
-		UserService us = UserService.getInstance();
-		req.setAttribute("user", us.getUser(userId));
-		
+		try{
+		ps.sendMailToPublisher(p, vf);
+		req.setAttribute("showPublisher", true);
+		}catch(InvalidParameterException ipe){
+			error=ipe.getMessage();
+			req.setAttribute("showPublisher", false);
+			req.setAttribute("vf", vf);
+		}
+
+		req.setAttribute("publication", p);
+		req.setAttribute("error", error);
 		
 		req.getRequestDispatcher("/WEB-INF/jsp/publication.jsp").forward(req,
 				resp);

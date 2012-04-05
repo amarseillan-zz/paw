@@ -26,12 +26,14 @@ public class PublicationList extends HttpServlet {
 			User user = (User)req.getSession().getAttribute("user");
 			if(user==null){
 				resp.sendRedirect("login");
+			}else
+			{
+				PublicationService ps = PublicationService.getInstance();
+				List<PublicationForm> pfList = ps.getAllAsPublicationForms(user.getId());
+				req.setAttribute("pList", pfList);
+				req.getRequestDispatcher("/WEB-INF/jsp/publicationList.jsp")
+						.forward(req, resp);
 			}
-			PublicationService ps = PublicationService.getInstance();
-			List<PublicationForm> pfList = ps.getAllAsPublicationForms(user.getId());
-			req.setAttribute("pList", pfList);
-			req.getRequestDispatcher("/WEB-INF/jsp/publicationList.jsp")
-					.forward(req, resp);
 		} catch (NumberFormatException nfe) {
 			resp.sendError(400);
 		}

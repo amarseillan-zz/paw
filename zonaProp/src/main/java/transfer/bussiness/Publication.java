@@ -1,5 +1,7 @@
 package transfer.bussiness;
 
+import services.UserService;
+
 public class Publication {
 
 	int publicationId;
@@ -21,6 +23,9 @@ public class Publication {
 	boolean barbecue;
 	String description;
 
+	User publisher=null;
+	
+	
 	public Publication(int publicationId, int userId, int type,
 			int operation_type, String address, String city, float price,
 			int environments, float covered, float uncovered, int age,
@@ -119,4 +124,14 @@ public class Publication {
 		return description;
 	}
 
+	public User getPublisher(){
+		if(publisher==null){
+			UserService us = UserService.getInstance();
+			publisher=us.getUser(userId);
+		}
+		
+		return publisher;
+	}
+	
+	
 }

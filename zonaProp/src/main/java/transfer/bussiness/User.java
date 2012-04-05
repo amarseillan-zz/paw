@@ -55,37 +55,37 @@ public class User {
 
 	public void setUsername(String username) throws InvalidParameterException {
 		if(username.length() < 3 || username.length() > 20)
-			throw new InvalidParameterException("nombre de usuario muy largo o muy corto.");
+			throw new InvalidParameterException("El nombre de usuario debe tener entre 3 y 20 caracteres.");
 		this.username = username;
 	}
 
 	public void setPassword(String password) throws InvalidParameterException {
 		if(password.length() < 3 || password.length() > 20)
-			throw new InvalidParameterException("contraseña muy larga o muy corta.");
+			throw new InvalidParameterException("La conteraseña debe tener entre 3 y 20 caracteres.");
 		this.password = password;
 	}
 
 	public void setName(String name) throws InvalidParameterException {
 		if(name.length() < 3 || name.length() > 20)
-			throw new InvalidParameterException("nombre muy largo o muy corto.");
+			throw new InvalidParameterException("El nombre debe tener entre 3 y 20 caracteres.");
 		this.name = name;
 	}
 
 	public void setLastName(String lastName) throws InvalidParameterException {		
 		if(lastName.length() < 3 || lastName.length() > 20)
-			throw new InvalidParameterException("apellido de usuario muy largo o muy corto.");
+			throw new InvalidParameterException("El apellido de usuario debe tener entre 3 y 20 caracters.");
 		this.lastName = lastName;
 	}
 
 	public void setEmail(String email) throws InvalidParameterException {
 		if(email.length() < 3 || email.length() > 40)
-			throw new InvalidParameterException("mail muy largo o muy corto.");
+			throw new InvalidParameterException("El mail debe tener entre 3 y 40 carecteres.");
 		this.email = email;
 	}
 
 	public void setPhone(String phone) throws InvalidParameterException {
 		if(phone.length() < 3 || phone.length() > 15)
-			throw new InvalidParameterException("telefono muy largo o muy corto.");
+			throw new InvalidParameterException("El telefono debe tener entre 3 y 15 caracteres.");
 		this.phone = phone;
 	}
 }
