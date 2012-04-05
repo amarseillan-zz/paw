@@ -44,7 +44,7 @@ public class PhotoDAO extends DAO {
 
 			ResultSet results = stmt.executeQuery();
 			while (results.next()) {
-				Photo p = new Photo(results.getInt(1), results.getInt(2), results.getBytes(3));
+				Photo p = new Photo(results.getInt(1), results.getInt(2), results.getBytes(3), results.getBinaryStream(3));
 				pList.add(p);
 			}
 			connection.close();
@@ -52,6 +52,41 @@ public class PhotoDAO extends DAO {
 			throw new DatabaseException(e.getMessage(), e);
 		}
 		return pList;
+		
+	}
+
+	public Photo getPhotoById(Integer imageId) {
+		Photo photo = null;
+
+		try {
+			Connection connection = manager.getConnection();
+			PreparedStatement stmt = connection
+					.prepareStatement("SELECT * FROM PHOTO WHERE PHOTOID = ?");
+			stmt.setInt(1, imageId);
+
+			ResultSet results = stmt.executeQuery();
+			while (results.next()) {
+				photo = new Photo(results.getInt(1), results.getInt(2), results.getBytes(3), results.getBinaryStream(3));
+			}
+			connection.close();
+		} catch (SQLException e) {
+			throw new DatabaseException(e.getMessage(), e);
+		}
+		return photo;
+	}
+
+	public void deletePhotoById(int imageId) {		
+		try {
+			Connection connection = manager.getConnection();
+			PreparedStatement stmt = connection
+					.prepareStatement("DELETE FROM PHOTO WHERE PHOTOID = ?");
+			stmt.setInt(1, imageId);
+			stmt.executeUpdate();
+			connection.commit();
+			connection.close();
+		} catch (SQLException e) {
+			throw new DatabaseException(e.getMessage(), e);
+		}
 		
 	}
 }

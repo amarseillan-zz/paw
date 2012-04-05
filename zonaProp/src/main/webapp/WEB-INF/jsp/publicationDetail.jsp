@@ -132,9 +132,7 @@
 								<input type="hidden" name="publicationId" value="${publication.publicationId}" />
 								<input type="hidden" name="userId" value="${publication.userId}" />
 								
-								<a href="<c:url value="photoUpload"><c:param name="pid" value="${publication.publicationId}" /></c:url>">
-								Agregar Imagenes...
-							</a>
+								<a href="<c:url value="photoUpload"><c:param name="pid" value="${publication.publicationId}" /></c:url>">Editar Imagenes</a>
 								
 								<div class="form-actions">
             						<button type="submit" class="btn btn-primary">Guardar</button>

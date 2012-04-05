@@ -76,6 +76,22 @@
 		<servlet-name>PhotoUpload</servlet-name>
 		<url-pattern>/photoUpload</url-pattern>
 	</servlet-mapping>
+	<servlet>
+	    <servlet-name>photoShower</servlet-name>
+	    <servlet-class>web.PhotoShower</servlet-class>
+	</servlet>
+	<servlet-mapping>
+	    <servlet-name>photoShower</servlet-name>
+	    <url-pattern>/photoShower/*</url-pattern>
+	</servlet-mapping>
+	<servlet>
+	    <servlet-name>photoDeleter</servlet-name>
+	    <servlet-class>web.PhotoDeleter</servlet-class>
+	</servlet>
+	<servlet-mapping>
+	    <servlet-name>photoDeleter</servlet-name>
+	    <url-pattern>/photoDeleter</url-pattern>
+	</servlet-mapping>
 	<filter>
 		<filter-name>LoggedFilter</filter-name>
 		<filter-class>filters.LoggedFilter</filter-class>

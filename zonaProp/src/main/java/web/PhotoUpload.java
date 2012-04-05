@@ -27,9 +27,11 @@ public class PhotoUpload extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
-	PublicationService ps = PublicationService.getInstance();
+	private static PublicationService ps = PublicationService.getInstance();
 	
-	Publication p;
+	private static Publication p;
+	
+	private static List<Photo> photos = null;
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -37,8 +39,15 @@ public class PhotoUpload extends HttpServlet {
 		if (req.getParameter("pid") != null) {
 			int publicationId = Integer.valueOf(req.getParameter("pid"));
 			p = ps.getPublication(publicationId);
-			if(p.getUserId()==((User) req.getSession().getAttribute("user")).getId())
+			if(p.getUserId()==((User) req.getSession().getAttribute("user")).getId()){
+				
+				PhotoService ps = PhotoService.getInstance(); 
+		       	photos = ps.getPhotosByPublicationId(p.getPublicationId());
+		       	
+				req.setAttribute("photos", photos);
+				req.setAttribute("pid", p.getPublicationId());
 				req.getRequestDispatcher("/WEB-INF/jsp/photoUpload.jsp").forward(req, resp);
+			}
 		}
 	}
 	
@@ -68,6 +77,11 @@ public class PhotoUpload extends HttpServlet {
         } catch (FileUploadException e) {
                 e.printStackTrace();
         }
+        
+        PhotoService ps = PhotoService.getInstance(); 
+       	photos = ps.getPhotosByPublicationId(p.getPublicationId());       	
+		req.setAttribute("photos", photos);
+		req.setAttribute("pid", p.getPublicationId());
 		req.setAttribute("error", errors);
 		req.getRequestDispatcher("/WEB-INF/jsp/photoUpload.jsp").forward(req, resp);
 		

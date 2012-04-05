@@ -2,13 +2,16 @@ package web;
 
 import java.io.IOException;
 import java.security.InvalidParameterException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import services.PhotoService;
 import services.PublicationService;
+import transfer.bussiness.Photo;
 import transfer.forms.VisitForm;
 
 public class Publication extends HttpServlet {
@@ -24,8 +27,15 @@ public class Publication extends HttpServlet {
 		try {
 			int publicationId = Integer.parseInt(req.getParameter("publicationId"));
 			PublicationService ps = PublicationService.getInstance();
-			req.setAttribute("publication", ps.getPublication(publicationId));
-			req.setAttribute("showPublisher", false);
+			transfer.bussiness.Publication p = ps.getPublication(publicationId);
+
+			PhotoService photoServ = PhotoService.getInstance(); 
+			List<Photo> photos = photoServ.getPhotosByPublicationId(p.getPublicationId());	 
+			
+			req.setAttribute("publication", p);
+			req.setAttribute("showPublisher", false);      	
+			req.setAttribute("photos", photos);
+			
 			req.getRequestDispatcher("/WEB-INF/jsp/publication.jsp").forward(req,
 					resp);
 		} catch (NumberFormatException nfe) {

@@ -15,7 +15,7 @@ public class PhotoService {
 
 	private static PhotoService instance;
 	PhotoDAO photoDAO;
-	private static final int MAX_PHOTO_SIZE = 500000;
+	private static final int MAX_PHOTO_SIZE = 5000000;
 	
 	public static synchronized PhotoService getInstance() {
 		if (instance == null) {
@@ -43,9 +43,17 @@ public class PhotoService {
 		}
 		byte[] imageBytes = new byte[size];
 		fileItem.getInputStream().read(imageBytes, 0, imageBytes.length);
-		Photo image = new Photo(0, publicationId, imageBytes);
+		Photo image = new Photo(0, publicationId, imageBytes, fileItem.getInputStream());
 		
 		return image;
+	}
+
+	public Photo getPhotoById(Integer imageId) {
+		return this.photoDAO.getPhotoById(imageId);
+	}
+
+	public void deletePhotoById(int imageId) {
+		this.photoDAO.deletePhotoById(imageId);
 	}
 	
 
