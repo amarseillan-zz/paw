@@ -66,9 +66,11 @@ public class PhotoUpload extends HttpServlet {
                         FileItem fileItem = it.next();     
                     	PhotoService ps = PhotoService.getInstance(); 
                     	try{
-                    		image = ps.createPhotoFromFileItem(fileItem, p.getPublicationId());	                       	
-                        	ps.uploadPhoto(image);   
-                        	errors = " Imagen subida con exito.";
+                    		image = ps.createPhotoFromFileItem(fileItem, p.getPublicationId());	     
+                    		if(image != null){
+	                        	ps.uploadPhoto(image);   
+	                        	errors = " Imagen subida con exito.";
+                    		}
                 		}catch(InvalidParameterException ipe){
                 			errors=ipe.getMessage();
                 		}catch(IOException e){                			

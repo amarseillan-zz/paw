@@ -1,6 +1,8 @@
 <%@ include file="header.jsp" %>
+
 <div class="control-group.error"><c:out value="${error}" /></div>
 
+	<div class="well">
 	<table style="width: 20%;">
 		<c:forEach items="${photos}" var="photo">	
 			<tr>
@@ -16,7 +18,7 @@
 			</tr>
 		</c:forEach>
 	</table>
-		
+	</div>
 
 	<form class="form-horizontal" method="POST" action="photoUpload" enctype="multipart/form-data">
 			<div class="control-group">
@@ -27,9 +29,8 @@
 			</div>
 			<div class="form-actions">
 				<button type="submit" class="btn btn-primary">Subir</button>
-				<button class="btn">Cancelar</button>
 			</div>
-		</fieldset>
+		</fieldset>	
 	</form>
 	
 <%@ include file="footer.jsp" %>	

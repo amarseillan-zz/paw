@@ -39,7 +39,10 @@ public class PhotoService {
 	public Photo createPhotoFromFileItem(FileItem fileItem, int publicationId) throws IOException {
 		int size = (int) fileItem.getSize();
 		if(size > MAX_PHOTO_SIZE){
-			throw new InvalidParameterException("Tamaño del archivo demasiado grande");
+			throw new InvalidParameterException("Tamaño del archivo demasiado grande.");
+		}
+		if(size == 0){
+			throw new InvalidParameterException("Debe seleccionar una imagen.");
 		}
 		byte[] imageBytes = new byte[size];
 		fileItem.getInputStream().read(imageBytes, 0, imageBytes.length);
