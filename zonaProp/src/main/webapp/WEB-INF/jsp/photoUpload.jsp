@@ -6,9 +6,12 @@
 			<tr>
 				<td>						
 					<img style="width:100%" src="<c:url value="photoShower"><c:param name="imageId" value="${photo.id}" /></c:url>" /> </img>							
-				</td>
-				<td>
-					<a href="<c:url value="photoDeleter"><c:param name="imageId" value="${photo.id}"/><c:param name="pid" value="${pid}"/></c:url>">Eliminar</a>
+				</td>				
+				<td>					
+					<form  method="POST" action="photoDeleter?imageId=${photo.id}&pid=${pid}">				
+						<button type="submit">Eliminar</button>
+						</fieldset>
+					</form>					
 				</td>
 			</tr>
 		</c:forEach>

@@ -27,7 +27,7 @@ public class PhotoDeleter extends HttpServlet {
 	private static List<Photo> photos = null;
 	
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {		
 		if (req.getParameter("pid") != null && req.getParameter("imageId") != null) {
 			int publicationId = Integer.valueOf(req.getParameter("pid"));
