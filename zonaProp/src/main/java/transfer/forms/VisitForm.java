@@ -37,11 +37,10 @@ public class VisitForm {
 		Properties p = SendMailTLS.getMailProperties("");
 		SendMailTLS sender = new SendMailTLS(p);
 		sender.send(req.getParameter("email"), to.getEmail(),
-				"Comentó en una de tus propiedades" + req.getParameter("name"),
+				"Comentó en una de tus propiedades " + req.getParameter("name"),
 				"mail del comentante:" + req.getParameter("email") + "\ntel:"
 						+ req.getParameter("phone") + "\ncomentario:\n"
 						+ req.getParameter("comment"));
-		sender.Stop();
 
 	}
 

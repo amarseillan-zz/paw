@@ -38,10 +38,9 @@ public class PublicationService {
 		return pDAO.getAll(userId);
 	}
 	
-	
 	public List<PublicationForm> getAllAsPublicationForms(int userId){
 		
-		List<Publication> pList = pDAO.getAll(userId);
+		List<Publication> pList = getAll(userId);
 		List<PublicationForm> pfList = new ArrayList<PublicationForm>();
 		for( Publication p: pList){
 			pfList.add(new PublicationForm(p));

@@ -1,6 +1,9 @@
 package transfer.bussiness;
 
 import java.security.InvalidParameterException;
+import java.util.List;
+
+import services.PublicationService;
 
 public class User {
 
@@ -11,6 +14,8 @@ public class User {
 	private String lastName;
 	private String email;
 	private String phone;
+	
+	List<Publication> publications=null;
 
 	public User(int id, String name, String lastName, String email,
 			String phone, String username, String password) {
@@ -24,6 +29,14 @@ public class User {
 		setPassword(password);
 	}
 	
+	public List<Publication> getPublications(){
+		if(publications==null){
+			PublicationService ps=PublicationService.getInstance();
+			publications=ps.getAll(id);
+		}
+		
+		return publications;
+	}
 
 	public int getId() {
 		return id;

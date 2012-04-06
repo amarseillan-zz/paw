@@ -55,6 +55,9 @@ public class Publication extends HttpServlet {
 		PublicationService ps = PublicationService.getInstance();
 		transfer.bussiness.Publication p=ps.getPublication(publicationId);
 		
+		PhotoService photoServ = PhotoService.getInstance(); 
+		List<Photo> photos = photoServ.getPhotosByPublicationId(p.getPublicationId());
+		
 		try{
 		ps.sendMailToPublisher(p, vf);
 		req.setAttribute("showPublisher", true);
@@ -63,6 +66,8 @@ public class Publication extends HttpServlet {
 			req.setAttribute("showPublisher", false);
 			req.setAttribute("vf", vf);
 		}
+    	
+		req.setAttribute("photos", photos);
 
 		req.setAttribute("publication", p);
 		req.setAttribute("error", error);

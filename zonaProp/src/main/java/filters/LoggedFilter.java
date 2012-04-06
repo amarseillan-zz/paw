@@ -29,18 +29,20 @@ public class LoggedFilter implements Filter{
 		if (req.getSession().getAttribute("user")==null) {
 			Cookie[] cs =req.getCookies();
 			User u = null;
-			for(Cookie c:cs){
-				if("userid".equals(c.getName()) && c.getValue()!=null){
-					u = UserService.getInstance().getUser(Integer.valueOf(c.getValue()));
-					System.out.println(u.getId() + u.getName());
+			if(cs!=null){
+				for(Cookie c:cs){
+					if("userid".equals(c.getName()) && c.getValue()!=null){
+						u = UserService.getInstance().getUser(Integer.valueOf(c.getValue()));
+						System.out.println(u.getId() + u.getName());
+					}
 				}
-			}
-			if (u!=null){
-				req.getSession().setAttribute("user",u);
-				//This is optional but will be probably useful to redirect to the main page.
-				if(req.getRequestURI().contains("login")){ 
-					resp.sendRedirect("publicationList");
-					return;
+				if (u!=null){
+					req.getSession().setAttribute("user",u);
+					//This is optional but will be probably useful to redirect to the main page.
+					if(req.getRequestURI().contains("login")){ 
+						resp.sendRedirect("publicationList");
+						return;
+					}
 				}
 			}
 			arg2.doFilter(request, arg1);
