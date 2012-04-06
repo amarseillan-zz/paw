@@ -26,7 +26,7 @@ public class LoggedFilter implements Filter{
 			FilterChain arg2) throws IOException, ServletException {
 		HttpServletResponse resp = (HttpServletResponse) arg1;
 		HttpServletRequest req = (HttpServletRequest) request;
-		if (req.getSession().getAttribute("user")==null) {
+		if (req.getSession().getAttribute("userId")==null) {
 			Cookie[] cs =req.getCookies();
 			User u = null;
 			if(cs!=null){
@@ -37,7 +37,7 @@ public class LoggedFilter implements Filter{
 					}
 				}
 				if (u!=null){
-					req.getSession().setAttribute("user",u);
+					req.getSession().setAttribute("userId",u.getId());
 					//This is optional but will be probably useful to redirect to the main page.
 					if(req.getRequestURI().contains("login")){ 
 						resp.sendRedirect("publicationList");

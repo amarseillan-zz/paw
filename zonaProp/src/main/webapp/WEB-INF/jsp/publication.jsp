@@ -31,11 +31,13 @@
 						</div>
 					</div>
 					
+				<c:if test="${not empty publication.photos}">
 					<div class="well">
-							<c:forEach items="${photos}" var="photo">
+							<c:forEach items="${publication.photos}" var="photo">
 									<img width="250" src="<c:url value="photoShower"><c:param name="imageId" value="${photo.id}" /></c:url>" /> </img>							
 							</c:forEach> 
 					</div>
+				</c:if>
 					
 					<form class="well form-horizontal" method="POST" action="publication">
 					

@@ -1,12 +1,10 @@
 package services;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import persistence.PublicationDAO;
 import transfer.bussiness.Publication;
 import transfer.bussiness.User;
-import transfer.forms.PublicationForm;
 import transfer.forms.VisitForm;
 
 public class PublicationService {
@@ -38,16 +36,6 @@ public class PublicationService {
 		return pDAO.getAll(userId);
 	}
 	
-	public List<PublicationForm> getAllAsPublicationForms(int userId){
-		
-		List<Publication> pList = getAll(userId);
-		List<PublicationForm> pfList = new ArrayList<PublicationForm>();
-		for( Publication p: pList){
-			pfList.add(new PublicationForm(p));
-		}
-		
-		return pfList;
-	}
 	
 	public List<Publication> advancedSearch(int type, int operation_type, int maxPrice, int minPrice, boolean ascending){
 		return pDAO.advancedSearch(type, operation_type, maxPrice, minPrice, ascending);

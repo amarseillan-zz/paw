@@ -1,5 +1,8 @@
 package transfer.bussiness;
 
+import java.util.List;
+
+import services.PhotoService;
 import services.UserService;
 
 public class Publication {
@@ -24,6 +27,8 @@ public class Publication {
 	String description;
 
 	User publisher=null;
+
+	List<Photo> photos=null;
 	
 	
 	public Publication(int publicationId, int userId, int type,
@@ -133,5 +138,13 @@ public class Publication {
 		return publisher;
 	}
 	
+	public List<Photo> getPhotos(){
+		if(photos==null){
+			PhotoService ps=PhotoService.getInstance();
+			photos=ps.getPhotosByPublicationId(publicationId);
+		}
+		
+		return photos;
+	}
 	
 }

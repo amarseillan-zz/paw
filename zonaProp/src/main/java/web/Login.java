@@ -17,6 +17,7 @@ public class Login extends HttpServlet {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	UserService us = UserService.getInstance();
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -29,10 +30,9 @@ public class Login extends HttpServlet {
 			throws ServletException, IOException {
 		String username = req.getParameter("username");
 		String password = req.getParameter("password");
-		UserService us = UserService.getInstance();
 		User user = us.authenticate(username, password);
 		if( user != null ){
-			req.getSession().setAttribute("user", user);
+			req.getSession().setAttribute("userId", user.getId());
 			if("on".equals(req.getParameter("remember"))){
 				resp.addCookie(new Cookie("userid", String.valueOf(user.getId())));
 			}

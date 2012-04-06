@@ -39,7 +39,7 @@ public class PublicationABM extends HttpServlet {
 		if (req.getParameter("pid") != null) {
 			int publicationId = Integer.valueOf(req.getParameter("pid"));
 			p = ps.getPublication(publicationId);
-			if(p.getUserId()==((User) req.getSession().getAttribute("user")).getId())
+			if(p.getUserId() == (Integer)req.getSession().getAttribute("userId"))
 				pf = new PublicationForm(p);
 		} else {
 

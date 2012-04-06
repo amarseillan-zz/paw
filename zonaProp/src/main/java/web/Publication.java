@@ -2,16 +2,13 @@ package web;
 
 import java.io.IOException;
 import java.security.InvalidParameterException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import services.PhotoService;
 import services.PublicationService;
-import transfer.bussiness.Photo;
 import transfer.forms.VisitForm;
 
 public class Publication extends HttpServlet {
@@ -21,20 +18,19 @@ public class Publication extends HttpServlet {
 	 */
 	private static final long serialVersionUID = 1L;
 
+
+	PublicationService ps = PublicationService.getInstance();
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		try {
 			int publicationId = Integer.parseInt(req.getParameter("publicationId"));
-			PublicationService ps = PublicationService.getInstance();
 			transfer.bussiness.Publication p = ps.getPublication(publicationId);
 
-			PhotoService photoServ = PhotoService.getInstance(); 
-			List<Photo> photos = photoServ.getPhotosByPublicationId(p.getPublicationId());	 
 			
 			req.setAttribute("publication", p);
-			req.setAttribute("showPublisher", false);      	
-			req.setAttribute("photos", photos);
+			req.setAttribute("showPublisher", false);
 			
 			req.getRequestDispatcher("/WEB-INF/jsp/publication.jsp").forward(req,
 					resp);
@@ -55,9 +51,6 @@ public class Publication extends HttpServlet {
 		PublicationService ps = PublicationService.getInstance();
 		transfer.bussiness.Publication p=ps.getPublication(publicationId);
 		
-		PhotoService photoServ = PhotoService.getInstance(); 
-		List<Photo> photos = photoServ.getPhotosByPublicationId(p.getPublicationId());
-		
 		try{
 		ps.sendMailToPublisher(p, vf);
 		req.setAttribute("showPublisher", true);
@@ -67,7 +60,6 @@ public class Publication extends HttpServlet {
 			req.setAttribute("vf", vf);
 		}
     	
-		req.setAttribute("photos", photos);
 
 		req.setAttribute("publication", p);
 		req.setAttribute("error", error);
