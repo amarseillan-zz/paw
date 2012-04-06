@@ -44,7 +44,7 @@ public class PhotoDAO extends DAO {
 
 			ResultSet results = stmt.executeQuery();
 			while (results.next()) {
-				Photo p = new Photo(results.getInt(1), results.getInt(2), results.getBytes(3), results.getBinaryStream(3));
+				Photo p = new Photo(results.getInt(1), results.getInt(2), results.getBinaryStream(3));
 				pList.add(p);
 			}
 			connection.close();
@@ -66,7 +66,7 @@ public class PhotoDAO extends DAO {
 
 			ResultSet results = stmt.executeQuery();
 			while (results.next()) {
-				photo = new Photo(results.getInt(1), results.getInt(2), results.getBytes(3), results.getBinaryStream(3));
+				photo = new Photo(results.getInt(1), results.getInt(2), results.getBinaryStream(3));
 			}
 			connection.close();
 		} catch (SQLException e) {

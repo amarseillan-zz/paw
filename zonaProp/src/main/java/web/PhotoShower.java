@@ -31,7 +31,7 @@ public class PhotoShower extends HttpServlet {
        	Photo image = ps.getPhotoById(imageId);
 
         if (image == null) {
-        	System.out.println("No se ecneuntra la imagen");
+        	System.out.println("No se encuentra la imagen");
             resp.sendError(HttpServletResponse.SC_NOT_FOUND); // 404.
             return;
         }
@@ -40,7 +40,6 @@ public class PhotoShower extends HttpServlet {
         resp.setBufferSize(DEFAULT_BUFFER_SIZE);
         resp.setContentType("image/jpeg"); 
         resp.setHeader("cache-control", "no-cache");
-        resp.setHeader("Content-Length", String.valueOf(image.getSize()));
         resp.setHeader("Content-Disposition", "inline; filename=\"imagen\"");
 
         BufferedInputStream input = null;

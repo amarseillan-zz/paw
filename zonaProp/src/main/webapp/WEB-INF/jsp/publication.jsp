@@ -32,13 +32,9 @@
 					</div>
 					
 					<div class="well">
-						<table style="width: 100%;">
 							<c:forEach items="${photos}" var="photo">
-								<td>							
-									<img style="width:100%" src="<c:url value="photoShower"><c:param name="imageId" value="${photo.id}" /></c:url>" /> </img>							
-								</td>	
-							</c:forEach>
-						</table>
+									<img width="250" src="<c:url value="photoShower"><c:param name="imageId" value="${photo.id}" /></c:url>" /> </img>							
+							</c:forEach> 
 					</div>
 					
 					<form class="well form-horizontal" method="POST" action="publication">

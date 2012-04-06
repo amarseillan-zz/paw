@@ -1,30 +1,26 @@
 package transfer.bussiness;
 
+import java.io.IOException;
 import java.io.InputStream;
+
+import org.apache.commons.io.IOUtils;
 
 public class Photo {
 
 	private int id;
 	private int publicationId;
-	private byte[] imageBytes;
 	private InputStream inputStream;
 
-	public Photo(int id, int publicationId, byte[] imageBytes, InputStream iS) {
+	public Photo(int id, int publicationId, InputStream iS) {
 		super();
 		this.id = id;
 		setPublicationId(publicationId);
-		setImageBytes(imageBytes);
 		setInputStream(iS);
 	}
 	
 
 	private void setInputStream(InputStream iS) {
 		this.inputStream = iS;		
-	}
-
-
-	private void setImageBytes(byte[] bytes) {
-		this.imageBytes = bytes;		
 	}
 
 	public void setPublicationId(int id){
@@ -39,19 +35,20 @@ public class Photo {
 		return publicationId;
 	}
 	
-	public byte[] getImageBytes() {
-		return imageBytes;
-	}
-
-
-	public int getSize() {
-		return imageBytes.length * Byte.SIZE;
-	}
-
 
 	public InputStream getInputStream() {
 		return this.inputStream;
 	}
 
+
+	public byte[] getImageBytes() {		
+		
+		try {
+			return IOUtils.toByteArray(this.getInputStream());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 
 }
