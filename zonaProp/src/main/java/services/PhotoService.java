@@ -43,10 +43,8 @@ public class PhotoService {
 		}
 		if(size == 0){
 			throw new InvalidParameterException("Debe seleccionar una imagen.");
-		}
-		byte[] imageBytes = new byte[size];
-		fileItem.getInputStream().read(imageBytes, 0, imageBytes.length);
-		Photo image = new Photo(0, publicationId, imageBytes, fileItem.getInputStream());
+		}		
+		Photo image = new Photo(0, publicationId, fileItem.getInputStream());
 		
 		return image;
 	}
