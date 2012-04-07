@@ -61,7 +61,7 @@ public class SendMailTLS {
 	}
 
 	public SendMailTLS(Properties p) {
-		this.p = p;
+		SendMailTLS.p = p;
 	}
 
 	public void send(final String from, final String to, final String subject,

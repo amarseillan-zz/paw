@@ -23,8 +23,9 @@ public class PublicationService {
 		pDAO = new PublicationDAO();
 	}
 	
-	public Publication create(Publication p, int userId){
-		return pDAO.createPublication(p, userId);
+	public void save(Publication p, int userId){
+		pDAO.save(p, userId);
+		return;
 	}
 	
 	public Publication getPublication(int pid){
@@ -41,9 +42,6 @@ public class PublicationService {
 		return pDAO.advancedSearch(type, operation_type, maxPrice, minPrice, ascending);
 	}
 	
-	public void update(Publication p){
-		pDAO.updatePublication(p);
-	}
 	
 	public void sendMailToPublisher(Publication p, VisitForm vf){
 		User publisher=p.getPublisher();

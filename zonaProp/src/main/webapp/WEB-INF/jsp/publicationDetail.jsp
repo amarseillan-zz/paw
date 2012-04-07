@@ -69,7 +69,7 @@
        							    </div>
 								</div>
 								<div class="control-group">
-        						    <label class="control-label" for="age">Antigüedad</label>
+        						    <label class="control-label" for="age">Antig&uuml;edad</label>
         						    <div class="controls">
         						    	<input type="text" class="input-xlarge" name="age" value="${publication.age}">
        							    </div>

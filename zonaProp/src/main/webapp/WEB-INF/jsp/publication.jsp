@@ -14,13 +14,13 @@
 						<h3>
 							Publicacion:
 						</h3>
-						<b>Ubicacion:</b> ${publication.address}, ${publication.city}
+						<b>Ubicaci&oacute;n:</b> ${publication.address}, ${publication.city}
 						<br/>
 						<b>Ambientes:</b> ${publication.environments}
 						<br/>
 						<b>Area:</b> ${publication.covered} metros cubiertos y ${publication.uncovered} metros descubiertos
 						<br/>
-						<b>Antiguedad:</b> ${publication.age} años
+						<b>Antig&uuml;edad:</b> ${publication.age} a&ntilde;os
 						<br/>
 						<b>Precio:</b> ${publication.price} pesos
 						<br/>
@@ -44,7 +44,7 @@
 							<label for="name">Nombre:</label>
 							<input type="text" name="name" class="span3" value="${vf.name}" />
 							
-							<label for="phone">Telefono:</label>
+							<label for="phone">Tel&eacute;fono:</label>
 							<input type="text" name="phone" class="span3" value="${vf.phone}"/>
 							
 							<label for="email">E-mail:</label>

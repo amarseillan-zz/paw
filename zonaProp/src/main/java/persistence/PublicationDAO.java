@@ -43,7 +43,7 @@ public class PublicationDAO extends DAO {
 
 
 	
-	public Publication createPublication(Publication p, int userId) {
+	private void createPublication(Publication p, int userId) {
 
 		try {
 			Connection connection = manager.getConnection();
@@ -101,7 +101,7 @@ public class PublicationDAO extends DAO {
 		} catch (SQLException e) {
 			throw new DatabaseException(e.getMessage(), e);
 		}
-		return p;
+		return;
 	}
 
 	public List<Publication> getAll(int userId) {
@@ -185,7 +185,7 @@ public class PublicationDAO extends DAO {
 		return pList;
 	}
 
-	public void updatePublication(Publication p) {
+	private void updatePublication(Publication p) {
 		try {
 			Connection connection = manager.getConnection();
 			PreparedStatement stmt = connection
@@ -219,4 +219,12 @@ public class PublicationDAO extends DAO {
 		return;
 	}
 
+	
+	public void save(Publication p, int userId){
+		if( userId == -1 ){
+			createPublication(p, userId);
+		}else{
+			updatePublication(p);
+		}
+	}
 }
