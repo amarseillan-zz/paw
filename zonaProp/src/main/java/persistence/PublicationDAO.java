@@ -49,7 +49,7 @@ public class PublicationDAO extends DAO {
 			Connection connection = manager.getConnection();
 			PreparedStatement stmt = connection
 					.prepareStatement("INSERT INTO PUBLICATION(userid,type,operation_type,address,city,price,environments,covered," +
-							"uncovered,age,cable,phone,pool,living,paddle,barbecue, description)VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+							"uncovered,age,cable,phone,pool,living,paddle,barbecue, description, active)VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 			stmt.setInt(1, userId);
 			stmt.setInt(2, p.getType());
 			stmt.setInt(3, p.getOperation_type());
@@ -224,7 +224,7 @@ public class PublicationDAO extends DAO {
 
 	
 	public void save(Publication p, int userId){
-		if( userId == -1 ){
+		if( p.getPublicationId() == -1 ){
 			createPublication(p, userId);
 		}else{
 			updatePublication(p);
