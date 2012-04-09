@@ -152,12 +152,17 @@
 		<input type="hidden" name="publicationId" value="${publication.publicationId}" />
 		<input type="hidden" name="userId" value="${publication.userId}" />
 
-		<a href="<c:url value=" photoUpload ">
-			<c:param name="pid" value="${publication.publicationId}" />
-		</c:url>
-			">Editar Imagenes
-		</a>
-
+		<c:if test="${publication.publicationId != -1}">		
+			<a href="<c:url value="photoUpload">
+				<c:param name="pid" value="${publication.publicationId}" />
+			</c:url>
+				">Editar Imagenes
+			</a>
+		</c:if>
+		<c:if test="${publication.publicationId == -1}">
+			<b>Debe guardar la publicaci&oacute;n para agregar im&aacute;genes a la misma</b>
+		</c:if>
+		
 		<div class="form-actions">
 			<button type="submit" class="btn btn-primary">Guardar</button>
 			<button class="btn">Cancelar</button>
