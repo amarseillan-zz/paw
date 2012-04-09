@@ -1,5 +1,6 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import persistence.PublicationDAO;
@@ -39,7 +40,14 @@ public class PublicationService {
 	
 	
 	public List<Publication> advancedSearch(int type, int operation_type, int maxPrice, int minPrice, boolean ascending){
-		return pDAO.advancedSearch(type, operation_type, maxPrice, minPrice, ascending);
+		List<Publication> aux = pDAO.advancedSearch(type, operation_type, maxPrice, minPrice, ascending);
+		List<Publication> pList = new ArrayList<Publication>();
+		for( Publication p: aux ){
+			if( p.isActive() ){
+				pList.add(p);
+			}
+		}
+		return pList;
 	}
 	
 	

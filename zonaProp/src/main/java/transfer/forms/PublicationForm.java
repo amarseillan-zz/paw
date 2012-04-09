@@ -28,6 +28,7 @@ public class PublicationForm {
 	private boolean paddle;
 	private boolean barbecue;
 	private String description;
+	private boolean active;
 
 	public PublicationForm() {
 		publicationId = -1;
@@ -48,13 +49,14 @@ public class PublicationForm {
 		paddle = false;
 		barbecue = false;
 		description = "";
+		active = true;
 	}
 
 	public PublicationForm(int publicationId, int userId, int type,
 			int operation_type, String address, String city, String price,
 			int environments, String covered, String uncovered, String age,
 			boolean cable, boolean phone, boolean pool, boolean living,
-			boolean paddle, boolean barbecue, String description) {
+			boolean paddle, boolean barbecue, String description, boolean active) {
 		super();
 		this.publicationId = publicationId;
 		this.userId = userId;
@@ -74,6 +76,7 @@ public class PublicationForm {
 		this.paddle = paddle;
 		this.barbecue = barbecue;
 		this.description = description;
+		this.active = active;
 	}
 
 	public PublicationForm(Publication p) {
@@ -95,6 +98,7 @@ public class PublicationForm {
 		paddle = p.isPaddle();
 		barbecue = p.isBarbecue();
 		description = p.getDescription();
+		active = p.isActive();
 	}
 
 	public Publication toBussiness() {
@@ -102,7 +106,7 @@ public class PublicationForm {
 				operation_type, address, city, Float.valueOf(price),
 				environments, Float.valueOf(covered), Float.valueOf(uncovered),
 				Integer.valueOf(age), cable, phone, pool, living, paddle,
-				barbecue, description);
+				barbecue, description, active);
 		return p;
 	}
 
@@ -270,6 +274,10 @@ public class PublicationForm {
 			operationTypeDesc = oTypeList.get(operation_type-1).getDescription();
 		}
 		return operationTypeDesc;
+	}
+	
+	public boolean isActive(){
+		return active;
 	}
 	
 	public List<String> validate(){

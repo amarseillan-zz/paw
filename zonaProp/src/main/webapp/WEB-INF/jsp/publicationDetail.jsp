@@ -13,7 +13,7 @@
 			<div class="controls">
 				<select name="type">
 					<c:forEach items="${typeList}" var="propertyType">
-						<option value="${propertyType.pos}">${propertyType.description}</option>
+						<option value="${propertyType.pos}" <c:if test="${publication.type == propertyType.pos}">selected="true"</c:if>>${propertyType.description}</option>
 					</c:forEach>
 				</select>
 			</div>
@@ -25,7 +25,7 @@
 			<div class="controls">
 				<select name="operation_type">
 					<c:forEach items="${oTypeList}" var="operationType">
-						<option value="${operationType.pos}">${operationType.description}</option>
+						<option value="${operationType.pos}" <c:if test="${publication.operation_type == operationType.pos}">selected="true"</c:if>>${operationType.description}</option>
 					</c:forEach>
 				</select>
 			</div>
@@ -58,13 +58,13 @@
 			</label>
 			<div class="controls">
 				<select name="environments">
-					<option value="1">1</option>
-					<option value="2">2</option>
-					<option value="3">3</option>
-					<option value="4">4</option>
-					<option value="5">5</option>
-					<option value="6">6</option>
-					<option value="7">7</option>
+					<option value="1" <c:if test="${publication.environments == 1}">selected="true"</c:if>>1</option>
+					<option value="2" <c:if test="${publication.environments == 2}">selected="true"</c:if>>2</option>
+					<option value="3" <c:if test="${publication.environments == 3}">selected="true"</c:if>>3</option>
+					<option value="4" <c:if test="${publication.environments == 4}">selected="true"</c:if>>4</option>
+					<option value="5" <c:if test="${publication.environments == 5}">selected="true"</c:if>>5</option>
+					<option value="6" <c:if test="${publication.environments == 6}">selected="true"</c:if>>6</option>
+					<option value="7" <c:if test="${publication.environments == 7}">selected="true"</c:if>>7</option>
 				</select>
 			</div>
 		</div>
@@ -157,6 +157,16 @@
 		</c:url>
 			">Editar Imagenes
 		</a>
+		
+		<div class="control-group">
+			<label class="control-label" for="active">Estado</label>
+			<div class="controls">
+				<select name="active">
+					<option value="1" <c:if test="${publication.active}">selected="true"</c:if>>Activa</option>
+					<option value="2" <c:if test="${!publication.active}">selected="true"</c:if>>Finalizada</option>
+				</select>
+			</div>
+		</div>
 
 		<div class="form-actions">
 			<button type="submit" class="btn btn-primary">Guardar</button>

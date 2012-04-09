@@ -25,6 +25,7 @@ public class Publication {
 	boolean paddle;
 	boolean barbecue;
 	String description;
+	boolean active;
 
 	User publisher=null;
 
@@ -35,7 +36,7 @@ public class Publication {
 			int operation_type, String address, String city, float price,
 			int environments, float covered, float uncovered, int age,
 			boolean cable, boolean phone, boolean pool, boolean living,
-			boolean paddle, boolean barbecue, String description) {
+			boolean paddle, boolean barbecue, String description, boolean active) {
 		super();
 		this.publicationId = publicationId;
 		this.userId = userId;
@@ -55,6 +56,7 @@ public class Publication {
 		this.paddle = paddle;
 		this.barbecue = barbecue;
 		this.description = description;
+		this.active = active;
 	}
 
 	public int getPublicationId() {
@@ -145,6 +147,10 @@ public class Publication {
 		}
 		
 		return photos;
+	}
+	
+	public boolean isActive(){
+		return active;
 	}
 	
 }

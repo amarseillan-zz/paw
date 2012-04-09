@@ -43,7 +43,6 @@ public class PublicationABM extends HttpServlet {
 		} else {
 
 		}
-		System.out.println(pf.isCable());
 		req.setAttribute("publication", pf);
 		req.setAttribute("typeList", typeList);
 		req.setAttribute("oTypeList", oTypeList);
@@ -68,7 +67,7 @@ public class PublicationABM extends HttpServlet {
 						.getParameter("living")), Boolean.valueOf(req
 						.getParameter("paddle")), Boolean.valueOf(req
 						.getParameter("barbecue")),
-				req.getParameter("description"));
+				req.getParameter("description"), Boolean.valueOf(req.getParameter("active")));
 		List<String> errors = pf.validate();
 		if( !errors.isEmpty() ){
 			cs = ComboService.getInstance();

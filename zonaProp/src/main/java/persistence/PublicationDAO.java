@@ -32,7 +32,7 @@ public class PublicationDAO extends DAO {
 						results.getFloat(9), results.getFloat(10),
 						results.getInt(11), results.getBoolean(12), results.getBoolean(13), results.getBoolean(14),
 						results.getBoolean(15), results.getBoolean(16),
-						results.getBoolean(17), results.getString(18));
+						results.getBoolean(17), results.getString(18), results.getBoolean(19));
 			}
 			connection.close();
 		} catch (SQLException e) {
@@ -49,7 +49,7 @@ public class PublicationDAO extends DAO {
 			Connection connection = manager.getConnection();
 			PreparedStatement stmt = connection
 					.prepareStatement("INSERT INTO PUBLICATION(userid,type,operation_type,address,city,price,environments,covered," +
-							"uncovered,age,cable,phone,pool,living,paddle,barbecue, description)VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+							"uncovered,age,cable,phone,pool,living,paddle,barbecue, description)VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 			stmt.setInt(1, userId);
 			stmt.setInt(2, p.getType());
 			stmt.setInt(3, p.getOperation_type());
@@ -67,6 +67,7 @@ public class PublicationDAO extends DAO {
 			stmt.setBoolean(15, p.isPaddle());
 			stmt.setBoolean(16, p.isBarbecue());
 			stmt.setString(17, p.getDescription());
+			stmt.setBoolean(18, p.isActive());
 			stmt.executeUpdate();
 
 			stmt = connection.prepareStatement("SELECT PUBLICATIONID FROM PUBLICATION WHERE USERID = ? AND ADDRESS = ? AND TYPE = ?");
@@ -92,7 +93,8 @@ public class PublicationDAO extends DAO {
 						p.isLiving(),
 						p.isPaddle(),
 						p.isBarbecue(),
-						p.getDescription());
+						p.getDescription(),
+						p.isActive());
 			}
 
 			connection.commit();
@@ -121,7 +123,7 @@ public class PublicationDAO extends DAO {
 						results.getFloat(9), results.getFloat(10),
 						results.getInt(11), results.getBoolean(12), results.getBoolean(13), results.getBoolean(14),
 						results.getBoolean(15), results.getBoolean(16),
-						results.getBoolean(17), results.getString(18));
+						results.getBoolean(17), results.getString(18), results.getBoolean(19));
 				pList.add(p);
 			}
 			connection.close();
@@ -175,7 +177,7 @@ public class PublicationDAO extends DAO {
 						results.getFloat(9), results.getFloat(10),
 						results.getInt(11), results.getBoolean(12), results.getBoolean(13), results.getBoolean(14),
 						results.getBoolean(15), results.getBoolean(16),
-						results.getBoolean(17), results.getString(18));
+						results.getBoolean(17), results.getString(18),results.getBoolean(19));
 				pList.add(p);
 			}
 			connection.close();
@@ -190,7 +192,7 @@ public class PublicationDAO extends DAO {
 			Connection connection = manager.getConnection();
 			PreparedStatement stmt = connection
 					.prepareStatement("UPDATE PUBLICATION SET userid=?, type=?,operation_type=?,address=?,city=?,price=?,environments=?,covered=?," +
-							"uncovered=?,age=?,cable=?,phone=?,pool=?,living=?,paddle=?,barbecue=?, description=? WHERE PUBLICATIONID=?");
+							"uncovered=?,age=?,cable=?,phone=?,pool=?,living=?,paddle=?,barbecue=?, description=?, active=? WHERE PUBLICATIONID=?");
 			stmt.setInt(1, p.getUserId());
 			stmt.setInt(2, p.getType());
 			stmt.setInt(3, p.getOperation_type());
@@ -208,7 +210,8 @@ public class PublicationDAO extends DAO {
 			stmt.setBoolean(15, p.isPaddle());
 			stmt.setBoolean(16, p.isBarbecue());
 			stmt.setString(17, p.getDescription());
-			stmt.setInt(18, p.getPublicationId());
+			stmt.setBoolean(18, p.isActive());
+			stmt.setInt(19, p.getPublicationId());
 			stmt.executeUpdate();
 
 			connection.commit();
