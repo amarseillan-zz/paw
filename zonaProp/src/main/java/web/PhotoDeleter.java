@@ -14,7 +14,6 @@ import services.PhotoService;
 import services.PublicationService;
 import transfer.bussiness.Photo;
 import transfer.bussiness.Publication;
-import transfer.bussiness.User;
 
 public class PhotoDeleter extends HttpServlet {
 
@@ -33,16 +32,15 @@ public class PhotoDeleter extends HttpServlet {
 			int publicationId = Integer.valueOf(req.getParameter("pid"));
 			int imageId = Integer.valueOf(req.getParameter("imageId"));
 			p = ps.getPublication(publicationId);
-			if(p.getUserId()==((User) req.getSession().getAttribute("user")).getId()){
-				
-				PhotoService ps = PhotoService.getInstance(); 
-				ps.deletePhotoById(imageId);
-				
-		       	photos = ps.getPhotosByPublicationId(p.getPublicationId());		       	
-				req.setAttribute("photos", photos);
-				req.setAttribute("pid", p.getPublicationId());
-				req.getRequestDispatcher("/WEB-INF/jsp/photoUpload.jsp").forward(req, resp);
-			}
+
+			PhotoService ps = PhotoService.getInstance(); 
+			ps.deletePhotoById(imageId);
+			
+	       	photos = ps.getPhotosByPublicationId(p.getPublicationId());		       	
+			req.setAttribute("photos", photos);
+			req.setAttribute("pid", p.getPublicationId());
+			req.getRequestDispatcher("/WEB-INF/jsp/photoUpload.jsp").forward(req, resp);
+			
 		}
 	}
 
