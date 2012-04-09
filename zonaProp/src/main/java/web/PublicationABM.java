@@ -43,6 +43,7 @@ public class PublicationABM extends HttpServlet {
 		} else {
 
 		}
+		System.out.println(pf.isCable());
 		req.setAttribute("publication", pf);
 		req.setAttribute("typeList", typeList);
 		req.setAttribute("oTypeList", oTypeList);

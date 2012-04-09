@@ -1023,6 +1023,10 @@ select:focus:required:invalid:focus {
   background-color: #eeeeee;
   border: 1px solid #ccc;
 }
+
+.error{
+    color:red;
+    }
 .input-prepend .add-on,
 .input-append .add-on,
 .input-prepend .btn,

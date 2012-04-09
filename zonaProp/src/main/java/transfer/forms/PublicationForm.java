@@ -274,6 +274,32 @@ public class PublicationForm {
 	
 	public List<String> validate(){
 		List<String> errors = new ArrayList<String>();
+		
+		if( address.length() >30 )
+			errors.add("Dirección demasiado larga.");
+		if( city.length() > 30 )
+			errors.add("Ciudad demasiado larga.");
+		try{
+			Double.parseDouble(price);
+		}catch(Exception e){
+			errors.add("Error en el precio. Ingrese un número real.");
+		}
+		try{
+			Double.parseDouble(covered);
+		}catch(Exception e){
+			errors.add("Error la superficie cubierta. Ingrese un número real.");
+		}
+		try{
+			Double.parseDouble(uncovered);
+		}catch(Exception e){
+			errors.add("Error en la superficie descubierta. Ingrese un número real.");
+		}
+		try{
+			Integer.parseInt(age);
+		}catch(Exception e){
+			errors.add("Error en la antigüedad. Ingrese un número entero.");
+		}
+		
 		return errors;
 	}
 }
