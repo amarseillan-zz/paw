@@ -1,8 +1,19 @@
-INSERT INTO SYS_USER(USERID, NAME, LASTNAME, EMAIL, PHONE, NICK, PASSWORD)VALUES('Agustin','Marseillan','agustinmarseillan@gmail.com','4723-8376','marse','123456'):
-INSERT INTO SYS_USER(USERID, NAME, LASTNAME, EMAIL, PHONE, NICK, PASSWORD)VALUES('Máximo','Vidella','maximovs@gmail.com','4939-8376','maxi','123456'):
-INSERT INTO SYS_USER(USERID, NAME, LASTNAME, EMAIL, PHONE, NICK, PASSWORD)VALUES('Axel','Wassington','axelwass@gmail.com','4949-4211','axel','654321'):
-INSERT INTO SYS_USER(USERID, NAME, LASTNAME, EMAIL, PHONE, NICK, PASSWORD)VALUES('Kevin','Kenny','kvnkny@gmail.com','3939-4221','kevin','654321'):
+DELETE FROM PHOTO;
+DELETE FROM PUBLICATION;
+DELETE FROM SYS_USER;
+
+
+INSERT INTO SYS_USER(USERID, NAME, LASTNAME, EMAIL, PHONE, NICK, PASSWORD)VALUES(1,'Agustin','Marseillan','agustinmarseillan@gmail.com','4723-8376','marse','123456');
+INSERT INTO SYS_USER(USERID, NAME, LASTNAME, EMAIL, PHONE, NICK, PASSWORD)VALUES(2,'Máximo','Vidella','maximovs@gmail.com','4939-8376','maxi','123456');
+INSERT INTO SYS_USER(USERID, NAME, LASTNAME, EMAIL, PHONE, NICK, PASSWORD)VALUES(3,'Axel','Wassington','axelwass@gmail.com','4949-4211','axel','654321');
+INSERT INTO SYS_USER(USERID, NAME, LASTNAME, EMAIL, PHONE, NICK, PASSWORD)VALUES(4,'Kevin','Kenny','kvnkny@gmail.com','3939-4221','kevin','654321');
 INSERT INTO PUBLICATION(userid,type,operation_type,address,city,price,environments,covered,uncovered,age,cable,phone,pool,living,paddle,barbecue, description, active)VALUES('1','1','2','Murature 785','San Isidro','100000.0','6','400','300','25','1','1','1','1','1','1','Linda casa en zona cheta.','1');
 INSERT INTO PUBLICATION(userid,type,operation_type,address,city,price,environments,covered,uncovered,age,cable,phone,pool,living,paddle,barbecue, description, active)VALUES('2','2','1','Cerrito 800','Buenos Aires','2000.0','3','200.0','0.0','15','1','1','0','0','0','0','Departamento chico pero con buena ubicación.','1');
 INSERT INTO PUBLICATION(userid,type,operation_type,address,city,price,environments,covered,uncovered,age,cable,phone,pool,living,paddle,barbecue, description, active)VALUES('3','2','1','Cerrito 800','Buenos Aires','100000.0','3','200.0','0.0','15','1','1','0','0','0','0','Departamento chico pero con buena ubicación.','1');
 INSERT INTO PUBLICATION(userid,type,operation_type,address,city,price,environments,covered,uncovered,age,cable,phone,pool,living,paddle,barbecue, description, active)VALUES('3','1','1','De las artes 300','Pinamar','300000.0','7','500.0','350.0','13','1','1','1','1','1','1','Casa de playa muy grande.','0');
+INSERT INTO PUBLICATION(userid,type,operation_type,address,city,price,environments,covered,uncovered,age,cable,phone,pool,living,paddle,barbecue, description, active)VALUES('3','1','1','De las artes 300','Pinamar','500000.0','7','500.0','350.0','13','1','1','1','1','1','1','Casa de playa muy grande.','1');
+INSERT INTO PUBLICATION(userid,type,operation_type,address,city,price,environments,covered,uncovered,age,cable,phone,pool,living,paddle,barbecue, description, active)VALUES('3','1','2','De las artes 300','Pinamar','21000.0','7','500.0','350.0','13','1','1','1','1','1','1','Casa de playa muy grande.','1');--
+INSERT INTO PUBLICATION(userid,type,operation_type,address,city,price,environments,covered,uncovered,age,cable,phone,pool,living,paddle,barbecue, description, active)VALUES('1','1','1','Murature 785','San Isidro','1000000.0','6','400','300','25','1','1','1','1','1','1','Linda casa en zona cheta.','1');
+INSERT INTO PUBLICATION(userid,type,operation_type,address,city,price,environments,covered,uncovered,age,cable,phone,pool,living,paddle,barbecue, description, active)VALUES('2','2','2','Alvear 574','Buenos Aires','3600.0','3','250.0','0.0','25','1','0','0','0','0','0','Excelente ubicación en buenos aires.','1');
+INSERT INTO PUBLICATION(userid,type,operation_type,address,city,price,environments,covered,uncovered,age,cable,phone,pool,living,paddle,barbecue, description, active)VALUES('3','1','1','Marquez 2340','San Isidro','123456.0','5','460.0','100.0','32','1','1','1','1','1','1','Linda casa cerca del hipódromo.','1');
+INSERT INTO PUBLICATION(userid,type,operation_type,address,city,price,environments,covered,uncovered,age,cable,phone,pool,living,paddle,barbecue, description, active)VALUES('1','1','2','Gorlero 405','Punta del este','15000.0','5','500.0','350.0','13','1','1','1','1','1','1','Excelente casa cerca de la playa.','0');
