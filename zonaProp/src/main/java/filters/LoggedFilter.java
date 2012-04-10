@@ -33,7 +33,9 @@ public class LoggedFilter implements Filter{
 				for(Cookie c:cs){
 					if("userid".equals(c.getName()) && c.getValue()!=null){
 						u = UserService.getInstance().getUser(Integer.valueOf(c.getValue()));
-						System.out.println(u.getId() + u.getName());
+					}
+					if("username".equals(c.getName()) && c.getValue()!=null){
+						req.setAttribute("username", c.getValue());
 					}
 				}
 				if (u!=null){

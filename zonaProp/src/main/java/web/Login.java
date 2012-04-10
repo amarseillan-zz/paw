@@ -36,10 +36,15 @@ public class Login extends HttpServlet {
 			if("on".equals(req.getParameter("remember"))){
 				resp.addCookie(new Cookie("userid", String.valueOf(user.getId())));
 			}
+			if("on".equals(req.getParameter("rememberu"))){
+				resp.addCookie(new Cookie("username", String.valueOf(username)));
+			}else{
+				resp.addCookie(new Cookie("username", ""));
+			}
 			resp.sendRedirect("publicationSearch");
 		} else {
 			req.setAttribute("username", username);
-			req.setAttribute("error", "Nombre de usuario o contrase�a inv�lidos");
+			req.setAttribute("error", "Nombre de usuario o contrase&ntilde;a inv&aacute;lidos");
 			req.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(req, resp);
 		}
 	}

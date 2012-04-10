@@ -8,7 +8,10 @@
 							<label for="password">Contrase&ntilde;a</label>
 							<input type="password" name="password" />
 							<label class="checkbox">
-								<input type="checkbox" name="remember"> Remember me </input>
+								<input type="checkbox" name="rememberu"> Recordar usuario </input>
+							</label>
+							<label class="checkbox">
+								<input type="checkbox" name="remember"> Recordar usuario y contrase&ntilde;a </input>
 							</label>
 							<input type="submit" name="submit" value="Ingresar" class="btn" />
 							<span class="help-inline">${error}</span>
