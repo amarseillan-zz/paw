@@ -52,6 +52,7 @@ public class PublicationABM extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
+		req.setCharacterEncoding("UTF-8");
 		pf = new PublicationForm(Integer.valueOf(req
 				.getParameter("publicationId")), Integer.valueOf(req
 				.getParameter("userId")), Integer.valueOf(req
@@ -80,7 +81,6 @@ public class PublicationABM extends HttpServlet {
 			req.getRequestDispatcher("/WEB-INF/jsp/publicationDetail.jsp").forward(req, resp);
 		}else{
 			int userId = (Integer)req.getSession().getAttribute("userId");
-			System.out.println(pf.getDescription());
 			ps.save(pf.toBussiness(), userId);
 			resp.sendRedirect("publicationList");
 		}
