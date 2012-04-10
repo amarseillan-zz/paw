@@ -80,6 +80,7 @@ public class PublicationABM extends HttpServlet {
 			req.getRequestDispatcher("/WEB-INF/jsp/publicationDetail.jsp").forward(req, resp);
 		}else{
 			int userId = (Integer)req.getSession().getAttribute("userId");
+			System.out.println(pf.getDescription());
 			ps.save(pf.toBussiness(), userId);
 			resp.sendRedirect("publicationList");
 		}
