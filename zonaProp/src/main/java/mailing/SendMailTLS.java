@@ -19,19 +19,14 @@ public class SendMailTLS {
 	private static Properties p;
 
 	public static void test() {
-		Properties p = SendMailTLS.getMailProperties("");
-		SendMailTLS sender = new SendMailTLS(p);
+		SendMailTLS sender = new SendMailTLS("mail.properties");
 		sender.send("maximo@maxsoft.com", "maximovs@gmail.com", "1",
-				"Si viste?");
-		sender.send("maximo@maxsoft.com", "maximovs@gmail.com", "2",
-				"Si viste?");
-		sender.send("maximo@maxsoft.com", "maximovs@gmail.com", "3",
 				"Si viste?");
 		sender.Stop();
 
 	}
 
-	public static Properties getMailProperties(String path) {
+	public Properties getMailProperties(String path) {
 		if (p != null) {
 			return p;
 		}
@@ -43,11 +38,12 @@ public class SendMailTLS {
 			// WEB-INF, and access it using ServletContext.getResourceAsStream.
 			// This file contains the javax.mail config properties mentioned
 			// above.
-			input = ClassLoader.getSystemResourceAsStream("mail.properties");
+			input = this.getClass().getClassLoader()
+					.getResourceAsStream(path);
 			props.load(input);
-		} catch (IOException ex) {
-			System.err
-					.println("Cannot open and load mail server properties file.");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} finally {
 			try {
 				if (input != null)
@@ -60,8 +56,8 @@ public class SendMailTLS {
 		return props;
 	}
 
-	public SendMailTLS(Properties p) {
-		SendMailTLS.p = p;
+	public SendMailTLS(String path) {
+		SendMailTLS.p = getMailProperties(path);
 	}
 
 	public void send(final String from, final String to, final String subject,
@@ -89,8 +85,6 @@ public class SendMailTLS {
 						message.setText(text);
 
 						Transport.send(message);
-
-						System.out.println("Done");
 
 					} catch (MessagingException e) {
 						throw new RuntimeException(e);

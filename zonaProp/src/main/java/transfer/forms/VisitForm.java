@@ -34,8 +34,8 @@ public class VisitForm {
 			throw new InvalidParameterException(
 					"El telefono debe tener entre 3 y 15 caracteres.");
 
-		Properties p = SendMailTLS.getMailProperties("");
-		SendMailTLS sender = new SendMailTLS(p);
+		
+		SendMailTLS sender = new SendMailTLS("mail.properties");
 		sender.send(req.getParameter("email"), to.getEmail(),
 				"Comentó en una de tus propiedades " + req.getParameter("name"),
 				"mail del comentante:" + req.getParameter("email") + "\ntel:"
