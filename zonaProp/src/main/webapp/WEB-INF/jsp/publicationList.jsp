@@ -18,7 +18,7 @@
 	<c:forEach items="${pList}" var="publication">
 		<tr>
 		<td>${publication.address}</td>
-		<td>${publication.type}</td>
+		<td>${publication.typeDesc}</td>
 		<td>${publication.price}</td>
 		<td>${publication.age}</td>
 		<td>
