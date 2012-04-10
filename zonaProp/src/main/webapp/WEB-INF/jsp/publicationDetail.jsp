@@ -156,8 +156,8 @@
 			<label class="control-label" for="active">Estado</label>
 			<div class="controls">
 				<select name="active">
-					<option value="1" <c:if test="${publication.active}">selected="true"</c:if>>Activa</option>
-					<option value="2" <c:if test="${!publication.active}">selected="true"</c:if>>Finalizada</option>
+					<option value="true" <c:if test="${publication.active}">selected="true"</c:if>>Activa</option>
+					<option value="false" <c:if test="${!publication.active}">selected="true"</c:if>>Finalizada</option>
 				</select>
 			</div>
 		</div>
