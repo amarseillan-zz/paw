@@ -14,4 +14,6 @@
 							<span class="help-inline">${error}</span>
 						</form>
 						
+						<a href="signUp">Registrarse</a>
+						
 <%@ include file="footer.jsp" %>

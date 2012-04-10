@@ -14,6 +14,14 @@
 	</head>
 	<body>
 		<h1>Sistema de propiedades online</h1>
+			<a href="publicationSearch">Buscar publicaciones</a>
+		<c:if test="${userId != null}">
+			<a href="publicationList">Mis publicaciones</a>
+			<a href="logout">Salir</a>
+		</c:if>
+		<c:if test="${userId == null}">
+			<a href="login">Login</a>
+		</c:if>
 		<br>
 			<div class="container-fluid">
   				<div class="container">

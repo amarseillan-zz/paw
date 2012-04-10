@@ -36,7 +36,7 @@ public class Login extends HttpServlet {
 			if("on".equals(req.getParameter("remember"))){
 				resp.addCookie(new Cookie("userid", String.valueOf(user.getId())));
 			}
-			resp.sendRedirect("publicationList");
+			resp.sendRedirect("publicationSearch");
 		} else {
 			req.setAttribute("username", username);
 			req.setAttribute("error", "Nombre de usuario o contrase�a inv�lidos");

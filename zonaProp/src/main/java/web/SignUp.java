@@ -47,7 +47,7 @@ public class SignUp extends HttpServlet {
 		
 		if( user != null ){
 			req.getSession().setAttribute("userId", user.getId());
-			resp.sendRedirect("publicationList");
+			resp.sendRedirect("publicationSearch");
 		} else {
 
 			req.setAttribute("error", error);
