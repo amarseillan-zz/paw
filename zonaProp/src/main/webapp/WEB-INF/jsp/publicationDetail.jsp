@@ -174,7 +174,6 @@
 		
 		<div class="form-actions">
 			<button type="submit" class="btn btn-primary">Guardar</button>
-			<button class="btn">Cancelar</button>
 		</div>
 
 	</fieldset>
