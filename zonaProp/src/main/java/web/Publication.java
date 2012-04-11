@@ -1,7 +1,7 @@
 package web;
 
 import java.io.IOException;
-import java.security.InvalidParameterException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import services.PublicationService;
 import transfer.forms.VisitForm;
+import validators.VisitFormValidator;
 
 public class Publication extends HttpServlet {
 
@@ -43,25 +44,26 @@ public class Publication extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 		throws ServletException, IOException{
 		
-		String error="";
-		
 		VisitForm vf= new VisitForm(req);
 		
 		int publicationId = Integer.parseInt(req.getParameter("publicationId"));
 		transfer.bussiness.Publication p=ps.getPublication(publicationId);
 		
-		try{
-		ps.sendMailToPublisher(p, vf);
-		req.setAttribute("showPublisher", true);
-		}catch(InvalidParameterException ipe){
-			error=ipe.getMessage();
+
+		List<String> errors = new VisitFormValidator().check(vf);
+		
+		if(errors == null){
+			ps.sendMailToPublisher(p, vf);
+			req.setAttribute("showPublisher", true);
+		}
+		else{
 			req.setAttribute("showPublisher", false);
 			req.setAttribute("vf", vf);
 		}
     	
 
 		req.setAttribute("publication", p);
-		req.setAttribute("error", error);
+		req.setAttribute("errors", errors);
 		
 		req.getRequestDispatcher("/WEB-INF/jsp/publication.jsp").forward(req,
 				resp);

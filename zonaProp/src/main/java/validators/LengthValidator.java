@@ -21,6 +21,6 @@ public class LengthValidator extends FieldValidator<String> {
 
 	@Override
 	public boolean isCorrect(String value) {
-		return value.length()>min && value.length()<max;
+		return value.length()>=min && value.length()<=max;
 	}
 }

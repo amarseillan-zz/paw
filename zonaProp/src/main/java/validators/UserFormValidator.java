@@ -2,7 +2,6 @@ package validators;
 
 
 
-import java.util.ArrayList;
 import java.util.List;
 
 import services.UserService;
@@ -10,21 +9,9 @@ import transfer.forms.UserForm;
 
 public class UserFormValidator extends ClassValidator<UserForm> {
 
-	List<String> errors = new ArrayList<String>();
 
 	public UserFormValidator() {
 
-	}
-
-	private boolean campValidator(String campName, int min, int max, String value){
-
-		LengthValidator lv = new LengthValidator(campName, min, max);
-		
-		if(!lv.isCorrect(value)){
-			errors.add(lv.getError());
-			return true;
-		}
-		return false;
 	}
 	
 	@Override
