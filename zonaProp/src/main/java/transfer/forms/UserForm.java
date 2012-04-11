@@ -1,10 +1,13 @@
 package transfer.forms;
 
-import java.security.InvalidParameterException;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import exceptions.InvalidParametersException;
+
 import transfer.bussiness.User;
+import validators.UserFormValidator;
 
 public class UserForm {
 	
@@ -16,10 +19,11 @@ public class UserForm {
 	
 	public User getUser(){
 		
-		if(!getPassword1().equals(getPassword2())){
-			throw new InvalidParameterException("las contraseñas deben coincidir");
-		}
+		List<String> errors = new UserFormValidator().validate(this);
 		
+		if(errors != null){
+			throw new InvalidParametersException(errors);
+		}
 		
 		return new User(0, getName(), getLastname(), getMail(), getPhone(), getUsername(), getPassword1());
 

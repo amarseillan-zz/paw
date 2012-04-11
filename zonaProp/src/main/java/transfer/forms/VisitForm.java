@@ -1,7 +1,6 @@
 package transfer.forms;
 
 import java.security.InvalidParameterException;
-import java.util.Properties;
 
 import javax.servlet.http.HttpServletRequest;
 

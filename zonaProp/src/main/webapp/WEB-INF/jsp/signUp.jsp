@@ -1,7 +1,9 @@
 <%@ include file="header.jsp" %>
 
 <h2>Register</h2>
-<div class="error"><c:out value="${error}" /></div>
+<c:forEach items="${errors}" var="error">
+	<p class="error">${error}</p>
+</c:forEach>
 <form class="form" method="POST" action="signUp">
 	<div class="fieldset">
 		<label for="username">(*)Usuario:</label>

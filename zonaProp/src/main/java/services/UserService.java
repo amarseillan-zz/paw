@@ -1,8 +1,8 @@
 package services;
 
-import java.security.InvalidParameterException;
 
 import exceptions.DuplicatedUsernameException;
+import exceptions.InvalidParametersException;
 import persistence.UserDAO;
 import transfer.bussiness.User;
 import transfer.forms.UserForm;
@@ -41,7 +41,7 @@ public class UserService {
 	}
 	
 	public User createNewUser(UserForm uf)
-			throws DuplicatedUsernameException, InvalidParameterException {
+			throws DuplicatedUsernameException, InvalidParametersException {
 		
 		User user = uf.getUser();
 		

@@ -1,7 +1,7 @@
 package web;
 
 import java.io.IOException;
-import java.security.InvalidParameterException;
+import java.util.List;
 
 import transfer.bussiness.User;
 import transfer.forms.UserForm;
@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import exceptions.DuplicatedUsernameException;
+import exceptions.InvalidParametersException;
 
 import services.UserService;
 
@@ -28,7 +29,7 @@ public class SignUp extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		String error="";
+		List<String> errors=null;
 		
 		User user = null;
 		UserForm uf = new UserForm(req);
@@ -39,9 +40,9 @@ public class SignUp extends HttpServlet {
 		try{
 		user = us.createNewUser(uf);		
 		}catch(DuplicatedUsernameException due){
-			error="este nombre de usuario ya fue utilizado";
-		}catch(InvalidParameterException ipe){
-			error=ipe.getMessage();
+			//TODO enviar error 
+		}catch(InvalidParametersException ipe){
+			errors=ipe.getErrors();
 		}
 		
 		
@@ -50,7 +51,7 @@ public class SignUp extends HttpServlet {
 			resp.sendRedirect("publicationSearch");
 		} else {
 
-			req.setAttribute("error", error);
+			req.setAttribute("errors", errors);
 			req.setAttribute("uf", uf);
 			req.getRequestDispatcher("/WEB-INF/jsp/signUp.jsp").forward(req, resp);
 		}

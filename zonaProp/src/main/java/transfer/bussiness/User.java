@@ -4,6 +4,7 @@ import java.security.InvalidParameterException;
 import java.util.List;
 
 import services.PublicationService;
+import validators.LengthValidator;
 
 public class User {
 
@@ -67,38 +68,33 @@ public class User {
 	}
 
 	public void setUsername(String username) throws InvalidParameterException {
-		if(username.length() < 3 || username.length() > 20)
-			throw new InvalidParameterException("El nombre de usuario debe tener entre 3 y 20 caracteres.");
+		new LengthValidator("nombre de usuario", 3, 20).check(username);
 		this.username = username;
 	}
 
 	public void setPassword(String password) throws InvalidParameterException {
-		if(password.length() < 3 || password.length() > 20)
-			throw new InvalidParameterException("La conteraseña debe tener entre 3 y 20 caracteres.");
+		new LengthValidator("contraseña", 3, 20).check(password);
 		this.password = password;
 	}
 
 	public void setName(String name) throws InvalidParameterException {
-		if(name.length() < 3 || name.length() > 20)
-			throw new InvalidParameterException("El nombre debe tener entre 3 y 20 caracteres.");
+		new LengthValidator("nombre", 3, 20).check(name);
 		this.name = name;
 	}
 
 	public void setLastName(String lastName) throws InvalidParameterException {		
-		if(lastName.length() < 3 || lastName.length() > 20)
-			throw new InvalidParameterException("El apellido de usuario debe tener entre 3 y 20 caracters.");
+		new LengthValidator("apellido", 3, 20).check(lastName);
 		this.lastName = lastName;
 	}
 
 	public void setEmail(String email) throws InvalidParameterException {
-		if(email.length() < 3 || email.length() > 40)
-			throw new InvalidParameterException("El mail debe tener entre 3 y 40 carecteres.");
+		new LengthValidator("mail", 3, 40).check(email);
 		this.email = email;
 	}
 
 	public void setPhone(String phone) throws InvalidParameterException {
-		if(phone.length() < 3 || phone.length() > 15)
-			throw new InvalidParameterException("El telefono debe tener entre 3 y 15 caracteres.");
+		new LengthValidator("telefono", 3, 15).check(phone);
 		this.phone = phone;
 	}
+	
 }

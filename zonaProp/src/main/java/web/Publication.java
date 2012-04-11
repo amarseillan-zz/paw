@@ -48,7 +48,6 @@ public class Publication extends HttpServlet {
 		VisitForm vf= new VisitForm(req);
 		
 		int publicationId = Integer.parseInt(req.getParameter("publicationId"));
-		PublicationService ps = PublicationService.getInstance();
 		transfer.bussiness.Publication p=ps.getPublication(publicationId);
 		
 		try{
