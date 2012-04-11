@@ -28,7 +28,12 @@ public class Publication extends HttpServlet {
 			throws ServletException, IOException {
 		try {
 			int publicationId = Integer.parseInt(req.getParameter("publicationId"));
-			transfer.forms.PublicationForm p = new PublicationForm(ps.getPublication(publicationId));
+			
+			transfer.bussiness.Publication pub = ps.getPublication(publicationId);
+			transfer.forms.PublicationForm p = null;
+			
+			if(pub!=null)
+				p = new PublicationForm(pub);
 
 			
 			req.setAttribute("publication", p);
@@ -48,13 +53,18 @@ public class Publication extends HttpServlet {
 		VisitForm vf= new VisitForm(req);
 		
 		int publicationId = Integer.parseInt(req.getParameter("publicationId"));
-		transfer.bussiness.Publication p=ps.getPublication(publicationId);
+		
+		transfer.bussiness.Publication pub = ps.getPublication(publicationId);
+		transfer.forms.PublicationForm p = null;
+		
+		if(pub!=null)
+			p = new PublicationForm(pub);
 		
 
 		List<String> errors = new VisitFormValidator().check(vf);
 		
 		if(errors == null){
-			ps.sendMailToPublisher(p, vf);
+			ps.sendMailToPublisher(p.toBussiness(), vf);
 			req.setAttribute("showPublisher", true);
 		}
 		else{

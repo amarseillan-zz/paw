@@ -12,7 +12,7 @@
 					
 					<div class="well">
 						<h3>
-							Publicacion:
+							Publicacion: ${publication.operationTypeDesc} de ${publication.typeDesc}
 						</h3>
 						<b>Ubicaci&oacute;n:</b> ${publication.address}, ${publication.city}
 						<br/>
