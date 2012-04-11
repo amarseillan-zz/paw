@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import services.ComboService;
+import transfer.bussiness.Photo;
 import transfer.bussiness.Publication;
+import transfer.bussiness.User;
 
 public class PublicationForm {
 
@@ -29,6 +31,10 @@ public class PublicationForm {
 	private boolean barbecue;
 	private String description;
 	private boolean active;
+	
+	private User publisher=null;
+
+	private List<Photo> photos=null;
 
 	public PublicationForm() {
 		publicationId = -1;
@@ -50,6 +56,8 @@ public class PublicationForm {
 		barbecue = false;
 		description = "";
 		active = true;
+		
+		
 	}
 
 	public PublicationForm(int publicationId, int userId, int type,
@@ -77,6 +85,8 @@ public class PublicationForm {
 		this.barbecue = barbecue;
 		this.description = description;
 		this.active = active;
+		
+	
 	}
 
 	public PublicationForm(Publication p) {
@@ -86,7 +96,7 @@ public class PublicationForm {
 		operation_type = p.getOperation_type();
 		address = p.getAddress();
 		city = p.getCity();
-		price = String.valueOf(p.getPrice());
+		price = String.valueOf((int) p.getPrice());
 		environments = p.getEnvironments();
 		covered = String.valueOf(p.getCovered());
 		uncovered = String.valueOf(p.getUncovered());
@@ -99,6 +109,10 @@ public class PublicationForm {
 		barbecue = p.isBarbecue();
 		description = p.getDescription();
 		active = p.isActive();
+		
+		setPublisher(p.getPublisher());
+		setPhotos(p.getPhotos());
+		
 	}
 
 	public Publication toBussiness() {
@@ -309,5 +323,21 @@ public class PublicationForm {
 		}
 		
 		return errors;
+	}
+
+	public User getPublisher() {
+		return publisher;
+	}
+
+	private void setPublisher(User publisher) {
+		this.publisher = publisher;
+	}
+
+	public List<Photo> getPhotos() {
+		return photos;
+	}
+
+	private void setPhotos(List<Photo> photos) {
+		this.photos = photos;
 	}
 }

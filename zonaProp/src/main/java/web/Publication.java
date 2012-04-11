@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import services.PublicationService;
+import transfer.forms.PublicationForm;
 import transfer.forms.VisitForm;
 import validators.VisitFormValidator;
 
@@ -27,7 +28,7 @@ public class Publication extends HttpServlet {
 			throws ServletException, IOException {
 		try {
 			int publicationId = Integer.parseInt(req.getParameter("publicationId"));
-			transfer.bussiness.Publication p = ps.getPublication(publicationId);
+			transfer.forms.PublicationForm p = new PublicationForm(ps.getPublication(publicationId));
 
 			
 			req.setAttribute("publication", p);
