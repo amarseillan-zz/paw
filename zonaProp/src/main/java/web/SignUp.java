@@ -5,14 +5,12 @@ import java.util.List;
 
 import transfer.bussiness.User;
 import transfer.forms.UserForm;
+import validators.UserFormValidator;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import exceptions.DuplicatedUsernameException;
-import exceptions.InvalidParametersException;
 
 import services.UserService;
 
@@ -29,7 +27,6 @@ public class SignUp extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		List<String> errors=null;
 		
 		User user = null;
 		UserForm uf = new UserForm(req);
@@ -37,16 +34,11 @@ public class SignUp extends HttpServlet {
 		
 		UserService us = UserService.getInstance();
 		
-		try{
-		user = us.createNewUser(uf);		
-		}catch(DuplicatedUsernameException due){
-			//TODO enviar error 
-		}catch(InvalidParametersException ipe){
-			errors=ipe.getErrors();
-		}
+		List<String> errors = new UserFormValidator().check(uf);
 		
-		
-		if( user != null ){
+		if( errors == null ){
+			user = uf.getUser();
+			user = us.createNewUser(user);
 			req.getSession().setAttribute("userId", user.getId());
 			resp.sendRedirect("publicationSearch");
 		} else {

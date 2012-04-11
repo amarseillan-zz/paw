@@ -1,11 +1,8 @@
 package services;
 
 
-import exceptions.DuplicatedUsernameException;
-import exceptions.InvalidParametersException;
 import persistence.UserDAO;
 import transfer.bussiness.User;
-import transfer.forms.UserForm;
 
 public class UserService {
 
@@ -32,22 +29,15 @@ public class UserService {
 		return userDAO.createUser(user);
 	}
 
-	public boolean userAlreadyExist(transfer.bussiness.User user) {
-		return userDAO.userAlreadyExist(user);
+	public boolean userAlreadyExist(String username) {
+		return userDAO.userAlreadyExist(username);
 	}
 	
 	public User getUser(int id){
 		return userDAO.getUser(id);
 	}
 	
-	public User createNewUser(UserForm uf)
-			throws DuplicatedUsernameException, InvalidParametersException {
-		
-		User user = uf.getUser();
-		
-		if(userAlreadyExist(user)){
-			throw new DuplicatedUsernameException();			
-		}
+	public User createNewUser(User user){
 		
 		user = createUser(user);
 		

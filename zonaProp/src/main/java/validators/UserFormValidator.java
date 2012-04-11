@@ -5,9 +5,10 @@ package validators;
 import java.util.ArrayList;
 import java.util.List;
 
+import services.UserService;
 import transfer.forms.UserForm;
 
-public class UserFormValidator extends Validator<UserForm> {
+public class UserFormValidator extends ClassValidator<UserForm> {
 
 	List<String> errors = new ArrayList<String>();
 
@@ -15,19 +16,12 @@ public class UserFormValidator extends Validator<UserForm> {
 
 	}
 
-	@Override
-	protected List<String> getError() {
-		return errors;
-	}
-
 	private boolean campValidator(String campName, int min, int max, String value){
+
+		LengthValidator lv = new LengthValidator(campName, min, max);
 		
-		List<String> error = null;
-		
-		error = new LengthValidator(campName, min, max).validate(value);
-		
-		if(error != null){
-			errors.add(error.get(0));
+		if(!lv.isCorrect(value)){
+			errors.add(lv.getError());
 			return true;
 		}
 		return false;
@@ -43,6 +37,11 @@ public class UserFormValidator extends Validator<UserForm> {
 			hasError = true;
 		}
 		
+		if(UserService.getInstance().userAlreadyExist(value.getUsername())){
+			errors.add("El nombre de usuario ya existe.");	
+			hasError = true;
+		}
+		
 		hasError = campValidator("nombre de usuario", 3, 20, value.getUsername()) || hasError;
 		hasError = campValidator("contraseña", 3, 20, value.getPassword1()) || hasError;
 		hasError = campValidator("nombre", 3, 20, value.getName()) || hasError;
@@ -51,5 +50,12 @@ public class UserFormValidator extends Validator<UserForm> {
 		hasError = campValidator("telefono", 3, 15, value.getPhone()) || hasError;
 		
 		return !hasError;
+	}
+
+
+
+	@Override
+	protected List<String> getErrors() {
+		return errors;
 	}
 }

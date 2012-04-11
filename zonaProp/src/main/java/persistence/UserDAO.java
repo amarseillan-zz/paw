@@ -56,11 +56,11 @@ public class UserDAO extends DAO {
 		return user;
 	}
 
-	public boolean userAlreadyExist(User user) {
+	public boolean userAlreadyExist(String username) {
 		try {
 			Connection connection = manager.getConnection();
 			PreparedStatement stmt = connection.prepareStatement("SELECT * FROM SYS_USER WHERE NICK = ?");
-			stmt.setString(1, user.getUsername());
+			stmt.setString(1, username);
 			ResultSet results = stmt.executeQuery();
 			if (results.next()) {
 				return true;

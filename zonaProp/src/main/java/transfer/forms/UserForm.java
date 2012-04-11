@@ -1,13 +1,9 @@
 package transfer.forms;
 
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import exceptions.InvalidParametersException;
-
 import transfer.bussiness.User;
-import validators.UserFormValidator;
 
 public class UserForm {
 	
@@ -18,12 +14,6 @@ public class UserForm {
 	}
 	
 	public User getUser(){
-		
-		List<String> errors = new UserFormValidator().validate(this);
-		
-		if(errors != null){
-			throw new InvalidParametersException(errors);
-		}
 		
 		return new User(0, getName(), getLastname(), getMail(), getPhone(), getUsername(), getPassword1());
 

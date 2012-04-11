@@ -1,9 +1,7 @@
 package validators;
 
-import java.util.ArrayList;
-import java.util.List;
 
-public class LengthValidator extends Validator<String> {
+public class LengthValidator extends FieldValidator<String> {
 	
 	public String campName;
 	public int min;
@@ -17,14 +15,12 @@ public class LengthValidator extends Validator<String> {
 	}
 
 	@Override
-	protected List<String> getError() {
-		List<String> errors= new ArrayList<String>();
-		errors.add("El campo " + campName + " debe tener entre " + min + " y " + max + " caracteres.");
-		return errors;
+	public String getError() {
+		return "El campo " + campName + " debe tener entre " + min + " y " + max + " caracteres.";
 	}
 
 	@Override
-	protected boolean isCorrect(String value) {
+	public boolean isCorrect(String value) {
 		return value.length()>min && value.length()<max;
 	}
 }
