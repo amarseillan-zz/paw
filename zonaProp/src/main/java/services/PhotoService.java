@@ -43,10 +43,24 @@ public class PhotoService {
 		}
 		if(size == 0){
 			throw new InvalidParameterException("Debe seleccionar una imagen.");
-		}		
+		}
+		if(!validExtension(fileItem.getName())){
+			throw new InvalidParameterException("Formato de imagen invalido.");			
+		}
 		Photo image = new Photo(0, publicationId, fileItem.getInputStream());
 		
 		return image;
+	}
+
+	private boolean validExtension(String name) {		
+		String[] aux = name.split("\\.");
+		if(aux.length > 0){
+			String extension =  aux[aux.length-1];
+			if(extension.equals("bmp") || extension.equals("png") || extension.equals("jpg")){
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public Photo getPhotoById(Integer imageId) {

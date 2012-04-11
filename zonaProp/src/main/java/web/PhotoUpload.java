@@ -38,7 +38,10 @@ public class PhotoUpload extends HttpServlet {
 		if (req.getParameter("pid") != null) {
 			int publicationId = Integer.valueOf(req.getParameter("pid"));
 			p = ps.getPublication(publicationId);
-				
+			if(p.getUserId() != (Integer)req.getSession().getAttribute("userId")) {
+		           resp.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+		            return;
+		    }
 			PhotoService ps = PhotoService.getInstance(); 
 	       	photos = ps.getPhotosByPublicationId(p.getPublicationId());
 	       	
@@ -55,6 +58,12 @@ public class PhotoUpload extends HttpServlet {
 		String errors = "";		
 		FileItemFactory factory = new DiskFileItemFactory();
         ServletFileUpload upload = new ServletFileUpload(factory);
+        
+        if(p.getUserId() != (Integer)req.getSession().getAttribute("userId")) {
+           resp.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+            return;
+        }
+        	
         try {
                 @SuppressWarnings("unchecked")
 				List<FileItem> fields = upload.parseRequest(req);
@@ -66,8 +75,7 @@ public class PhotoUpload extends HttpServlet {
                     	try{
                     		image = ps.createPhotoFromFileItem(fileItem, p.getPublicationId());	     
                     		if(image != null){
-	                        	ps.uploadPhoto(image);   
-	                        	errors = " Imagen subida con exito.";
+	                        	ps.uploadPhoto(image);
                     		}
                 		}catch(InvalidParameterException ipe){
                 			errors=ipe.getMessage();

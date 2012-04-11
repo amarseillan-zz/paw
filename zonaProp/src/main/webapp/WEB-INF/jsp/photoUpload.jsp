@@ -1,6 +1,7 @@
 <%@ include file="header.jsp" %>
 
-<div class="control-group.error"><c:out value="${error}" /></div>
+
+<p class="error">${error}</p>
 
 	<div class="well">
 	<table style="width: 20%;">

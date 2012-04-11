@@ -19,24 +19,27 @@ public class PhotoDeleter extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
-	private static PublicationService ps = PublicationService.getInstance();
-	
-	private static Publication p;
-	
-	private static List<Photo> photos = null;
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {		
+			throws ServletException, IOException {	
+		
 		if (req.getParameter("pid") != null && req.getParameter("imageId") != null) {
 			int publicationId = Integer.valueOf(req.getParameter("pid"));
 			int imageId = Integer.valueOf(req.getParameter("imageId"));
-			p = ps.getPublication(publicationId);
-
-			PhotoService ps = PhotoService.getInstance(); 
-			ps.deletePhotoById(imageId);
 			
-	       	photos = ps.getPhotosByPublicationId(p.getPublicationId());		       	
+			PublicationService ps = PublicationService.getInstance();
+			Publication p = ps.getPublication(publicationId);
+			
+			if(p.getUserId() != (Integer)req.getSession().getAttribute("userId")) {
+		           resp.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+		           return;
+		    }
+
+			PhotoService photoS = PhotoService.getInstance(); 
+			photoS.deletePhotoById(imageId);
+			
+			List<Photo> photos = photoS.getPhotosByPublicationId(p.getPublicationId());		       	
 			req.setAttribute("photos", photos);
 			req.setAttribute("pid", p.getPublicationId());
 			req.getRequestDispatcher("/WEB-INF/jsp/photoUpload.jsp").forward(req, resp);

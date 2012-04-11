@@ -26,8 +26,11 @@
 						<br/>
 						<div>
 							<b>Ubicacion en el mapa:</b>
-							<br/>
-							<img ALT="Mapa" class="mapa" src="http://maps.google.com/maps/api/staticmap?center=${publication.city}+${publication.address}&zoom=14&size=400x400&maptype=roadmap&markers=${publication.city}+${publication.address}&sensor=false"></img>
+							<br/>							
+							<a target="_blank"	href="http://maps.google.com/maps?oe=UTF-8&gfns=1&q=${publication.city}+${publication.address}&um=1&ie=UTF-8&hq=&hnear=0x95bccabde7ad73db:0x4945c65ee2469ece,${publication.city}+${publication.address}&ei=7pGET-qfCYmhtweOv737Bw&sa=X&oi=geocode_result&ct=image&resnum=1&ved=0CCQQ8gEwAA">
+              					 <img ALT="Mapa" class="mapa" src="http://maps.google.com/maps/api/staticmap?center=${publication.city}+${publication.address}&zoom=14&size=400x400&maptype=roadmap&markers=${publication.city}+${publication.address}&sensor=false"></img>
+                           	</a>
+
 						</div>
 					</div>
 					
