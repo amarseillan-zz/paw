@@ -24,6 +24,15 @@
 						<br/>
 						<b>Precio:</b> ${publication.price} pesos
 						<br/>
+						<b>Servicios:</b>
+						<c:if test="${publication.cable}">cable</c:if>
+						<c:if test="${publication.phone}"> telefono</c:if>
+						<c:if test="${publication.pool}"> pileta</c:if>
+						<c:if test="${publication.living}"> salon</c:if>
+						<c:if test="${publication.paddle}"> cancha de paddle"</c:if>
+						<c:if test="${publication.barbecue}"> parrilla</c:if>
+						<br/>
+						<b>Descripcion:</b> ${publication.description}
 						<div>
 							<b>Ubicacion en el mapa:</b>
 							<br/>							
@@ -43,6 +52,10 @@
 				</c:if>
 					
 					<form class="well form-horizontal" method="POST" action="publication">
+							<c:forEach items="${errors}" var="error">
+								<p class="error">${error}</p>
+							</c:forEach>
+					
 					
 							<label for="name">Nombre:</label>
 							<input type="text" name="name" class="span3" value="${vf.name}" />
@@ -59,7 +72,6 @@
 							<textarea name="comment" rows="10" cols="20">${vf.comment}</textarea>	
 							<br/>
 							<input type="submit" name="submit" value="Enviar" class="btn" />
-							<span class="help-inline">${error}</span>
 					</form>
 				</c:if>
 					
