@@ -2,6 +2,9 @@
 <%@ include file="header.jsp" %>
 
 <h2>Buscar publicaciones</h2>
+<c:forEach items="${errors}" var="error">
+								<p class="error">${error}</p>
+							</c:forEach>
 						<form class="form-horizontal" method="GET" action="publicationSearchResults">
 							<fieldset>
 								<div class="control-group">
