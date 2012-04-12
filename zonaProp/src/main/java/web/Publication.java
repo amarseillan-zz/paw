@@ -64,7 +64,7 @@ public class Publication extends HttpServlet {
 		List<String> errors = new VisitFormValidator().check(vf);
 		
 		if(errors == null){
-			ps.sendMailToPublisher(p.toBussiness(), vf);
+			ps.sendMailToPublisher(p.toBussiness(), vf.toBussiness());
 			req.setAttribute("showPublisher", true);
 		}
 		else{
