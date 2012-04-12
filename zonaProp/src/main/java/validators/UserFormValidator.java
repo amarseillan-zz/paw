@@ -20,7 +20,7 @@ public class UserFormValidator extends ClassValidator<UserForm> {
 		boolean hasError = false;
 		
 		if(!value.getPassword1().equals(value.getPassword2())){
-			errors.add("Las contraseñas deben coincidir.");
+			errors.add("Las contrase&ntilde;as deben coincidir.");
 			hasError = true;
 		}
 		
@@ -30,11 +30,11 @@ public class UserFormValidator extends ClassValidator<UserForm> {
 		}
 		
 		hasError = campValidator("nombre de usuario", 3, 20, value.getUsername()) || hasError;
-		hasError = campValidator("contraseña", 3, 20, value.getPassword1()) || hasError;
+		hasError = campValidator("contrase&ntilde;a", 3, 20, value.getPassword1()) || hasError;
 		hasError = campValidator("nombre", 3, 20, value.getName()) || hasError;
 		hasError = campValidator("apellido", 3, 20, value.getLastname()) || hasError;
 		hasError = campValidator("mail", 3, 40, value.getMail()) || hasError;
-		hasError = campValidator("telefono", 3, 15, value.getPhone()) || hasError;
+		hasError = campValidator("tel&eacute;fono", 3, 15, value.getPhone()) || hasError;
 		
 		return !hasError;
 	}
