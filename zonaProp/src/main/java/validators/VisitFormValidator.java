@@ -16,9 +16,9 @@ public class VisitFormValidator extends ClassValidator<VisitForm> {
 		
 		boolean hasError = false;
 		
-		hasError = campValidator("nombre de usuario", 3, 40, value.getEmail()) || hasError;
-		hasError = campValidator("contraseña", 3, 15, value.getPhone()) || hasError;
-		hasError = campValidator("nombre", 3, 20, value.getName()) || hasError;
+		hasError = campValidator(new LengthValidator("nombre de usuario", 3, 20), value.getEmail()) || hasError;
+		hasError = campValidator(new LengthValidator("contrase&ntilde;a", 3, 20), value.getPhone()) || hasError;
+		hasError = campValidator(new LengthValidator("nombre", 3, 20), value.getName()) || hasError;
 		
 		return !hasError;
 	}

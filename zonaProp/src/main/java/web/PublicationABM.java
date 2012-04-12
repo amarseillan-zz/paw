@@ -13,6 +13,7 @@ import services.PublicationService;
 import transfer.bussiness.Publication;
 import transfer.forms.Combo;
 import transfer.forms.PublicationForm;
+import validators.PublicationFormValidator;
 
 public class PublicationABM extends HttpServlet {
 
@@ -69,8 +70,8 @@ public class PublicationABM extends HttpServlet {
 						.getParameter("paddle")), Boolean.valueOf(req
 						.getParameter("barbecue")),
 				req.getParameter("description"), Boolean.valueOf(req.getParameter("active")));
-		List<String> errors = pf.validate();
-		if( !errors.isEmpty() ){
+		List<String> errors = new PublicationFormValidator().check(pf);
+		if( errors != null ){
 			cs = ComboService.getInstance();
 			typeList = cs.getTypes();
 			oTypeList = cs.getOperationTypes();

@@ -10,12 +10,10 @@ public abstract class ClassValidator<T> {
 	abstract protected boolean isCorrect(T value);
 	abstract protected List<String> getErrors();
 
-	protected boolean campValidator(String campName, int min, int max, String value){
-
-		LengthValidator lv = new LengthValidator(campName, min, max);
+	protected <S> boolean campValidator(FieldValidator<S> fv, S value){
 		
-		if(!lv.isCorrect(value)){
-			errors.add(lv.getError());
+		if(!fv.isCorrect(value)){
+			errors.add(fv.getError());
 			return true;
 		}
 		return false;

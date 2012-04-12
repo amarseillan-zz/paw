@@ -4,7 +4,6 @@ package validators;
 
 import java.util.List;
 
-import services.UserService;
 import transfer.forms.UserForm;
 
 public class UserFormValidator extends ClassValidator<UserForm> {
@@ -24,17 +23,13 @@ public class UserFormValidator extends ClassValidator<UserForm> {
 			hasError = true;
 		}
 		
-		if(UserService.getInstance().userAlreadyExist(value.getUsername())){
-			errors.add("El nombre de usuario ya existe.");	
-			hasError = true;
-		}
-		
-		hasError = campValidator("nombre de usuario", 3, 20, value.getUsername()) || hasError;
-		hasError = campValidator("contrase&ntilde;a", 3, 20, value.getPassword1()) || hasError;
-		hasError = campValidator("nombre", 3, 20, value.getName()) || hasError;
-		hasError = campValidator("apellido", 3, 20, value.getLastname()) || hasError;
-		hasError = campValidator("mail", 3, 40, value.getMail()) || hasError;
-		hasError = campValidator("tel&eacute;fono", 3, 15, value.getPhone()) || hasError;
+		hasError = campValidator(new UserUnicityValidator(),value.getUsername()) || hasError;
+		hasError = campValidator(new LengthValidator("nombre de usuario", 3, 20), value.getUsername()) || hasError;
+		hasError = campValidator(new LengthValidator("contrase&ntilde;a", 3, 20), value.getPassword1()) || hasError;
+		hasError = campValidator(new LengthValidator("nombre", 3, 20), value.getName()) || hasError;
+		hasError = campValidator(new LengthValidator("apellido", 3, 20), value.getLastname()) || hasError;
+		hasError = campValidator(new LengthValidator("mail", 3, 40), value.getMail()) || hasError;
+		hasError = campValidator(new LengthValidator("tel&eacute;fono", 3, 15), value.getPhone()) || hasError;
 		
 		return !hasError;
 	}
