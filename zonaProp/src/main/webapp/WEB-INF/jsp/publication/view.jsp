@@ -54,7 +54,8 @@
 					<form:form class="well form-horizontal" method="POST" action="comment" commandName="commentForm">
 						
 						<div class="error"><form:errors path="*" /></div>
-					
+						
+						<input type="hidden" name="publicationId" value="${publication.publicationId}"/>
 							<label for="name">Nombre:</label>
 							<form:input type="text" name="name" class="span3" path="name" />
 							
@@ -64,7 +65,6 @@
 							<label for="email">E-mail:</label>
 							<form:input type="text" name="email" class="span3" path="email"/>
 							
-							<input type="hidden" name="publicationId" value="${publication.publicationId}"/>
 							
 							<label for="comment">Comentario:</label>
 							<form:textarea name="comment" rows="10" cols="20" path="comment"></form:textarea>	
