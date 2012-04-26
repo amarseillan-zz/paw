@@ -3,6 +3,7 @@ package zonaProp.web;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,13 +15,16 @@ import zonaProp.services.ComboService;
 import zonaProp.services.PublicationService;
 import zonaProp.transfer.bussiness.Publication;
 import zonaProp.transfer.forms.Combo;
-import zonaProp.transfer.forms.PublicationForm;
-import zonaProp.transfer.forms.VisitForm;
-import zonaProp.validators.VisitFormValidator;
 import zonaProp.web.command.CommentForm;
+import zonaProp.web.command.validator.CommentFormValidator;
 
 @Controller
 public class PublicationController {
+	CommentFormValidator cfv;
+	@Autowired
+	public PublicationController(CommentFormValidator cfv) {
+		this.cfv = cfv;
+	}
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView search(){
 		ComboService cs = ComboService.getInstance();
@@ -42,13 +46,23 @@ public class PublicationController {
 		return mav;
 	}
 	@RequestMapping(method = RequestMethod.POST)
-	public ModelAndView comment(@RequestParam("publicationId") Publication p, @RequestParam("commentForm") CommentForm cf, Errors errors){
+	public ModelAndView comment(@RequestParam("publicationId") Publication p,CommentForm cf, Errors errors){
+		cfv.validate(cf, errors);
+		
+
 		ModelAndView mav = new ModelAndView();
-		PublicationService ps = PublicationService.getInstance();
-		ps.sendMailToPublisher(p, cf.build());
-		mav.addObject("showPublisher", true);
+		
+		if(errors.hasErrors()){
+			mav.addObject("showPublisher", false);
+		} else {
+			mav.addObject("showPublisher", true);		
+			PublicationService ps = PublicationService.getInstance();
+			ps.sendMailToPublisher(p, cf.build());
+		}
+		
+
 		mav.addObject("publication", p);
-		mav.setViewName("publication/view.jsp");
+		mav.setViewName("publication/view");
 		return mav;
 	}
 }
