@@ -1,20 +1,12 @@
 package zonaProp.transfer.forms;
 
-import java.util.List;
 
-import zonaProp.services.ComboService;
-import zonaProp.transfer.bussiness.Photo;
 import zonaProp.transfer.bussiness.Publication;
-import zonaProp.transfer.bussiness.User;
 
 public class PublicationForm {
 
 	private int publicationId;
 	private int userId;
-	private int type;
-	private String typeDesc=null;
-	private int operation_type;
-	private String operationTypeDesc=null;
 	private String address;
 	private String city;
 	private String price;
@@ -31,15 +23,11 @@ public class PublicationForm {
 	private String description;
 	private boolean active;
 	
-	private User publisher=null;
 
-	private List<Photo> photos=null;
 
 	public PublicationForm() {
 		publicationId = -1;
 		userId = -1;
-		type = 0;
-		operation_type = 0;
 		address = "";
 		city = "";
 		price = "";
@@ -67,8 +55,6 @@ public class PublicationForm {
 		super();
 		this.publicationId = publicationId;
 		this.userId = userId;
-		this.type = type;
-		this.operation_type = operation_type;
 		this.address = address;
 		this.city = city;
 		this.price = price;
@@ -91,8 +77,6 @@ public class PublicationForm {
 	public PublicationForm(Publication p) {
 		publicationId = p.getPublicationId();
 		userId = p.getUserId();
-		type = p.getType();
-		operation_type = p.getOperation_type();
 		address = p.getAddress();
 		city = p.getCity();
 		price = String.valueOf((int) p.getPrice());
@@ -109,18 +93,10 @@ public class PublicationForm {
 		description = p.getDescription();
 		active = p.isActive();
 		
-		setPublisher(p.getPublisher());
-		setPhotos(p.getPhotos());
-		
 	}
 
-	public Publication toBussiness() {
-		Publication p = new Publication(publicationId, userId, type,
-				operation_type, address, city, Float.valueOf(price),
-				environments, Float.valueOf(covered), Float.valueOf(uncovered),
-				Integer.valueOf(age), cable, phone, pool, living, paddle,
-				barbecue, description, active);
-		return p;
+	public Publication toBussiness(){
+		return null;
 	}
 
 	public int getPublicationId() {
@@ -137,22 +113,6 @@ public class PublicationForm {
 
 	public void setUserId(int userId) {
 		this.userId = userId;
-	}
-
-	public int getType() {
-		return type;
-	}
-
-	public void setType(int type) {
-		this.type = type;
-	}
-
-	public int getOperation_type() {
-		return operation_type;
-	}
-
-	public void setOperation_type(int operation_type) {
-		this.operation_type = operation_type;
 	}
 
 	public String getAddress() {
@@ -266,46 +226,8 @@ public class PublicationForm {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
-	public String getTypeDesc(){
-		if(typeDesc == null){
-			ComboService cs = ComboService.getInstance();
-			List<Combo> typeList = cs.getTypes();
-			List<Combo> oTypeList = cs.getOperationTypes();
-			typeDesc = typeList.get(type-1).getDescription();
-			operationTypeDesc = oTypeList.get(operation_type-1).getDescription();
-		}
-		return typeDesc;
-	}
-	
-	public String getOperationTypeDesc(){
-		if(operationTypeDesc == null){
-			ComboService cs = ComboService.getInstance();
-			List<Combo> typeList = cs.getTypes();
-			List<Combo> oTypeList = cs.getOperationTypes();
-			typeDesc = typeList.get(type-1).getDescription();
-			operationTypeDesc = oTypeList.get(operation_type-1).getDescription();
-		}
-		return operationTypeDesc;
-	}
 	
 	public boolean isActive(){
 		return active;
-	}
-
-	public User getPublisher() {
-		return publisher;
-	}
-
-	private void setPublisher(User publisher) {
-		this.publisher = publisher;
-	}
-
-	public List<Photo> getPhotos() {
-		return photos;
-	}
-
-	private void setPhotos(List<Photo> photos) {
-		this.photos = photos;
 	}
 }

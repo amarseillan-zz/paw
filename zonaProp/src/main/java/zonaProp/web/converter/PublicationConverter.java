@@ -14,10 +14,11 @@ public class PublicationConverter implements Converter<String, Publication>{
 	
 //	private StudentService service;
 	PublicationService ps = PublicationService.getInstance();
-//	@Autowired
-//	public StudentConverter(StudentService service) {
-//		this.service = service;
-//	}
+
+	@Autowired
+	public PublicationConverter(PublicationService ps) {
+		this.ps = ps;
+	}
 
 	public Publication convert(String source) {
 		return ps.getPublication(Integer.valueOf(source));

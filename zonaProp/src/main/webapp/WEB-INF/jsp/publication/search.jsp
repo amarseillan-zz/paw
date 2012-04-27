@@ -13,7 +13,7 @@
               								<select name="type">
 																	<option value="-1">Tipo de propiedad:</option>
               									<c:forEach items="${typeList}" var="propertyType">
-    								            	<option value="${propertyType.pos}">${propertyType.description}</option>
+    								            	<option value="${propertyType.number}">${propertyType.name}</option>
 																</c:forEach>
      								         </select>
       							      </div>
@@ -24,7 +24,7 @@
               								<select name="operation_type">
 																	<option value="-1">Tipo de operaci&oacute;n</option>
               									<c:forEach items="${oTypeList}" var="operationType">
-    								            	<option value="${operationType.pos}">${operationType.description}</option>
+    								            	<option value="${operationType.number}">${operationType.name}</option>
 																</c:forEach>
      								         </select>
       							      </div>

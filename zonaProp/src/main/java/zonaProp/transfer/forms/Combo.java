@@ -1,5 +1,6 @@
 package zonaProp.transfer.forms;
 
+@Deprecated
 public class Combo {
 
 	private int pos;

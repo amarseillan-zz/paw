@@ -9,6 +9,7 @@ import java.util.List;
 
 import zonaProp.transfer.forms.Combo;
 
+@Deprecated
 public class ComboDAO extends DAO {
 
 	public ComboDAO() {

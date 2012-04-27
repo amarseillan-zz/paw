@@ -8,9 +8,9 @@ public class LengthValidator extends FieldValidator<String> {
 	public int max;
 
 	
-	public LengthValidator(String campName, int min, int max){
+	public LengthValidator(String fieldName, int min, int max){
 		this.type="length";
-		this.fieldName=campName;
+		this.fieldName=fieldName;
 		this.min=min;
 		this.max=max;
 	}

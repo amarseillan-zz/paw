@@ -2,9 +2,12 @@ package zonaProp.services;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import zonaProp.persistence.ComboDAO;
 import zonaProp.transfer.forms.Combo;
 
+@Deprecated
 public class ComboService {
 
 	private static ComboService instance;

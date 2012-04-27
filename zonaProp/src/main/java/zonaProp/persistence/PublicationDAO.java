@@ -51,8 +51,8 @@ public class PublicationDAO extends DAO {
 					.prepareStatement("INSERT INTO PUBLICATION(userid,type,operation_type,address,city,price,environments,covered," +
 							"uncovered,age,cable,phone,pool,living,paddle,barbecue, description, active)VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 			stmt.setInt(1, userId);
-			stmt.setInt(2, p.getType());
-			stmt.setInt(3, p.getOperation_type());
+			stmt.setInt(2, p.getPropertyType().getNumber());
+			stmt.setInt(3, p.getOperationType().getNumber());
 			stmt.setString(4, p.getAddress());
 			stmt.setString(5, p.getCity());
 			stmt.setFloat(6, p.getPrice());
@@ -73,13 +73,13 @@ public class PublicationDAO extends DAO {
 			stmt = connection.prepareStatement("SELECT PUBLICATIONID FROM PUBLICATION WHERE USERID = ? AND ADDRESS = ? AND TYPE = ?");
 			stmt.setInt(1, userId);
 			stmt.setString(2, p.getAddress());
-			stmt.setInt(3, p.getType());
+			stmt.setInt(3, p.getPropertyType().getNumber());
 			ResultSet results = stmt.executeQuery();
 			if (results.next()) {
 				p = new Publication( results.getInt(1),
 						p.getUserId(),
-						p.getType(),
-						p.getOperation_type(),
+						p.getPropertyType().getNumber(),
+						p.getOperationType().getNumber(),
 						p.getAddress(),
 						p.getCity(),
 						p.getPrice(),
@@ -194,8 +194,8 @@ public class PublicationDAO extends DAO {
 					.prepareStatement("UPDATE PUBLICATION SET userid=?, type=?,operation_type=?,address=?,city=?,price=?,environments=?,covered=?," +
 							"uncovered=?,age=?,cable=?,phone=?,pool=?,living=?,paddle=?,barbecue=?, description=?, active=? WHERE PUBLICATIONID=?");
 			stmt.setInt(1, p.getUserId());
-			stmt.setInt(2, p.getType());
-			stmt.setInt(3, p.getOperation_type());
+			stmt.setInt(2, p.getPropertyType().getNumber());
+			stmt.setInt(3, p.getOperationType().getNumber());
 			stmt.setString(4, p.getAddress());
 			stmt.setString(5, p.getCity());
 			stmt.setFloat(6, p.getPrice());

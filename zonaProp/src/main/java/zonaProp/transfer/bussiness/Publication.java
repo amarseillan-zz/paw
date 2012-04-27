@@ -2,40 +2,36 @@ package zonaProp.transfer.bussiness;
 
 import java.util.List;
 
-import zonaProp.services.ComboService;
 import zonaProp.services.PhotoService;
 import zonaProp.services.UserService;
-import zonaProp.transfer.forms.Combo;
 
 public class Publication {
 
-	int publicationId;
-	int userId;
-	int type;
-	int operation_type;
-	String address;
-	String city;
-	float price;
-	int environments;
-	float covered;
-	float uncovered;
-	int age;
-	boolean cable;
-	boolean phone;
-	boolean pool;
-	boolean living;
-	boolean paddle;
-	boolean barbecue;
-	String description;
-	boolean active;
+	private int publicationId;
+	private int userId;
+	private String address;
+	private String city;
+	private float price;
+	private int environments;
+	private float covered;
+	private float uncovered;
+	private int age;
+	private boolean cable;
+	private boolean phone;
+	private boolean pool;
+	private boolean living;
+	private boolean paddle;
+	private boolean barbecue;
+	private String description;
+	private boolean active;
 
-	private String typeDesc=null;
-	private String operationTypeDesc=null;
 	
+	private PropertyType propertyType;
+	private OperationType operationType;
 	
-	User publisher=null;
+	private User publisher=null;
 
-	List<Photo> photos=null;
+	private List<Photo> photos=null;
 	
 	
 	public Publication(int publicationId, int userId, int type,
@@ -46,8 +42,6 @@ public class Publication {
 		super();
 		this.publicationId = publicationId;
 		this.userId = userId;
-		this.type = type;
-		this.operation_type = operation_type;
 		this.address = address;
 		this.city = city;
 		this.price = price;
@@ -63,30 +57,13 @@ public class Publication {
 		this.barbecue = barbecue;
 		this.description = description;
 		this.active = active;
+		
+		propertyType= PropertyType.values()[type-1];
+		operationType= OperationType.values()[operation_type-1];
 	}
 
 	
-	public String getTypeDesc(){
-		if(typeDesc == null){
-			ComboService cs = ComboService.getInstance();
-			List<Combo> typeList = cs.getTypes();
-			List<Combo> oTypeList = cs.getOperationTypes();
-			typeDesc = typeList.get(type-1).getDescription();
-			operationTypeDesc = oTypeList.get(operation_type-1).getDescription();
-		}
-		return typeDesc;
-	}
-	
-	public String getOperationTypeDesc(){
-		if(operationTypeDesc == null){
-			ComboService cs = ComboService.getInstance();
-			List<Combo> typeList = cs.getTypes();
-			List<Combo> oTypeList = cs.getOperationTypes();
-			typeDesc = typeList.get(type-1).getDescription();
-			operationTypeDesc = oTypeList.get(operation_type-1).getDescription();
-		}
-		return operationTypeDesc;
-	}
+
 	
 	
 	public int getPublicationId() {
@@ -96,15 +73,15 @@ public class Publication {
 	public int getUserId() {
 		return userId;
 	}
-
-	public int getType() {
-		return type;
+	
+	public PropertyType getPropertyType(){
+		return propertyType;
 	}
 
-	public int getOperation_type() {
-		return operation_type;
+	public OperationType getOperationType(){
+		return operationType;
 	}
-
+	
 	public String getAddress() {
 		return address;
 	}

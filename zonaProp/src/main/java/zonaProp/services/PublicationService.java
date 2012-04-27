@@ -3,11 +3,15 @@ package zonaProp.services;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import zonaProp.persistence.PublicationDAO;
 import zonaProp.transfer.bussiness.Publication;
 import zonaProp.transfer.bussiness.User;
 import zonaProp.transfer.bussiness.Comment;
 
+
+@Service
 public class PublicationService {
 
 	private static PublicationService instance;

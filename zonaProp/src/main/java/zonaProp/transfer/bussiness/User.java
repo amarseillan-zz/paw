@@ -16,7 +16,7 @@ public class User {
 	private String email;
 	private String phone;
 	
-	List<Publication> publications=null;
+	private List<Publication> publications=null;
 
 	public User(int id, String name, String lastName, String email,
 			String phone, String username, String password) {

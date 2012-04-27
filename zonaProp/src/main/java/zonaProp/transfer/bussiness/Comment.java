@@ -6,10 +6,10 @@ import zonaProp.mailing.SendMailTLS;
 
 
 public class Comment {
-	String name;
-	String email;
-	String phone;
-	String comment;
+	private String name;
+	private String email;
+	private String phone;
+	private String comment;
 
 	public Comment(String name, String email, String phone, String comment) {
 		this.name = name;
