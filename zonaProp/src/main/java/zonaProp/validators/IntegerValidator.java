@@ -1,16 +1,15 @@
 package zonaProp.validators;
 
 public class IntegerValidator extends FieldValidator<String> {
-
-	private String fieldName;
 	
 	public IntegerValidator(String fieldName){
+		type="numberFormat";
 		this.fieldName=fieldName;
 	}
 	
 	@Override
 	public String getError() {
-		return "Error en "+ fieldName + ". Ingrese un nœmero entero.";
+		return "Error en "+ fieldName + ". Ingrese un nï¿½mero entero.";
 	}
 
 	@Override

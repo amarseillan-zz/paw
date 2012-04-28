@@ -11,20 +11,22 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import zonaProp.services.PublicationService;
-import zonaProp.transfer.bussiness.OperationType;
-import zonaProp.transfer.bussiness.PropertyType;
 import zonaProp.transfer.bussiness.Publication;
 import zonaProp.web.command.CommentForm;
+import zonaProp.web.command.SearchForm;
 import zonaProp.web.command.validator.CommentFormValidator;
+import zonaProp.web.command.validator.SearchFormValidator;
 
 @Controller
 public class PublicationController {
 	
 	CommentFormValidator cfv;
+	SearchFormValidator sfv;
 	PublicationService ps;
 	
 	@Autowired
-	public PublicationController(CommentFormValidator cfv, PublicationService ps) {
+	public PublicationController(CommentFormValidator cfv, SearchFormValidator sfv, PublicationService ps) {
+		this.sfv = sfv;
 		this.cfv = cfv;
 		this.ps = ps;
 	}
@@ -33,10 +35,27 @@ public class PublicationController {
 	public ModelAndView search(){
 
 		ModelAndView mav = new ModelAndView();
-		
-		mav.addObject("typeList", PropertyType.values());
-		mav.addObject("oTypeList", OperationType.values());
+		mav.addObject("searchForm", new SearchForm());
 		return mav;
+
+	}
+	
+	@RequestMapping(method = RequestMethod.GET)
+	public ModelAndView searchResults(SearchForm sf, Errors errors){
+		
+		sfv.validate(sf, errors);
+
+		ModelAndView mav = new ModelAndView();
+		
+		if(errors.hasErrors()){
+			mav.addObject("searchForm", sf);
+			mav.setViewName("publication/search");
+			return mav;
+		}
+		else{
+			mav.addObject("pList",ps.advancedSearch(sf.build()));
+			return mav;
+		}
 
 	}
 	
@@ -60,7 +79,8 @@ public class PublicationController {
 		
 		if(errors.hasErrors()){
 			mav.addObject("showPublisher", false);
-		} else {
+		} 
+		else {
 			mav.addObject("showPublisher", true);
 			ps.sendMailToPublisher(p, cf.build());
 		}

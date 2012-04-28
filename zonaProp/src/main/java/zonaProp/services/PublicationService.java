@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import zonaProp.persistence.PublicationDAO;
 import zonaProp.transfer.bussiness.Publication;
+import zonaProp.transfer.bussiness.Search;
 import zonaProp.transfer.bussiness.User;
 import zonaProp.transfer.bussiness.Comment;
 
@@ -43,8 +44,8 @@ public class PublicationService {
 	}
 	
 	
-	public List<Publication> advancedSearch(int type, int operation_type, int maxPrice, int minPrice, boolean ascending){
-		List<Publication> aux = pDAO.advancedSearch(type, operation_type, maxPrice, minPrice, ascending);
+	public List<Publication> advancedSearch(Search s){
+		List<Publication> aux = pDAO.advancedSearch(s);
 		List<Publication> pList = new ArrayList<Publication>();
 		for( Publication p: aux ){
 			if( p.isActive() ){

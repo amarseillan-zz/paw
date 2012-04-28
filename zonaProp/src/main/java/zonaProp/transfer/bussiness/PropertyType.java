@@ -13,13 +13,17 @@ public enum PropertyType {
 		this.number=number;
 	}
 
-	public String getName(){
-		return name;
-	}
-
 	public int getNumber() {
 		return this.number;
 	}
+	
+	public String toString(){
+		return name;
+	}
 
+
+	public String getName() {
+		return this.name;
+	}
 
 }

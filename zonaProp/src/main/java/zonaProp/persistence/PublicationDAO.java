@@ -5,10 +5,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 import zonaProp.transfer.bussiness.Publication;
+import zonaProp.transfer.bussiness.Search;
 
 public class PublicationDAO extends DAO {
 	public static final int EMPTY=-1;
@@ -133,41 +133,15 @@ public class PublicationDAO extends DAO {
 		return pList;
 	}
 
-	public List<Publication> advancedSearch(int type,int operation_type, int maxPrice, int minPrice, boolean ascending) {
+	public List<Publication> advancedSearch(Search s) {
 		List<Publication> pList = new ArrayList<Publication>();
 
 		try {
 			Connection connection = manager.getConnection();
 			PreparedStatement stmt ;
-			LinkedList<String> l = new LinkedList<String>();
-			if(type!=EMPTY){
-				l.add("type = " + type);
-			}
-			if(operation_type!=EMPTY){
-				l.add("operation_type = " + operation_type);
-			}
-			if(maxPrice!=EMPTY){
-				l.add("price <= " + maxPrice);
-			}
-			if(minPrice!=EMPTY){
-				l.add("price >= " + minPrice);
-			}
-			String aux = "SELECT * FROM PUBLICATION";
-			if(l.size()>0){
-				int i=0;
-				while(i<l.size()){
-					if(i==0){
-						aux+=" where ";
-					}else{
-						aux+=" and ";
-					}
-					aux+=l.get(i++);
-				}
-			}
-			aux+=" order by price";
-			aux+=ascending?" ASC":" DESC";
+			
 			stmt=connection
-					.prepareStatement(aux);
+					.prepareStatement(s.statment());
 
 			ResultSet results = stmt.executeQuery();
 			while (results.next()) {

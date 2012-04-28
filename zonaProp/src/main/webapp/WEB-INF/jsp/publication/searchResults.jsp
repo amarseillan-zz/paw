@@ -1,5 +1,5 @@
 
-<%@ include file="header.jsp" %>
+<%@ include file="../header.jsp" %>
 
 
 <c:if test="${empty pList}">
@@ -23,13 +23,13 @@
 		<tbody>
 		<c:forEach items="${pList}" var="publication">
 			<tr>
-			<td>${publication.operationTypeDesc}</td>
-			<td>${publication.typeDesc}</td>
+			<td>${publication.operationType.name}</td>
+			<td>${publication.propertyType.name}</td>
 			<td>${publication.address}</td>
 			<td>${publication.city}</td>
 			<td>${publication.price}</td>
 			<td>
-				<a href="<c:url value="publication">
+				<a href="<c:url value="view">
 						<c:param name="publicationId" value="${publication.publicationId}" />
 					</c:url>">
 					ver
@@ -49,4 +49,4 @@
 	</fieldset>
 </form>
 
-<%@ include file="footer.jsp" %>
+<%@ include file="../footer.jsp" %>

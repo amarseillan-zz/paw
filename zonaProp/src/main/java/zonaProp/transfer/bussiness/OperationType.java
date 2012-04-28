@@ -13,7 +13,7 @@ public enum OperationType {
 		this.number=number;
 	}
 
-	public String getName(){
+	public String toString(){
 		return name;
 	}
 
@@ -21,5 +21,8 @@ public enum OperationType {
 		return this.number;
 	}
 
+	public String getName() {
+		return this.name;
+	}
 
 }
