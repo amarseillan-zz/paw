@@ -34,8 +34,8 @@ public class Publication {
 	private List<Photo> photos=null;
 	
 	
-	public Publication(int publicationId, int userId, int type,
-			int operation_type, String address, String city, float price,
+	public Publication(int publicationId, int userId, PropertyType propertyType,
+			OperationType operationType, String address, String city, float price,
 			int environments, float covered, float uncovered, int age,
 			boolean cable, boolean phone, boolean pool, boolean living,
 			boolean paddle, boolean barbecue, String description, boolean active) {
@@ -58,8 +58,8 @@ public class Publication {
 		this.description = description;
 		this.active = active;
 		
-		propertyType= PropertyType.values()[type-1];
-		operationType= OperationType.values()[operation_type-1];
+		this.propertyType= propertyType;
+		this.operationType = operationType;
 	}
 
 	

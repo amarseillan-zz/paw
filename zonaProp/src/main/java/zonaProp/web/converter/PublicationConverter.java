@@ -12,8 +12,7 @@ import zonaProp.transfer.bussiness.Publication;
 @Component
 public class PublicationConverter implements Converter<String, Publication>{
 	
-//	private StudentService service;
-	PublicationService ps = PublicationService.getInstance();
+	PublicationService ps;
 
 	@Autowired
 	public PublicationConverter(PublicationService ps) {

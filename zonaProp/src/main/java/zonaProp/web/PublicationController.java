@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import zonaProp.services.PublicationService;
 import zonaProp.transfer.bussiness.Publication;
 import zonaProp.web.command.CommentForm;
+import zonaProp.web.command.PublicationForm;
 import zonaProp.web.command.SearchForm;
 import zonaProp.web.command.validator.CommentFormValidator;
 import zonaProp.web.command.validator.SearchFormValidator;
@@ -90,5 +91,21 @@ public class PublicationController {
 		return mav;
 	}
 	
+	@RequestMapping(method = RequestMethod.GET)
+	public ModelAndView ABM(@RequestParam("pid") Publication p){
+		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("publicationForm", p==null?new PublicationForm():new PublicationForm(p));
+		
+		return mav;
+	}
+	
+	@RequestMapping(method = RequestMethod.POST)
+	public ModelAndView saveChanges(PublicationForm pf, Errors errors){
+		ModelAndView mav = new ModelAndView();
+		
+		
+		return mav;
+	}
 	
 }

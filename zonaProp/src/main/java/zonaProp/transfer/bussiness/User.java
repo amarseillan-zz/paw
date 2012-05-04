@@ -18,6 +18,10 @@ public class User {
 	
 	private List<Publication> publications=null;
 
+	public User(){
+		
+	}
+	
 	public User(int id, String name, String lastName, String email,
 			String phone, String username, String password) {
 		super();

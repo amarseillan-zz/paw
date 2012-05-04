@@ -24,7 +24,6 @@ public class PublicationList extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		try {
 			UserService us= UserService.getInstance();
 			User user = us.getUser((Integer)req.getSession().getAttribute("userId"));
 			if(user==null){
@@ -43,9 +42,6 @@ public class PublicationList extends HttpServlet {
 				req.getRequestDispatcher("/WEB-INF/jsp/publicationList.jsp")
 						.forward(req, resp);
 			}
-		} catch (NumberFormatException nfe) {
-			resp.sendError(400);
-		}
 	}
 
 }

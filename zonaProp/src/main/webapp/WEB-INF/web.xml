@@ -33,39 +33,6 @@
 		<url-pattern>/signUp</url-pattern>
 	</servlet-mapping>
 	<servlet>
-		<servlet-name>PublicationList</servlet-name>
-		<servlet-class>zonaProp.web.PublicationList</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>PublicationList</servlet-name>
-		<url-pattern>/publicationList</url-pattern>
-	</servlet-mapping>
-	<servlet>
-		<servlet-name>PublicationABM</servlet-name>
-		<servlet-class>zonaProp.web.PublicationABM</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>PublicationABM</servlet-name>
-		<url-pattern>/publicationDetail</url-pattern>
-	</servlet-mapping>
-	<servlet>
-		<servlet-name>Publication</servlet-name>
-		<servlet-class>zonaProp.web.PublicationPage</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>Publication</servlet-name>
-		<url-pattern>/publication</url-pattern>
-	</servlet-mapping>
-	<servlet>
-		<servlet-name>PublicationSearchResults</servlet-name>
-		<servlet-class>zonaProp.web.PublicationSearchResults</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>PublicationSearchResults</servlet-name>
-		<url-pattern>/publicationSearchResults</url-pattern>
-	</servlet-mapping>
-
-	<servlet>
 		<servlet-name>Logout</servlet-name>
 		<servlet-class>zonaProp.web.Logout</servlet-class>
 	</servlet>
