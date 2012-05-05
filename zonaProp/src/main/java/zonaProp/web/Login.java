@@ -44,7 +44,7 @@ public class Login extends HttpServlet {
 			resp.sendRedirect("publicationSearch");
 		} else {
 			req.setAttribute("username", username);
-			req.setAttribute("error", "Nombre de usuario o contrase–a inv‡lidos");
+			req.setAttribute("error", "Nombre de usuario o contraseï¿½a invï¿½lidos");
 			req.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(req, resp);
 		}
 	}

@@ -49,14 +49,6 @@
 		<url-pattern>/publicationDetail</url-pattern>
 	</servlet-mapping>
 	<servlet>
-		<servlet-name>Publication</servlet-name>
-		<servlet-class>zonaProp.web.PublicationPage</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>Publication</servlet-name>
-		<url-pattern>/publication</url-pattern>
-	</servlet-mapping>
-	<servlet>
 		<servlet-name>Logout</servlet-name>
 		<servlet-class>zonaProp.web.Logout</servlet-class>
 	</servlet>

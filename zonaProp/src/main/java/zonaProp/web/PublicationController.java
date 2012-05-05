@@ -25,6 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
 import zonaProp.services.PublicationService;
 import zonaProp.transfer.bussiness.Photo;
 import zonaProp.transfer.bussiness.Publication;
+import zonaProp.transfer.forms.PublicationForm;
 import zonaProp.web.command.CommentForm;
 import zonaProp.web.command.SearchForm;
 import zonaProp.web.command.validator.CommentFormValidator;
@@ -105,7 +106,6 @@ public class PublicationController {
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public void viewPhoto(@RequestParam("imageId") Photo photo, HttpServletResponse resp) {	        
-    //	Photo image = ps.getPhotoById(imageId);
        	if(photo == null){
        		return;
        	}              
@@ -150,8 +150,7 @@ public class PublicationController {
 	protected ModelAndView uploadPhoto(HttpServletRequest req) {
 		ModelAndView mav = new ModelAndView();		
 		FileItemFactory factory = new DiskFileItemFactory();
-        ServletFileUpload upload = new ServletFileUpload(factory);
-        
+        ServletFileUpload upload = new ServletFileUpload(factory);        
 //        if(p.getUserId() != (Integer)req.getSession().getAttribute("userId")) {
 //           resp.sendError(HttpServletResponse.SC_UNAUTHORIZED);
 //            return;
@@ -162,12 +161,11 @@ public class PublicationController {
 				List<FileItem> fields = upload.parseRequest(req);
                 Iterator<FileItem> it = fields.iterator();
                 while (it.hasNext()) {
-            		Photo image = null;
-                    FileItem fileItem = it.next();
+            		FileItem fileItem = it.next();
                     if(fileItem.getFieldName().equals("publicationId")) {
                     	publicationId = Integer.valueOf(fileItem.getString());
                     } else {
-	            		image = createPhotoFromFileItem(fileItem, publicationId);	     
+                    	Photo image = createPhotoFromFileItem(fileItem, publicationId);	     
 	            		if(image != null) {
 	                    	ps.uploadPhoto(image); 
 	                    }
@@ -180,6 +178,22 @@ public class PublicationController {
         mav.addObject("publication", p);
 		mav.setViewName("publication/editPhotos");	
 		return mav;		
+	}
+	
+
+	public ModelAndView ABM(@RequestParam("pid") Publication p){
+		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("publicationForm", p==null?new PublicationForm():new PublicationForm(p));
+		
+		return mav;
+	}
+	
+	@RequestMapping(method = RequestMethod.POST)
+	public ModelAndView saveChanges(PublicationForm pf, Errors errors){
+		ModelAndView mav = new ModelAndView();		
+		
+		return mav;
 	}
 	
 	private Photo createPhotoFromFileItem(FileItem fileItem, int publicationId) throws IOException {
