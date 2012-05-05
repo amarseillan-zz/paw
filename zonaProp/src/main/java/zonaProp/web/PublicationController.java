@@ -1,7 +1,6 @@
 package zonaProp.web;
 import java.io.IOException;
 import java.io.InputStream;
-import java.security.InvalidParameterException;
 import java.util.Iterator;
 import java.util.List;
 
@@ -148,6 +147,7 @@ public class PublicationController {
 	
 	@RequestMapping(method = RequestMethod.POST)
 	protected ModelAndView uploadPhoto(HttpServletRequest req) {
+		String error = "";	
 		ModelAndView mav = new ModelAndView();		
 		FileItemFactory factory = new DiskFileItemFactory();
         ServletFileUpload upload = new ServletFileUpload(factory);        
@@ -171,10 +171,13 @@ public class PublicationController {
 	                    }
                     }
                 }
-        } catch (Exception e) {
+        } catch (IllegalArgumentException e) {
+        	error=e.getMessage();
+		} catch (Exception e) {
 			e.printStackTrace();
 		}        
         Publication p = ps.getPublication(publicationId);        
+        mav.addObject("error", error);        
         mav.addObject("publication", p);
 		mav.setViewName("publication/editPhotos");	
 		return mav;		
@@ -199,13 +202,13 @@ public class PublicationController {
 	private Photo createPhotoFromFileItem(FileItem fileItem, int publicationId) throws IOException {
 		int size = (int) fileItem.getSize();
 		if(size > 5000000){
-			throw new InvalidParameterException("Tamaño del archivo demasiado grande.");
+			throw new IllegalArgumentException("Tamaño del archivo demasiado grande.");
 		}
 		if(size == 0){
-			throw new InvalidParameterException("Debe seleccionar una imagen.");
+			throw new IllegalArgumentException("Debe seleccionar una imagen.");
 		}
 		if(!validExtension(fileItem.getName())){
-			throw new InvalidParameterException("Formato de imagen invalido.");			
+			throw new IllegalArgumentException("Formato de imagen invalido.");			
 		}
 		Photo image = new Photo(0, publicationId, fileItem.getInputStream());
 		
