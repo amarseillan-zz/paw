@@ -112,8 +112,7 @@ public class PublicationController {
         resp.setBufferSize(1024);
         resp.setContentType("image/jpeg"); 
         resp.setHeader("Content-Disposition", "inline; filename=\"imagen"+photo.getId()+"\"");
-        resp.setContentLength(photo.getSize());
-           
+        resp.setContentLength(photo.getSize());           
         try {
             InputStream input = photo.getInputStream();
             ServletOutputStream output = resp.getOutputStream();     
@@ -183,7 +182,7 @@ public class PublicationController {
 		return mav;		
 	}
 	
-
+	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView ABM(@RequestParam("pid") Publication p){
 		ModelAndView mav = new ModelAndView();
 		
