@@ -150,7 +150,7 @@ public class Publication {
 	public List<Photo> getPhotos(){
 		if(photos==null){
 			PhotoService ps=PhotoService.getInstance();
-			photos=ps.getPhotosByPublicationId(publicationId);
+			photos=ps.getPhotosByPublication(this);
 		}
 		
 		return photos;

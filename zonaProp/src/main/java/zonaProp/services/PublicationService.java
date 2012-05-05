@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import zonaProp.persistence.PublicationDAO;
+import zonaProp.transfer.bussiness.Photo;
 import zonaProp.transfer.bussiness.Publication;
 import zonaProp.transfer.bussiness.Search;
 import zonaProp.transfer.bussiness.User;
@@ -59,6 +60,22 @@ public class PublicationService {
 	public void sendMailToPublisher(Publication p, Comment visit){
 		User publisher=p.getPublisher();
 		visit.sendMailTo(publisher);
+	}
+	
+	public void uploadPhoto(Photo image) {
+		this.pDAO.uploadPhoto(image);		
+	}
+	
+	public List<Photo> getPhotosByPublication(Publication p) {
+		return this.pDAO.getPhotosByPublication(p);		
+	}
+
+	public Photo getPhotoById(Integer imageId) {
+		return this.pDAO.getPhotoById(imageId);
+	}
+
+	public void deletePhoto(Photo image) {
+		this.pDAO.deletePhoto(image);
 	}
 	
 }

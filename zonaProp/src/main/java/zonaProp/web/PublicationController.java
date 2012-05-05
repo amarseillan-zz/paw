@@ -1,7 +1,19 @@
 package zonaProp.web;
+import java.io.IOException;
+import java.io.InputStream;
+import java.security.InvalidParameterException;
+import java.util.Iterator;
+import java.util.List;
 
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
-
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileItemFactory;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
@@ -11,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import zonaProp.services.PublicationService;
+import zonaProp.transfer.bussiness.Photo;
 import zonaProp.transfer.bussiness.Publication;
 import zonaProp.web.command.CommentForm;
 import zonaProp.web.command.SearchForm;
@@ -90,5 +103,110 @@ public class PublicationController {
 		return mav;
 	}
 	
+	@RequestMapping(method = RequestMethod.GET)
+	public void viewPhoto(@RequestParam("imageId") Photo photo, HttpServletResponse resp) {	        
+    //	Photo image = ps.getPhotoById(imageId);
+       	if(photo == null){
+       		return;
+       	}              
+      	resp.reset();
+        resp.setBufferSize(1024);
+        resp.setContentType("image/jpeg"); 
+        resp.setHeader("Content-Disposition", "inline; filename=\"imagen"+photo.getId()+"\"");
+        resp.setContentLength(photo.getSize());
+           
+        try {
+            InputStream input = photo.getInputStream();
+            ServletOutputStream output = resp.getOutputStream();     
+			IOUtils.copy(input, output);
+	        input.close();
+	        output.close(); 
+		} catch (IOException e) {
+			e.printStackTrace();
+		} 
+	}
+	
+	@RequestMapping(method = RequestMethod.GET)
+	public ModelAndView editPhotos(@RequestParam("publicationId") Publication p) {		
+		ModelAndView mav = new ModelAndView();	
+		mav.addObject("publication", p);
+		return mav;		
+	}
+	
+	@RequestMapping(method = RequestMethod.POST)
+	protected ModelAndView deletePhoto(@RequestParam("publicationId") Publication p, @RequestParam("imageId") Photo photo) {	
+		ModelAndView mav = new ModelAndView();					
+//		if(p.getUserId() != (Integer)req.getSession().getAttribute("userId")) {
+//	           resp.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+//	           return;
+//	    }
+		ps.deletePhoto(photo);		
+		mav.addObject("publication", p);
+		mav.setViewName("publication/editPhotos");	
+		return mav;		
+	}
+	
+	@RequestMapping(method = RequestMethod.POST)
+	protected ModelAndView uploadPhoto(HttpServletRequest req) {
+		ModelAndView mav = new ModelAndView();		
+		FileItemFactory factory = new DiskFileItemFactory();
+        ServletFileUpload upload = new ServletFileUpload(factory);
+        
+//        if(p.getUserId() != (Integer)req.getSession().getAttribute("userId")) {
+//           resp.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+//            return;
+//        }     	
+        Integer publicationId=null;
+        try {
+                @SuppressWarnings("unchecked")
+				List<FileItem> fields = upload.parseRequest(req);
+                Iterator<FileItem> it = fields.iterator();
+                while (it.hasNext()) {
+            		Photo image = null;
+                    FileItem fileItem = it.next();
+                    if(fileItem.getFieldName().equals("publicationId")) {
+                    	publicationId = Integer.valueOf(fileItem.getString());
+                    } else {
+	            		image = createPhotoFromFileItem(fileItem, publicationId);	     
+	            		if(image != null) {
+	                    	ps.uploadPhoto(image); 
+	                    }
+                    }
+                }
+        } catch (Exception e) {
+			e.printStackTrace();
+		}        
+        Publication p = ps.getPublication(publicationId);        
+        mav.addObject("publication", p);
+		mav.setViewName("publication/editPhotos");	
+		return mav;		
+	}
+	
+	private Photo createPhotoFromFileItem(FileItem fileItem, int publicationId) throws IOException {
+		int size = (int) fileItem.getSize();
+		if(size > 5000000){
+			throw new InvalidParameterException("Tamaño del archivo demasiado grande.");
+		}
+		if(size == 0){
+			throw new InvalidParameterException("Debe seleccionar una imagen.");
+		}
+		if(!validExtension(fileItem.getName())){
+			throw new InvalidParameterException("Formato de imagen invalido.");			
+		}
+		Photo image = new Photo(0, publicationId, fileItem.getInputStream());
+		
+		return image;
+	}
+	
+	private boolean validExtension(String name) {		
+		String[] aux = name.split("\\.");
+		if(aux.length > 0){
+			String extension =  aux[aux.length-1];
+			if(extension.equals("bmp") || extension.equals("png") || extension.equals("jpg")){
+				return true;
+			}
+		}
+		return false;
+	}
 	
 }

@@ -37,9 +37,10 @@ public class PhotoDeleter extends HttpServlet {
 		    }
 
 			PhotoService photoS = PhotoService.getInstance(); 
-			photoS.deletePhotoById(imageId);
+			Photo photo = photoS.getPhotoById(imageId);
+			photoS.deletePhoto(photo);
 			
-			List<Photo> photos = photoS.getPhotosByPublicationId(p.getPublicationId());		       	
+			List<Photo> photos = photoS.getPhotosByPublication(p);		       	
 			req.setAttribute("photos", photos);
 			req.setAttribute("pid", p.getPublicationId());
 			req.getRequestDispatcher("/WEB-INF/jsp/photoUpload.jsp").forward(req, resp);

@@ -25,6 +25,7 @@ import zonaProp.transfer.bussiness.Publication;
 public class PhotoUpload extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
+	private static final int MAX_PHOTO_SIZE = 5000000;
 
 	private static PublicationService ps = PublicationService.getInstance();
 	
@@ -43,7 +44,7 @@ public class PhotoUpload extends HttpServlet {
 		            return;
 		    }
 			PhotoService ps = PhotoService.getInstance(); 
-	       	photos = ps.getPhotosByPublicationId(p.getPublicationId());
+	       	photos = ps.getPhotosByPublication(p);
 	       	
 			req.setAttribute("photos", photos);
 			req.setAttribute("pid", p.getPublicationId());
@@ -73,7 +74,7 @@ public class PhotoUpload extends HttpServlet {
                         FileItem fileItem = it.next();     
                     	PhotoService ps = PhotoService.getInstance(); 
                     	try{
-                    		image = ps.createPhotoFromFileItem(fileItem, p.getPublicationId());	     
+                    		image = this.createPhotoFromFileItem(fileItem, p.getPublicationId());	     
                     		if(image != null){
 	                        	ps.uploadPhoto(image);
                     		}
@@ -87,12 +88,39 @@ public class PhotoUpload extends HttpServlet {
         }
         
         PhotoService ps = PhotoService.getInstance(); 
-       	photos = ps.getPhotosByPublicationId(p.getPublicationId());       	
+       	photos = ps.getPhotosByPublication(p);       	
 		req.setAttribute("photos", photos);
 		req.setAttribute("pid", p.getPublicationId());
 		req.setAttribute("error", errors);
 		req.getRequestDispatcher("/WEB-INF/jsp/photoUpload.jsp").forward(req, resp);
 		
+	}
+	
+	private Photo createPhotoFromFileItem(FileItem fileItem, int publicationId) throws IOException {
+		int size = (int) fileItem.getSize();
+		if(size > MAX_PHOTO_SIZE){
+			throw new InvalidParameterException("Tamaño del archivo demasiado grande.");
+		}
+		if(size == 0){
+			throw new InvalidParameterException("Debe seleccionar una imagen.");
+		}
+		if(!validExtension(fileItem.getName())){
+			throw new InvalidParameterException("Formato de imagen invalido.");			
+		}
+		Photo image = new Photo(0, publicationId, fileItem.getInputStream());
+		
+		return image;
+	}
+	
+	private boolean validExtension(String name) {		
+		String[] aux = name.split("\\.");
+		if(aux.length > 0){
+			String extension =  aux[aux.length-1];
+			if(extension.equals("bmp") || extension.equals("png") || extension.equals("jpg")){
+				return true;
+			}
+		}
+		return false;
 	}
 
 }

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import zonaProp.transfer.bussiness.Photo;
+import zonaProp.transfer.bussiness.Publication;
 
 public class PhotoDAO extends DAO {
 
@@ -34,19 +35,19 @@ public class PhotoDAO extends DAO {
 		
 	}
 
-	public List<Photo> getPhotosByPublicationId(int publicationId) {
+	public List<Photo> getPhotosByPublication(Publication p) {
 		List<Photo> pList = new ArrayList<Photo>();
 
 		try {
 			Connection connection = manager.getConnection();
 			PreparedStatement stmt = connection
 					.prepareStatement("SELECT * FROM PHOTO WHERE PUBLICATIONID = ?");
-			stmt.setInt(1, publicationId);
+			stmt.setInt(1, p.getPublicationId());
 
 			ResultSet results = stmt.executeQuery();
 			while (results.next()) {
-				Photo p = new Photo(results.getInt(1), results.getInt(2), results.getBinaryStream(3));
-				pList.add(p);
+				Photo photo = new Photo(results.getInt(1), results.getInt(2), results.getBinaryStream(3));
+				pList.add(photo);
 			}
 			connection.close();
 		} catch (SQLException e) {
@@ -76,12 +77,12 @@ public class PhotoDAO extends DAO {
 		return photo;
 	}
 
-	public void deletePhotoById(int imageId) {		
+	public void deletePhoto(Photo photo) {		
 		try {
 			Connection connection = manager.getConnection();
 			PreparedStatement stmt = connection
 					.prepareStatement("DELETE FROM PHOTO WHERE PHOTOID = ?");
-			stmt.setInt(1, imageId);
+			stmt.setInt(1, photo.getId());
 			stmt.executeUpdate();
 			connection.commit();
 			connection.close();
