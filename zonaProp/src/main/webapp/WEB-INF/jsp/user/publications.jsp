@@ -3,7 +3,7 @@
 
 <h2>Sus publicaciones</h2>
 
-<a href="../publication/ABM">Nueva publicaci&oacute;n</a>
+<a href="../publication/create">Nueva publicaci&oacute;n</a>
 <table class="table table-striped">
 	<thead>
 	<tr>
@@ -22,7 +22,7 @@
 		<td>${publication.price}</td>
 		<td>${publication.age}</td>
 		<td>
-			<a href="<c:url value="../publication/ABM">
+			<a href="<c:url value="../publication/modify">
 						<c:param name="pid" value="${publication.publicationId}" />
 					</c:url>">
 				editar

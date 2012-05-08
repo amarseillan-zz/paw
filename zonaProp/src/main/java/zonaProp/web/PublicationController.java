@@ -24,8 +24,8 @@ import org.springframework.web.servlet.ModelAndView;
 import zonaProp.services.PublicationService;
 import zonaProp.transfer.bussiness.Photo;
 import zonaProp.transfer.bussiness.Publication;
-import zonaProp.transfer.forms.PublicationForm;
 import zonaProp.web.command.CommentForm;
+import zonaProp.web.command.PublicationForm;
 import zonaProp.web.command.SearchForm;
 import zonaProp.web.command.validator.CommentFormValidator;
 import zonaProp.web.command.validator.SearchFormValidator;
@@ -183,11 +183,22 @@ public class PublicationController {
 	}
 	
 	@RequestMapping(method = RequestMethod.GET)
-	public ModelAndView ABM(@RequestParam("pid") Publication p){
+	public ModelAndView modify(@RequestParam("pid") Publication p){
 		ModelAndView mav = new ModelAndView();
 		
-		mav.addObject("publicationForm", p==null?new PublicationForm():new PublicationForm(p));
+		mav.addObject("publicationForm", new PublicationForm(p));
 		
+		mav.setViewName("publication/ABM");
+		return mav;
+	}
+	
+	@RequestMapping(method = RequestMethod.GET)
+	public ModelAndView create(){
+		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("publicationForm", new PublicationForm());
+		
+		mav.setViewName("publication/ABM");
 		return mav;
 	}
 	
@@ -201,7 +212,7 @@ public class PublicationController {
 	private Photo createPhotoFromFileItem(FileItem fileItem, int publicationId) throws IOException {
 		int size = (int) fileItem.getSize();
 		if(size > 5000000){
-			throw new IllegalArgumentException("Tamaño del archivo demasiado grande.");
+			throw new IllegalArgumentException("Tamaï¿½o del archivo demasiado grande.");
 		}
 		if(size == 0){
 			throw new IllegalArgumentException("Debe seleccionar una imagen.");

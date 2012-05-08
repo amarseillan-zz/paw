@@ -20,7 +20,11 @@ public class PublicationConverter implements Converter<String, Publication>{
 	}
 
 	public Publication convert(String source) {
+		try{
 		return ps.getPublication(Integer.valueOf(source));
+		} catch(NumberFormatException nfe){
+			return null;
+		}
 	}
 
 }

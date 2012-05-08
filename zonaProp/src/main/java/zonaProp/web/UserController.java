@@ -25,7 +25,7 @@ public class UserController {
 	}
 	
 	@RequestMapping(method = RequestMethod.GET)
-	public ModelAndView userPublications(@ModelAttribute("userId") int ui){
+	public ModelAndView publications(@ModelAttribute("userId") int ui){
 		
 		User u = us.getUser(ui);
 		
