@@ -3,8 +3,8 @@ package zonaProp.transfer.bussiness;
 import java.util.LinkedList;
 
 public class Search {
-	private Integer min;
-	private Integer max;
+	private Integer min=null;
+	private Integer max=null;
 	private OperationType operationType=null;
 	private PropertyType propertyType=null;
 	private boolean ascending=true;

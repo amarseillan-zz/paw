@@ -32,22 +32,7 @@
 		<servlet-name>SignUp</servlet-name>
 		<url-pattern>/signUp</url-pattern>
 	</servlet-mapping>
-	<servlet>
-		<servlet-name>PublicationList</servlet-name>
-		<servlet-class>zonaProp.web.PublicationList</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>PublicationList</servlet-name>
-		<url-pattern>/publicationList</url-pattern>
-	</servlet-mapping>
-	<servlet>
-		<servlet-name>PublicationABM</servlet-name>
-		<servlet-class>zonaProp.web.PublicationABM</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>PublicationABM</servlet-name>
-		<url-pattern>/publicationDetail</url-pattern>
-	</servlet-mapping>
+
 	<servlet>
 		<servlet-name>Logout</servlet-name>
 		<servlet-class>zonaProp.web.Logout</servlet-class>

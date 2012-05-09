@@ -2,15 +2,15 @@ package zonaProp.validators;
 
 public class DoubleValidator extends FieldValidator<String> {
 
-	private String fieldName;
 	
 	public DoubleValidator(String fieldName){
+		type="doubleFormat";
 		this.fieldName=fieldName;
 	}
 	
 	@Override
 	public String getError() {
-		return "Error en "+ fieldName + ". Ingrese un nœmero real.";
+		return "Error en "+ fieldName + ". Ingrese un nï¿½mero real.";
 	}
 
 	@Override

@@ -68,7 +68,7 @@ public class PublicationForm {
 		barbecue = p.isBarbecue();
 		description = p.getDescription();
 		active = p.isActive();
-		
+
 		propertyType = p.getPropertyType();
 		operationType = p.getOperationType();
 	}
@@ -93,12 +93,13 @@ public class PublicationForm {
 		this.active = active;
 	}
 
-	public Publication toBussiness() {
-		return new Publication(publicationId, userId, propertyType, operationType,
-				address, city, Integer.getInteger(price), environments, Integer
-						.getInteger(covered), Integer.getInteger(uncovered),
-				Integer.getInteger(age), cable, phone, pool, living, paddle,
-				barbecue, description, active);
+	public Publication build() {
+		return new Publication(publicationId, userId, propertyType,
+				operationType, address, city, Double.parseDouble(price),
+				environments, Double.parseDouble(covered), Double
+						.parseDouble(uncovered), Integer.parseInt(age),
+				cable, phone, pool, living, paddle, barbecue, description,
+				active);
 	}
 
 	public int getPublicationId() {

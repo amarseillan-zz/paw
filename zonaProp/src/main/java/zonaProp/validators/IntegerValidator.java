@@ -3,7 +3,7 @@ package zonaProp.validators;
 public class IntegerValidator extends FieldValidator<String> {
 	
 	public IntegerValidator(String fieldName){
-		type="numberFormat";
+		type="integerFormat";
 		this.fieldName=fieldName;
 	}
 	

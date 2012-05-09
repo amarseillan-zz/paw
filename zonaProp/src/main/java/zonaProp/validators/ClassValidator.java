@@ -3,6 +3,7 @@ package zonaProp.validators;
 import java.util.ArrayList;
 import java.util.List;
 
+@Deprecated
 public abstract class ClassValidator<T> {
 
 	protected List<String> errors = new ArrayList<String>();

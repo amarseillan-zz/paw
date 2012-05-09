@@ -23,7 +23,7 @@
 		<td>${publication.age}</td>
 		<td>
 			<a href="<c:url value="../publication/modify">
-						<c:param name="pid" value="${publication.publicationId}" />
+						<c:param name="publicationId" value="${publication.publicationId}" />
 					</c:url>">
 				editar
 			</a>
@@ -31,6 +31,12 @@
 						<c:param name="publicationId" value="${publication.publicationId}" />
 					</c:url>">
 				ver
+			</a>
+			<br/>
+			<a href="<c:url value="editPhotos">
+				<c:param name="publicationId" value="${publicationForm.publicationId}" />
+			</c:url>
+				">Editar Imagenes
 			</a>
 		</td>
 		</tr>
