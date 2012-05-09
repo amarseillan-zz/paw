@@ -12,8 +12,8 @@
 		<form:input type="text" path="name" />
 	</div>
 	<div class="fieldset">
-		<label for="lastName">(*)Apellido:</label>
-		<form:input type="text" path="lastName" />
+		<label for="lastname">(*)Apellido:</label>
+		<form:input type="text" path="lastname" />
 	</div>
 	<div class="fieldset">
 		<label for="email">(*)E-mail:</label>

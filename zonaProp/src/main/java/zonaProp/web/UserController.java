@@ -58,8 +58,6 @@ public class UserController {
 		User user = null;
 
 		
-		UserService us = UserService.getInstance();
-		
 //		List<String> errors = new UserFormValidator().check(uf);
 		
 		if(!errors.hasErrors()){
@@ -69,8 +67,7 @@ public class UserController {
 			mav = new ModelAndView("redirect:../publication/search");
 		} else {
 			mav = new ModelAndView();
-			mav.addObject(errors);
-			mav.addObject(uf);
+			mav.addObject("userForm",uf);
 		}
 		return mav;
 	}

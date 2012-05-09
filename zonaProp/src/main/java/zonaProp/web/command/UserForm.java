@@ -11,7 +11,7 @@ public class UserForm {
 	private String password1;
 	private String password2;
 	private String name;
-	private String lastName;
+	private String lastname;
 	private String email;
 	private String phone;
 	
@@ -35,12 +35,12 @@ public class UserForm {
 		this.name = name;
 	}
 
-	public String getLastName() {
-		return lastName;
+	public String getLastname() {
+		return lastname;
 	}
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
 	}
 
 	public String getEmail() {
@@ -76,7 +76,7 @@ public class UserForm {
 	}
 	
 	public User build(){
-		return new User(0,name,lastName,email,phone,username,password1);
+		return new User(0,name,lastname,email,phone,username,password1);
 	}
 	
 }

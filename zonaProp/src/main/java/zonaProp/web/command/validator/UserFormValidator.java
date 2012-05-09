@@ -13,19 +13,14 @@ import zonaProp.web.command.UserForm;
 @Component
 public class UserFormValidator implements Validator {
 
-	private FieldValidator<String> usernameV = new LengthValidator("name", 4, 20);
-	private FieldValidator<String> password1V = new LengthValidator("name", 4, 20);
+	private FieldValidator<String> usernameV = new LengthValidator("username", 4, 20);
+	private FieldValidator<String> password1V = new LengthValidator("password1", 4, 20);
 	private FieldValidator<String> nameV = new LengthValidator("name", 3, 20);
-	private FieldValidator<String> lastNameV = new LengthValidator("name", 3, 20);
-	private FieldValidator<String> emailV = new LengthValidator("name", 3, 20);
-	private FieldValidator<String> phoneV = new LengthValidator("name", 3,20);
+	private FieldValidator<String> lastNameV = new LengthValidator("lastname", 3, 20);
+	private FieldValidator<String> emailV = new LengthValidator("email", 3, 20);
+	private FieldValidator<String> phoneV = new LengthValidator("phone", 3,20);
 	
-//	private FieldValidator<String> usernameV = new LengthValidator("username", 4, 20);
-//	private FieldValidator<String> password1V = new LengthValidator("password", 4, 20);
-//	private FieldValidator<String> nameV = new LengthValidator("name", 3, 20);
-//	private FieldValidator<String> lastNameV = new LengthValidator("lastname", 3, 20);
-//	private FieldValidator<String> emailV = new LengthValidator("email", 3, 20);
-//	private FieldValidator<String> phoneV = new LengthValidator("phone", 3,20);
+	
 	
 	public boolean supports(Class<?> clazz) {
 		return UserForm.class.equals(clazz);
@@ -39,7 +34,7 @@ public class UserFormValidator implements Validator {
 		usernameV.appendError(errors, form.getUsername());
 		password1V.appendError(errors, form.getPassword1());
 		nameV.appendError(errors, form.getName());
-		lastNameV.appendError(errors, form.getLastName());
+		lastNameV.appendError(errors, form.getLastname());
 		emailV.appendError(errors, form.getEmail());
 		phoneV.appendError(errors, form.getPhone());		
 	}
