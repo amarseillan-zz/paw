@@ -174,16 +174,7 @@
 				</form:select>
 			</div>
 		</div>
-		<c:if test="${publicationForm.publicationId != -1}">		
-			<a href="<c:url value="editPhotos">
-				<c:param name="publicationId" value="${publicationForm.publicationId}" />
-			</c:url>
-				">Editar Imagenes
-			</a>
-		</c:if>
-		<c:if test="${publicationForm.publicationId == -1}">
-			<b>Debe guardar la publicaci&oacute;n para agregar im&aacute;genes a la misma</b>
-		</c:if>
+		
 		
 		<div class="form-actions">
 			<button type="submit" class="btn btn-primary">Guardar</button>

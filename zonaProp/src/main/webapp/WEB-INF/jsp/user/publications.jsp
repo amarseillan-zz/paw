@@ -32,6 +32,12 @@
 					</c:url>">
 				ver
 			</a>
+			<br/>
+			<a href="<c:url value="editPhotos">
+				<c:param name="publicationId" value="${publicationForm.publicationId}" />
+			</c:url>
+				">Editar Imagenes
+			</a>
 		</td>
 		</tr>
 	</c:forEach>
