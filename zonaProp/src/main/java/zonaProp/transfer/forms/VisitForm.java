@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import zonaProp.transfer.bussiness.Comment;
 
+@Deprecated
 public class VisitForm {
 
 	private HttpServletRequest req;

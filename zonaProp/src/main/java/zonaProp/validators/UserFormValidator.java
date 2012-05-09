@@ -6,6 +6,7 @@ import java.util.List;
 
 import zonaProp.transfer.forms.UserForm;
 
+@Deprecated
 public class UserFormValidator extends ClassValidator<UserForm> {
 
 

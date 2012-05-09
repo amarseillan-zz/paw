@@ -1,7 +1,7 @@
 package zonaProp.transfer.bussiness;
 
 public enum PropertyType {
-	HOUSE("casa",1), DEPARTMENT("deparamento",2);
+	HOUSE("Casa",1), DEPARTMENT("Deparamento",2);
 
 	private String name;
 	private int number;

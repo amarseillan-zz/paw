@@ -16,9 +16,11 @@ import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import zonaProp.services.PublicationService;
@@ -28,17 +30,22 @@ import zonaProp.web.command.CommentForm;
 import zonaProp.web.command.PublicationForm;
 import zonaProp.web.command.SearchForm;
 import zonaProp.web.command.validator.CommentFormValidator;
+import zonaProp.web.command.validator.PublicationFormValidator;
 import zonaProp.web.command.validator.SearchFormValidator;
 
 @Controller
+@SessionAttributes("userId")
 public class PublicationController {
 	
+	PublicationFormValidator pfv;
 	CommentFormValidator cfv;
 	SearchFormValidator sfv;
 	PublicationService ps;
 	
 	@Autowired
-	public PublicationController(CommentFormValidator cfv, SearchFormValidator sfv, PublicationService ps) {
+	public PublicationController(PublicationFormValidator pfv, CommentFormValidator cfv, SearchFormValidator sfv, PublicationService ps) {
+		
+		this.pfv = pfv;
 		this.sfv = sfv;
 		this.cfv = cfv;
 		this.ps = ps;
@@ -183,7 +190,7 @@ public class PublicationController {
 	}
 	
 	@RequestMapping(method = RequestMethod.GET)
-	public ModelAndView modify(@RequestParam("pid") Publication p){
+	public ModelAndView modify(@RequestParam("publicationId") Publication p){
 		ModelAndView mav = new ModelAndView();
 		
 		mav.addObject("publicationForm", new PublicationForm(p));
@@ -203,10 +210,22 @@ public class PublicationController {
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public ModelAndView saveChanges(PublicationForm pf, Errors errors){
-		ModelAndView mav = new ModelAndView();		
+	public ModelAndView saveChanges(PublicationForm pf, Errors errors,@ModelAttribute("userId") int ui){
 		
-		return mav;
+		pfv.validate(pf, errors);
+
+		ModelAndView mav = new ModelAndView();	
+		
+		if(errors.hasErrors()){
+			mav.addObject("publicationForm", pf);
+			mav.setViewName("publication/ABM");
+			return mav;
+		}	
+		
+		ps.save(pf.build(), ui);
+	
+		return new ModelAndView("redirect:../user/publications");
+		
 	}
 	
 	private Photo createPhotoFromFileItem(FileItem fileItem, int publicationId) throws IOException {

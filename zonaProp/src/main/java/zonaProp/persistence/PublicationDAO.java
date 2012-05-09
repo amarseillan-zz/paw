@@ -58,10 +58,10 @@ public class PublicationDAO extends DAO {
 			stmt.setInt(3, p.getOperationType().getNumber());
 			stmt.setString(4, p.getAddress());
 			stmt.setString(5, p.getCity());
-			stmt.setFloat(6, p.getPrice());
+			stmt.setFloat(6, (float)p.getPrice());
 			stmt.setInt(7, p.getEnvironments());
-			stmt.setFloat(8, p.getCovered());
-			stmt.setFloat(9, p.getUncovered());
+			stmt.setFloat(8, (float)p.getCovered());
+			stmt.setFloat(9, (float)p.getUncovered());
 			stmt.setInt(10, p.getAge());
 			stmt.setBoolean(11, p.isCable());
 			stmt.setBoolean(12, p.isPhone());
@@ -175,10 +175,10 @@ public class PublicationDAO extends DAO {
 			stmt.setInt(3, p.getOperationType().getNumber());
 			stmt.setString(4, p.getAddress());
 			stmt.setString(5, p.getCity());
-			stmt.setFloat(6, p.getPrice());
+			stmt.setFloat(6, (float)p.getPrice());
 			stmt.setInt(7, p.getEnvironments());
-			stmt.setFloat(8, p.getCovered());
-			stmt.setFloat(9, p.getUncovered());
+			stmt.setFloat(8, (float)p.getCovered());
+			stmt.setFloat(9, (float)p.getUncovered());
 			stmt.setInt(10, p.getAge());
 			stmt.setBoolean(11, p.isCable());
 			stmt.setBoolean(12, p.isPhone());

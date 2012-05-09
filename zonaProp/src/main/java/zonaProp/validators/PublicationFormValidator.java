@@ -4,6 +4,7 @@ import java.util.List;
 
 import zonaProp.transfer.forms.PublicationForm;
 
+@Deprecated
 public class PublicationFormValidator extends ClassValidator<PublicationForm> {
 
 	@Override

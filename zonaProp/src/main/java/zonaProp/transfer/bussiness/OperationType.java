@@ -1,7 +1,7 @@
 package zonaProp.transfer.bussiness;
 
 public enum OperationType {
-	SELL("venta",1), RENT("alquiler",2);
+	SELL("Venta",1), RENT("Alquiler",2);
 
 	private String name;
 	private int number;

@@ -11,10 +11,10 @@ public class Publication {
 	private int userId;
 	private String address;
 	private String city;
-	private float price;
+	private double price;
 	private int environments;
-	private float covered;
-	private float uncovered;
+	private double covered;
+	private double uncovered;
 	private int age;
 	private boolean cable;
 	private boolean phone;
@@ -35,8 +35,8 @@ public class Publication {
 	
 	
 	public Publication(int publicationId, int userId, PropertyType propertyType,
-			OperationType operationType, String address, String city, float price,
-			int environments, float covered, float uncovered, int age,
+			OperationType operationType, String address, String city, double price,
+			int environments, double covered, double uncovered, int age,
 			boolean cable, boolean phone, boolean pool, boolean living,
 			boolean paddle, boolean barbecue, String description, boolean active) {
 		super();
@@ -90,7 +90,7 @@ public class Publication {
 		return city;
 	}
 
-	public float getPrice() {
+	public double getPrice() {
 		return price;
 	}
 
@@ -98,11 +98,11 @@ public class Publication {
 		return environments;
 	}
 
-	public float getCovered() {
+	public double getCovered() {
 		return covered;
 	}
 
-	public float getUncovered() {
+	public double getUncovered() {
 		return uncovered;
 	}
 

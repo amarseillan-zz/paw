@@ -3,6 +3,7 @@ package zonaProp.transfer.forms;
 
 import zonaProp.transfer.bussiness.Publication;
 
+@Deprecated
 public class PublicationForm {
 
 	private int publicationId;

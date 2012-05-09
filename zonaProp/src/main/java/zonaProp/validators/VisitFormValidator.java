@@ -4,6 +4,7 @@ import java.util.List;
 
 import zonaProp.transfer.forms.VisitForm;
 
+@Deprecated
 public class VisitFormValidator extends ClassValidator<VisitForm> {
 	
 	@Override

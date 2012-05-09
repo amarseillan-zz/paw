@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import zonaProp.transfer.bussiness.User;
 
+@Deprecated
 public class UserForm {
 	
 	HttpServletRequest req;

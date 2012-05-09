@@ -169,18 +169,19 @@
 			<label class="control-label" for="active">Estado</label>
 			<div class="controls">
 				<form:select path="active">
-					<form:options/>
+					<form:option label="Activa" value="true"/>
+					<form:option label="Inactiva" value="false"/>
 				</form:select>
 			</div>
 		</div>
-		<c:if test="${publication.publicationId != -1}">		
-			<a href="<c:url value="photoUpload">
-				<c:param name="pid" value="${publication.publicationId}" />
+		<c:if test="${publicationForm.publicationId != -1}">		
+			<a href="<c:url value="editPhotos">
+				<c:param name="publicationId" value="${publicationForm.publicationId}" />
 			</c:url>
 				">Editar Imagenes
 			</a>
 		</c:if>
-		<c:if test="${publication.publicationId == -1}">
+		<c:if test="${publicationForm.publicationId == -1}">
 			<b>Debe guardar la publicaci&oacute;n para agregar im&aacute;genes a la misma</b>
 		</c:if>
 		
