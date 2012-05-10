@@ -5,15 +5,13 @@ import java.io.InputStream;
 
 import org.apache.commons.io.IOUtils;
 
-public class Photo {
+public class Photo extends PersistentEntity {
 
-	private int id;
 	private int publicationId;
 	private InputStream inputStream;
 
 	public Photo(int id, int publicationId, InputStream iS) {
-		super();
-		this.id = id;
+		super(id);
 		setPublicationId(publicationId);
 		setInputStream(iS);
 	}
@@ -25,10 +23,6 @@ public class Photo {
 
 	private void setPublicationId(int id){
 		this.publicationId = id;
-	}
-
-	public int getId() {
-		return id;
 	}
 	
 	public int getPublicationId() {

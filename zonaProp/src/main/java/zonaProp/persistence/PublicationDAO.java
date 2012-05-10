@@ -178,7 +178,7 @@ public class PublicationDAO extends DAO {
 			stmt.setBoolean(16, false);
 			stmt.setString(17, p.getDescription());
 			stmt.setBoolean(18, p.isActive());
-			stmt.setInt(19, p.getPublicationId());
+			stmt.setInt(19, p.getId());
 			stmt.executeUpdate();
 
 			connection.commit();
@@ -191,7 +191,7 @@ public class PublicationDAO extends DAO {
 
 	
 	public void save(Publication p, int userId){
-		if( p.getPublicationId() == -1 ){
+		if( p.isNew() ){
 			createPublication(p, userId);
 		}else{
 			updatePublication(p);
@@ -224,7 +224,7 @@ public class PublicationDAO extends DAO {
 			Connection connection = manager.getConnection();
 			PreparedStatement stmt = connection
 					.prepareStatement("SELECT * FROM PHOTO WHERE PUBLICATIONID = ?");
-			stmt.setInt(1, p.getPublicationId());
+			stmt.setInt(1, p.getId());
 
 			ResultSet results = stmt.executeQuery();
 			while (results.next()) {

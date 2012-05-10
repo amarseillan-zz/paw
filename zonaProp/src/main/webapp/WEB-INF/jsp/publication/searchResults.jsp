@@ -30,7 +30,7 @@
 			<td>${publication.price}</td>
 			<td>
 				<a href="<c:url value="view">
-						<c:param name="publicationId" value="${publication.publicationId}" />
+						<c:param name="publicationId" value="${publication.id}" />
 					</c:url>">
 					ver
 				</a>

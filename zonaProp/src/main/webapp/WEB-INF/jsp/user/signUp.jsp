@@ -1,9 +1,11 @@
 <%@ include file="../header.jsp" %>
 
 <h2>Register</h2>
-	<div class="error"><form:errors path="*" /></div>
+
 <form:form class="form" method="POST" action="signUp" commandName="userForm">
+		<div class="error"><form:errors path="*" /></div>
 	<div class="fieldset">
+		<form:errors path="username" />
 		<label for="username">(*)Usuario:</label>
 		<form:input type="text" path="username" />
 	</div>
@@ -24,8 +26,8 @@
 		<form:input type="text" path="phone" />
 	</div>
 	<div class="fieldset">
-		<label for="password1">(*)Contrase&ntilde;a:</label>
-		<form:input type="password" path="password1" />
+		<label for="password">(*)Contrase&ntilde;a:</label>
+		<form:input type="password" path="password" />
 	</div>
 	<div class="fieldset">
 		<label for="password2">(*)Ingrese contrase&ntilde;a nuevamente:</label>

@@ -3,12 +3,14 @@ package zonaProp.transfer.bussiness;
 import java.security.InvalidParameterException;
 import java.util.List;
 
+import org.hibernate.annotations.Entity;
+
 import zonaProp.services.PublicationService;
 import zonaProp.validators.LengthValidator;
 
-public class User {
+@Entity
+public class User extends PersistentEntity{
 
-	private int id;
 	private String username;
 	private String password;
 	private String name;
@@ -19,13 +21,12 @@ public class User {
 	private List<Publication> publications=null;
 
 	public User(){
-		
+		super(0);
 	}
 	
 	public User(int id, String name, String lastName, String email,
 			String phone, String username, String password) {
-		super();
-		this.id = id;
+		super(id);
 		setUsername(username);
 		setName(name);
 		setLastName(lastName);
@@ -37,14 +38,10 @@ public class User {
 	public List<Publication> getPublications(){
 		if(publications==null){
 			PublicationService ps=PublicationService.getInstance();
-			publications=ps.getAll(id);
+			publications=ps.getAll(getId());
 		}
 		
 		return publications;
-	}
-
-	public int getId() {
-		return id;
 	}
 
 	public String getName() {

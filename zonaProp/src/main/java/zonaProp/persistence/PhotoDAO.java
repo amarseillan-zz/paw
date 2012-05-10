@@ -42,7 +42,7 @@ public class PhotoDAO extends DAO {
 			Connection connection = manager.getConnection();
 			PreparedStatement stmt = connection
 					.prepareStatement("SELECT * FROM PHOTO WHERE PUBLICATIONID = ?");
-			stmt.setInt(1, p.getPublicationId());
+			stmt.setInt(1, p.getId());
 
 			ResultSet results = stmt.executeQuery();
 			while (results.next()) {

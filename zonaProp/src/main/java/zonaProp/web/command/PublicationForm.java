@@ -49,7 +49,7 @@ public class PublicationForm {
 	}
 
 	public PublicationForm(Publication p) {
-		publicationId = p.getPublicationId();
+		publicationId = p.getId();
 		userId = p.getUserId();
 		address = p.getAddress();
 		city = p.getCity();

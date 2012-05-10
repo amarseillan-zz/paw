@@ -8,7 +8,7 @@ import zonaProp.transfer.bussiness.User;
 
 public class UserForm {
 	private String username;
-	private String password1;
+	private String password;
 	private String password2;
 	private String name;
 	private String lastname;
@@ -59,12 +59,12 @@ public class UserForm {
 		this.phone = phone;
 	}
 
-	public String getPassword1() {
-		return password1;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setPassword1(String password1) {
-		this.password1 = password1;
+	public void setPassword(String password1) {
+		this.password = password1;
 	}
 
 	public String getPassword2() {
@@ -76,7 +76,7 @@ public class UserForm {
 	}
 	
 	public User build(){
-		return new User(0,name,lastname,email,phone,username,password1);
+		return new User(0,name,lastname,email,phone,username,password);
 	}
 	
 }
