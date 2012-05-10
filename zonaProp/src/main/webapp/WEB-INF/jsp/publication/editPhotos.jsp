@@ -34,7 +34,7 @@
 	</form:form>
 	
 	<div class="form-actions">
-				<a href="<c:url value="publicationDetail"><c:param name="pid" value="${publication.id}" /></c:url>"  class="btn btn-primary"/>Volver</a>
+				<a href="<c:url value="../user/publications"></c:url>"  class="btn btn-primary"/>Volver</a>
 	</div>
 	
 <%@ include file="../footer.jsp" %>	
