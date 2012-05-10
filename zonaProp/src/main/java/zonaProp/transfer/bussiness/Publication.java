@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.hibernate.annotations.Entity;
 
-import zonaProp.services.PhotoService;
+import zonaProp.services.PublicationService;
 import zonaProp.services.UserService;
 
 @Entity
@@ -115,7 +115,7 @@ public class Publication extends PersistentEntity {
 
 	public List<Photo> getPhotos() {
 		if (photos == null) {
-			PhotoService ps = PhotoService.getInstance();
+			PublicationService ps = PublicationService.getInstance();
 			photos = ps.getPhotosByPublication(this);
 		}
 
