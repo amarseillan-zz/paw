@@ -1,6 +1,5 @@
 package zonaProp.validators;
 
-import java.security.InvalidParameterException;
 
 import org.springframework.validation.Errors;
 
@@ -12,9 +11,9 @@ public abstract class FieldValidator<T> {
 	abstract public boolean isCorrect(T value);
 	abstract public String getError();
 	
-	public void check(T value) throws InvalidParameterException{
+	public void check(T value){
 		if(!isCorrect(value)){
-			throw new InvalidParameterException(getError());
+			throw new IllegalArgumentException(getError());
 		}
 	}
 	
