@@ -90,24 +90,24 @@ public class UserController {
 			}else{
 				luf.setRemember("off");
 			}
-		}else{
-			for(Cookie c:req.getCookies()){
-				if(c.getName().equals("username")){
-					luf.setUsername(c.getValue());
-					luf.setRememberu("on");
-				}
-				if(c.getName().equals("userid")){
-					user = us.authenticate(luf.getUsername(), luf.getPassword());
-					if(user!=null){
-						s.setAttribute("userId", user.getId());
-						mav = new ModelAndView("redirect:../publication/search");
-					}else{
-						luf.setRemember("off");
-					}
+		}
+		for(Cookie c:req.getCookies()){
+			if(c.getName().equals("username")){
+				luf.setUsername(c.getValue());
+				luf.setRememberu("on");
+			}
+			if(c.getName().equals("userid")){
+				user = us.authenticate(luf.getUsername(), luf.getPassword());
+				if(user!=null){
+					s.setAttribute("userId", user.getId());
+					mav = new ModelAndView("redirect:../publication/search");
+				}else{
+					luf.setRemember("off");
 				}
 			}
-			if(user==null) mav.addObject(luf);
 		}
+		if(user==null) mav.addObject(luf);
+
 		return mav;
 	}
 
