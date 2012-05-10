@@ -2,12 +2,14 @@ package zonaProp.transfer.bussiness;
 
 import java.util.List;
 
+import org.hibernate.annotations.Entity;
+
 import zonaProp.services.PhotoService;
 import zonaProp.services.UserService;
 
-public class Publication {
+@Entity
+public class Publication extends PersistentEntity{
 
-	private int publicationId;
 	private int userId;
 	private String address;
 	private String city;
@@ -39,8 +41,7 @@ public class Publication {
 			int environments, double covered, double uncovered, int age,
 			boolean cable, boolean phone, boolean pool, boolean living,
 			boolean paddle, boolean barbecue, String description, boolean active) {
-		super();
-		this.publicationId = publicationId;
+		super(publicationId);
 		this.userId = userId;
 		this.address = address;
 		this.city = city;
@@ -60,14 +61,6 @@ public class Publication {
 		
 		this.propertyType= propertyType;
 		this.operationType = operationType;
-	}
-
-	
-
-	
-	
-	public int getPublicationId() {
-		return publicationId;
 	}
 
 	public int getUserId() {
