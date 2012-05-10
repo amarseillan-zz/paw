@@ -7,7 +7,7 @@ import zonaProp.persistence.PhotoDAO;
 import zonaProp.transfer.bussiness.Photo;
 import zonaProp.transfer.bussiness.Publication;
 
-
+@Deprecated
 public class PhotoService {
 
 	private static PhotoService instance;

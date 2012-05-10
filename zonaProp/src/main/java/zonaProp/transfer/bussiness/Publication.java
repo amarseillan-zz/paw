@@ -1,16 +1,14 @@
 package zonaProp.transfer.bussiness;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.annotations.Entity;
 
-import zonaProp.services.PhotoService;
-import zonaProp.services.UserService;
 
 @Entity
 public class Publication extends PersistentEntity{
 
-	private int userId;
 	private String address;
 	private String city;
 	private double price;
@@ -31,18 +29,21 @@ public class Publication extends PersistentEntity{
 	private PropertyType propertyType;
 	private OperationType operationType;
 	
-	private User publisher=null;
+	private User publisher;
 
-	private List<Photo> photos=null;
+	private List<Photo> photos= new ArrayList<Photo>();
 	
+	public Publication() {
+		super(0);
+	}
 	
-	public Publication(int publicationId, int userId, PropertyType propertyType,
+	public Publication(int publicationId, User publisher, PropertyType propertyType,
 			OperationType operationType, String address, String city, double price,
 			int environments, double covered, double uncovered, int age,
 			boolean cable, boolean phone, boolean pool, boolean living,
 			boolean paddle, boolean barbecue, String description, boolean active) {
 		super(publicationId);
-		this.userId = userId;
+		this.publisher = publisher;
 		this.address = address;
 		this.city = city;
 		this.price = price;
@@ -61,10 +62,6 @@ public class Publication extends PersistentEntity{
 		
 		this.propertyType= propertyType;
 		this.operationType = operationType;
-	}
-
-	public int getUserId() {
-		return userId;
 	}
 	
 	public PropertyType getPropertyType(){
@@ -132,25 +129,51 @@ public class Publication extends PersistentEntity{
 	}
 
 	public User getPublisher(){
-		if(publisher==null){
-			UserService us = UserService.getInstance();
-			publisher=us.getUser(userId);
-		}
-		
 		return publisher;
 	}
 	
 	public List<Photo> getPhotos(){
-		if(photos==null){
-			PhotoService ps=PhotoService.getInstance();
-			photos=ps.getPhotosByPublication(this);
-		}
-		
 		return photos;
 	}
 	
 	public boolean isActive(){
 		return active;
+	}
+
+	public void deletePhoto(Photo photo) {
+		photos.remove(photo);
+	}
+
+	public void addPhoto(Photo image) {
+		photos.add(image);
+	}
+
+	public void update(Publication p) {
+		this.publisher = p.getPublisher();
+		this.address = p.getAddress();
+		this.city = p.getCity();
+		this.price = p.getPrice();
+		this.environments = p.getEnvironments();
+		this.covered = p.getCovered();
+		this.uncovered = p.getUncovered();
+		this.age = p.getAge();
+		this.cable = p.isCable();
+		this.phone = p.isPhone();
+		this.pool = p.isPool();
+		this.living = p.isLiving();
+		this.paddle = p.isPaddle();
+		this.barbecue = p.isBarbecue();
+		this.description = p.getDescription();
+		this.active = p.isActive();
+		
+		this.propertyType= p.getPropertyType();
+		this.operationType = p.getOperationType();
+		
+	}
+
+	public Photo getPhotoById(int imageId) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

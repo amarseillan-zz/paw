@@ -8,17 +8,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 
-
-import zonaProp.services.PhotoService;
-import zonaProp.services.PublicationService;
+import zonaProp.model.repo.PublicationRepo;
 import zonaProp.transfer.bussiness.Photo;
 import zonaProp.transfer.bussiness.Publication;
 
 public class PhotoDeleter extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-
+	private PublicationRepo publications;
+	
+	@Autowired
+	public PhotoDeleter(PublicationRepo publications) {
+		this.publications = publications;
+	}
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
@@ -28,19 +32,17 @@ public class PhotoDeleter extends HttpServlet {
 			int publicationId = Integer.valueOf(req.getParameter("pid"));
 			int imageId = Integer.valueOf(req.getParameter("imageId"));
 			
-			PublicationService ps = PublicationService.getInstance();
-			Publication p = ps.getPublication(publicationId);
+			Publication p = publications.get(publicationId);
 			
-			if(p.getUserId() != (Integer)req.getSession().getAttribute("userId")) {
+			if(p.getPublisher().getId() != (Integer)req.getSession().getAttribute("userId")) {
 		           resp.sendError(HttpServletResponse.SC_UNAUTHORIZED);
 		           return;
 		    }
 
-			PhotoService photoS = PhotoService.getInstance(); 
-			Photo photo = photoS.getPhotoById(imageId);
-			photoS.deletePhoto(photo);
+			Photo photo = p.getPhotoById(imageId);
+			p.deletePhoto(photo);
 			
-			List<Photo> photos = photoS.getPhotosByPublication(p);		       	
+			List<Photo> photos = p.getPhotos();	       	
 			req.setAttribute("photos", photos);
 			req.setAttribute("pid", p.getId());
 			req.getRequestDispatcher("/WEB-INF/jsp/photoUpload.jsp").forward(req, resp);

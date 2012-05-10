@@ -1,11 +1,13 @@
 package zonaProp.transfer.bussiness;
 
 import java.security.InvalidParameterException;
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.Entity;
 
-import zonaProp.services.PublicationService;
 import zonaProp.validators.LengthValidator;
 
 @Entity
@@ -18,7 +20,8 @@ public class User extends PersistentEntity{
 	private String email;
 	private String phone;
 	
-	private List<Publication> publications=null;
+	@OneToMany(mappedBy="publication")
+	private List<Publication> publications= new ArrayList<Publication>();
 
 	public User(){
 		super(0);
@@ -36,11 +39,6 @@ public class User extends PersistentEntity{
 	}
 	
 	public List<Publication> getPublications(){
-		if(publications==null){
-			PublicationService ps=PublicationService.getInstance();
-			publications=ps.getAll(getId());
-		}
-		
 		return publications;
 	}
 

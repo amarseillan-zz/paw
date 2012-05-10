@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import zonaProp.persistence.UserDAO;
 import zonaProp.transfer.bussiness.User;
 
-@Service
+@Deprecated
 public class UserService {
 
 	private static UserService instance;

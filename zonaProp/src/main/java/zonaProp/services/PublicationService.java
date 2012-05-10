@@ -12,8 +12,7 @@ import zonaProp.transfer.bussiness.Search;
 import zonaProp.transfer.bussiness.User;
 import zonaProp.transfer.bussiness.Comment;
 
-
-@Service
+@Deprecated
 public class PublicationService {
 
 	private static PublicationService instance;

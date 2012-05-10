@@ -15,10 +15,9 @@ import org.apache.commons.fileupload.FileItemFactory;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.springframework.beans.factory.annotation.Autowired;
 
-
-import zonaProp.services.PhotoService;
-import zonaProp.services.PublicationService;
+import zonaProp.model.repo.PublicationRepo;
 import zonaProp.transfer.bussiness.Photo;
 import zonaProp.transfer.bussiness.Publication;
 
@@ -26,25 +25,31 @@ public class PhotoUpload extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	private static final int MAX_PHOTO_SIZE = 5000000;
-
-	private static PublicationService ps = PublicationService.getInstance();
+	private PublicationRepo publications;
 	
 	private static Publication p;
 	
 	private static List<Photo> photos = null;
+	
+	
+	
+	@Autowired
+	public PhotoUpload(PublicationRepo publications) {
+		this.publications = publications;
+	}
+	
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {		
 		if (req.getParameter("pid") != null) {
 			int publicationId = Integer.valueOf(req.getParameter("pid"));
-			p = ps.getPublication(publicationId);
-			if(p.getUserId() != (Integer)req.getSession().getAttribute("userId")) {
+			p = publications.get(publicationId);
+			if(p.getPublisher().getId() != (Integer)req.getSession().getAttribute("userId")) {
 		           resp.sendError(HttpServletResponse.SC_UNAUTHORIZED);
 		            return;
 		    }
-			PhotoService ps = PhotoService.getInstance(); 
-	       	photos = ps.getPhotosByPublication(p);
+	       	photos = p.getPhotos();
 	       	
 			req.setAttribute("photos", photos);
 			req.setAttribute("pid", p.getId());
@@ -60,7 +65,7 @@ public class PhotoUpload extends HttpServlet {
 		FileItemFactory factory = new DiskFileItemFactory();
         ServletFileUpload upload = new ServletFileUpload(factory);
         
-        if(p.getUserId() != (Integer)req.getSession().getAttribute("userId")) {
+        if(p.getPublisher().getId() != (Integer)req.getSession().getAttribute("userId")) {
            resp.sendError(HttpServletResponse.SC_UNAUTHORIZED);
             return;
         }
@@ -72,11 +77,10 @@ public class PhotoUpload extends HttpServlet {
                 while (it.hasNext()) {
                 		Photo image = null;
                         FileItem fileItem = it.next();     
-                    	PhotoService ps = PhotoService.getInstance(); 
                     	try{
                     		image = this.createPhotoFromFileItem(fileItem, p.getId());	     
                     		if(image != null){
-	                        	ps.uploadPhoto(image);
+	                        	p.addPhoto(image);
                     		}
                 		}catch(InvalidParameterException ipe){
                 			errors=ipe.getMessage();
@@ -87,8 +91,7 @@ public class PhotoUpload extends HttpServlet {
                 e.printStackTrace();
         }
         
-        PhotoService ps = PhotoService.getInstance(); 
-       	photos = ps.getPhotosByPublication(p);       	
+       	photos = p.getPhotos();       	
 		req.setAttribute("photos", photos);
 		req.setAttribute("pid", p.getId());
 		req.setAttribute("error", errors);

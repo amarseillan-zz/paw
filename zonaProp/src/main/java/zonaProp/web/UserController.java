@@ -1,7 +1,5 @@
 package zonaProp.web;
 
-
-
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,114 +14,129 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
-import zonaProp.services.UserService;
+import zonaProp.model.repo.DuplicatedUserException;
+import zonaProp.model.repo.UserRepo;
 import zonaProp.transfer.bussiness.User;
+import zonaProp.web.command.LoginUserForm;
 import zonaProp.web.command.UserForm;
+import zonaProp.web.command.validator.LoginUserFormValidator;
 import zonaProp.web.command.validator.UserFormValidator;
 
 @Controller
 @SessionAttributes("userId")
 public class UserController {
 	LoginUserFormValidator lufv;
-	UserService us;
+	UserRepo users;
 	UserFormValidator ufv;
+
 	@Autowired
-	public UserController(UserService us, UserFormValidator ufv, LoginUserFormValidator lufv) {
-		this.us = us;
+	public UserController(UserRepo users, UserFormValidator ufv,
+			LoginUserFormValidator lufv) {
+		this.users = users;
 		this.ufv = ufv;
 		this.lufv = lufv;
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
-	public ModelAndView publications(@ModelAttribute("userId") int ui){
+	public ModelAndView publications(@ModelAttribute("userId") int ui) {
 
-		User u = us.getUser(ui);
+		User u = users.get(ui);
 
 		ModelAndView mav = new ModelAndView();
 
-		mav.addObject("pList",u.getPublications());
+		mav.addObject("pList", u.getPublications());
 
 		return mav;
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
-	public ModelAndView signUp(){
+	public ModelAndView signUp() {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject(new UserForm());
 		return mav;
 	}
+
 	@RequestMapping(method = RequestMethod.POST)
-	public ModelAndView signUp(HttpSession s, UserForm uf, Errors errors){
+	public ModelAndView signUp(HttpSession s, UserForm uf, Errors errors) {
 		ModelAndView mav;
-		ufv.validate(uf,errors);
+		ufv.validate(uf, errors);
 		User user = null;
 
-
-		//		List<String> errors = new UserFormValidator().check(uf);
-
-		if(!errors.hasErrors()){
+		// List<String> errors = new UserFormValidator().check(uf);
+		mav = null;
+		if (!errors.hasErrors()) {
 			user = uf.build();
-			user = us.createNewUser(user);
-			s.setAttribute("userId", user.getId());
-			mav = new ModelAndView("redirect:../publication/search");
+			try {
+				users.add(user);
+				s.setAttribute("userId", user.getId());
+				mav = new ModelAndView("redirect:../publication/search");
+			} catch (DuplicatedUserException e) {
+				//TODO hacer que se cargue un error de que ya est‡ en uso ese nombre
+			}
 		} else {
 			mav = new ModelAndView();
-			mav.addObject("userForm",uf);
+			mav.addObject("userForm", uf);
 		}
 		return mav;
 	}
+
 	@RequestMapping(method = RequestMethod.GET)
-	public ModelAndView login(HttpServletRequest req,HttpSession s){
+	public ModelAndView login(HttpServletRequest req, HttpSession s) {
 		ModelAndView mav = new ModelAndView();
 		LoginUserForm luf = new LoginUserForm();
 		User user = null;
-		if(req.getSession().getAttribute("userId")!=null && req.getSession().getAttribute("userId").equals("")){
-			user = us.authenticate(luf.getUsername(), luf.getPassword());
-			if(user!=null){
+		if (req.getSession().getAttribute("userId") != null
+				&& req.getSession().getAttribute("userId").equals("")) {
+			if ( users.authenticate(luf.getUsername(), luf.getPassword()) ) {
+				user = users.get(luf.getUsername(), luf.getPassword());
 				s.setAttribute("userId", user.getId());
 				mav = new ModelAndView("redirect:../publication/search");
-			}else{
+			} else {
 				luf.setRemember("off");
 			}
 		}
-		for(Cookie c:req.getCookies()){
-			if(c.getName().equals("username")){
+		for (Cookie c : req.getCookies()) {
+			if (c.getName().equals("username")) {
 				luf.setUsername(c.getValue());
 				luf.setRememberu("on");
 			}
-			if(c.getName().equals("userid")){
-				user = us.authenticate(luf.getUsername(), luf.getPassword());
-				if(user!=null){
+			if (c.getName().equals("userid")) {
+				if ( users.authenticate(luf.getUsername(), luf.getPassword()) ){
+					user = users.get(luf.getUsername(), luf.getPassword());
 					s.setAttribute("userId", user.getId());
 					mav = new ModelAndView("redirect:../publication/search");
-				}else{
+				} else {
 					luf.setRemember("off");
 				}
 			}
 		}
-		if(user==null) mav.addObject(luf);
+		if (user == null)
+			mav.addObject(luf);
 
 		return mav;
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public ModelAndView login(LoginUserForm luf, Errors errors, HttpSession s, HttpServletResponse resp){
+	public ModelAndView login(LoginUserForm luf, Errors errors, HttpSession s,
+			HttpServletResponse resp) {
 		lufv.validate(luf, errors);
-		ModelAndView mav = null ;
+		ModelAndView mav = null;
 
-		User user = us.authenticate(luf.getUsername(), luf.getPassword());
-		if( user != null ){
+		if ( users.authenticate(luf.getUsername(), luf.getPassword()) ) {
+			User user = users.get(luf.getUsername(), luf.getPassword());
 			s.setAttribute("userId", user.getId());
-			if("on".equals(luf.getRemember())){
+			if ("on".equals(luf.getRemember())) {
 				Cookie c = new Cookie("userid", String.valueOf(user.getId()));
-				c.setMaxAge(30*24*60*60);
+				c.setMaxAge(30 * 24 * 60 * 60);
 				resp.addCookie(c);
 			}
-			if("on".equals(luf.getRememberu())){
-				Cookie c = new Cookie("username", String.valueOf(luf.getUsername()));
-				c.setMaxAge(30*24*60*60);
-				resp.addCookie(new Cookie("username", String.valueOf(luf.getUsername())));
-			}else{
+			if ("on".equals(luf.getRememberu())) {
+				Cookie c = new Cookie("username", String.valueOf(luf
+						.getUsername()));
+				c.setMaxAge(30 * 24 * 60 * 60);
+				resp.addCookie(new Cookie("username", String.valueOf(luf
+						.getUsername())));
+			} else {
 				resp.addCookie(new Cookie("username", ""));
 			}
 			mav = new ModelAndView("redirect:../publication/search");
@@ -131,9 +144,8 @@ public class UserController {
 			errors.reject("invalidUser");
 			mav = new ModelAndView();
 		}
-		//		mav.addObject(new LoginUserForm());
+		// mav.addObject(new LoginUserForm());
 		return mav;
-
 
 	}
 

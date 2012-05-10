@@ -7,6 +7,7 @@ import java.sql.SQLException;
 
 import zonaProp.transfer.bussiness.User;
 
+@Deprecated
 public class UserDAO extends DAO {
 
 	public UserDAO() {

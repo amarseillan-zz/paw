@@ -10,6 +10,7 @@ import java.util.List;
 import zonaProp.transfer.bussiness.Photo;
 import zonaProp.transfer.bussiness.Publication;
 
+@Deprecated
 public class PhotoDAO extends DAO {
 
 	public PhotoDAO() {
@@ -21,7 +22,7 @@ public class PhotoDAO extends DAO {
 	    	Connection connection = manager.getConnection();
 			PreparedStatement stmt = connection
 					.prepareStatement("INSERT INTO PHOTO(PUBLICATIONID, PHOTO)VALUES(?,?)");
-			stmt.setInt(1, image.getPublicationId());
+			stmt.setInt(1, image.getPublication().getId());
 			stmt.setBytes(2, image.getImageBytes());
 			
 			stmt.executeUpdate();

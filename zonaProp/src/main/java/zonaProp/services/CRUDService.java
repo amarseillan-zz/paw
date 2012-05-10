@@ -1,5 +1,6 @@
 package zonaProp.services;
 
+@Deprecated
 public interface CRUDService {
 
 	public void create();

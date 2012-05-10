@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+@Deprecated
 public abstract class DAO {
 	private static String driver;
 	private static String connectionString;

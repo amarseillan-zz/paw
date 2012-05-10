@@ -13,6 +13,7 @@ import zonaProp.transfer.bussiness.PropertyType;
 import zonaProp.transfer.bussiness.Publication;
 import zonaProp.transfer.bussiness.Search;
 
+@Deprecated
 public class PublicationDAO extends DAO {
 	public static final int EMPTY=-1;
 	public PublicationDAO() {
@@ -29,13 +30,13 @@ public class PublicationDAO extends DAO {
 
 			ResultSet results = stmt.executeQuery();
 			if (results.next()) {
-				p = new Publication(results.getInt(1), results.getInt(2),
-						PropertyType.values()[results.getInt(3)-1], OperationType.values()[results.getInt(4)-1],
-						results.getString(5), results.getString(6), results.getFloat(7), results.getInt(8),
-						results.getFloat(9), results.getFloat(10),
-						results.getInt(11), results.getBoolean(12), results.getBoolean(13), results.getBoolean(14),
-						results.getBoolean(15), results.getBoolean(16),
-						results.getBoolean(17), results.getString(18), results.getBoolean(19));
+	//			p = new Publication(results.getInt(1), results.getInt(2),
+	//					PropertyType.values()[results.getInt(3)-1], OperationType.values()[results.getInt(4)-1],
+	//					results.getString(5), results.getString(6), results.getFloat(7), results.getInt(8),
+	//					results.getFloat(9), results.getFloat(10),
+	//					results.getInt(11), results.getBoolean(12), results.getBoolean(13), results.getBoolean(14),
+	//					results.getBoolean(15), results.getBoolean(16),
+	//					results.getBoolean(17), results.getString(18), results.getBoolean(19));
 			}
 			connection.close();
 		} catch (SQLException e) {

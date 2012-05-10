@@ -9,26 +9,37 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import zonaProp.services.PhotoService;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import zonaProp.model.repo.PublicationRepo;
 import zonaProp.transfer.bussiness.Photo;
+import zonaProp.transfer.bussiness.Publication;
 
 public class PhotoShower extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final int DEFAULT_BUFFER_SIZE = 10240; // 10KB.
+	private PublicationRepo publications;
 
+	
+	@Autowired
+	public PhotoShower(PublicationRepo publications) {
+		this.publications = publications;
+	}
+	
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
         throws ServletException, IOException
     {
     
     	Integer imageId = Integer.valueOf(req.getParameter("imageId"));
+    	Integer publicationId = Integer.valueOf(req.getParameter("publicationId"));
 
         if (imageId == null) {
            resp.sendError(HttpServletResponse.SC_NOT_FOUND); // 404.
             return;
         }
-        
-    	PhotoService ps = PhotoService.getInstance(); 
-       	Photo image = ps.getPhotoById(imageId);
+        Publication p = publications.get(publicationId);
+       	Photo image = p.getPhotoById(imageId);
 
         if (image == null) {
         	System.out.println("No se encuentra la imagen");

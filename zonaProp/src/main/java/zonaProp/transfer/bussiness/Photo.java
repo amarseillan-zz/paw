@@ -3,30 +3,24 @@ package zonaProp.transfer.bussiness;
 import java.io.IOException;
 import java.io.InputStream;
 
+import javax.persistence.ManyToOne;
+
 import org.apache.commons.io.IOUtils;
 
 public class Photo extends PersistentEntity {
 
-	private int publicationId;
+	@ManyToOne
+	private Publication publication;
 	private InputStream inputStream;
 
 	public Photo(int id, int publicationId, InputStream iS) {
 		super(id);
-		setPublicationId(publicationId);
 		setInputStream(iS);
 	}
 	
 
 	private void setInputStream(InputStream iS) {
 		this.inputStream = iS;		
-	}
-
-	private void setPublicationId(int id){
-		this.publicationId = id;
-	}
-	
-	public int getPublicationId() {
-		return publicationId;
 	}
 	
 
@@ -59,6 +53,16 @@ public class Photo extends PersistentEntity {
 			e.printStackTrace();
 		}
 		return 0;
+	}
+
+
+	public Publication getPublication() {
+		return publication;
+	}
+
+
+	public void setPublication(Publication publication) {
+		this.publication = publication;
 	}
 
 }
