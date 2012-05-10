@@ -5,14 +5,14 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 import zonaProp.validators.FieldValidator;
-import zonaProp.validators.IntegerValidator;
+import zonaProp.validators.PositiveIntValidator;
 import zonaProp.web.command.SearchForm;
 
 @Component
 public class SearchFormValidator implements Validator {
 
-	FieldValidator<String> minValidator =  new IntegerValidator("min");
-	FieldValidator<String> maxValidator =  new IntegerValidator("max");
+	FieldValidator<String> minValidator =  new PositiveIntValidator("min");
+	FieldValidator<String> maxValidator =  new PositiveIntValidator("max");
 	
 	public boolean supports(Class<?> clazz) {
 		return SearchForm.class.equals(clazz);

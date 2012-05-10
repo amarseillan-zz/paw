@@ -42,7 +42,7 @@ public class PhotoDeleter extends HttpServlet {
 			
 			List<Photo> photos = photoS.getPhotosByPublication(p);		       	
 			req.setAttribute("photos", photos);
-			req.setAttribute("pid", p.getPublicationId());
+			req.setAttribute("pid", p.getId());
 			req.getRequestDispatcher("/WEB-INF/jsp/photoUpload.jsp").forward(req, resp);
 			
 		}
