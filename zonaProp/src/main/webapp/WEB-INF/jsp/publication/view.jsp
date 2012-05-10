@@ -25,12 +25,9 @@
 						<b>Precio:</b> ${publication.price} pesos
 						<br/>
 						<b>Servicios:</b>
-						<c:if test="${publication.cable}">cable</c:if>
-						<c:if test="${publication.phone}"> telefono</c:if>
-						<c:if test="${publication.pool}"> pileta</c:if>
-						<c:if test="${publication.living}"> salon</c:if>
-						<c:if test="${publication.paddle}"> cancha de paddle"</c:if>
-						<c:if test="${publication.barbecue}"> parrilla</c:if>
+						<c:forEach var="service" items="${publication.propertyServices}">
+							${service}
+						</c:forEach>
 						<br/>
 						<b>Descripcion:</b> ${publication.description}
 						<div>

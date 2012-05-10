@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import zonaProp.services.PublicationService;
 import zonaProp.transfer.bussiness.Photo;
+import zonaProp.transfer.bussiness.PropertyServices;
 import zonaProp.transfer.bussiness.Publication;
 import zonaProp.web.command.CommentForm;
 import zonaProp.web.command.PhotoForm;
@@ -177,6 +178,7 @@ public class PublicationController {
 		ModelAndView mav = new ModelAndView();
 		
 		mav.addObject("publicationForm", new PublicationForm(p));
+		mav.addObject("services", PropertyServices.values());
 		
 		mav.setViewName("publication/ABM");
 		return mav;
@@ -187,6 +189,7 @@ public class PublicationController {
 		ModelAndView mav = new ModelAndView();
 		
 		mav.addObject("publicationForm", new PublicationForm());
+		mav.addObject("services", PropertyServices.values());
 		
 		mav.setViewName("publication/ABM");
 		return mav;
@@ -201,6 +204,7 @@ public class PublicationController {
 		
 		if(errors.hasErrors()){
 			mav.addObject("publicationForm", pf);
+			mav.addObject("services", PropertyServices.values());
 			mav.setViewName("publication/ABM");
 			return mav;
 		}	

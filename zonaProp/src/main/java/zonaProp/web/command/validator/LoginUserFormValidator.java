@@ -24,6 +24,6 @@ public class LoginUserFormValidator implements Validator {
 	public void validate(Object target, Errors errors) {
 		LoginUserForm form = (LoginUserForm) target;
 		usernameValdator.appendError(errors, form.getUsername());
-		usernameValdator.appendError(errors, form.getPassword());
+		passwordValdator.appendError(errors, form.getPassword());
 	}
 }
