@@ -13,7 +13,7 @@
 				<td>					
 					<form  method="POST" action="deletePhoto">
 						<input type="hidden" name="imageId" value="${photo.id}" />	
-						<input type="hidden" name="publicationId" value="${publication.publicationId}" />			
+						<input type="hidden" name="publicationId" value="${publication.id}" />			
 						<button type="submit">Eliminar</button>
 						</fieldset>
 					</form>					
@@ -26,7 +26,7 @@
 	<form:form class="well form-horizontal" method="POST" action="uploadPhoto" enctype="multipart/form-data" commandName="photoForm">
 				<div class="error"><form:errors path="*" /></div>		
 						
-				<form:input type="hidden" name="publicationId" value="${publication.publicationId}" path="publication"/>
+				<form:input type="hidden" name="publicationId" value="${publication.id}" path="publication"/>
 				
 				<form:input name="photo" type="file" path="fileData"/>
 				
@@ -34,7 +34,7 @@
 	</form:form>
 	
 	<div class="form-actions">
-				<a href="<c:url value="publicationDetail"><c:param name="pid" value="${publication.publicationId}" /></c:url>"  class="btn btn-primary"/>Volver</a>
+				<a href="<c:url value="publicationDetail"><c:param name="pid" value="${publication.id}" /></c:url>"  class="btn btn-primary"/>Volver</a>
 	</div>
 	
 <%@ include file="../footer.jsp" %>	

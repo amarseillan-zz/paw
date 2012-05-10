@@ -18,7 +18,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import zonaProp.services.UserService;
 import zonaProp.transfer.bussiness.User;
+import zonaProp.web.command.LoginUserForm;
 import zonaProp.web.command.UserForm;
+import zonaProp.web.command.validator.LoginUserFormValidator;
 import zonaProp.web.command.validator.UserFormValidator;
 
 @Controller

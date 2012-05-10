@@ -37,7 +37,7 @@ public class PhotoForm {
 	  public Photo getPhoto(){
 		Photo image = null; 
 		try {
-			image = new Photo(0, publication.getPublicationId(), fileData.getInputStream());
+			image = new Photo(0, publication.getId(), fileData.getInputStream());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

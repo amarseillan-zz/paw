@@ -55,7 +55,7 @@
 						
 						<div class="error"><form:errors path="*" /></div>
 						
-						<input type="hidden" name="publicationId" value="${publication.publicationId}"/>
+						<input type="hidden" name="publicationId" value="${publication.id}"/>
 							<label for="name">Nombre:</label>
 							<form:input type="text" name="name" class="span3" path="name" />
 							
