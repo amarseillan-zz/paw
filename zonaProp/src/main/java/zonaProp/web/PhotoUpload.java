@@ -47,7 +47,7 @@ public class PhotoUpload extends HttpServlet {
 	       	photos = ps.getPhotosByPublication(p);
 	       	
 			req.setAttribute("photos", photos);
-			req.setAttribute("pid", p.getPublicationId());
+			req.setAttribute("pid", p.getId());
 			req.getRequestDispatcher("/WEB-INF/jsp/photoUpload.jsp").forward(req, resp);
 		
 		}
@@ -74,7 +74,7 @@ public class PhotoUpload extends HttpServlet {
                         FileItem fileItem = it.next();     
                     	PhotoService ps = PhotoService.getInstance(); 
                     	try{
-                    		image = this.createPhotoFromFileItem(fileItem, p.getPublicationId());	     
+                    		image = this.createPhotoFromFileItem(fileItem, p.getId());	     
                     		if(image != null){
 	                        	ps.uploadPhoto(image);
                     		}
@@ -90,7 +90,7 @@ public class PhotoUpload extends HttpServlet {
         PhotoService ps = PhotoService.getInstance(); 
        	photos = ps.getPhotosByPublication(p);       	
 		req.setAttribute("photos", photos);
-		req.setAttribute("pid", p.getPublicationId());
+		req.setAttribute("pid", p.getId());
 		req.setAttribute("error", errors);
 		req.getRequestDispatcher("/WEB-INF/jsp/photoUpload.jsp").forward(req, resp);
 		
