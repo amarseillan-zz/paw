@@ -98,7 +98,9 @@
 		</div>
 		
 		<div class="control-group">
-			<form:checkboxes path="propertyServices" items="${services}"/>
+			<div class="controls">
+				<form:checkboxes class="input-checkbox" path="propertyServices" items="${services}"/>
+			</div>	
 		</div>
 		
 		<div class="control-group">
