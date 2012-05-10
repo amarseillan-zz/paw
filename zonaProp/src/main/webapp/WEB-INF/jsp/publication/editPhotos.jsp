@@ -13,7 +13,7 @@
 				<td>					
 					<form  method="POST" action="deletePhoto">
 						<input type="hidden" name="imageId" value="${photo.id}" />	
-						<input type="hidden" name="publicationId" value="${publication.publicationId}" />			
+						<input type="hidden" name="publicationId" value="${publication.id}" />			
 						<button type="submit">Eliminar</button>
 						</fieldset>
 					</form>					
@@ -27,7 +27,7 @@
 			<div class="control-group">
 				 <label class="control-label" for="photo">Agregar foto</label>
 				 <div class="controls">
-						<input type="hidden" name="publicationId" value="${publication.publicationId}" />		
+						<input type="hidden" name="publicationId" value="${publication.id}" />		
 				        <input name="photo" type="file"/>
 				 <button type="submit" class="btn btn-primary">Subir</button>       
 				 </div>
@@ -35,7 +35,7 @@
 		</fieldset>	
 	</form>
 	<div class="form-actions">
-				<a href="<c:url value="publicationDetail"><c:param name="pid" value="${publication.publicationId}" /></c:url>"  class="btn btn-primary"/>Volver</a>
+				<a href="<c:url value="publicationDetail"><c:param name="pid" value="${publication.id}" /></c:url>"  class="btn btn-primary"/>Volver</a>
 	</div>
 	
 <%@ include file="../footer.jsp" %>	
