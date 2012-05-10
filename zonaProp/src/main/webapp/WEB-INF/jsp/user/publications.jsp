@@ -33,8 +33,8 @@
 				ver
 			</a>
 			<br/>
-			<a href="<c:url value="editPhotos">
-				<c:param name="publicationId" value="${publicationForm.publicationId}" />
+			<a href="<c:url value="../publication/editPhotos">
+				<c:param name="publicationId" value="${publication.publicationId}" />
 			</c:url>
 				">Editar Imagenes
 			</a>

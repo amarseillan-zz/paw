@@ -1,9 +1,5 @@
 package zonaProp.web;
 
-
-
-import java.util.List;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +13,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import zonaProp.services.UserService;
 import zonaProp.transfer.bussiness.User;
-import zonaProp.web.command.CommentForm;
 import zonaProp.web.command.UserForm;
 import zonaProp.web.command.validator.UserFormValidator;
 

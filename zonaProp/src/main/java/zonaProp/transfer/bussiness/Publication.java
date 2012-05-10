@@ -16,29 +16,24 @@ public class Publication {
 	private double covered;
 	private double uncovered;
 	private int age;
-	private boolean cable;
-	private boolean phone;
-	private boolean pool;
-	private boolean living;
-	private boolean paddle;
-	private boolean barbecue;
 	private String description;
 	private boolean active;
 
-	
+	List<PropertyServices> propertyServices;
+
 	private PropertyType propertyType;
 	private OperationType operationType;
-	
-	private User publisher=null;
 
-	private List<Photo> photos=null;
-	
-	
-	public Publication(int publicationId, int userId, PropertyType propertyType,
-			OperationType operationType, String address, String city, double price,
-			int environments, double covered, double uncovered, int age,
-			boolean cable, boolean phone, boolean pool, boolean living,
-			boolean paddle, boolean barbecue, String description, boolean active) {
+	private User publisher = null;
+
+	private List<Photo> photos = null;
+
+	public Publication(int publicationId, int userId,
+			PropertyType propertyType, OperationType operationType,
+			String address, String city, double price, int environments,
+			double covered, double uncovered, int age,
+			List<PropertyServices> propertyServices, String description,
+			boolean active) {
 		super();
 		this.publicationId = publicationId;
 		this.userId = userId;
@@ -49,23 +44,20 @@ public class Publication {
 		this.covered = covered;
 		this.uncovered = uncovered;
 		this.age = age;
-		this.cable = cable;
-		this.phone = phone;
-		this.pool = pool;
-		this.living = living;
-		this.paddle = paddle;
-		this.barbecue = barbecue;
+
+		this.propertyServices = propertyServices;
+
 		this.description = description;
 		this.active = active;
-		
-		this.propertyType= propertyType;
+
+		this.propertyType = propertyType;
 		this.operationType = operationType;
 	}
 
-	
+	public List<PropertyServices> getPropertyServices() {
+		return propertyServices;
+	}
 
-	
-	
 	public int getPublicationId() {
 		return publicationId;
 	}
@@ -73,15 +65,15 @@ public class Publication {
 	public int getUserId() {
 		return userId;
 	}
-	
-	public PropertyType getPropertyType(){
+
+	public PropertyType getPropertyType() {
 		return propertyType;
 	}
 
-	public OperationType getOperationType(){
+	public OperationType getOperationType() {
 		return operationType;
 	}
-	
+
 	public String getAddress() {
 		return address;
 	}
@@ -110,54 +102,30 @@ public class Publication {
 		return age;
 	}
 
-	public boolean isCable() {
-		return cable;
-	}
-
-	public boolean isPhone() {
-		return phone;
-	}
-
-	public boolean isPool() {
-		return pool;
-	}
-
-	public boolean isLiving() {
-		return living;
-	}
-
-	public boolean isPaddle() {
-		return paddle;
-	}
-
-	public boolean isBarbecue() {
-		return barbecue;
-	}
-
 	public String getDescription() {
 		return description;
 	}
 
-	public User getPublisher(){
-		if(publisher==null){
+	public User getPublisher() {
+		if (publisher == null) {
 			UserService us = UserService.getInstance();
-			publisher=us.getUser(userId);
+			publisher = us.getUser(userId);
 		}
-		
+
 		return publisher;
 	}
-	
-	public List<Photo> getPhotos(){
-		if(photos==null){
-			PhotoService ps=PhotoService.getInstance();
-			photos=ps.getPhotosByPublication(this);
+
+	public List<Photo> getPhotos() {
+		if (photos == null) {
+			PhotoService ps = PhotoService.getInstance();
+			photos = ps.getPhotosByPublication(this);
 		}
-		
+
 		return photos;
 	}
-	
-	public boolean isActive(){
+
+	public boolean isActive() {
 		return active;
 	}
-	
+
 }

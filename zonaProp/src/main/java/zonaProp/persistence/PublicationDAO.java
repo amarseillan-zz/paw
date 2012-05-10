@@ -9,6 +9,7 @@ import java.util.List;
 
 import zonaProp.transfer.bussiness.Photo;
 import zonaProp.transfer.bussiness.OperationType;
+import zonaProp.transfer.bussiness.PropertyServices;
 import zonaProp.transfer.bussiness.PropertyType;
 import zonaProp.transfer.bussiness.Publication;
 import zonaProp.transfer.bussiness.Search;
@@ -33,9 +34,7 @@ public class PublicationDAO extends DAO {
 						PropertyType.values()[results.getInt(3)-1], OperationType.values()[results.getInt(4)-1],
 						results.getString(5), results.getString(6), results.getFloat(7), results.getInt(8),
 						results.getFloat(9), results.getFloat(10),
-						results.getInt(11), results.getBoolean(12), results.getBoolean(13), results.getBoolean(14),
-						results.getBoolean(15), results.getBoolean(16),
-						results.getBoolean(17), results.getString(18), results.getBoolean(19));
+						results.getInt(11), new ArrayList<PropertyServices>(), results.getString(18), results.getBoolean(19));
 			}
 			connection.close();
 		} catch (SQLException e) {
@@ -63,12 +62,12 @@ public class PublicationDAO extends DAO {
 			stmt.setFloat(8, (float)p.getCovered());
 			stmt.setFloat(9, (float)p.getUncovered());
 			stmt.setInt(10, p.getAge());
-			stmt.setBoolean(11, p.isCable());
-			stmt.setBoolean(12, p.isPhone());
-			stmt.setBoolean(13, p.isPool());
-			stmt.setBoolean(14, p.isLiving());
-			stmt.setBoolean(15, p.isPaddle());
-			stmt.setBoolean(16, p.isBarbecue());
+			stmt.setBoolean(11, false);
+			stmt.setBoolean(12, false);
+			stmt.setBoolean(13, false);
+			stmt.setBoolean(14, false);
+			stmt.setBoolean(15, false);
+			stmt.setBoolean(16, false);
 			stmt.setString(17, p.getDescription());
 			stmt.setBoolean(18, p.isActive());
 			stmt.executeUpdate();
@@ -90,12 +89,7 @@ public class PublicationDAO extends DAO {
 						p.getCovered(),
 						p.getUncovered(),
 						p.getAge(),
-						p.isCable(),
-						p.isPhone(),
-						p.isPool(),
-						p.isLiving(),
-						p.isPaddle(),
-						p.isBarbecue(),
+						new ArrayList<PropertyServices>(),
 						p.getDescription(),
 						p.isActive());
 			}
@@ -124,9 +118,7 @@ public class PublicationDAO extends DAO {
 						PropertyType.values()[results.getInt(3)-1], OperationType.values()[results.getInt(4)-1],
 						results.getString(5), results.getString(6), results.getFloat(7), results.getInt(8),
 						results.getFloat(9), results.getFloat(10),
-						results.getInt(11), results.getBoolean(12), results.getBoolean(13), results.getBoolean(14),
-						results.getBoolean(15), results.getBoolean(16),
-						results.getBoolean(17), results.getString(18), results.getBoolean(19));
+						results.getInt(11), new ArrayList<PropertyServices>(), results.getString(18), results.getBoolean(19));
 				pList.add(p);
 			}
 			connection.close();
@@ -152,9 +144,7 @@ public class PublicationDAO extends DAO {
 						PropertyType.values()[results.getInt(3)-1], OperationType.values()[results.getInt(4)-1],
 						results.getString(5), results.getString(6), results.getFloat(7), results.getInt(8),
 						results.getFloat(9), results.getFloat(10),
-						results.getInt(11), results.getBoolean(12), results.getBoolean(13), results.getBoolean(14),
-						results.getBoolean(15), results.getBoolean(16),
-						results.getBoolean(17), results.getString(18), results.getBoolean(19));
+						results.getInt(11), new ArrayList<PropertyServices>(), results.getString(18), results.getBoolean(19));
 				pList.add(p);
 			}
 			connection.close();
@@ -180,12 +170,12 @@ public class PublicationDAO extends DAO {
 			stmt.setFloat(8, (float)p.getCovered());
 			stmt.setFloat(9, (float)p.getUncovered());
 			stmt.setInt(10, p.getAge());
-			stmt.setBoolean(11, p.isCable());
-			stmt.setBoolean(12, p.isPhone());
-			stmt.setBoolean(13, p.isPool());
-			stmt.setBoolean(14, p.isLiving());
-			stmt.setBoolean(15, p.isPaddle());
-			stmt.setBoolean(16, p.isBarbecue());
+			stmt.setBoolean(11, false);
+			stmt.setBoolean(12, false);
+			stmt.setBoolean(13, false);
+			stmt.setBoolean(14, false);
+			stmt.setBoolean(15, false);
+			stmt.setBoolean(16, false);
 			stmt.setString(17, p.getDescription());
 			stmt.setBoolean(18, p.isActive());
 			stmt.setInt(19, p.getPublicationId());
