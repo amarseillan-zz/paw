@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import zonaProp.services.PublicationService;
 import zonaProp.transfer.bussiness.Photo;
 
-@Component
+@Deprecated
 public class PhotoConverter  implements Converter<String, Photo>{
 
 	PublicationService ps = PublicationService.getInstance();

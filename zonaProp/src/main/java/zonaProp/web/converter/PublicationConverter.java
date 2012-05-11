@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
-import zonaProp.services.PublicationService;
+import zonaProp.model.repo.PublicationRepo;
 import zonaProp.transfer.bussiness.Publication;
 
 
@@ -12,16 +12,16 @@ import zonaProp.transfer.bussiness.Publication;
 @Component
 public class PublicationConverter implements Converter<String, Publication>{
 	
-	PublicationService ps;
-
+	PublicationRepo publications;
+	
 	@Autowired
-	public PublicationConverter(PublicationService ps) {
-		this.ps = ps;
+	public PublicationConverter(PublicationRepo publications) {
+		this.publications = publications;
 	}
 
 	public Publication convert(String source) {
 		try{
-		return ps.getPublication(Integer.valueOf(source));
+		return publications.get(Integer.valueOf(source));
 		} catch(NumberFormatException nfe){
 			return null;
 		}

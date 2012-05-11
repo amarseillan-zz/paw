@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
-import zonaProp.services.UserService;
+import zonaProp.model.repo.UserRepo;
 import zonaProp.transfer.bussiness.User;
 
 
@@ -12,15 +12,16 @@ import zonaProp.transfer.bussiness.User;
 @Component
 public class UserConverter implements Converter<String, User>{
 	
-	UserService us;
-
+	
+	UserRepo users;
+	
 	@Autowired
-	public UserConverter(UserService us) {
-		this.us = us;
+	public UserConverter(UserRepo users) {
+		this.users = users;
 	}
 
 	public User convert(String source) {
-		return us.getUser(Integer.valueOf(source));
+		return users.get(Integer.valueOf(source));
 	}
 
 }
