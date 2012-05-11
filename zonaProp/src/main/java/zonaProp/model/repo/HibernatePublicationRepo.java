@@ -4,11 +4,13 @@ import java.util.List;
 
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import zonaProp.transfer.bussiness.Publication;
 import zonaProp.transfer.bussiness.Search;
 
+@Component
 @Repository
 public class HibernatePublicationRepo extends AbstractHibernateRepo implements PublicationRepo {
 

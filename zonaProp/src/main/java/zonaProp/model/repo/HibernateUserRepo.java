@@ -4,10 +4,12 @@ import java.util.List;
 
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import zonaProp.transfer.bussiness.User;
 
+@Component
 @Repository
 public class HibernateUserRepo extends AbstractHibernateRepo implements UserRepo {
 
@@ -17,7 +19,7 @@ public class HibernateUserRepo extends AbstractHibernateRepo implements UserRepo
 	}
 	
 	public List<User> getAll() {
-		return find("from Publication");
+		return find("from User");
 	}
 	
 	public User get(int userId) {
@@ -32,14 +34,14 @@ public class HibernateUserRepo extends AbstractHibernateRepo implements UserRepo
 		
 	}
 	private boolean existsUsername(String username) {
-		return !find("from Publication where username = ?", username).isEmpty();
+		return !find("from User where username = ?", username).isEmpty();
 	}
 
 	public boolean authenticate(String username, String password) {
-		return !find("from Publication where username = ?, password = ?", username, password).isEmpty();
+		return !find("from User where username = ?, password = ?", username, password).isEmpty();
 	}
 
 	public User get(String username, String password) {
-		return (User) find("from Publication where username = ?, password = ?", username, password).get(0);
+		return (User) find("from User where username = ?, password = ?", username, password).get(0);
 	}
 }
