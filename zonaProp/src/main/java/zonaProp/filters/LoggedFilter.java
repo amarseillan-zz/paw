@@ -42,7 +42,7 @@ public class LoggedFilter implements Filter{
 					req.getSession().setAttribute("userId",u.getId());
 					//This is optional but will be probably useful to redirect to the main page.
 					if(req.getRequestURI().contains("login")){ 
-						resp.sendRedirect("../publication/list");
+						resp.sendRedirect("publications");
 						return;
 					}
 				}
@@ -50,7 +50,7 @@ public class LoggedFilter implements Filter{
 			arg2.doFilter(request, arg1);
 		} else {
 			if(req.getRequestURI().contains("login")){ 
-				resp.sendRedirect("publicationList");
+				resp.sendRedirect("publications");
 				return;
 			}
 			arg2.doFilter(request, arg1);

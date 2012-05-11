@@ -1,6 +1,10 @@
 package zonaProp.web.command;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import zonaProp.transfer.bussiness.OperationType;
+import zonaProp.transfer.bussiness.PropertyServices;
 import zonaProp.transfer.bussiness.PropertyType;
 import zonaProp.transfer.bussiness.Publication;
 import zonaProp.transfer.bussiness.User;
@@ -16,12 +20,9 @@ public class PublicationForm {
 	private String covered;
 	private String uncovered;
 	private String age;
-	private boolean cable;
-	private boolean phone;
-	private boolean pool;
-	private boolean living;
-	private boolean paddle;
-	private boolean barbecue;
+
+	List<PropertyServices> propertyServices;
+
 	private String description;
 	private boolean active;
 
@@ -38,12 +39,9 @@ public class PublicationForm {
 		covered = "";
 		uncovered = "";
 		age = "";
-		cable = false;
-		phone = false;
-		pool = false;
-		living = false;
-		paddle = false;
-		barbecue = false;
+
+		propertyServices = new ArrayList<PropertyServices>();
+
 		description = "";
 		active = true;
 
@@ -61,17 +59,22 @@ public class PublicationForm {
 		covered = String.valueOf(p.getCovered());
 		uncovered = String.valueOf(p.getUncovered());
 		age = String.valueOf(p.getAge());
-		cable = p.isCable();
-		phone = p.isPhone();
-		pool = p.isPool();
-		living = p.isLiving();
-		paddle = p.isPaddle();
-		barbecue = p.isBarbecue();
+
+		propertyServices = p.getPropertyServices();
+
 		description = p.getDescription();
 		active = p.isActive();
 
 		propertyType = p.getPropertyType();
 		operationType = p.getOperationType();
+	}
+
+	public List<PropertyServices> getPropertyServices() {
+		return propertyServices;
+	}
+
+	public void setPropertyServices(List<PropertyServices> propertyServices) {
+		this.propertyServices = propertyServices;
 	}
 
 	public PropertyType getPropertyType() {
@@ -97,9 +100,9 @@ public class PublicationForm {
 	public Publication build() {
 		return new Publication(publicationId, publisher, propertyType,
 				operationType, address, city, Double.parseDouble(price),
-				environments, Double.parseDouble(covered),
-				Double.parseDouble(uncovered), Integer.parseInt(age), cable,
-				phone, pool, living, paddle, barbecue, description, active);
+				environments, Double.parseDouble(covered), Double
+						.parseDouble(uncovered), Integer.parseInt(age),
+				propertyServices, description, active);
 	}
 
 	public int getPublicationId() {
@@ -168,54 +171,6 @@ public class PublicationForm {
 
 	public void setAge(String age) {
 		this.age = age;
-	}
-
-	public boolean isCable() {
-		return cable;
-	}
-
-	public void setCable(boolean cable) {
-		this.cable = cable;
-	}
-
-	public boolean isPhone() {
-		return phone;
-	}
-
-	public void setPhone(boolean phone) {
-		this.phone = phone;
-	}
-
-	public boolean isPool() {
-		return pool;
-	}
-
-	public void setPool(boolean pool) {
-		this.pool = pool;
-	}
-
-	public boolean isLiving() {
-		return living;
-	}
-
-	public void setLiving(boolean living) {
-		this.living = living;
-	}
-
-	public boolean isPaddle() {
-		return paddle;
-	}
-
-	public void setPaddle(boolean paddle) {
-		this.paddle = paddle;
-	}
-
-	public boolean isBarbecue() {
-		return barbecue;
-	}
-
-	public void setBarbecue(boolean barbecue) {
-		this.barbecue = barbecue;
 	}
 
 	public String getDescription() {

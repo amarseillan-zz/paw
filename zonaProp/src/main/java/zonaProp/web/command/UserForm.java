@@ -1,6 +1,6 @@
 package zonaProp.web.command;
 
-import zonaProp.services.UserService;
+
 import zonaProp.transfer.bussiness.User;
 
 

@@ -5,9 +5,8 @@ import java.util.List;
 
 import org.hibernate.annotations.Entity;
 
-
 @Entity
-public class Publication extends PersistentEntity{
+public class Publication extends PersistentEntity {
 
 	private String address;
 	private String city;
@@ -16,33 +15,30 @@ public class Publication extends PersistentEntity{
 	private double covered;
 	private double uncovered;
 	private int age;
-	private boolean cable;
-	private boolean phone;
-	private boolean pool;
-	private boolean living;
-	private boolean paddle;
-	private boolean barbecue;
 	private String description;
 	private boolean active;
 
-	
+	List<PropertyServices> propertyServices;
+
 	private PropertyType propertyType;
 	private OperationType operationType;
-	
+
 	private User publisher;
 
-	private List<Photo> photos= new ArrayList<Photo>();
-	
+	private List<Photo> photos = new ArrayList<Photo>();
+
 	public Publication() {
 		super(0);
 	}
-	
-	public Publication(int publicationId, User publisher, PropertyType propertyType,
-			OperationType operationType, String address, String city, double price,
-			int environments, double covered, double uncovered, int age,
-			boolean cable, boolean phone, boolean pool, boolean living,
-			boolean paddle, boolean barbecue, String description, boolean active) {
+
+	public Publication(int publicationId, User publisher,
+			PropertyType propertyType, OperationType operationType,
+			String address, String city, double price, int environments,
+			double covered, double uncovered, int age,
+			List<PropertyServices> propertyServices, String description,
+			boolean active) {
 		super(publicationId);
+
 		this.publisher = publisher;
 		this.address = address;
 		this.city = city;
@@ -51,27 +47,30 @@ public class Publication extends PersistentEntity{
 		this.covered = covered;
 		this.uncovered = uncovered;
 		this.age = age;
-		this.cable = cable;
-		this.phone = phone;
-		this.pool = pool;
-		this.living = living;
-		this.paddle = paddle;
-		this.barbecue = barbecue;
+		this.propertyServices = propertyServices;
 		this.description = description;
 		this.active = active;
-		
-		this.propertyType= propertyType;
+
+		this.propertyType = propertyType;
 		this.operationType = operationType;
 	}
-	
-	public PropertyType getPropertyType(){
+
+	public List<PropertyServices> getPropertyServices() {
+		return propertyServices;
+	}
+
+	public int getUserId() {
+		return publisher.getId();
+	}
+
+	public PropertyType getPropertyType() {
 		return propertyType;
 	}
 
-	public OperationType getOperationType(){
+	public OperationType getOperationType() {
 		return operationType;
 	}
-	
+
 	public String getAddress() {
 		return address;
 	}
@@ -100,43 +99,19 @@ public class Publication extends PersistentEntity{
 		return age;
 	}
 
-	public boolean isCable() {
-		return cable;
-	}
-
-	public boolean isPhone() {
-		return phone;
-	}
-
-	public boolean isPool() {
-		return pool;
-	}
-
-	public boolean isLiving() {
-		return living;
-	}
-
-	public boolean isPaddle() {
-		return paddle;
-	}
-
-	public boolean isBarbecue() {
-		return barbecue;
-	}
-
 	public String getDescription() {
 		return description;
 	}
 
-	public User getPublisher(){
+	public User getPublisher() {
 		return publisher;
 	}
-	
-	public List<Photo> getPhotos(){
+
+	public List<Photo> getPhotos() {
 		return photos;
 	}
-	
-	public boolean isActive(){
+
+	public boolean isActive() {
 		return active;
 	}
 
@@ -157,23 +132,17 @@ public class Publication extends PersistentEntity{
 		this.covered = p.getCovered();
 		this.uncovered = p.getUncovered();
 		this.age = p.getAge();
-		this.cable = p.isCable();
-		this.phone = p.isPhone();
-		this.pool = p.isPool();
-		this.living = p.isLiving();
-		this.paddle = p.isPaddle();
-		this.barbecue = p.isBarbecue();
+		this.propertyServices = p.getPropertyServices();
 		this.description = p.getDescription();
 		this.active = p.isActive();
-		
-		this.propertyType= p.getPropertyType();
+
+		this.propertyType = p.getPropertyType();
 		this.operationType = p.getOperationType();
-		
+
 	}
 
 	public Photo getPhotoById(int imageId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
 }

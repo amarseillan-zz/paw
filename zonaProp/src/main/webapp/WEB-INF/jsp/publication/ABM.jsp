@@ -98,59 +98,9 @@
 		</div>
 		
 		<div class="control-group">
-			<label class="control-label" for="cable">Cable</label>
 			<div class="controls">
-				<label class="checkbox">
-					<form:input type="checkbox" value="true" path="cable"/>
-				</label>
-			</div>
-		</div>
-		
-		<div class="control-group">
-			<label class="control-label" for="phone">Tel&eacute;fono
-			</label>
-			<div class="controls">
-				<label class="checkbox">
-					<form:input type="checkbox" value="true" path="phone"/>
-				</label>
-			</div>
-		</div>
-		
-		<div class="control-group">
-			<label class="control-label" for="pool">Pileta</label>
-			<div class="controls">
-				<label class="checkbox">
-					<form:input type="checkbox" value="true" path="pool"/>
-				</label>
-			</div>
-		</div>
-		
-		<div class="control-group">
-			<label class="control-label" for="living">Sal&oacute;n
-			</label>
-			<div class="controls">
-				<label class="checkbox">
-					<form:input type="checkbox" value="true" path="living"/>
-				</label>
-			</div>
-		</div>
-		
-		<div class="control-group">
-			<label class="control-label" for="paddle">Cancha de paddle</label>
-			<div class="controls">
-				<label class="checkbox">
-					<form:input type="checkbox" value="true" path="paddle"/>
-				</label>
-			</div>
-		</div>
-		
-		<div class="control-group">
-			<label class="control-label" for="barbecue">Quincho</label>
-			<div class="controls">
-				<label class="checkbox">
-					<form:input type="checkbox" value="true" path="barbecue"/>
-				</label>
-			</div>
+				<form:checkboxes class="input-checkbox" path="propertyServices" items="${services}"/>
+			</div>	
 		</div>
 		
 		<div class="control-group">

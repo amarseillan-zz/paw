@@ -16,6 +16,10 @@
 	<!-- Beans relacionados con Spring-Hibernate -->
 	<import resource="classpath:data.xml" />
 
+	 <!-- Configure the multipart resolver -->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+    </bean>
+    
 	<!-- Servicios - ya no hace falta declararlos - Spring scanea @Service en Clases -->
 	<!--<import resource="classpath:service.xml" />-->
 	

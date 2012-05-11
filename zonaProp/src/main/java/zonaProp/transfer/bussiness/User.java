@@ -1,6 +1,5 @@
 package zonaProp.transfer.bussiness;
 
-import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -66,32 +65,32 @@ public class User extends PersistentEntity{
 		return password;
 	}
 
-	public void setUsername(String username) throws InvalidParameterException {
+	public void setUsername(String username)  {
 		new LengthValidator("nombre de usuario", 3, 20).check(username);
 		this.username = username;
 	}
 
-	public void setPassword(String password) throws InvalidParameterException {
+	public void setPassword(String password)  {
 		new LengthValidator("contraseña", 3, 20).check(password);
 		this.password = password;
 	}
 
-	public void setName(String name) throws InvalidParameterException {
+	public void setName(String name)  {
 		new LengthValidator("nombre", 3, 20).check(name);
 		this.name = name;
 	}
 
-	public void setLastName(String lastName) throws InvalidParameterException {		
+	public void setLastName(String lastName)  {		
 		new LengthValidator("apellido", 3, 20).check(lastName);
 		this.lastName = lastName;
 	}
 
-	public void setEmail(String email) throws InvalidParameterException {
+	public void setEmail(String email)  {
 		new LengthValidator("mail", 3, 40).check(email);
 		this.email = email;
 	}
 
-	public void setPhone(String phone) throws InvalidParameterException {
+	public void setPhone(String phone)  {
 		new LengthValidator("telefono", 3, 15).check(phone);
 		this.phone = phone;
 	}

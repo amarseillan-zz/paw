@@ -6,7 +6,6 @@ import org.springframework.validation.Validator;
 
 import zonaProp.validators.FieldValidator;
 import zonaProp.validators.LengthValidator;
-import zonaProp.web.command.CommentForm;
 import zonaProp.web.command.UserForm;
 
 
