@@ -3,6 +3,9 @@ package zonaProp.transfer.bussiness;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CollectionTable;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -24,7 +27,10 @@ public class Publication extends PersistentEntity {
 	private String description;
 	private boolean active;
 
-	@Transient
+	@ElementCollection(targetClass=PropertyServices.class)
+    @Enumerated(EnumType.STRING)
+    @CollectionTable(name="property_services")
+    @Column(name="services")
 	List<PropertyServices> propertyServices;
 
 	@Enumerated(EnumType.ORDINAL)
@@ -42,7 +48,7 @@ public class Publication extends PersistentEntity {
 		super(0);
 	}
 
-	public Publication(int publicationId, User publisher,
+	public Publication(int publicationId,
 			PropertyType propertyType, OperationType operationType,
 			String address, String city, double price, int environments,
 			double covered, double uncovered, int age,
@@ -50,7 +56,6 @@ public class Publication extends PersistentEntity {
 			boolean active) {
 		super(publicationId);
 
-		this.publisher = publisher;
 		this.address = address;
 		this.city = city;
 		this.price = price;
@@ -152,6 +157,12 @@ public class Publication extends PersistentEntity {
 
 	}
 
+	public void setPublisher(User publisher){
+		this.publisher=publisher;
+		publisher.addPublication(this);
+	}
+	
+	
 	public Photo getPhotoById(int imageId) {
 		// TODO Auto-generated method stub
 		return null;

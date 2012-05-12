@@ -42,6 +42,13 @@ public class User extends PersistentEntity{
 	public List<Publication> getPublications(){
 		return publications;
 	}
+	
+	public void addPublication(Publication publication){
+		publications.add(publication);
+		if(!publication.getPublisher().equals(this)){
+			publication.setPublisher(this);
+		}
+	}
 
 	public String getName() {
 		return name;

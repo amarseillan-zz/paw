@@ -38,7 +38,7 @@ public class Login extends HttpServlet {
 		String username = req.getParameter("username");
 		String password = req.getParameter("password");
 		if (users.authenticate(username, password)) {
-			User user = users.get(username, password);
+			User user = users.get(username);
 			req.getSession().setAttribute("userId", user.getId());
 			if ("on".equals(req.getParameter("remember"))) {
 				resp.addCookie(new Cookie("userid",

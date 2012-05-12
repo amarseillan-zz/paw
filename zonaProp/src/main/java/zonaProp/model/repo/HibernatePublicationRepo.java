@@ -1,8 +1,11 @@
 package zonaProp.model.repo;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
+import org.hibernate.classic.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
@@ -23,18 +26,58 @@ public class HibernatePublicationRepo extends AbstractHibernateRepo implements P
 		return find("from Publication");
 	}
 	
-	public Publication get(int userId) {
-		//TODO esto esta mal. el id tiene que ser el de publication para buscarlo con get
-		return get(Publication.class, userId);
+	public Publication get(int publicationId) {
+		return get(Publication.class, publicationId);
 	}
 
 	public void add(Publication publication) {
 		save(publication);	
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Publication> getSome(Search build) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Object> parameters = new ArrayList<Object>();
+		String hql = "from Publication " + (build.isAll()? "" : "where ");
+		boolean hasPrevious = false;
+		Session session = getSession();
+		
+		if(build.getMin()!=null){
+			parameters.add(build.getMin());
+			hql += "price>=? ";
+			hasPrevious = true;
+		}
+		if(build.getMax()!=null){
+			parameters.add(build.getMax());
+			hql += (hasPrevious? "and " : "") + "price<=? ";
+			hasPrevious = true;
+		}
+		
+		if(build.getOperationType()!=null){
+			parameters.add(build.getOperationType());
+			hql += (hasPrevious? "and " : "") + "operationType=? ";
+			hasPrevious = true;
+		}
+		if(build.getPropertyType()!=null){
+			parameters.add(build.getPropertyType());
+			hql += (hasPrevious? "and " : "") + "propertyType=? ";
+			hasPrevious = true;
+		}
+		
+		if(build.getPublisher()!=null){
+			parameters.add(build.getPublisher());
+			hql += (hasPrevious? "and " : "") + "publisher=? ";
+		}
+		
+		hql += "order by price "  + (build.isAscending()?"asc" : "desc");
+		
+
+		Query query = session.createQuery(hql);
+		int i=0;
+		for (Object parameter : parameters) {
+			query.setParameter(i++, parameter);
+		}
+		
+		return query.list();
 	}
 	
 

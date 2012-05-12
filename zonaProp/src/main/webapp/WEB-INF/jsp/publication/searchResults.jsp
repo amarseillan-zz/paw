@@ -41,7 +41,7 @@
 	</table>
 </c:if>
 
-<form class="form-horizontal" method="GET" action="publicationSearch">
+<form class="form-horizontal" method="GET" action="search">
 	<fieldset>
 			<div class="form-actions">
 					<button type="submit" class="btn btn-primary">Modificar la b&uacute;squeda</button>

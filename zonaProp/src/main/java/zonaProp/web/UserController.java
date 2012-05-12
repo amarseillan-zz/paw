@@ -71,7 +71,7 @@ public class UserController {
 				s.setAttribute("userId", user.getId());
 				mav = new ModelAndView("redirect:../publication/search");
 			} catch (DuplicatedUserException e) {
-				//TODO hacer que se cargue un error de que ya est‡ en uso ese nombre
+				//TODO hacer que se cargue un error de que ya estï¿½ en uso ese nombre
 			}
 		} else {
 			mav = new ModelAndView();
@@ -88,7 +88,7 @@ public class UserController {
 		if (req.getSession().getAttribute("userId") != null
 				&& req.getSession().getAttribute("userId").equals("")) {
 			if ( users.authenticate(luf.getUsername(), luf.getPassword()) ) {
-				user = users.get(luf.getUsername(), luf.getPassword());
+				user = users.get(luf.getUsername());
 				s.setAttribute("userId", user.getId());
 				mav = new ModelAndView("redirect:../publication/search");
 			} else {
@@ -102,7 +102,7 @@ public class UserController {
 			}
 			if (c.getName().equals("userid")) {
 				if ( users.authenticate(luf.getUsername(), luf.getPassword()) ){
-					user = users.get(luf.getUsername(), luf.getPassword());
+					user = users.get(luf.getUsername());
 					s.setAttribute("userId", user.getId());
 					mav = new ModelAndView("redirect:../publication/search");
 				} else {
@@ -123,7 +123,7 @@ public class UserController {
 		ModelAndView mav = null;
 
 		if ( users.authenticate(luf.getUsername(), luf.getPassword()) ) {
-			User user = users.get(luf.getUsername(), luf.getPassword());
+			User user = users.get(luf.getUsername());
 			s.setAttribute("userId", user.getId());
 			if ("on".equals(luf.getRemember())) {
 				Cookie c = new Cookie("userid", String.valueOf(user.getId()));

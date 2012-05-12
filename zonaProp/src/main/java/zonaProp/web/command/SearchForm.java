@@ -55,8 +55,8 @@ public class SearchForm {
 	}
 
 	public Search build() {
-		return new Search(min.isEmpty() ? null : Integer.valueOf(min),
-				max.isEmpty() ? null : Integer.valueOf(max), operationType,
-				propertyType, ascending);
+		return new Search(min.isEmpty() ? null : Double.parseDouble(min),
+				max.isEmpty() ? null : Double.parseDouble(max), operationType,
+				propertyType, ascending,null);
 	}
 }

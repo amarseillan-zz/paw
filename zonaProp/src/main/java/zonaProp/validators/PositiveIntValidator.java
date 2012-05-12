@@ -15,7 +15,7 @@ public class PositiveIntValidator extends FieldValidator<String>  {
 		@Override
 		public boolean isCorrect(String value) {
 			try{
-				if(Integer.parseInt(value)>0)
+				if(Integer.parseInt(value)>=0)
 					return true;
 				return false;
 			}catch(Exception e){

@@ -16,7 +16,7 @@ public class PositiveDoubleValidator extends FieldValidator<String> {
 	@Override
 	public boolean isCorrect(String value) {
 		try{
-			if(Double.parseDouble(value)>0.0)
+			if(Double.parseDouble(value)>=0.0)
 				return true;
 			return false;
 		}catch(Exception e){

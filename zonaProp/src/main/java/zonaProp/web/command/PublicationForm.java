@@ -7,12 +7,10 @@ import zonaProp.transfer.bussiness.OperationType;
 import zonaProp.transfer.bussiness.PropertyServices;
 import zonaProp.transfer.bussiness.PropertyType;
 import zonaProp.transfer.bussiness.Publication;
-import zonaProp.transfer.bussiness.User;
 
 public class PublicationForm {
 
 	private int publicationId;
-	private User publisher;
 	private String address;
 	private String city;
 	private String price;
@@ -30,8 +28,7 @@ public class PublicationForm {
 	private OperationType operationType;
 
 	public PublicationForm() {
-		publicationId = -1;
-		publisher = null;
+		publicationId = 0;
 		address = "";
 		city = "";
 		price = "";
@@ -51,7 +48,6 @@ public class PublicationForm {
 
 	public PublicationForm(Publication p) {
 		publicationId = p.getId();
-		publisher = p.getPublisher();
 		address = p.getAddress();
 		city = p.getCity();
 		price = String.valueOf((int) p.getPrice());
@@ -98,7 +94,7 @@ public class PublicationForm {
 	}
 
 	public Publication build() {
-		return new Publication(publicationId, publisher, propertyType,
+		return new Publication(publicationId, propertyType,
 				operationType, address, city, Double.parseDouble(price),
 				environments, Double.parseDouble(covered), Double
 						.parseDouble(uncovered), Integer.parseInt(age),
@@ -111,10 +107,6 @@ public class PublicationForm {
 
 	public void setPublicationId(int publicationId) {
 		this.publicationId = publicationId;
-	}
-
-	public int getUserId() {
-		return publisher.getId();
 	}
 
 	public String getAddress() {

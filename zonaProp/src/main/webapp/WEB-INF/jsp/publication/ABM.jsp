@@ -113,7 +113,6 @@
 		</div>
 
 		<form:input type="hidden" path="publicationId" />
-		<form:input type="hidden" path="userId" />
 
 		<div class="control-group">
 			<label class="control-label" for="active">Estado</label>

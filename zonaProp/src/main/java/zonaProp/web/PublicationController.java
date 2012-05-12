@@ -18,9 +18,11 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import zonaProp.model.repo.PublicationRepo;
+import zonaProp.model.repo.UserRepo;
 import zonaProp.transfer.bussiness.Photo;
 import zonaProp.transfer.bussiness.PropertyServices;
 import zonaProp.transfer.bussiness.Publication;
+import zonaProp.transfer.bussiness.User;
 import zonaProp.web.command.CommentForm;
 import zonaProp.web.command.PhotoForm;
 import zonaProp.web.command.PublicationForm;
@@ -39,16 +41,18 @@ public class PublicationController {
 	CommentFormValidator cfv;
 	SearchFormValidator sfv;
 	PublicationRepo publications;
+	UserRepo users;
 
 	@Autowired
 	public PublicationController(PublicationFormValidator pfv,
 			CommentFormValidator cfv, SearchFormValidator sfv,
-			PublicationRepo publications) {
+			PublicationRepo publications, UserRepo users) {
 
 		this.pfv = pfv;
 		this.sfv = sfv;
 		this.cfv = cfv;
 		this.publications = publications;
+		this.users = users;
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
@@ -202,6 +206,8 @@ public class PublicationController {
 
 		ModelAndView mav = new ModelAndView();
 
+		User publisher = users.get(ui);
+		
 		if (errors.hasErrors()) {
 			mav.addObject("publicationForm", pf);
 			mav.addObject("services", PropertyServices.values());
@@ -210,6 +216,7 @@ public class PublicationController {
 		}
 
 		Publication p = pf.build();
+		p.setPublisher(publisher);
 		if(p.isNew()){
 			publications.add(p);
 		}else{

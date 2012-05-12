@@ -23,5 +23,5 @@ public interface UserRepo {
 
 	public boolean authenticate(String username, String password);
 
-	public User get(String username, String password);
+	public User get(String username);
 }
