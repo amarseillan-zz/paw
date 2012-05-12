@@ -24,6 +24,7 @@ public class HibernatePublicationRepo extends AbstractHibernateRepo implements P
 	}
 	
 	public Publication get(int userId) {
+		//TODO esto esta mal. el id tiene que ser el de publication para buscarlo con get
 		return get(Publication.class, userId);
 	}
 

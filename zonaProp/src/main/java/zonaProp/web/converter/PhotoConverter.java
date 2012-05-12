@@ -2,7 +2,6 @@ package zonaProp.web.converter;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
-import org.springframework.stereotype.Component;
 
 import zonaProp.services.PublicationService;
 import zonaProp.transfer.bussiness.Photo;

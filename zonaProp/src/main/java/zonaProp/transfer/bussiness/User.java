@@ -3,13 +3,15 @@ package zonaProp.transfer.bussiness;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
-import org.hibernate.annotations.Entity;
 
 import zonaProp.validators.LengthValidator;
 
 @Entity
+@Table(name="sys_user")
 public class User extends PersistentEntity{
 
 	private String username;
@@ -19,7 +21,7 @@ public class User extends PersistentEntity{
 	private String email;
 	private String phone;
 	
-	@OneToMany(mappedBy="publication")
+	@OneToMany(mappedBy="publisher")
 	private List<Publication> publications= new ArrayList<Publication>();
 
 	public User(){

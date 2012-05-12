@@ -3,7 +3,13 @@ package zonaProp.transfer.bussiness;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.hibernate.annotations.Entity;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
+
+
 
 @Entity
 public class Publication extends PersistentEntity {
@@ -18,13 +24,18 @@ public class Publication extends PersistentEntity {
 	private String description;
 	private boolean active;
 
+	@Transient
 	List<PropertyServices> propertyServices;
 
+	@Enumerated(EnumType.ORDINAL)
 	private PropertyType propertyType;
+	@Enumerated(EnumType.ORDINAL)
 	private OperationType operationType;
 
+	@ManyToOne
 	private User publisher;
 
+	@Transient
 	private List<Photo> photos = new ArrayList<Photo>();
 
 	public Publication() {

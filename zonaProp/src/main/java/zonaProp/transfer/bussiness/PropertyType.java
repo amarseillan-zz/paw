@@ -1,29 +1,18 @@
 package zonaProp.transfer.bussiness;
 
 public enum PropertyType {
-	HOUSE("Casa",1), DEPARTMENT("Deparamento",2);
+	HOUSE("Casa"), DEPARTMENT("Deparamento");
 
 	private String name;
-	private int number;
 
 	
 	
-	private PropertyType(String name, int number) {
+	private PropertyType(String name) {
 		this.name = name;
-		this.number=number;
-	}
-
-	public int getNumber() {
-		return this.number;
 	}
 	
 	public String toString(){
 		return name;
-	}
-
-
-	public String getName() {
-		return this.name;
 	}
 
 }

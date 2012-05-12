@@ -36,11 +36,12 @@
 				hibernate.current_session_context_class=thread
             	hibernate.max_fetch_depth=2
            		hibernate.jdbc.batch_size=30  
+           		hibernate.archive.autodetection= class
 			</value>
 		</property>
 
 		<property name="packagesToScan">
-			<list> <value>zonaProp.model</value> </list>
+			<list> <value>zonaProp</value> </list>
 		</property>
 
 	</bean>

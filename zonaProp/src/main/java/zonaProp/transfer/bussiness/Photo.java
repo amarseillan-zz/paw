@@ -3,14 +3,12 @@ package zonaProp.transfer.bussiness;
 import java.io.IOException;
 import java.io.InputStream;
 
-import javax.persistence.ManyToOne;
 
 import org.apache.commons.io.IOUtils;
 
+
 public class Photo extends PersistentEntity {
 
-	@ManyToOne
-	private Publication publication;
 	private InputStream inputStream;
 
 	public Photo(int id, int publicationId, InputStream iS) {
@@ -54,15 +52,4 @@ public class Photo extends PersistentEntity {
 		}
 		return 0;
 	}
-
-
-	public Publication getPublication() {
-		return publication;
-	}
-
-
-	public void setPublication(Publication publication) {
-		this.publication = publication;
-	}
-
 }
