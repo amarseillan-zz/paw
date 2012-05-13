@@ -104,7 +104,7 @@ public class UserController {
 				if ( users.authenticate(luf.getUsername(), luf.getPassword()) ){
 					user = users.get(luf.getUsername());
 					s.setAttribute("userId", user.getId());
-					mav = new ModelAndView("redirect:../publication/search");
+					mav = new ModelAndView("redirect:../user/publications");
 				} else {
 					luf.setRemember("off");
 				}
@@ -122,8 +122,8 @@ public class UserController {
 		lufv.validate(luf, errors);
 		ModelAndView mav = null;
 
-		if ( users.authenticate(luf.getUsername(), luf.getPassword()) ) {
-			User user = users.get(luf.getUsername());
+		User user=luf.build(users);
+		if ( user!=null ) {
 			s.setAttribute("userId", user.getId());
 			if ("on".equals(luf.getRemember())) {
 				Cookie c = new Cookie("userid", String.valueOf(user.getId()));
@@ -139,7 +139,7 @@ public class UserController {
 			} else {
 				resp.addCookie(new Cookie("username", ""));
 			}
-			mav = new ModelAndView("redirect:../publication/search");
+			mav = new ModelAndView("redirect:../user/publications");
 		} else {
 			errors.reject("invalidUser");
 			mav = new ModelAndView();

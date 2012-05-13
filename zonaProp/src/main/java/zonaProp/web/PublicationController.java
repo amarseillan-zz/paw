@@ -1,12 +1,10 @@
 package zonaProp.web;
 
 import java.io.IOException;
-import java.io.InputStream;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
@@ -44,10 +42,11 @@ public class PublicationController {
 	UserRepo users;
 
 	@Autowired
-	public PublicationController(PublicationFormValidator pfv,
+	public PublicationController(PublicationFormValidator pfv, PhotoFormValidator photofv,
 			CommentFormValidator cfv, SearchFormValidator sfv,
 			PublicationRepo publications, UserRepo users) {
 
+		this.photofv = photofv;
 		this.pfv = pfv;
 		this.sfv = sfv;
 		this.cfv = cfv;
@@ -112,28 +111,28 @@ public class PublicationController {
 		mav.setViewName("publication/view");
 		return mav;
 	}
-	
+
 	@RequestMapping(method = RequestMethod.POST)
-	protected ModelAndView uploadPhoto(PhotoForm pF,  Errors errors, @ModelAttribute("userId") int ui) {
-		Publication p = pF.getPublication();
-		
-		if(p.getUserId() != ui) {
-	           return null;
-	    }
-		photofv.validate(pF, errors);	
-		
+	protected ModelAndView uploadPhoto(
+			@RequestParam("publicationId") Publication p, PhotoForm pF,
+			Errors errors, @ModelAttribute("userId") int ui) {
+
+		if (p.getUserId() != ui) {
+			return null;
+		}
+		photofv.validate(pF, errors);
+
 		ModelAndView mav = new ModelAndView();
-		
-		if(!errors.hasErrors()) {			
-			Photo image = pF.getPhoto();		
-			p.addPhoto(image); 
-		} 
-        mav.addObject("publication", p);
-		mav.setViewName("publication/editPhotos");	
-		return mav;		
+
+		if (!errors.hasErrors()) {
+			Photo image = pF.build();
+			p.addPhoto(image);
+		}
+		mav.addObject("publication", p);
+		mav.setViewName("publication/editPhotos");
+		return mav;
 	}
-	
-	
+
 	@RequestMapping(method = RequestMethod.GET)
 	public void viewPhoto(@RequestParam("imageId") Photo photo,
 			HttpServletResponse resp) {
@@ -147,10 +146,8 @@ public class PublicationController {
 				+ photo.getId() + "\"");
 		resp.setContentLength(photo.getSize());
 		try {
-			InputStream input = photo.getInputStream();
 			ServletOutputStream output = resp.getOutputStream();
-			IOUtils.copy(input, output);
-			input.close();
+			output.write(photo.getData());
 			output.close();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -161,23 +158,26 @@ public class PublicationController {
 	public ModelAndView editPhotos(@RequestParam("publicationId") Publication p) {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("publication", p);
+		mav.addObject("photoForm", new PhotoForm());
 		return mav;
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	protected ModelAndView deletePhoto(@RequestParam("publicationId") Publication p, @RequestParam("imageId") Photo photo, @ModelAttribute("userId") int ui) {	
-		ModelAndView mav = new ModelAndView();					
-		if(p.getUserId() != ui) {
-	           return null;
-	    }
-		p.deletePhoto(photo);		
+	protected ModelAndView deletePhoto(
+			@RequestParam("publicationId") Publication p,
+			@RequestParam("imageId") Photo photo,
+			@ModelAttribute("userId") int ui) {
+		ModelAndView mav = new ModelAndView();
+		if (p.getUserId() != ui) {
+			return null;
+		}
+		p.deletePhoto(photo);
 		mav.addObject("publication", p);
 		mav.addObject("photoForm", new PhotoForm());
-		mav.setViewName("publication/editPhotos");	
-		return mav;		
+		mav.setViewName("publication/editPhotos");
+		return mav;
 	}
 
-	
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView modify(@RequestParam("publicationId") Publication p) {
 		ModelAndView mav = new ModelAndView();
@@ -207,7 +207,7 @@ public class PublicationController {
 		ModelAndView mav = new ModelAndView();
 
 		User publisher = users.get(ui);
-		
+
 		if (errors.hasErrors()) {
 			mav.addObject("publicationForm", pf);
 			mav.addObject("services", PropertyServices.values());
@@ -217,9 +217,9 @@ public class PublicationController {
 
 		Publication p = pf.build();
 		p.setPublisher(publisher);
-		if(p.isNew()){
+		if (p.isNew()) {
 			publications.add(p);
-		}else{
+		} else {
 			Publication old = publications.get(p.getId());
 			old.update(p);
 		}
@@ -228,5 +228,4 @@ public class PublicationController {
 
 	}
 
-	
 }

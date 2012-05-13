@@ -3,14 +3,16 @@ package zonaProp.transfer.bussiness;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.Transient;
+import javax.persistence.OneToMany;
 
 
 
@@ -41,7 +43,8 @@ public class Publication extends PersistentEntity {
 	@ManyToOne
 	private User publisher;
 
-	@Transient
+	@OneToMany(cascade=CascadeType.ALL)
+	@JoinColumn(name="dep_id")
 	private List<Photo> photos = new ArrayList<Photo>();
 
 	public Publication() {
@@ -160,11 +163,5 @@ public class Publication extends PersistentEntity {
 	public void setPublisher(User publisher){
 		this.publisher=publisher;
 		publisher.addPublication(this);
-	}
-	
-	
-	public Photo getPhotoById(int imageId) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 }

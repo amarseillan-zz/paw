@@ -1,6 +1,7 @@
 package zonaProp.web.command;
 
-import zonaProp.services.UserService;
+
+import zonaProp.model.repo.UserRepo;
 import zonaProp.transfer.bussiness.User;
 
 
@@ -55,8 +56,11 @@ public class LoginUserForm {
 		this.remember = remember;
 	}
 	
-	public User build(UserService service){
-		return service.authenticate(username, password);
+	public User build(UserRepo users){
+		if(users.authenticate(username, password)){
+			return users.get(username);
+		}
+		return null;
 	}
 
 	

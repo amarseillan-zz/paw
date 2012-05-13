@@ -1,23 +1,23 @@
 package zonaProp.web.converter;
 
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 
-import zonaProp.services.PublicationService;
 import zonaProp.transfer.bussiness.Photo;
 
-@Deprecated
-public class PhotoConverter  implements Converter<String, Photo>{
 
-	PublicationService ps = PublicationService.getInstance();
+public class PhotoConverter  implements Converter<String, Photo>{
+	
+	private final SessionFactory sessionFactory;
 
 	@Autowired
-	public PhotoConverter(PublicationService ps) {
-		this.ps = ps;
+	public PhotoConverter(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
 	}
 
 	public Photo convert(String source) {
-		return ps.getPhotoById(Integer.valueOf(source));
+		return (Photo)sessionFactory.getCurrentSession().get(Photo.class, Integer.parseInt(source));
 	}
 
 }

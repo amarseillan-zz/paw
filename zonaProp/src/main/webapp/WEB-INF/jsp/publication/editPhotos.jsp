@@ -26,7 +26,7 @@
 	<form:form class="well form-horizontal" method="POST" action="uploadPhoto" enctype="multipart/form-data" commandName="photoForm">
 				<div class="error"><form:errors path="*" /></div>		
 						
-				<form:input type="hidden" name="publicationId" value="${publication.id}" path="publication"/>
+				<input type="hidden" name="publicationId" value="${publication.id}" path="publication"/>
 				
 				<form:input name="photo" type="file" path="fileData"/>
 				
