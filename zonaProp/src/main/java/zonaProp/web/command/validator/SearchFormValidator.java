@@ -21,9 +21,9 @@ public class SearchFormValidator implements Validator {
 	public void validate(Object target, Errors errors) {
 		SearchForm form = (SearchForm) target;
 		
-		if(!form.getMin().isEmpty())
+		if(form.getMin()!=null && !form.getMin().isEmpty())
 			minValidator.appendError(errors, form.getMin());
-		if(!form.getMax().isEmpty())
+		if(form.getMax()!=null && !form.getMax().isEmpty())
 			maxValidator.appendError(errors, form.getMax());
 
 	}

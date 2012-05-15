@@ -87,6 +87,7 @@ public class PublicationController {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("publication", p);
 		mav.addObject("commentForm", new CommentForm());
+		mav.addObject("searchForm", new SearchForm());
 		mav.addObject("showPublisher", false);
 		return mav;
 	}
@@ -108,6 +109,7 @@ public class PublicationController {
 		}
 
 		mav.addObject("publication", p);
+		mav.addObject("searchForm", new SearchForm());
 		mav.setViewName("publication/view");
 		return mav;
 	}

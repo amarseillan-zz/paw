@@ -10,6 +10,11 @@
 						<%@ include file="../userInfo.jsp" %>
 					</c:if>
 					
+					<form:form class="well form-horizontal" method="GET" action="searchResults" commandName="searchForm">
+						<input type="hidden" path="publisher"/>
+						<button type="submit" class="btn btn-primary">Otras publicaciones del usuario</button>
+					</form:form>
+					
 					<div class="well">
 						<h3>
 							Publicacion: ${publication.operationType.name} de ${publication.propertyType.name}
@@ -26,7 +31,7 @@
 						<br/>
 						<b>Servicios:</b>
 						<c:forEach var="service" items="${publication.propertyServices}">
-							${service}
+							${service.name}.
 						</c:forEach>
 						<br/>
 						<b>Descripcion:</b> ${publication.description}

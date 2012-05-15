@@ -3,6 +3,7 @@ package zonaProp.web.command;
 import zonaProp.transfer.bussiness.OperationType;
 import zonaProp.transfer.bussiness.PropertyType;
 import zonaProp.transfer.bussiness.Search;
+import zonaProp.transfer.bussiness.User;
 
 public class SearchForm {
 
@@ -10,7 +11,17 @@ public class SearchForm {
 	String min = null;
 	OperationType operationType = null;
 	PropertyType propertyType = null;
+	User publisher = null;
 	boolean ascending = true;
+
+	
+	public User getPublisher() {
+		return publisher;
+	}
+
+	public void setPublisher(User publisher) {
+		this.publisher = publisher;
+	}
 
 	public boolean isAscending() {
 		return ascending;
@@ -55,8 +66,8 @@ public class SearchForm {
 	}
 
 	public Search build() {
-		return new Search(min.isEmpty() ? null : Double.parseDouble(min),
-				max.isEmpty() ? null : Double.parseDouble(max), operationType,
-				propertyType, ascending,null);
+		return new Search(min==null || min.isEmpty() ? null : Double.parseDouble(min),
+				max==null || max.isEmpty() ? null : Double.parseDouble(max), operationType,
+				propertyType, ascending, publisher);
 	}
 }

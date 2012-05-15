@@ -5,7 +5,6 @@
 <form:form class="form" method="POST" action="signUp" commandName="userForm">
 		<div class="error"><form:errors path="*" /></div>
 	<div class="fieldset">
-		<form:errors path="username" />
 		<label for="username">(*)Usuario:</label>
 		<form:input type="text" path="username" />
 	</div>
