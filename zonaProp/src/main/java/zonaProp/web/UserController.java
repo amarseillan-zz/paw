@@ -1,5 +1,7 @@
 package zonaProp.web;
 
+import java.io.IOException;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -96,11 +98,11 @@ public class UserController {
 			}
 		}
 		for (Cookie c : req.getCookies()) {
-			if (c.getName().equals("username")) {
+			if (c!= null && c.getName().equals("username")) {
 				luf.setUsername(c.getValue());
 				luf.setRememberu("on");
 			}
-			if (c.getName().equals("userid")) {
+			if (c!=null && c.getName().equals("userid")) {
 				if ( users.authenticate(luf.getUsername(), luf.getPassword()) ){
 					user = users.get(luf.getUsername());
 					s.setAttribute("userId", user.getId());
@@ -147,6 +149,22 @@ public class UserController {
 		// mav.addObject(new LoginUserForm());
 		return mav;
 
+	}
+	
+	@RequestMapping(method = RequestMethod.GET)
+	public void logout(HttpSession s,	HttpServletResponse resp) {
+		ModelAndView mav = new ModelAndView("redirect:login");
+		s.setAttribute("userId", null);
+		s.invalidate();
+		Cookie c = new Cookie("userid", null);
+		c.setMaxAge(0);
+		resp.addCookie(c);
+		try {
+			resp.sendRedirect("login");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }
