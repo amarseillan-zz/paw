@@ -2,37 +2,40 @@ package zonaProp.filters;
 
 import java.io.IOException;
 
-import javax.servlet.Filter;
 import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import zonaProp.services.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.web.filter.OncePerRequestFilter;
+
+import zonaProp.model.repo.UserRepo;
 import zonaProp.transfer.bussiness.User;
 
-public class LoggedFilter implements Filter{
+@Component
+public class LoggedFilter extends OncePerRequestFilter {
 
-	public void destroy() {
-		// TODO Auto-generated method stub
-		
+	private UserRepo ur;
+	
+	@Autowired
+	public LoggedFilter(UserRepo ur) {
+		this.ur = ur;
 	}
 
-	public void doFilter(ServletRequest request, ServletResponse arg1,
-			FilterChain arg2) throws IOException, ServletException {
-		HttpServletResponse resp = (HttpServletResponse) arg1;
-		HttpServletRequest req = (HttpServletRequest) request;
+	@Override
+	protected void doFilterInternal(HttpServletRequest req,
+			HttpServletResponse resp, FilterChain filterChain)
+			throws ServletException, IOException {
 		if (req.getSession().getAttribute("userId")==null) {
 			Cookie[] cs =req.getCookies();
 			User u = null;
 			if(cs!=null){
 				for(Cookie c:cs){
 					if("userid".equals(c.getName()) && c.getValue()!=null){
-						u = UserService.getInstance().getUser(Integer.valueOf(c.getValue()));
+						u = ur.get(Integer.valueOf(c.getValue()));
 					}
 					if("username".equals(c.getName()) && c.getValue()!=null){
 						req.setAttribute("username", c.getValue());
@@ -47,19 +50,14 @@ public class LoggedFilter implements Filter{
 					}
 				}
 			}
-			arg2.doFilter(request, arg1);
+			filterChain.doFilter(req, resp);
 		} else {
 			if(req.getRequestURI().contains("login")){ 
 				resp.sendRedirect("publications");
 				return;
 			}
-			arg2.doFilter(request, arg1);
+			filterChain.doFilter(req, resp);
 		}
-		
-	}
-
-	public void init(FilterConfig arg0) throws ServletException {
-		// TODO Auto-generated method stub
 		
 	}
 

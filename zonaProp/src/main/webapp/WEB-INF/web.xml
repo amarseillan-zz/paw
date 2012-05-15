@@ -15,24 +15,7 @@
 		<servlet-name>spring</servlet-name>
 		<url-pattern>/bin/*</url-pattern>
 	</servlet-mapping>
-	
-	<servlet>
-		<servlet-name>Login</servlet-name>
-		<servlet-class>zonaProp.web.Login</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>Login</servlet-name>
-		<url-pattern>/login</url-pattern>
-	</servlet-mapping>
 
-	<servlet>
-		<servlet-name>Logout</servlet-name>
-		<servlet-class>zonaProp.web.Logout</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>Logout</servlet-name>
-		<url-pattern>/logout</url-pattern>
-	</servlet-mapping>	
 	<servlet>
 	    <servlet-name>ErrorPage</servlet-name>
 	    <servlet-class>zonaProp.web.ErrorPage</servlet-class>
@@ -65,10 +48,20 @@
 		<filter-name>transactionFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
+	
 	<filter>
-		<filter-name>LoggedFilter</filter-name>
-		<filter-class>zonaProp.filters.LoggedFilter</filter-class>
-	</filter>
+ 		<filter-name>LoggedFilter</filter-name> 
+  		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class> 
+ 		<init-param>
+  			<param-name>targetBeanName</param-name> 
+  			<param-value>loggedFilter</param-value> 
+  		</init-param>
+  		<init-param>
+  			<param-name>contextAttribute</param-name> 
+  			<param-value>org.springframework.web.servlet.FrameworkServlet.CONTEXT.spring</param-value> 
+  		</init-param>
+  </filter>
+  
 	<filter-mapping>
 		<filter-name>LoggedFilter</filter-name>
 		<url-pattern>/*</url-pattern>

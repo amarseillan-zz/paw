@@ -20,6 +20,10 @@ public abstract class PersistentEntity {
 		return id;
 	}
 	
+	protected void setId(int id){
+		this.id=id;
+	}
+	
 	public boolean isNew(){
 		return id == 0;
 	}
