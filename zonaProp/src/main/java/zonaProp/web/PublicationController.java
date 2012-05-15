@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import zonaProp.mailing.MailingService;
+import zonaProp.mailing.SendMailTLS;
 import zonaProp.model.repo.PublicationRepo;
 import zonaProp.model.repo.UserRepo;
 import zonaProp.transfer.bussiness.Photo;
@@ -40,11 +42,11 @@ public class PublicationController {
 	SearchFormValidator sfv;
 	PublicationRepo publications;
 	UserRepo users;
-
+	MailingService mailingService;
 	@Autowired
 	public PublicationController(PublicationFormValidator pfv, PhotoFormValidator photofv,
 			CommentFormValidator cfv, SearchFormValidator sfv,
-			PublicationRepo publications, UserRepo users) {
+			PublicationRepo publications, UserRepo users, MailingService mailingService) {
 
 		this.photofv = photofv;
 		this.pfv = pfv;
@@ -52,6 +54,7 @@ public class PublicationController {
 		this.cfv = cfv;
 		this.publications = publications;
 		this.users = users;
+		this.mailingService = mailingService;
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
@@ -103,8 +106,7 @@ public class PublicationController {
 			mav.addObject("showPublisher", false);
 		} else {
 			mav.addObject("showPublisher", true);
-
-			cf.build().sendMailTo(p.getPublisher());
+			mailingService.contact(cf.build(), p.getPublisher());
 		}
 
 		mav.addObject("publication", p);
