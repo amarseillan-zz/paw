@@ -97,18 +97,20 @@ public class UserController {
 				luf.setRemember("off");
 			}
 		}
-		for (Cookie c : req.getCookies()) {
-			if (c!= null && c.getName().equals("username")) {
-				luf.setUsername(c.getValue());
-				luf.setRememberu("on");
-			}
-			if (c!=null && c.getName().equals("userid")) {
-				if ( users.authenticate(luf.getUsername(), luf.getPassword()) ){
-					user = users.get(luf.getUsername());
-					s.setAttribute("userId", user.getId());
-					mav = new ModelAndView("redirect:../user/publications");
-				} else {
-					luf.setRemember("off");
+		if(req.getCookies()!=null){
+			for (Cookie c : req.getCookies()) {
+				if (c!= null && c.getName().equals("username")) {
+					luf.setUsername(c.getValue());
+					luf.setRememberu("on");
+				}
+				if (c!=null && c.getName().equals("userid")) {
+					if ( users.authenticate(luf.getUsername(), luf.getPassword()) ){
+						user = users.get(luf.getUsername());
+						s.setAttribute("userId", user.getId());
+						mav = new ModelAndView("redirect:../user/publications");
+					} else {
+						luf.setRemember("off");
+					}
 				}
 			}
 		}
@@ -119,8 +121,7 @@ public class UserController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public ModelAndView login(LoginUserForm luf, Errors errors, HttpSession s,
-			HttpServletResponse resp) {
+	public ModelAndView login(HttpServletResponse resp,LoginUserForm luf, Errors errors, HttpSession s) {
 		lufv.validate(luf, errors);
 		ModelAndView mav = null;
 
@@ -136,8 +137,7 @@ public class UserController {
 				Cookie c = new Cookie("username", String.valueOf(luf
 						.getUsername()));
 				c.setMaxAge(30 * 24 * 60 * 60);
-				resp.addCookie(new Cookie("username", String.valueOf(luf
-						.getUsername())));
+				resp.addCookie(c);
 			} else {
 				resp.addCookie(new Cookie("username", ""));
 			}
@@ -150,10 +150,9 @@ public class UserController {
 		return mav;
 
 	}
-	
+
 	@RequestMapping(method = RequestMethod.GET)
 	public void logout(HttpSession s,	HttpServletResponse resp) {
-		ModelAndView mav = new ModelAndView("redirect:login");
 		s.setAttribute("userId", null);
 		s.invalidate();
 		Cookie c = new Cookie("userid", null);

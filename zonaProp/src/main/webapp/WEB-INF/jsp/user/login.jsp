@@ -10,11 +10,11 @@
 							<form:input type="password" path="password" />
 							<label class="checkbox">
 								Recordar usuario 
-								<form:input type="checkbox" path="rememberu"></form:input>
+								<form:input type="checkbox" path="rememberu" value="on"></form:input>
 							</label>
 							<label class="checkbox">
 								Recordar usuario y contrase&ntilde;a
-								<form:input type="checkbox" path="remember"></form:input>
+								<form:input type="checkbox" path="remember" value="on"></form:input>
 							</label>
 							<input type="submit" name="submit" value="Ingresar" class="btn" />
 							<span class="help-inline">${error}</span>

@@ -18,12 +18,19 @@ public class Comment {
 		this.comment = comment;
 	}
 
-	public void sendMailTo(User to) throws InvalidParameterException {
+	public String getName() {
+		return name;
+	}
 
-		SendMailTLS sender = new SendMailTLS("mail.properties");
-		sender.send(email, to.getEmail(), "Comentó en una de tus propiedades "
-				+ name, "mail del comentante: " + email + "\ntel: " + phone
-				+ "\ncomentario:\n" + comment);
+	public String getEmail() {
+		return email;
+	}
 
+	public String getPhone() {
+		return phone;
+	}
+
+	public String getComment() {
+		return comment;
 	}
 }
