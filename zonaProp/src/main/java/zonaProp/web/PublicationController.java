@@ -91,6 +91,7 @@ public class PublicationController {
 		mav.addObject("commentForm", new CommentForm());
 		mav.addObject("searchForm", new SearchForm());
 		mav.addObject("showPublisher", false);
+		p.access();
 		return mav;
 	}
 

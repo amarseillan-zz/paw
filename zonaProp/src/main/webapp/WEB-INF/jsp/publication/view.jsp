@@ -29,6 +29,8 @@
 						<br/>
 						<b>Precio:</b> ${publication.price} pesos
 						<br/>
+						<b>Cantidad de accesos:</b> ${publication.access} accesos
+						<br/>
 						<b>Servicios:</b>
 						<c:forEach var="service" items="${publication.propertyServices}">
 							${service.name}.

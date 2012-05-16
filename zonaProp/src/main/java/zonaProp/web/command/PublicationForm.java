@@ -18,6 +18,7 @@ public class PublicationForm {
 	private String covered;
 	private String uncovered;
 	private String age;
+	private int access;
 
 	List<PropertyServices> propertyServices;
 
@@ -44,6 +45,7 @@ public class PublicationForm {
 
 		propertyType = null;
 		operationType = null;
+		access = 0;
 	}
 
 	public PublicationForm(Publication p) {
@@ -63,6 +65,7 @@ public class PublicationForm {
 
 		propertyType = p.getPropertyType();
 		operationType = p.getOperationType();
+		access = p.getAccess();
 	}
 
 	public List<PropertyServices> getPropertyServices() {
@@ -98,7 +101,7 @@ public class PublicationForm {
 				operationType, address, city, Double.parseDouble(price),
 				environments, Double.parseDouble(covered), Double
 						.parseDouble(uncovered), Integer.parseInt(age),
-				propertyServices, description, active);
+				propertyServices, description, active, access);
 	}
 
 	public int getPublicationId() {

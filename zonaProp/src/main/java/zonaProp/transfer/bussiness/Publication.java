@@ -28,6 +28,7 @@ public class Publication extends PersistentEntity {
 	private int age;
 	private String description;
 	private boolean active;
+	private int access;
 
 	@ElementCollection(targetClass=PropertyServices.class)
     @Enumerated(EnumType.STRING)
@@ -56,7 +57,7 @@ public class Publication extends PersistentEntity {
 			String address, String city, double price, int environments,
 			double covered, double uncovered, int age,
 			List<PropertyServices> propertyServices, String description,
-			boolean active) {
+			boolean active, int access) {
 		super(publicationId);
 
 		this.address = address;
@@ -72,6 +73,7 @@ public class Publication extends PersistentEntity {
 
 		this.propertyType = propertyType;
 		this.operationType = operationType;
+		this.access = access;
 	}
 
 	public List<PropertyServices> getPropertyServices() {
@@ -163,5 +165,13 @@ public class Publication extends PersistentEntity {
 	public void setPublisher(User publisher){
 		this.publisher=publisher;
 		publisher.addPublication(this);
+	}
+
+	public int getAccess() {
+		return access;
+	}
+
+	public void access(){
+		access++;
 	}
 }
