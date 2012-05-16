@@ -1,8 +1,8 @@
 package zonaProp.web;
 
 import java.io.IOException;
+import java.io.OutputStream;
 
-import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -143,13 +143,13 @@ public class PublicationController {
 			return;
 		}
 		resp.reset();
-		resp.setBufferSize(1024);
+	//	resp.setBufferSize(1024);
 		resp.setContentType("image/jpeg");
 		resp.setHeader("Content-Disposition", "inline; filename=\"imagen"
 				+ photo.getId() + "\"");
 		resp.setContentLength(photo.getSize());
 		try {
-			ServletOutputStream output = resp.getOutputStream();
+			OutputStream output = resp.getOutputStream();
 			output.write(photo.getData());
 			output.close();
 		} catch (IOException e) {
