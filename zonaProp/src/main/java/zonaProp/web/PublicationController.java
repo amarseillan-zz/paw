@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import zonaProp.mailing.MailingService;
-import zonaProp.mailing.SendMailTLS;
 import zonaProp.model.repo.PublicationRepo;
 import zonaProp.model.repo.UserRepo;
 import zonaProp.transfer.bussiness.Photo;
@@ -126,14 +125,13 @@ public class PublicationController {
 		}
 		photofv.validate(pF, errors);
 
-		ModelAndView mav = new ModelAndView();
-
 		if (!errors.hasErrors()) {
 			Photo image = pF.build();
 			p.addPhoto(image);
 		}
-		mav.addObject("publication", p);
-		mav.setViewName("publication/editPhotos");
+		
+		ModelAndView mav = new ModelAndView("redirect:editPhotos");		
+		mav.addObject("publicationId", p.getId());
 		return mav;
 	}
 
