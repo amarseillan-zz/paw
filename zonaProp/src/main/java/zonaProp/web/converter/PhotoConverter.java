@@ -3,10 +3,11 @@ package zonaProp.web.converter;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.stereotype.Component;
 
 import zonaProp.transfer.bussiness.Photo;
 
-
+@Component
 public class PhotoConverter  implements Converter<String, Photo>{
 	
 	private final SessionFactory sessionFactory;
