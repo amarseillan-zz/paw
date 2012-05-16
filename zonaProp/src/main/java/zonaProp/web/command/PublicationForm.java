@@ -19,6 +19,9 @@ public class PublicationForm {
 	private String uncovered;
 	private String age;
 	private int access;
+	private String kitchen;
+	private String dinningRoom;
+	private String room;
 
 	List<PropertyServices> propertyServices;
 
@@ -46,6 +49,10 @@ public class PublicationForm {
 		propertyType = null;
 		operationType = null;
 		access = 0;
+
+		kitchen = "";
+		dinningRoom = "";
+		room = "";
 	}
 
 	public PublicationForm(Publication p) {
@@ -66,6 +73,10 @@ public class PublicationForm {
 		propertyType = p.getPropertyType();
 		operationType = p.getOperationType();
 		access = p.getAccess();
+
+		kitchen = String.valueOf(p.getKitchen());
+		dinningRoom = String.valueOf(p.getDinningRoom());
+		room = String.valueOf(p.getRoom());
 	}
 
 	public List<PropertyServices> getPropertyServices() {
@@ -97,11 +108,12 @@ public class PublicationForm {
 	}
 
 	public Publication build() {
-		return new Publication(publicationId, propertyType,
-				operationType, address, city, Double.parseDouble(price),
-				environments, Double.parseDouble(covered), Double
-						.parseDouble(uncovered), Integer.parseInt(age),
-				propertyServices, description, active, access);
+		return new Publication(publicationId, propertyType, operationType,
+				address, city, Double.parseDouble(price), environments,
+				Double.parseDouble(covered), Double.parseDouble(uncovered),
+				Integer.parseInt(age), propertyServices, description, active,
+				access, Integer.valueOf(kitchen), Integer.valueOf(dinningRoom),
+				Integer.valueOf(room));
 	}
 
 	public int getPublicationId() {
@@ -179,4 +191,29 @@ public class PublicationForm {
 	public boolean isActive() {
 		return active;
 	}
+
+	public String getKitchen() {
+		return kitchen;
+	}
+
+	public void setKitchen(String kitchen) {
+		this.kitchen = kitchen;
+	}
+
+	public String getDinningRoom() {
+		return dinningRoom;
+	}
+
+	public void setDinningRoom(String dinningRoom) {
+		this.dinningRoom = dinningRoom;
+	}
+
+	public String getRoom() {
+		return room;
+	}
+
+	public void setRoom(String room) {
+		this.room = room;
+	}
+
 }

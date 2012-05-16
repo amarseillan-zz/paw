@@ -89,6 +89,30 @@
 		</div>
 		
 		<div class="control-group">
+			<label class="control-label" for="kitchen">Superficie de la cocina</label>
+			<div class="controls">
+				<form:input type="text" class="input-xlarge"
+					path="kitchen"/>
+			</div>
+		</div>
+		
+		<div class="control-group">
+			<label class="control-label" for="dinningRoom">Superficie del comedor</label>
+			<div class="controls">
+				<form:input type="text" class="input-xlarge"
+					path="dinningRoom"/>
+			</div>
+		</div>
+		
+		<div class="control-group">
+			<label class="control-label" for="room">Superficie del dormitorio</label>
+			<div class="controls">
+				<form:input type="text" class="input-xlarge"
+					path="room"/>
+			</div>
+		</div>
+		
+		<div class="control-group">
 			<label class="control-label" for="age">Antig&uuml;edad
 			</label>
 			<div class="controls">

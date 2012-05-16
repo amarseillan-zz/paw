@@ -25,6 +25,8 @@
 						<br/>
 						<b>Area:</b> ${publication.covered} metros cubiertos y ${publication.uncovered} metros descubiertos
 						<br/>
+						${publication.kitchen} metros de cocina, ${publication.dinningRoom} metros de comedor y ${publication.room} metros de cuartos
+						<br/>
 						<b>Antig&uuml;edad:</b> ${publication.age} a&ntilde;os
 						<br/>
 						<b>Precio:</b> ${publication.price} pesos

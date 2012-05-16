@@ -9,7 +9,7 @@ public class PositiveIntValidator extends FieldValidator<String>  {
 		
 		@Override
 		public String getError() {
-			return "Error en "+ fieldName + ". Ingrese un nï¿½mero entero positivo.";
+			return "Error en "+ fieldName + ". Ingrese un nœmero entero positivo.";
 		}
 
 		@Override

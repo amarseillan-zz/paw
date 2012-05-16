@@ -14,8 +14,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-
-
 @Entity
 public class Publication extends PersistentEntity {
 
@@ -29,11 +27,14 @@ public class Publication extends PersistentEntity {
 	private String description;
 	private boolean active;
 	private int access;
+	private int kitchen;
+	private int dinningRoom;
+	private int room;
 
-	@ElementCollection(targetClass=PropertyServices.class)
-    @Enumerated(EnumType.STRING)
-    @CollectionTable(name="property_services")
-    @Column(name="services")
+	@ElementCollection(targetClass = PropertyServices.class)
+	@Enumerated(EnumType.STRING)
+	@CollectionTable(name = "property_services")
+	@Column(name = "services")
 	List<PropertyServices> propertyServices;
 
 	@Enumerated(EnumType.ORDINAL)
@@ -44,20 +45,20 @@ public class Publication extends PersistentEntity {
 	@ManyToOne
 	private User publisher;
 
-	@OneToMany(cascade=CascadeType.ALL)
-	@JoinColumn(name="dep_id")
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "dep_id")
 	private List<Photo> photos = new ArrayList<Photo>();
 
 	public Publication() {
 		super(0);
 	}
 
-	public Publication(int publicationId,
-			PropertyType propertyType, OperationType operationType,
-			String address, String city, double price, int environments,
-			double covered, double uncovered, int age,
-			List<PropertyServices> propertyServices, String description,
-			boolean active, int access) {
+	public Publication(int publicationId, PropertyType propertyType,
+			OperationType operationType, String address, String city,
+			double price, int environments, double covered, double uncovered,
+			int age, List<PropertyServices> propertyServices,
+			String description, boolean active, int access, int kitchen,
+			int dinningRoom, int room) {
 		super(publicationId);
 
 		this.address = address;
@@ -74,6 +75,9 @@ public class Publication extends PersistentEntity {
 		this.propertyType = propertyType;
 		this.operationType = operationType;
 		this.access = access;
+		this.kitchen = kitchen;
+		this.dinningRoom = dinningRoom;
+		this.room = room;
 	}
 
 	public List<PropertyServices> getPropertyServices() {
@@ -162,8 +166,8 @@ public class Publication extends PersistentEntity {
 
 	}
 
-	public void setPublisher(User publisher){
-		this.publisher=publisher;
+	public void setPublisher(User publisher) {
+		this.publisher = publisher;
 		publisher.addPublication(this);
 	}
 
@@ -171,7 +175,20 @@ public class Publication extends PersistentEntity {
 		return access;
 	}
 
-	public void access(){
+	public void access() {
 		access++;
 	}
+
+	public int getKitchen() {
+		return kitchen;
+	}
+
+	public int getDinningRoom() {
+		return dinningRoom;
+	}
+
+	public int getRoom() {
+		return room;
+	}
+
 }
