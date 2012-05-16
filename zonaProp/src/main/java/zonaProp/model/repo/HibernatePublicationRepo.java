@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
+import zonaProp.transfer.bussiness.Photo;
 import zonaProp.transfer.bussiness.Publication;
 import zonaProp.transfer.bussiness.Search;
 
@@ -78,6 +79,11 @@ public class HibernatePublicationRepo extends AbstractHibernateRepo implements P
 		}
 		
 		return query.list();
+	}
+
+	@Override
+	public Photo getPhoto(Integer id) {
+		return get(Photo.class, id);
 	}
 	
 

@@ -1,8 +1,5 @@
 package zonaProp.transfer.bussiness;
 
-import java.security.InvalidParameterException;
-
-import zonaProp.mailing.SendMailTLS;
 
 
 public class Comment {
