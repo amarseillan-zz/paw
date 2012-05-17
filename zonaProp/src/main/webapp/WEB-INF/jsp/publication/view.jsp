@@ -10,10 +10,10 @@
 						<%@ include file="../userInfo.jsp" %>
 					</c:if>
 					
-					<form:form class="well form-horizontal" method="GET" action="searchResults" commandName="searchForm">
-						<input type="hidden" path="publisher"/>
-						<button type="submit" class="btn btn-primary">Otras publicaciones del usuario</button>
-					</form:form>
+					<a href="<c:url value="../publication/searchResults">
+						<c:param name="publisher" value="${publication.publisher.id}" />
+					</c:url>">Otras publicaciones del usuario
+					</a>
 					
 					<div class="well">
 						<h3>

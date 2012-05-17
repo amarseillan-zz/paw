@@ -26,9 +26,9 @@ public class PhotoForm {
 	  public Photo build(){
 		Photo image = null; 
 		try {
-			image = new Photo(0, fileData.getInputStream());
+			image = new Photo(fileData.getInputStream());
 		} catch (IOException e) {
-			e.printStackTrace();
+			throw new RuntimeException(e);
 		}
 		return image;
 	  }

@@ -4,6 +4,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
+import zonaProp.transfer.bussiness.UserType;
 import zonaProp.validators.FieldValidator;
 import zonaProp.validators.LengthValidator;
 import zonaProp.web.command.UserForm;
@@ -19,8 +20,6 @@ public class UserFormValidator implements Validator {
 	private FieldValidator<String> emailV = new LengthValidator("email", 3, 20);
 	private FieldValidator<String> phoneV = new LengthValidator("phone", 3,20);
 	
-	
-	
 	public boolean supports(Class<?> clazz) {
 		return UserForm.class.equals(clazz);
 	}
@@ -32,9 +31,16 @@ public class UserFormValidator implements Validator {
 		}
 		usernameV.appendError(errors, form.getUsername());
 		passwordV.appendError(errors, form.getPassword());
-		nameV.appendError(errors, form.getName());
-		lastNameV.appendError(errors, form.getLastname());
 		emailV.appendError(errors, form.getEmail());
-		phoneV.appendError(errors, form.getPhone());		
+		phoneV.appendError(errors, form.getPhone());	
+		
+
+		if(form.getUserType() == UserType.PRIVATEUSER){
+			nameV.appendError(errors, form.getName());
+			lastNameV.appendError(errors, form.getLastname());
+		}
+		else if(form.getUserType() == UserType.REALESTATE){
+			//TODO validar campos de real state
+		}
 	}
 }

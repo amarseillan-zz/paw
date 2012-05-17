@@ -2,6 +2,7 @@ package zonaProp.model.repo;
 
 import java.util.List;
 
+import zonaProp.transfer.bussiness.Photo;
 import zonaProp.transfer.bussiness.Publication;
 import zonaProp.transfer.bussiness.Search;
 
@@ -28,4 +29,10 @@ public interface PublicationRepo {
 	 * Devuelve la lista de las publicaciones que cumplan con el criterio @search
 	 */
 	public List<Publication> getSome(Search search);
+
+	
+	/*
+	 * Devuelve la Photo con el ID indicado
+	 */
+	public Photo getPhoto(Integer id);
 }
