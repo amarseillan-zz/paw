@@ -19,7 +19,7 @@
 									<label class="control-label" for="operation_type">Tipo de operaci&oacute;n</label>
 										<div class="controls">
               								<form:select path="operationType">
-												<form:option value="" label="Tipo de operaci&oacute;n"/>
+												<form:option value="">Tipo de operaci&oacute;n</form:option>
               									<form:options/>
      								         </form:select>
       							      </div>

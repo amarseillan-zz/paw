@@ -175,7 +175,7 @@ public class Publication extends PersistentEntity {
 		return access;
 	}
 
-	public void access() {
+	public synchronized void access() {
 		access++;
 	}
 
