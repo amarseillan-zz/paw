@@ -24,7 +24,7 @@ public class FileExtensionValidator extends FieldValidator<CommonsMultipartFile>
 	@Override
 	public boolean isCorrect(CommonsMultipartFile value) {
 		String[] aux = value.getOriginalFilename().split("\\.");
-		if(aux.length > 0){
+		if(aux.length > 1){
 			String extension =  aux[aux.length-1];
 			if(extensions.contains(extension)){
 				return true;

@@ -19,7 +19,7 @@ import zonaProp.web.command.PhotoForm;
 @Component
 public class PhotoFormValidator implements Validator {
 
-	private FieldValidator<CommonsMultipartFile> fileSizeValidator = new FileSizeValidator("photo", 2000000);
+	private FieldValidator<CommonsMultipartFile> fileSizeValidator = new FileSizeValidator("fileData", 2000000);
 	private FieldValidator<CommonsMultipartFile> fileExtensionValidator;
 	
 	
@@ -29,13 +29,19 @@ public class PhotoFormValidator implements Validator {
 	
 	public void validate(Object target, Errors errors) {
 		PhotoForm form = (PhotoForm) target;	
+		
 		List<String> extensions = new ArrayList<String>();
 		extensions.add("jpg");
 		extensions.add("JPG");
-		fileExtensionValidator = new FileExtensionValidator("photo", extensions);
+		fileExtensionValidator = new FileExtensionValidator("fileData", extensions);
 		
-		fileSizeValidator.appendError(errors, form.getFileData());
-		fileExtensionValidator.appendError(errors, form.getFileData());
+		if(!form.getFileData().isEmpty()){
+			fileSizeValidator.appendError(errors, form.getFileData());
+			fileExtensionValidator.appendError(errors, form.getFileData());
+		}
+		else{
+			errors.rejectValue("fileData", "null.publication");
+		}
 	}
 
 }

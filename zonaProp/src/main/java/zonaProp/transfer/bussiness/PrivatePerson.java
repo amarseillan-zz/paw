@@ -40,6 +40,6 @@ public class PrivatePerson extends User {
 
 	@Override
 	public String getCompleteName() {
-		return name + lastName;
+		return name + " " + lastName;
 	}
 }

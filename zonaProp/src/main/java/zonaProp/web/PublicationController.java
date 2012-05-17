@@ -129,10 +129,13 @@ public class PublicationController {
 		if (!errors.hasErrors()) {
 			Photo image = pF.build();
 			p.addPhoto(image);
+			ModelAndView mav = new ModelAndView("redirect:editPhotos");	
+			mav.addObject("publicationId", p.getId());
+			return mav;
 		}
-		
-		ModelAndView mav = new ModelAndView("redirect:editPhotos");		
-		mav.addObject("publicationId", p.getId());
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("publication/editPhotos");
+		mav.addObject("publication", p);
 		return mav;
 	}
 

@@ -27,7 +27,7 @@ public class Photo extends PersistentEntity {
 		data=IOUtils.toByteArray(iS);
 		iS.close();
 		}catch(IOException e){
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException(e);
 		}
 	}
 	
