@@ -19,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 import zonaProp.model.repo.DuplicatedUserException;
 import zonaProp.model.repo.UserRepo;
 import zonaProp.transfer.bussiness.User;
+import zonaProp.transfer.bussiness.UserType;
 import zonaProp.web.command.LoginUserForm;
 import zonaProp.web.command.UserForm;
 import zonaProp.web.command.validator.LoginUserFormValidator;
@@ -52,9 +53,18 @@ public class UserController {
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
-	public ModelAndView signUp() {
+	public ModelAndView signUpInm() {
 		ModelAndView mav = new ModelAndView();
-		mav.addObject(new UserForm());
+		mav.addObject(new UserForm(UserType.REALESTATE));
+		mav.setViewName("user/signUp");
+		return mav;
+	}
+	
+	@RequestMapping(method = RequestMethod.GET)
+	public ModelAndView signUpPart() {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject(new UserForm(UserType.PRIVATEUSER));
+		mav.setViewName("user/signUp");
 		return mav;
 	}
 
@@ -149,6 +159,10 @@ public class UserController {
 		// mav.addObject(new LoginUserForm());
 		return mav;
 
+	}
+	
+	@RequestMapping(method = RequestMethod.GET)
+	public void selectRegType(){
 	}
 
 	@RequestMapping(method = RequestMethod.GET)

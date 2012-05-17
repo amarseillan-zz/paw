@@ -38,6 +38,8 @@ public class HibernateUserRepo extends AbstractHibernateRepo implements UserRepo
 	}
 
 	public boolean authenticate(String username, String password) {
+		if(username == null || password == null)
+			return false;
 		return !find("from User where username = ? AND password = ?", username, password).isEmpty();
 	}
 

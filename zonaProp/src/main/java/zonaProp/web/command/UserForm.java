@@ -1,21 +1,52 @@
 package zonaProp.web.command;
 
+import java.io.IOException;
 
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
+
+import zonaProp.transfer.bussiness.Photo;
+import zonaProp.transfer.bussiness.PrivatePerson;
+import zonaProp.transfer.bussiness.RealEstate;
 import zonaProp.transfer.bussiness.User;
-
-
-
+import zonaProp.transfer.bussiness.UserType;
 
 public class UserForm {
+	
+	private String companyName;
+	private CommonsMultipartFile fileData;
+
+	private String name;
+	private String lastname;
+	
 	private String username;
 	private String password;
 	private String password2;
-	private String name;
-	private String lastname;
 	private String email;
 	private String phone;
 	
+	private UserType userType;
+	
+	public UserForm(UserType userType){
+		this.userType = userType;
+	}
+	
 	public UserForm(){
+	}
+
+	public String getCompanyName() {
+		return companyName;
+	}
+
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
+	}
+
+	public UserType getUserType() {
+		return userType;
+	}
+
+	public void setUserType(UserType userType) {
+		this.userType = userType;
 	}
 
 	public String getUsername() {
@@ -75,8 +106,29 @@ public class UserForm {
 		this.password2 = password2;
 	}
 	
+	public CommonsMultipartFile getFileData() {
+		return fileData;
+	}
+
+	public void setFileData(CommonsMultipartFile fileData) {
+		this.fileData = fileData;
+	}
+	
 	public User build(){
-		return new User(0,name,lastname,email,phone,username,password);
+		System.out.println(userType);
+		if(userType == UserType.PRIVATEUSER){
+			return new PrivatePerson(name,lastname,email,phone,username,password);
+		}
+		else if(userType == UserType.REALESTATE){
+				try {
+					return new RealEstate(companyName, new Photo(fileData.getInputStream()), email, phone, username, password);
+				} catch (IOException e) {
+					throw new RuntimeException(e);
+				}
+		}
+		else{
+			throw new IllegalArgumentException("User type not suported.");
+		}
 	}
 	
 }
