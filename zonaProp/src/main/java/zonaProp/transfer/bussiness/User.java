@@ -84,5 +84,14 @@ public abstract class User extends PersistentEntity {
 	}
 	
 	public abstract String getCompleteName();
+	
+	public int getActivePublicationsQuantity() {
+		int cant = 0;
+		for(Publication p:this.publications) {
+			if(p.isActive())
+				cant++;
+		}
+		return cant;
+	}
 
 }

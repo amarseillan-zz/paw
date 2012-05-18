@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
+import zonaProp.transfer.bussiness.RealEstate;
 import zonaProp.transfer.bussiness.User;
 
 @Component
@@ -45,5 +46,10 @@ public class HibernateUserRepo extends AbstractHibernateRepo implements UserRepo
 
 	public User get(String username) {
 		return (User) find("from User where username = ?", username).get(0);
+	}
+
+	@Override
+	public List<RealEstate> getRealStates() {
+		return find("from RealEstate");
 	}
 }

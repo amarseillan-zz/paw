@@ -1,6 +1,7 @@
 package zonaProp.web;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -18,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import zonaProp.model.repo.DuplicatedUserException;
 import zonaProp.model.repo.UserRepo;
+import zonaProp.transfer.bussiness.RealEstate;
 import zonaProp.transfer.bussiness.User;
 import zonaProp.transfer.bussiness.UserType;
 import zonaProp.web.command.LoginUserForm;
@@ -48,6 +50,18 @@ public class UserController {
 		ModelAndView mav = new ModelAndView();
 
 		mav.addObject("pList", u.getPublications());
+
+		return mav;
+	}
+	
+	@RequestMapping(method = RequestMethod.GET)
+	public ModelAndView realEstates() {
+
+		ModelAndView mav = new ModelAndView();
+		
+		List<RealEstate> list = users.getRealStates();
+
+		mav.addObject("list", list);
 
 		return mav;
 	}
