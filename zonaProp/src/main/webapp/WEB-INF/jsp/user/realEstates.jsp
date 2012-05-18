@@ -8,18 +8,18 @@
 	<h2>Inmobiliarias registradas</h2>
 	
 	<c:forEach items="${list}" var="realEstate">
-		<div class="well">
+		<div class="well" >
 			<table>	<tbody>
 				<tr>
 				<td><img width="200" src="<c:url value="../publication/viewPhoto"><c:param name="imageId" value="${realEstate.photo.id}" /></c:url>" /> </img></td>
 				<td><h3>${realEstate.companyName}</h3>
-				<br>Cantidad de avisos: <c:out value="${realEstate.activePublicationsQuantity}"/> 
+				<br><h5>Cantidad de avisos: <c:out value="${realEstate.activePublicationsQuantity}"/> <h5>
 				<br>
-					<a href="<c:url value="../publication/searchResults">
+					<h5><a href="<c:url value="../publication/searchResults">
 							<c:param name="publisher" value="${realEstate.id}" />
 						</c:url>">
-						ver
-					</a>
+						ver publicaciones
+					</a></h5>
 				</td>
 				</tr>
 			</table> </tbody>
