@@ -48,7 +48,6 @@ public class HibernateUserRepo extends AbstractHibernateRepo implements UserRepo
 		return (User) find("from User where username = ?", username).get(0);
 	}
 
-	@Override
 	public List<RealEstate> getRealStates() {
 		return find("from RealEstate");
 	}
