@@ -2,6 +2,8 @@ package zonaProp.web;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -67,7 +69,6 @@ public class PublicationController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView searchResults(SearchForm sf, Errors errors) {
-
 		sfv.validate(sf, errors);
 
 		ModelAndView mav = new ModelAndView();
@@ -77,7 +78,23 @@ public class PublicationController {
 			mav.setViewName("publication/search");
 			return mav;
 		} else {
-			mav.addObject("pList", publications.getSome(sf.build()));
+			List<Publication> pList = publications.getSome(sf.build());
+
+			int fromIndex = (sf.getPageValue()-1)*sf.getPageSizeValue();
+			int toIndex = sf.getPageValue()*sf.getPageSizeValue();
+
+			fromIndex=(fromIndex>0&&fromIndex<=toIndex&&fromIndex<pList.size())?fromIndex:0;
+			toIndex=(toIndex>0&&toIndex<pList.size()&&toIndex>=fromIndex)?toIndex:pList.size();
+
+			List<SearchForm> sFList = new ArrayList<SearchForm>();
+
+			for(int i=0;i<pList.size()/sf.getPageSizeValue() + (pList.size()%sf.getPageSizeValue()==0?0:1);i++){
+				SearchForm s = new SearchForm(sf.getMax(),sf.getMin(),sf.getOperationType(),sf.getPropertyType(),sf.getPublisher(),sf.isAscending(),String.valueOf(i+1),sf.getPageSize());
+				sFList.add(s);
+			}
+			mav.addObject("sf",sf);
+			mav.addObject("sFList", sFList);
+			mav.addObject("pList", pList.subList(fromIndex, toIndex));
 			return mav;
 		}
 
@@ -146,7 +163,7 @@ public class PublicationController {
 			return;
 		}
 		resp.reset();
-	//	resp.setBufferSize(1024);
+		//	resp.setBufferSize(1024);
 		resp.setContentType("image/jpeg");
 		resp.setHeader("Content-Disposition", "inline; filename=\"imagen"
 				+ photo.getId() + "\"");

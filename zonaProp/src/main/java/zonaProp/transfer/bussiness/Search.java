@@ -66,4 +66,5 @@ public class Search {
 	public User getPublisher() {
 		return publisher;
 	}
+	
 }

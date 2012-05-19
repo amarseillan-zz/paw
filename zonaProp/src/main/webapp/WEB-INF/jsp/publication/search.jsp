@@ -45,6 +45,18 @@
               							</label>
             						</div>
           						</div>
+											<div class="control-group">
+												<label class="control-label" for="pageSize">Propiedades por p&aacute;gina</label>
+													<div class="controls">
+			              					<form:select path="pageSize">
+															<form:option value="30">30</form:option>
+															<form:option value="50">50</form:option>
+															<form:option value="100">100</form:option>
+															<form:option value="150">150</form:option>
+			              									
+			     								         </form:select>
+			      							      </div>
+											</div>
 								<div class="form-actions">
             						<button type="submit" class="btn btn-primary">Buscar</button>
           						</div>
