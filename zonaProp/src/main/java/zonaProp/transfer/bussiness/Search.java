@@ -8,6 +8,7 @@ public class Search {
 	private PropertyType propertyType=null;
 	private boolean ascending=true;
 	private User publisher=null;
+	
 
 	public Search(Double min, Double max, OperationType operationType,
 			PropertyType propertyType, boolean ascending, User publisher) {
@@ -47,4 +48,5 @@ public class Search {
 	public User getPublisher() {
 		return publisher;
 	}
+	
 }

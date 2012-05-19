@@ -39,6 +39,14 @@
 		</c:forEach>
 		</tbody>
 	</table>
+	<c:forEach items="${sFList}" var="searchForm">
+	<c:if test="${not empty searchForm.publisher}">
+		<a href="searchResults?propertyType=${searchForm.propertyType}&operationType=${searchForm.operationType}&min=${searchForm.min}&max=${searchForm.max}&ascending=${searchForm.ascending}&_ascending=on&pageSize=${searchForm.pageSize}&page=${searchForm.page}&publisher=${searchForm.publisher.id}"><c:if test="${searchForm.page == sf.page}"><b></c:if>${searchForm.page}<c:if test="${searchForm.page == sf.page}"></b></c:if></a>
+		</c:if>
+		<c:if test="${empty searchForm.publisher}">
+			<a href="searchResults?propertyType=${searchForm.propertyType}&operationType=${searchForm.operationType}&min=${searchForm.min}&max=${searchForm.max}&ascending=${searchForm.ascending}&_ascending=on&pageSize=${searchForm.pageSize}&page=${searchForm.page}"><c:if test="${searchForm.page == sf.page}"><b></c:if>${searchForm.page}<c:if test="${searchForm.page == sf.page}"></b></c:if></a>
+			</c:if>
+		</c:forEach>
 </c:if>
 
 <form class="form-horizontal" method="GET" action="search">

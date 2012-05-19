@@ -13,8 +13,26 @@ public class SearchForm {
 	PropertyType propertyType = null;
 	User publisher = null;
 	boolean ascending = true;
-
+	String page = null;
+	String pageSize = null;
+	public SearchForm() {
+		// TODO Auto-generated constructor stub
+	}
 	
+	public SearchForm(String max, String min, OperationType operationType,
+			PropertyType propertyType, User publisher, boolean ascending,
+			String page, String pageSize) {
+		super();
+		this.max = max;
+		this.min = min;
+		this.operationType = operationType;
+		this.propertyType = propertyType;
+		this.publisher = publisher;
+		this.ascending = ascending;
+		this.page = page;
+		this.pageSize = pageSize;
+	}
+
 	public User getPublisher() {
 		return publisher;
 	}
@@ -65,6 +83,30 @@ public class SearchForm {
 		this.propertyType = propertyType;
 	}
 
+	public Integer getPageValue(){
+		return this.page==null || this.page.isEmpty() ? 1 : Integer.parseInt(this.page);
+	}
+	
+	public String getPage(){
+		return page;
+	}
+	
+	public void setPage(String page){
+		this.page = page;
+	}
+	
+	public String getPageSize(){
+		return pageSize;
+	}
+	
+	public Integer getPageSizeValue(){
+		return this.pageSize==null || this.pageSize.isEmpty() ? 50 : Integer.parseInt(this.pageSize);
+	}
+	
+	public void setPageSize(String pageSize){
+		this.pageSize = pageSize;
+	}
+	
 	public Search build() {
 		return new Search(min==null || min.isEmpty() ? null : Double.parseDouble(min),
 				max==null || max.isEmpty() ? null : Double.parseDouble(max), operationType,

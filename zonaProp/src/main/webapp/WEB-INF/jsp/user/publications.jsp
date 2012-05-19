@@ -17,7 +17,9 @@
 	<tbody>
 	<c:forEach items="${pList}" var="publication">
 		<tr>
-		<td>${publication.address}</td>
+		<td><a href="<c:url value="../publication/view">
+						<c:param name="publicationId" value="${publication.id}" />
+					</c:url>">${publication.address}</a></td>
 		<td>${publication.propertyType.name}</td>
 		<td>${publication.price}</td>
 		<td>${publication.age}</td>
@@ -25,18 +27,13 @@
 			<a href="<c:url value="../publication/modify">
 						<c:param name="publicationId" value="${publication.id}" />
 					</c:url>">
-				editar
-			</a>
-			<a href="<c:url value="../publication/view">
-						<c:param name="publicationId" value="${publication.id}" />
-					</c:url>">
-				ver
+				Editar informaci&oacute;n
 			</a>
 			<br/>
 			<a href="<c:url value="../publication/editPhotos">
 				<c:param name="publicationId" value="${publication.id}" />
 			</c:url>
-				">Editar Imagenes
+				">Editar im&aacute;genes
 			</a>
 		</td>
 		</tr>
