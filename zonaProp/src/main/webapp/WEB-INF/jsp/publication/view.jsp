@@ -29,8 +29,6 @@
 						<br/>
 						<b>Area:</b> ${publication.covered} metros cubiertos y ${publication.uncovered} metros descubiertos
 						<br/>
-						${publication.kitchen} metros de cocina, ${publication.dinningRoom} metros de comedor y ${publication.room} metros de cuartos
-						<br/>
 						<b>Antig&uuml;edad:</b> ${publication.age} a&ntilde;os
 						<br/>
 						<b>Precio:</b> ${publication.price} pesos
@@ -58,7 +56,7 @@
 							<c:forEach items="${publication.photos}" var="photo">
 									<img class="image" src="<c:url value="viewPhoto"><c:param name="imageId" value="${photo.id}" /></c:url>" /> 
 									<c:if test="${publication.reserved}">
-										<img class="pic-on-pic"" src="../../imgs/reserved.png"/>
+										<img class="pic-on-pic" src="../../imgs/reserved.png"/>
 									</c:if>			
 							</c:forEach> 
 					</div>

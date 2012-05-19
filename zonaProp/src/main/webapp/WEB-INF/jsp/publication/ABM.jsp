@@ -72,6 +72,22 @@
 			</div>
 		</div>
 		
+		<c:forEach var="env" items="${publicationForm.environmentList}">
+			<div class="control-group">
+				<div class="controls">
+					${env.type.name} de ${env.width}x${env.depth}. <a href="">Eliminar</a><br/>
+				</div>
+			</div>
+		</c:forEach>
+		
+		<c:if test="${not publication.new}">
+			<div class="control-group">
+				<div class="controls">
+					<a href="addEnvironment?publicationId=<c:out value="${publicationForm.publicationId}"/>">Agregar ambiente</a>
+				</div>
+			</div>
+		</c:if>
+		
 		<div class="control-group">
 			<label class="control-label" for="covered">Superficie cubierta</label>
 			<div class="controls">
@@ -85,30 +101,6 @@
 			<div class="controls">
 				<form:input type="text" class="input-xlarge"
 					path="uncovered"/>
-			</div>
-		</div>
-		
-		<div class="control-group">
-			<label class="control-label" for="kitchen">Superficie de la cocina</label>
-			<div class="controls">
-				<form:input type="text" class="input-xlarge"
-					path="kitchen"/>
-			</div>
-		</div>
-		
-		<div class="control-group">
-			<label class="control-label" for="dinningRoom">Superficie del comedor</label>
-			<div class="controls">
-				<form:input type="text" class="input-xlarge"
-					path="dinningRoom"/>
-			</div>
-		</div>
-		
-		<div class="control-group">
-			<label class="control-label" for="room">Superficie del dormitorio</label>
-			<div class="controls">
-				<form:input type="text" class="input-xlarge"
-					path="room"/>
 			</div>
 		</div>
 		

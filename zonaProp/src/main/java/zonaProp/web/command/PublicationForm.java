@@ -3,6 +3,7 @@ package zonaProp.web.command;
 import java.util.ArrayList;
 import java.util.List;
 
+import zonaProp.transfer.bussiness.Environment;
 import zonaProp.transfer.bussiness.OperationType;
 import zonaProp.transfer.bussiness.PropertyServices;
 import zonaProp.transfer.bussiness.PropertyType;
@@ -19,10 +20,8 @@ public class PublicationForm {
 	private String uncovered;
 	private String age;
 	private int access;
-	private String kitchen;
-	private String dinningRoom;
-	private String room;
-
+	
+	List<Environment> environmentList;
 	List<PropertyServices> propertyServices;
 
 	private String description;
@@ -43,7 +42,8 @@ public class PublicationForm {
 		age = "";
 
 		propertyServices = new ArrayList<PropertyServices>();
-
+		environmentList = new ArrayList<Environment>();
+		
 		description = "";
 		active = true;
 		reserved = false;
@@ -52,9 +52,6 @@ public class PublicationForm {
 		operationType = null;
 		access = 0;
 
-		kitchen = "";
-		dinningRoom = "";
-		room = "";
 	}
 
 	public PublicationForm(Publication p) {
@@ -76,10 +73,9 @@ public class PublicationForm {
 		propertyType = p.getPropertyType();
 		operationType = p.getOperationType();
 		access = p.getAccess();
+		
+		environmentList = p.getEnvironmentList();
 
-		kitchen = String.valueOf(p.getKitchen());
-		dinningRoom = String.valueOf(p.getDinningRoom());
-		room = String.valueOf(p.getRoom());
 	}
 
 	public List<PropertyServices> getPropertyServices() {
@@ -119,8 +115,7 @@ public class PublicationForm {
 				address, city, Double.parseDouble(price), environments,
 				Double.parseDouble(covered), Double.parseDouble(uncovered),
 				Integer.parseInt(age), propertyServices, description, active, reserved,
-				access, Integer.valueOf(kitchen), Integer.valueOf(dinningRoom),
-				Integer.valueOf(room));
+				access, environmentList);
 	}
 
 	public int getPublicationId() {
@@ -203,28 +198,13 @@ public class PublicationForm {
 		return reserved;
 	}
 
-	public String getKitchen() {
-		return kitchen;
+	public List<Environment> getEnvironmentList() {
+		return environmentList;
 	}
 
-	public void setKitchen(String kitchen) {
-		this.kitchen = kitchen;
+	public void setEnvironmentList(List<Environment> environmentList) {
+		this.environmentList = environmentList;
 	}
 
-	public String getDinningRoom() {
-		return dinningRoom;
-	}
-
-	public void setDinningRoom(String dinningRoom) {
-		this.dinningRoom = dinningRoom;
-	}
-
-	public String getRoom() {
-		return room;
-	}
-
-	public void setRoom(String room) {
-		this.room = room;
-	}
 
 }

@@ -23,6 +23,10 @@ public class Publication extends PersistentEntity {
 	private String city;
 	private double price;
 	private int environments;
+
+	@OneToMany(cascade = CascadeType.ALL)
+	private List<Environment> environmentList;
+
 	private double covered;
 	private double uncovered;
 	private int age;
@@ -30,9 +34,6 @@ public class Publication extends PersistentEntity {
 	private boolean active;
 	private boolean reserved;
 	private int access;
-	private int kitchen;
-	private int dinningRoom;
-	private int room;
 
 	@ElementCollection(targetClass = PropertyServices.class)
 	@Enumerated(EnumType.STRING)
@@ -58,9 +59,8 @@ public class Publication extends PersistentEntity {
 			OperationType operationType, String address, String city,
 			double price, int environments, double covered, double uncovered,
 			int age, List<PropertyServices> propertyServices,
-			String description, boolean active, boolean reserved, int access, int kitchen,
-			int dinningRoom, int room) {
-		
+			String description, boolean active, boolean reserved, int access,
+			List<Environment> environmentList) {
 		super(publicationId);
 		setAddress(address);
 		setCity(city);
@@ -76,12 +76,7 @@ public class Publication extends PersistentEntity {
 		setPropertyType(propertyType);
 		setOperationType(operationType);
 		setAccess(access);
-		setKitchen(kitchen);
-		setDinningRoom(dinningRoom);
-		setRoom(room);
 	}
-	
-	
 
 	private void setAddress(String address) {
 		new LengthValidator("direccion", 1, 30).check(address);
@@ -124,25 +119,13 @@ public class Publication extends PersistentEntity {
 	private void setActive(boolean active) {
 		this.active = active;
 	}
-	
+
 	private void setReserved(boolean reserved) {
 		this.reserved = reserved;
 	}
 
 	private void setAccess(int access) {
 		this.access = access;
-	}
-
-	private void setKitchen(int kitchen) {
-		this.kitchen = kitchen;
-	}
-
-	private void setDinningRoom(int dinningRoom) {
-		this.dinningRoom = dinningRoom;
-	}
-
-	private void setRoom(int room) {
-		this.room = room;
 	}
 
 	private void setPropertyType(PropertyType propertyType) {
@@ -214,7 +197,7 @@ public class Publication extends PersistentEntity {
 	public boolean isActive() {
 		return active;
 	}
-	
+
 	public boolean isReserved() {
 		return reserved;
 	}
@@ -259,16 +242,16 @@ public class Publication extends PersistentEntity {
 		access++;
 	}
 
-	public int getKitchen() {
-		return kitchen;
+	public void addEnvironment(Environment env) {
+		environmentList.add(env);
 	}
 
-	public int getDinningRoom() {
-		return dinningRoom;
+	public List<Environment> getEnvironmentList() {
+		return environmentList;
 	}
 
-	public int getRoom() {
-		return room;
+	public void deleteEnvironment(Environment e) {
+		environmentList.remove(e);
 	}
 
 }

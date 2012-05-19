@@ -27,19 +27,11 @@ public class PublicationFormValidator implements Validator {
 			"uncovered");
 
 	private FieldValidator<String> ageValdator = new PositiveIntValidator("age");
+	
+	private FieldValidator<Object> operationTypeValidator = new NotNullValidator("operationType");
+	private FieldValidator<Object> propertyTypeValidator = new NotNullValidator("propertyType");
 
-	private FieldValidator<Object> operationTypeValidator = new NotNullValidator(
-			"operationType");
-	private FieldValidator<Object> propertyTypeValidator = new NotNullValidator(
-			"propertyType");
-
-	private FieldValidator<String> kitchenValidator = new PositiveIntValidator(
-			"kitchen");
-	private FieldValidator<String> dinningRoomValidator = new PositiveIntValidator(
-			"dinningRoom");
-	private FieldValidator<String> roomValidator = new PositiveIntValidator(
-			"room");
-
+	
 	public boolean supports(Class<?> clazz) {
 		return PublicationForm.class.equals(clazz);
 	}
@@ -55,8 +47,5 @@ public class PublicationFormValidator implements Validator {
 		ageValdator.appendError(errors, form.getAge());
 		operationTypeValidator.appendError(errors, form.getOperationType());
 		propertyTypeValidator.appendError(errors, form.getPropertyType());
-		kitchenValidator.appendError(errors, form.getKitchen());
-		dinningRoomValidator.appendError(errors, form.getDinningRoom());
-		roomValidator.appendError(errors, form.getRoom());
 	}
 }
