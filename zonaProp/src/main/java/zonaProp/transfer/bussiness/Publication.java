@@ -10,9 +10,11 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+
+import zonaProp.validators.LengthValidator;
+import zonaProp.validators.NotNullValidator;
 
 @Entity
 public class Publication extends PersistentEntity {
@@ -47,11 +49,9 @@ public class Publication extends PersistentEntity {
 	private User publisher;
 
 	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "dep_id")
 	private List<Photo> photos = new ArrayList<Photo>();
 
 	public Publication() {
-		super(0);
 	}
 
 	public Publication(int publicationId, PropertyType propertyType,
@@ -60,23 +60,75 @@ public class Publication extends PersistentEntity {
 			int age, List<PropertyServices> propertyServices,
 			String description, boolean active, int access, List<Environment> environmentList) {
 		super(publicationId);
+		setAddress(address);
+		setCity(city);
+		setPrice(price);
+		setEnvironments(environments);
+		setCovered(covered);
+		setUncovered(uncovered);
+		setAge(age);
+		setPropertyServices(propertyServices);
+		setDescription(description);
+		setActive(active);
+		setPropertyType(propertyType);
+		setOperationType(operationType);
+		setAccess(access);
+	}
 
+	private void setAddress(String address) {
+		new LengthValidator("direccion", 1, 30).check(address);
 		this.address = address;
+	}
+
+	private void setCity(String city) {
+		new LengthValidator("ciudad", 1, 30).check(city);
 		this.city = city;
+	}
+
+	private void setPrice(double price) {
 		this.price = price;
+	}
+
+	private void setEnvironments(int environments) {
 		this.environments = environments;
+	}
+
+	private void setCovered(double covered) {
 		this.covered = covered;
+	}
+
+	private void setUncovered(double uncovered) {
 		this.uncovered = uncovered;
+	}
+
+	private void setAge(int age) {
 		this.age = age;
+	}
+
+	private void setPropertyServices(List<PropertyServices> propertyServices) {
 		this.propertyServices = propertyServices;
+	}
+
+	private void setDescription(String description) {
 		this.description = description;
+	}
+
+	private void setActive(boolean active) {
 		this.active = active;
+	}
 
-		this.propertyType = propertyType;
-		this.operationType = operationType;
+	private void setAccess(int access) {
 		this.access = access;
-		this.environmentList = environmentList;
+	}
 
+	private void setPropertyType(PropertyType propertyType) {
+		new NotNullValidator("tipo de propiedad");
+		this.propertyType = propertyType;
+	}
+
+	private void setOperationType(OperationType operationType) {
+		new NotNullValidator("tipo de operacion");
+		this.operationType = operationType;
 	}
 
 	public List<PropertyServices> getPropertyServices() {
@@ -174,7 +226,7 @@ public class Publication extends PersistentEntity {
 		return access;
 	}
 
-	public void access() {
+	public synchronized void access() {
 		access++;
 	}
 

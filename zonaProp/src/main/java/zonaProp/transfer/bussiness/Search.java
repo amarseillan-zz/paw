@@ -1,29 +1,48 @@
 package zonaProp.transfer.bussiness;
 
-
 public class Search {
-	private Double min=null;
-	private Double max=null;
-	private OperationType operationType=null;
-	private PropertyType propertyType=null;
-	private boolean ascending=true;
-	private User publisher=null;
+	private Double min = null;
+	private Double max = null;
+	private OperationType operationType = null;
+	private PropertyType propertyType = null;
+	private boolean ascending = true;
+	private User publisher = null;
 
 	public Search(Double min, Double max, OperationType operationType,
 			PropertyType propertyType, boolean ascending, User publisher) {
-		super();
+
+		setMin(min);
+		setMax(max);
+		setOperationType(operationType);
+		setPropertyType(propertyType);
+		setAscending(ascending);
+		setPublisher(publisher);
+	}
+
+	private void setMin(Double min) {
 		this.min = min;
+	}
+
+	private void setMax(Double max) {
 		this.max = max;
+	}
+
+	private void setOperationType(OperationType operationType) {
 		this.operationType = operationType;
+	}
+
+	private void setPropertyType(PropertyType propertyType) {
 		this.propertyType = propertyType;
+	}
+
+	private void setAscending(boolean ascending) {
 		this.ascending = ascending;
+	}
+
+	private void setPublisher(User publisher) {
 		this.publisher = publisher;
 	}
 
-	public boolean isAll(){
-		return min==null && max==null && operationType == null && propertyType ==null && publisher==null;
-	}
-	
 	public Double getMin() {
 		return min;
 	}
@@ -47,4 +66,5 @@ public class Search {
 	public User getPublisher() {
 		return publisher;
 	}
+	
 }

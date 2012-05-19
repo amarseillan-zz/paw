@@ -18,16 +18,14 @@ public class Photo extends PersistentEntity {
 	byte[] data;
 
 	public Photo(){
-		super(0);
 	}
 	
-	public Photo(int id, InputStream iS) {
-		super(id);
+	public Photo(InputStream iS) {
 		try{
 		data=IOUtils.toByteArray(iS);
 		iS.close();
 		}catch(IOException e){
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException(e);
 		}
 	}
 	

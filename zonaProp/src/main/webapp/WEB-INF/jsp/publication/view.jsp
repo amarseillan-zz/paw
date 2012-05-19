@@ -10,15 +10,19 @@
 						<%@ include file="../userInfo.jsp" %>
 					</c:if>
 					
-					<form:form class="well form-horizontal" method="GET" action="searchResults" commandName="searchForm">
-						<input type="hidden" path="publisher"/>
-						<button type="submit" class="btn btn-primary">Otras publicaciones del usuario</button>
-					</form:form>
+					<a href="<c:url value="../publication/searchResults">
+						<c:param name="publisher" value="${publication.publisher.id}" />
+					</c:url>">Otras publicaciones del usuario
+					</a>
 					
 					<div class="well">
 						<h3>
-							Publicacion: ${publication.operationType.name} de ${publication.propertyType.name}
-						</h3>
+							Publicacion: ${publication.operationType.name} de ${publication.propertyType.name}</h3>
+							<h6><c:if test="${publication.access != 0}">
+								(Visto 	${publication.access}	
+								<c:if test="${publication.access == 1}">vez</c:if>
+								<c:if test="${publication.access != 1}">veces</c:if>
+								 )</c:if></h6>
 						<b>Ubicaci&oacute;n:</b> ${publication.address}, ${publication.city}
 						<br/>
 						<b>Ambientes:</b> ${publication.environments}
@@ -31,13 +35,13 @@
 						<br/>
 						<b>Precio:</b> ${publication.price} pesos
 						<br/>
-						<b>Cantidad de accesos:</b> ${publication.access} accesos
-						<br/>
+						<c:if test="${not empty publication.propertyServices}">
 						<b>Servicios:</b>
 						<c:forEach var="service" items="${publication.propertyServices}">
 							${service.name}.
 						</c:forEach>
 						<br/>
+						</c:if>
 						<b>Descripcion:</b> ${publication.description}
 						<div>
 							<b>Ubicacion en el mapa:</b>

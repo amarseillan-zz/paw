@@ -4,58 +4,47 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
 
 import zonaProp.validators.LengthValidator;
 
 @Entity
-@Table(name="sys_user")
-public class User extends PersistentEntity{
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@Table(name = "sys_user")
+public abstract class User extends PersistentEntity {
 
 	private String username;
 	private String password;
-	private String name;
-	private String lastName;
 	private String email;
 	private String phone;
-	
-	@OneToMany(mappedBy="publisher")
-	private List<Publication> publications= new ArrayList<Publication>();
+
+	@OneToMany(mappedBy = "publisher")
+	private List<Publication> publications = new ArrayList<Publication>();
 
 	public User(){
-		super(0);
 	}
 	
-	public User(int id, String name, String lastName, String email,
-			String phone, String username, String password) {
-		super(id);
+	public User(String email, String phone, String username,
+			String password) {
+		super();
 		setUsername(username);
-		setName(name);
-		setLastName(lastName);
 		setEmail(email);
 		setPhone(phone);
 		setPassword(password);
 	}
-	
-	public List<Publication> getPublications(){
+
+	public List<Publication> getPublications() {
 		return publications;
 	}
-	
-	public void addPublication(Publication publication){
+
+	public void addPublication(Publication publication) {
 		publications.add(publication);
-		if(!publication.getPublisher().equals(this)){
+		if (!publication.getPublisher().equals(this)) {
 			publication.setPublisher(this);
 		}
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public String getLastName() {
-		return lastName;
 	}
 
 	public String getEmail() {
@@ -74,34 +63,35 @@ public class User extends PersistentEntity{
 		return password;
 	}
 
-	public void setUsername(String username)  {
+	private void setUsername(String username) {
 		new LengthValidator("nombre de usuario", 3, 20).check(username);
 		this.username = username;
 	}
 
-	public void setPassword(String password)  {
+	private void setPassword(String password) {
 		new LengthValidator("contraseña", 3, 20).check(password);
 		this.password = password;
 	}
 
-	public void setName(String name)  {
-		new LengthValidator("nombre", 3, 20).check(name);
-		this.name = name;
-	}
-
-	public void setLastName(String lastName)  {		
-		new LengthValidator("apellido", 3, 20).check(lastName);
-		this.lastName = lastName;
-	}
-
-	public void setEmail(String email)  {
+	private void setEmail(String email) {
 		new LengthValidator("mail", 3, 40).check(email);
 		this.email = email;
 	}
 
-	public void setPhone(String phone)  {
-		new LengthValidator("telefono", 3, 15).check(phone);
+	private void setPhone(String phone) {
+		new LengthValidator("telefono", 3, 40).check(phone);
 		this.phone = phone;
 	}
 	
+	public abstract String getCompleteName();
+	
+	public int getActivePublicationsQuantity() {
+		int cant = 0;
+		for(Publication p:this.publications) {
+			if(p.isActive())
+				cant++;
+		}
+		return cant;
+	}
+
 }

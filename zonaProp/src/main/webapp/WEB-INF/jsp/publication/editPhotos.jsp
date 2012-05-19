@@ -1,7 +1,6 @@
 <%@ include file="../header.jsp" %>
 
 
-<p class="error">${error}</p>
 
 	<div class="well">
 	<table style="width: 20%;">
@@ -24,7 +23,7 @@
 	</div>
 	
 	<form:form class="well form-horizontal" method="POST" action="uploadPhoto" enctype="multipart/form-data" commandName="photoForm">
-				<div class="error"><form:errors path="*" /></div>		
+				<div class="error"><form:errors path="*" /></div>	
 						
 				<input type="hidden" name="publicationId" value="${publication.id}" path="publication"/>
 				

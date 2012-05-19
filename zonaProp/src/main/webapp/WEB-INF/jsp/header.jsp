@@ -17,9 +17,10 @@
 	<body>
 		<h1>Sistema de propiedades online</h1>
 			<a href="../publication/search">Buscar publicaciones</a>
+			<a href="../user/realEstates">Inmobiliarias</a>
 		<c:if test="${userId != null}">
 			<a href="../user/publications">Mis publicaciones</a>
-			<a href="logout">Salir</a>
+			<a href="../user/logout">Salir</a>
 		</c:if>
 		<c:if test="${userId == null}">
 			<a href="../user/login">Login</a>
