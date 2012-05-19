@@ -27,6 +27,7 @@ public class PublicationForm {
 
 	private String description;
 	private boolean active;
+	private boolean reserved;
 
 	private PropertyType propertyType;
 	private OperationType operationType;
@@ -45,6 +46,7 @@ public class PublicationForm {
 
 		description = "";
 		active = true;
+		reserved = false;
 
 		propertyType = null;
 		operationType = null;
@@ -69,6 +71,7 @@ public class PublicationForm {
 
 		description = p.getDescription();
 		active = p.isActive();
+		reserved = p.isReserved(); 
 
 		propertyType = p.getPropertyType();
 		operationType = p.getOperationType();
@@ -106,12 +109,16 @@ public class PublicationForm {
 	public void setActive(boolean active) {
 		this.active = active;
 	}
+	
+	public void setReserved(boolean reserved) {
+		this.reserved = reserved;
+	}
 
 	public Publication build() {
 		return new Publication(publicationId, propertyType, operationType,
 				address, city, Double.parseDouble(price), environments,
 				Double.parseDouble(covered), Double.parseDouble(uncovered),
-				Integer.parseInt(age), propertyServices, description, active,
+				Integer.parseInt(age), propertyServices, description, active, reserved,
 				access, Integer.valueOf(kitchen), Integer.valueOf(dinningRoom),
 				Integer.valueOf(room));
 	}
@@ -190,6 +197,10 @@ public class PublicationForm {
 
 	public boolean isActive() {
 		return active;
+	}
+	
+	public boolean isReserved() {
+		return reserved;
 	}
 
 	public String getKitchen() {

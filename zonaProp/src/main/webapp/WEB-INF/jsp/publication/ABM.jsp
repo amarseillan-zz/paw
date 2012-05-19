@@ -146,8 +146,14 @@
 					<form:option label="Inactiva" value="false"/>
 				</form:select>
 			</div>
+			
+			<div class="controls">
+				<form:select path="reserved">
+					<form:option label="No reservado" value="false"/>
+					<form:option label="Reservado" value="true"/>
+				</form:select>
+			</div>
 		</div>
-		
 		
 		<div class="form-actions">
 			<button type="submit" class="btn btn-primary">Guardar</button>

@@ -30,7 +30,7 @@ public class UserFormValidator implements Validator {
 	private FieldValidator<String> emailV = new LengthValidator("email", 3, 20);
 	private FieldValidator<String> phoneV = new LengthValidator("phone", 3, 20);
 	private FieldValidator<CommonsMultipartFile> fileSizeValidator = new FileSizeValidator(
-			"fileData", 2000000);
+			"fileData", 5000000);
 	private FieldValidator<CommonsMultipartFile> fileExtensionValidator;
 
 	public UserFormValidator() {

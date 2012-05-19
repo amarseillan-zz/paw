@@ -15,6 +15,7 @@ public class SearchForm {
 	boolean ascending = true;
 	String page = null;
 	String pageSize = null;
+	
 	public SearchForm() {
 		// TODO Auto-generated constructor stub
 	}

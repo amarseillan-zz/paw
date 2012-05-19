@@ -17,7 +17,7 @@ import zonaProp.web.command.PhotoForm;
 public class PhotoFormValidator implements Validator {
 
 	private FieldValidator<CommonsMultipartFile> fileSizeValidator = new FileSizeValidator(
-			"fileData", 2000000);
+			"fileData", 5000000);
 	private FieldValidator<CommonsMultipartFile> fileExtensionValidator;
 
 	public PhotoFormValidator() {

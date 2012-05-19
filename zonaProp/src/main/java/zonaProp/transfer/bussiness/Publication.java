@@ -28,6 +28,7 @@ public class Publication extends PersistentEntity {
 	private int age;
 	private String description;
 	private boolean active;
+	private boolean reserved;
 	private int access;
 	private int kitchen;
 	private int dinningRoom;
@@ -57,7 +58,7 @@ public class Publication extends PersistentEntity {
 			OperationType operationType, String address, String city,
 			double price, int environments, double covered, double uncovered,
 			int age, List<PropertyServices> propertyServices,
-			String description, boolean active, int access, int kitchen,
+			String description, boolean active, boolean reserved, int access, int kitchen,
 			int dinningRoom, int room) {
 		
 		super(publicationId);
@@ -71,6 +72,7 @@ public class Publication extends PersistentEntity {
 		setPropertyServices(propertyServices);
 		setDescription(description);
 		setActive(active);
+		setReserved(reserved);
 		setPropertyType(propertyType);
 		setOperationType(operationType);
 		setAccess(access);
@@ -78,6 +80,8 @@ public class Publication extends PersistentEntity {
 		setDinningRoom(dinningRoom);
 		setRoom(room);
 	}
+	
+	
 
 	private void setAddress(String address) {
 		new LengthValidator("direccion", 1, 30).check(address);
@@ -119,6 +123,10 @@ public class Publication extends PersistentEntity {
 
 	private void setActive(boolean active) {
 		this.active = active;
+	}
+	
+	private void setReserved(boolean reserved) {
+		this.reserved = reserved;
 	}
 
 	private void setAccess(int access) {
@@ -205,6 +213,10 @@ public class Publication extends PersistentEntity {
 
 	public boolean isActive() {
 		return active;
+	}
+	
+	public boolean isReserved() {
+		return reserved;
 	}
 
 	public void deletePhoto(Photo photo) {
