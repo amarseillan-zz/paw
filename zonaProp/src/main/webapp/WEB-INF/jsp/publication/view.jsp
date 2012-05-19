@@ -29,6 +29,9 @@
 						<br/>
 						<b>Area:</b> ${publication.covered} metros cubiertos y ${publication.uncovered} metros descubiertos
 						<br/>
+						<c:forEach var="env" items="${publication.environmentList}">
+							${env.type.name} de ${env.width}x${env.depth}.<br/>
+						</c:forEach>
 						<b>Antig&uuml;edad:</b> ${publication.age} a&ntilde;os
 						<br/>
 						<b>Precio:</b> ${publication.price} pesos
