@@ -21,15 +21,16 @@ public class Publication extends PersistentEntity {
 	private String city;
 	private double price;
 	private int environments;
+
+	@OneToMany(cascade = CascadeType.ALL)
+	private List<Environment> environmentList;
+	
 	private double covered;
 	private double uncovered;
 	private int age;
 	private String description;
 	private boolean active;
 	private int access;
-	private int kitchen;
-	private int dinningRoom;
-	private int room;
 
 	@ElementCollection(targetClass = PropertyServices.class)
 	@Enumerated(EnumType.STRING)
@@ -57,8 +58,7 @@ public class Publication extends PersistentEntity {
 			OperationType operationType, String address, String city,
 			double price, int environments, double covered, double uncovered,
 			int age, List<PropertyServices> propertyServices,
-			String description, boolean active, int access, int kitchen,
-			int dinningRoom, int room) {
+			String description, boolean active, int access, List<Environment> environmentList) {
 		super(publicationId);
 
 		this.address = address;
@@ -75,9 +75,8 @@ public class Publication extends PersistentEntity {
 		this.propertyType = propertyType;
 		this.operationType = operationType;
 		this.access = access;
-		this.kitchen = kitchen;
-		this.dinningRoom = dinningRoom;
-		this.room = room;
+		this.environmentList = environmentList;
+
 	}
 
 	public List<PropertyServices> getPropertyServices() {
@@ -179,16 +178,16 @@ public class Publication extends PersistentEntity {
 		access++;
 	}
 
-	public int getKitchen() {
-		return kitchen;
+	public void addEnvironment(Environment env) {
+		environmentList.add(env);
 	}
 
-	public int getDinningRoom() {
-		return dinningRoom;
+	public List<Environment> getEnvironmentList() {
+		return environmentList;
 	}
 
-	public int getRoom() {
-		return room;
+	public void deleteEnvironment(Environment e) {
+		environmentList.remove(e);
 	}
 
 }

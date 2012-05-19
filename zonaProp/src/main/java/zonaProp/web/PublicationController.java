@@ -18,15 +18,19 @@ import org.springframework.web.servlet.ModelAndView;
 import zonaProp.mailing.MailingService;
 import zonaProp.model.repo.PublicationRepo;
 import zonaProp.model.repo.UserRepo;
+import zonaProp.transfer.bussiness.Environment;
+import zonaProp.transfer.bussiness.EnvironmentType;
 import zonaProp.transfer.bussiness.Photo;
 import zonaProp.transfer.bussiness.PropertyServices;
 import zonaProp.transfer.bussiness.Publication;
 import zonaProp.transfer.bussiness.User;
 import zonaProp.web.command.CommentForm;
+import zonaProp.web.command.EnvironmentForm;
 import zonaProp.web.command.PhotoForm;
 import zonaProp.web.command.PublicationForm;
 import zonaProp.web.command.SearchForm;
 import zonaProp.web.command.validator.CommentFormValidator;
+import zonaProp.web.command.validator.EnvironmentFormValidator;
 import zonaProp.web.command.validator.PhotoFormValidator;
 import zonaProp.web.command.validator.PublicationFormValidator;
 import zonaProp.web.command.validator.SearchFormValidator;
@@ -39,18 +43,23 @@ public class PublicationController {
 	PhotoFormValidator photofv;
 	CommentFormValidator cfv;
 	SearchFormValidator sfv;
+	EnvironmentFormValidator efv;
 	PublicationRepo publications;
 	UserRepo users;
 	MailingService mailingService;
+
 	@Autowired
-	public PublicationController(PublicationFormValidator pfv, PhotoFormValidator photofv,
-			CommentFormValidator cfv, SearchFormValidator sfv,
-			PublicationRepo publications, UserRepo users, MailingService mailingService) {
+	public PublicationController(PublicationFormValidator pfv,
+			PhotoFormValidator photofv, CommentFormValidator cfv,
+			SearchFormValidator sfv, EnvironmentFormValidator efv,
+			PublicationRepo publications, UserRepo users,
+			MailingService mailingService) {
 
 		this.photofv = photofv;
 		this.pfv = pfv;
 		this.sfv = sfv;
 		this.cfv = cfv;
+		this.efv = efv;
 		this.publications = publications;
 		this.users = users;
 		this.mailingService = mailingService;
@@ -130,8 +139,8 @@ public class PublicationController {
 			Photo image = pF.build();
 			p.addPhoto(image);
 		}
-		
-		ModelAndView mav = new ModelAndView("redirect:editPhotos");		
+
+		ModelAndView mav = new ModelAndView("redirect:editPhotos");
 		mav.addObject("publicationId", p.getId());
 		return mav;
 	}
@@ -143,7 +152,7 @@ public class PublicationController {
 			return;
 		}
 		resp.reset();
-	//	resp.setBufferSize(1024);
+		// resp.setBufferSize(1024);
 		resp.setContentType("image/jpeg");
 		resp.setHeader("Content-Disposition", "inline; filename=\"imagen"
 				+ photo.getId() + "\"");
@@ -228,6 +237,57 @@ public class PublicationController {
 		}
 
 		return new ModelAndView("redirect:../user/publications");
+
+	}
+
+	@RequestMapping(method = RequestMethod.GET)
+	public ModelAndView addEnvironment(
+			@RequestParam("publicationId") Publication p) {
+		ModelAndView mav = new ModelAndView();
+
+		mav.addObject("publication", p);
+		mav.addObject("environmentForm", new EnvironmentForm());
+		mav.addObject("environmentTypes", EnvironmentType.values());
+		return mav;
+	}
+
+	@RequestMapping(method = RequestMethod.POST)
+	protected ModelAndView deleteEnv(
+			@RequestParam("publicationId") Publication p,
+			@RequestParam("envId") Environment e,
+			@ModelAttribute("userId") int ui) {
+		ModelAndView mav = new ModelAndView();
+		if (p.getUserId() != ui) {
+			return null;
+		}
+		p.deleteEnvironment(e);
+		mav.addObject("publication", p);
+		mav.setViewName("publication/modify");
+		return mav;
+	}
+
+	@RequestMapping(method = RequestMethod.POST)
+	protected ModelAndView addEnvironment(
+			@RequestParam("publicationId") Publication p, EnvironmentForm ef,
+			Errors errors, @ModelAttribute("userId") int ui) {
+
+		if (p.getUserId() != ui) {
+			return null;
+		}
+		efv.validate(ef, errors);
+
+		if (!errors.hasErrors()) {
+			Environment env = ef.build();
+			p.addEnvironment(env);
+			ModelAndView mav = new ModelAndView("redirect:modify");
+			mav.addObject("publicationId", p.getId());
+			return mav;
+		}
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("publication", p);
+		mav.addObject("environmentForm", ef);
+		mav.addObject("environmentTypes", EnvironmentType.values());
+		return mav;
 
 	}
 
