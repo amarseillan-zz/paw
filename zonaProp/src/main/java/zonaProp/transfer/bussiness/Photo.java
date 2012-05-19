@@ -18,11 +18,9 @@ public class Photo extends PersistentEntity {
 	byte[] data;
 
 	public Photo(){
-		super();
 	}
 	
 	public Photo(InputStream iS) {
-		super();
 		try{
 		data=IOUtils.toByteArray(iS);
 		iS.close();
