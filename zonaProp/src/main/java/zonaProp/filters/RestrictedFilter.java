@@ -2,28 +2,28 @@ package zonaProp.filters;
 
 import java.io.IOException;
 
-import javax.servlet.Filter;
 import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
+
+
 @Component
-public class ErrorFilter extends OncePerRequestFilter {
+public class RestrictedFilter extends OncePerRequestFilter {
 
 	@Override
 	protected void doFilterInternal(HttpServletRequest req,
 			HttpServletResponse resp, FilterChain filterChain)
 					throws ServletException, IOException {
-		try{
+		System.out.println(req.getContextPath());
+		System.out.println(req.getRequestURI());
+		if(req.getRequestURI().matches(".*/bin.*") || req.getRequestURI().matches(".*/css.*")){
 			filterChain.doFilter(req, resp);
-		}catch(Exception e){
-			resp.sendRedirect("errorPage");
+		}else{
+				resp.sendRedirect("/zonaProp/bin/publication/search");
 		}
 	}
 
