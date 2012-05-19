@@ -3,9 +3,14 @@ package zonaProp.model.repo;
 import java.io.Serializable;
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.hibernate.classic.Session;
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Order;
+
+import zonaProp.transfer.bussiness.Publication;
 
 public abstract class AbstractHibernateRepo {
 	private final SessionFactory sessionFactory;
@@ -20,17 +25,16 @@ public abstract class AbstractHibernateRepo {
 	}
 
 	@SuppressWarnings("unchecked")
-	public <T> List<T> find(String hql, Object... params) {
-		Session session = getSession();
-
-		Query query = session.createQuery(hql);
-		for (int i = 0; i < params.length; i++) {
-			query.setParameter(i, params[i]);
+	public <T> List<T> find(Class<T> c,List<Criterion> l, Order order) {
+		Criteria criteria = getSession().createCriteria(c);
+		for (Criterion criterion : l) {
+			criteria.add(criterion);
 		}
-		List<T> list = query.list();
-		return list;
+		criteria.addOrder(order);
+		return criteria.list();
 	}
 
+	
 	protected org.hibernate.classic.Session getSession() {
 		return sessionFactory.getCurrentSession();
 	}
