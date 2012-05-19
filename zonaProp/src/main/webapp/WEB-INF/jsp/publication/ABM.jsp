@@ -80,7 +80,7 @@
 			</div>
 		</c:forEach>
 		
-		<c:if test="${not publication.new}">
+		<c:if test="${publicationForm.publicationId != 0}">
 			<div class="control-group">
 				<div class="controls">
 					<a href="addEnvironment?publicationId=<c:out value="${publicationForm.publicationId}"/>">Agregar ambiente</a>
