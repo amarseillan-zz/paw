@@ -3992,3 +3992,16 @@ a.thumbnail:hover {
 .invisible {
   visibility: hidden;
 }
+
+img.image {
+ width:250px; 
+ height:250px;
+}
+
+img.pic-on-pic{
+	position:relative;
+	top:-75px; 
+	left:-255px; 
+	width:100px; 
+	height:100px;
+}

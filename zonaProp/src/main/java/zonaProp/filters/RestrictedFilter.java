@@ -20,7 +20,7 @@ public class RestrictedFilter extends OncePerRequestFilter {
 					throws ServletException, IOException {
 		System.out.println(req.getContextPath());
 		System.out.println(req.getRequestURI());
-		if(req.getRequestURI().matches(".*/bin.*") || req.getRequestURI().matches(".*/css.*")){
+		if(req.getRequestURI().matches(".*/bin.*") || req.getRequestURI().matches(".*/css.*") || req.getRequestURI().matches(".*/imgs.*")){
 			filterChain.doFilter(req, resp);
 		}else{
 				resp.sendRedirect("/zonaProp/bin/publication/search");

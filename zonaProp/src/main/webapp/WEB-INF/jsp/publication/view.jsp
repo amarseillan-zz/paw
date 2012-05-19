@@ -56,8 +56,10 @@
 				<c:if test="${not empty publication.photos}">
 					<div class="well">
 							<c:forEach items="${publication.photos}" var="photo">
-									<img style="width:250px; hight:250px;" src="<c:url value="viewPhoto"><c:param name="imageId" value="${photo.id}" /></c:url>" /> 
-										<img style="position:relative; top:-43px; left:-255px; width:100px; height:100px;" src="../../imgs/reserved.png"/>			
+									<img class="image" src="<c:url value="viewPhoto"><c:param name="imageId" value="${photo.id}" /></c:url>" /> 
+									<c:if test="${publication.reserved}">
+										<img class="pic-on-pic"" src="../../imgs/reserved.png"/>
+									</c:if>			
 							</c:forEach> 
 					</div>
 				</c:if>

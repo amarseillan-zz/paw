@@ -4,13 +4,10 @@ import java.io.Serializable;
 import java.util.List;
 
 import org.hibernate.Criteria;
-import org.hibernate.Query;
 import org.hibernate.SessionFactory;
-import org.hibernate.classic.Session;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Order;
 
-import zonaProp.transfer.bussiness.Publication;
 
 public abstract class AbstractHibernateRepo {
 	private final SessionFactory sessionFactory;

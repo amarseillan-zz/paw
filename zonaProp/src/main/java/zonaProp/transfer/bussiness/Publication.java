@@ -239,6 +239,7 @@ public class Publication extends PersistentEntity {
 		this.propertyServices = p.getPropertyServices();
 		this.description = p.getDescription();
 		this.active = p.isActive();
+		this.reserved = p.isReserved();
 
 		this.propertyType = p.getPropertyType();
 		this.operationType = p.getOperationType();
