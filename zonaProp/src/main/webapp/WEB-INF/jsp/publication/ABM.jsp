@@ -75,7 +75,8 @@
 		<c:forEach var="env" items="${publicationForm.environmentList}">
 			<div class="control-group">
 				<div class="controls">
-					${env.type.name} de ${env.width}x${env.depth}. <a href="">Eliminar</a><br/>
+					${env.type.name} de ${env.width}x${env.depth}.
+						<a href="deleteEnv?publicationId=${publicationForm.publicationId}&envId=${env.id}">Eliminar</a>
 				</div>
 			</div>
 		</c:forEach>

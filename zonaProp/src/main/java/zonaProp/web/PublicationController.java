@@ -174,18 +174,21 @@ public class PublicationController {
 		if (photo == null) {
 			return;
 		}
-		resp.reset();
-		//	resp.setBufferSize(1024);
 		resp.setContentType("image/jpeg");
-		resp.setHeader("Content-Disposition", "inline; filename=\"imagen"
-				+ photo.getId() + "\"");
-		resp.setContentLength(photo.getSize());
+		resp.setHeader("Content-Disposition", "inline; filename=\"imagen" + photo.getId() + "\"");
+		OutputStream output = null;
 		try {
-			OutputStream output = resp.getOutputStream();
+			output = resp.getOutputStream();
+			resp.setContentLength(photo.getSize());
 			output.write(photo.getData());
-			output.close();
 		} catch (IOException e) {
-			e.printStackTrace();
+			throw new RuntimeException(e);
+		} finally {
+			try {
+				output.close();
+			} catch (Exception e){
+				throw new RuntimeException(e);
+			}
 		}
 	}
 
@@ -277,7 +280,7 @@ public class PublicationController {
 		return mav;
 	}
 
-	@RequestMapping(method = RequestMethod.POST)
+	@RequestMapping(method = RequestMethod.GET)
 	protected ModelAndView deleteEnv(
 			@RequestParam("publicationId") Publication p,
 			@RequestParam("envId") Environment e,
@@ -289,11 +292,13 @@ public class PublicationController {
 			return null;
 		}
 		p.deleteEnvironment(e);
-		mav.addObject("publication", p);
-		mav.setViewName("publication/modify");
+		mav.addObject("publicationForm", new PublicationForm(p));
+		mav.addObject("services", PropertyServices.values());
+		mav.setViewName("publication/ABM");
 		return mav;
 	}
 
+	
 	@RequestMapping(method = RequestMethod.POST)
 	protected ModelAndView addEnvironment(
 			@RequestParam("publicationId") Publication p, EnvironmentForm ef,
