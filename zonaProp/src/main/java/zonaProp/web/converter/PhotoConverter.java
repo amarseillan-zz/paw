@@ -5,22 +5,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
-import zonaProp.model.repo.PublicationRepo;
+import zonaProp.model.repo.PhotoRepo;
 import zonaProp.transfer.bussiness.Photo;
 
 @Component
 public class PhotoConverter  implements Converter<String, Photo>{
 	
-	PublicationRepo publications;
+	PhotoRepo photos;
 	
 	@Autowired
-	public PhotoConverter(PublicationRepo publications) {
-		this.publications = publications;
+	public PhotoConverter(PhotoRepo photos) {
+		this.photos = photos;
 	}
 
 	public Photo convert(String source) {
 		try{
-		return publications.getPhoto(Integer.valueOf(source));
+		return photos.get(Integer.valueOf(source));
 		} catch(NumberFormatException nfe){
 			return null;
 		}

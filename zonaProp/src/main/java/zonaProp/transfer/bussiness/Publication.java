@@ -26,7 +26,7 @@ public class Publication extends PersistentEntity {
 	private int environments;
 
 	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name="publicationId")
+	@JoinColumn(name = "publicationId")
 	private List<Environment> environmentList;
 
 	private double covered;
@@ -35,7 +35,7 @@ public class Publication extends PersistentEntity {
 	private String description;
 	private boolean active;
 	private boolean reserved;
-	private int access;
+	private int access = 0;
 
 	@ElementCollection(targetClass = PropertyServices.class)
 	@Enumerated(EnumType.STRING)
@@ -61,7 +61,7 @@ public class Publication extends PersistentEntity {
 			OperationType operationType, String address, String city,
 			double price, int environments, double covered, double uncovered,
 			int age, List<PropertyServices> propertyServices,
-			String description, boolean active, boolean reserved, int access,
+			String description, boolean active, boolean reserved, 
 			List<Environment> environmentList) {
 		super(publicationId);
 		setAddress(address);
@@ -77,7 +77,6 @@ public class Publication extends PersistentEntity {
 		setReserved(reserved);
 		setPropertyType(propertyType);
 		setOperationType(operationType);
-		setAccess(access);
 	}
 
 	private void setAddress(String address) {
@@ -126,10 +125,6 @@ public class Publication extends PersistentEntity {
 		this.reserved = reserved;
 	}
 
-	private void setAccess(int access) {
-		this.access = access;
-	}
-
 	private void setPropertyType(PropertyType propertyType) {
 		new NotNullValidator("tipo de propiedad");
 		this.propertyType = propertyType;
@@ -143,11 +138,7 @@ public class Publication extends PersistentEntity {
 	public List<PropertyServices> getPropertyServices() {
 		return propertyServices;
 	}
-
-	public int getUserId() {
-		return publisher.getId();
-	}
-
+	
 	public PropertyType getPropertyType() {
 		return propertyType;
 	}
@@ -254,6 +245,10 @@ public class Publication extends PersistentEntity {
 
 	public void deleteEnvironment(Environment e) {
 		environmentList.remove(e);
+	}
+
+	public boolean belongsTo(User user) {
+		return publisher.equals(user);
 	}
 
 }

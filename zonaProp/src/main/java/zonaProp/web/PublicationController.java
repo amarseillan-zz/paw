@@ -87,19 +87,25 @@ public class PublicationController {
 		} else {
 			List<Publication> pList = publications.getSome(sf.build());
 
-			int fromIndex = (sf.getPageValue()-1)*sf.getPageSizeValue();
-			int toIndex = sf.getPageValue()*sf.getPageSizeValue();
+			int fromIndex = (sf.getPageValue() - 1) * sf.getPageSizeValue();
+			int toIndex = sf.getPageValue() * sf.getPageSizeValue();
 
-			fromIndex=(fromIndex>0&&fromIndex<=toIndex&&fromIndex<pList.size())?fromIndex:0;
-			toIndex=(toIndex>0&&toIndex<pList.size()&&toIndex>=fromIndex)?toIndex:pList.size();
+			fromIndex = (fromIndex > 0 && fromIndex <= toIndex && fromIndex < pList
+					.size()) ? fromIndex : 0;
+			toIndex = (toIndex > 0 && toIndex < pList.size() && toIndex >= fromIndex) ? toIndex
+					: pList.size();
 
 			List<SearchForm> sFList = new ArrayList<SearchForm>();
 
-			for(int i=0;i<pList.size()/sf.getPageSizeValue() + (pList.size()%sf.getPageSizeValue()==0?0:1);i++){
-				SearchForm s = new SearchForm(sf.getMax(),sf.getMin(),sf.getOperationType(),sf.getPropertyType(),sf.getPublisher(),sf.isAscending(),String.valueOf(i+1),sf.getPageSize());
+			for (int i = 0; i < pList.size() / sf.getPageSizeValue()
+					+ (pList.size() % sf.getPageSizeValue() == 0 ? 0 : 1); i++) {
+				SearchForm s = new SearchForm(sf.getMax(), sf.getMin(),
+						sf.getOperationType(), sf.getPropertyType(),
+						sf.getPublisher(), sf.isAscending(),
+						String.valueOf(i + 1), sf.getPageSize());
 				sFList.add(s);
 			}
-			mav.addObject("sf",sf);
+			mav.addObject("sf", sf);
 			mav.addObject("sFList", sFList);
 			mav.addObject("pList", pList.subList(fromIndex, toIndex));
 			return mav;
@@ -144,10 +150,10 @@ public class PublicationController {
 	protected ModelAndView uploadPhoto(
 			@RequestParam("publicationId") Publication p, PhotoForm pF,
 			Errors errors, HttpSession s) {
-		
-		User u = users.get((Integer)s.getAttribute("userId"));
-		
-		if (p.getUserId() != u.getId()) {
+
+		User u = users.get((Integer) s.getAttribute("userId"));
+
+		if (p.belongsTo(u)) {
 			return null;
 		}
 		photofv.validate(pF, errors);
@@ -155,7 +161,7 @@ public class PublicationController {
 		if (!errors.hasErrors()) {
 			Photo image = pF.build();
 			p.addPhoto(image);
-			ModelAndView mav = new ModelAndView("redirect:editPhotos");	
+			ModelAndView mav = new ModelAndView("redirect:editPhotos");
 			mav.addObject("publicationId", p.getId());
 			return mav;
 		}
@@ -172,7 +178,8 @@ public class PublicationController {
 			return;
 		}
 		resp.setContentType("image/jpeg");
-		resp.setHeader("Content-Disposition", "inline; filename=\"imagen" + photo.getId() + "\"");
+		resp.setHeader("Content-Disposition", "inline; filename=\"imagen"
+				+ photo.getId() + "\"");
 		OutputStream output = null;
 		try {
 			output = resp.getOutputStream();
@@ -183,7 +190,7 @@ public class PublicationController {
 		} finally {
 			try {
 				output.close();
-			} catch (Exception e){
+			} catch (Exception e) {
 				throw new RuntimeException(e);
 			}
 		}
@@ -200,16 +207,15 @@ public class PublicationController {
 	@RequestMapping(method = RequestMethod.POST)
 	protected ModelAndView deletePhoto(
 			@RequestParam("publicationId") Publication p,
-			@RequestParam("imageId") Photo photo,
-			 HttpSession s) {
-			
-			User u = users.get((Integer)s.getAttribute("userId"));
-			
-			if (p.getUserId() != u.getId()) {
-				return null;
-			}
-			
-			ModelAndView mav = new ModelAndView();
+			@RequestParam("imageId") Photo photo, HttpSession s) {
+
+		User u = users.get((Integer) s.getAttribute("userId"));
+
+		ModelAndView mav = new ModelAndView();
+
+		if (p.belongsTo(u)) {
+			return null;
+		}
 		p.deletePhoto(photo);
 		mav.addObject("publication", p);
 		mav.addObject("photoForm", new PhotoForm());
@@ -245,7 +251,7 @@ public class PublicationController {
 
 		ModelAndView mav = new ModelAndView();
 
-		User publisher = users.get((Integer)s.getAttribute("userId"));
+		User publisher = users.get((Integer) s.getAttribute("userId"));
 
 		if (errors.hasErrors()) {
 			mav.addObject("publicationForm", pf);
@@ -281,15 +287,14 @@ public class PublicationController {
 	@RequestMapping(method = RequestMethod.GET)
 	protected ModelAndView deleteEnv(
 			@RequestParam("publicationId") Publication p,
-			@RequestParam("envId") Environment e,
-			 HttpSession s) {
-		
-		User u = users.get((Integer)s.getAttribute("userId"));
-		
-		if (p.getUserId() != u.getId()) {
+			@RequestParam("envId") Environment e, HttpSession s) {
+
+		User u = users.get((Integer) s.getAttribute("userId"));
+
+		if (p.belongsTo(u)) {
 			return null;
 		}
-		
+
 		ModelAndView mav = new ModelAndView();
 		p.deleteEnvironment(e);
 		mav.addObject("publicationForm", new PublicationForm(p));
@@ -298,15 +303,14 @@ public class PublicationController {
 		return mav;
 	}
 
-	
 	@RequestMapping(method = RequestMethod.POST)
 	protected ModelAndView addEnvironment(
 			@RequestParam("publicationId") Publication p, EnvironmentForm ef,
-			Errors errors,  HttpSession s) {
-		
-		User u = users.get((Integer)s.getAttribute("userId"));
-		
-		if (p.getUserId() != u.getId()) {
+			Errors errors, HttpSession s) {
+
+		User u = users.get((Integer) s.getAttribute("userId"));
+
+		if (p.belongsTo(u)) {
 			return null;
 		}
 		efv.validate(ef, errors);
