@@ -75,10 +75,8 @@
 		<c:forEach var="env" items="${publicationForm.environmentList}">
 			<div class="control-group">
 				<div class="controls">
-					<label class="control-label">${env.type.name} de ${env.width}x${env.depth}.</label>
-					<div class="controls">
-						<button type="submit">Eliminar</button>
-					</div>
+					${env.type.name} de ${env.width}x${env.depth}.
+						<a href="deleteEnv?publicationId=${publicationForm.publicationId}&envId=${env.id}">Eliminar</a>
 				</div>
 			</div>
 		</c:forEach>

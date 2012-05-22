@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
+import zonaProp.transfer.bussiness.Environment;
 import zonaProp.transfer.bussiness.Photo;
 import zonaProp.transfer.bussiness.Publication;
 import zonaProp.transfer.bussiness.Search;
@@ -71,6 +72,11 @@ public class HibernatePublicationRepo extends AbstractHibernateRepo implements P
 
 	public Photo getPhoto(Integer id) {
 		return get(Photo.class, id);
+	}
+
+	@Override
+	public Environment getEnvironment(Integer id) {
+		return get(Environment.class, id);
 	}
 
 
