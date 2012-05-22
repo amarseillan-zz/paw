@@ -30,10 +30,12 @@ public class LoggedFilter extends OncePerRequestFilter {
 			HttpServletResponse resp, FilterChain filterChain)
 			throws ServletException, IOException {
 		if (req.getSession().getAttribute("userId")==null) {
+			System.out.println("LoggedFilter: user==null");
 			Cookie[] cs =req.getCookies();
 			User u = null;
 			if(cs!=null){
 				for(Cookie c:cs){
+					System.out.println("LoggedFilter: cukis");
 					if("userid".equals(c.getName()) && c.getValue()!=null){
 						u = ur.get(Integer.valueOf(c.getValue()));
 					}
@@ -50,8 +52,10 @@ public class LoggedFilter extends OncePerRequestFilter {
 					}
 				}
 			}
+			System.out.println("LoggedFilter: antes de doFilter");
 			filterChain.doFilter(req, resp);
 		} else {
+			System.out.println("LoggedFilter: user!=null");
 			if(req.getRequestURI().contains("login")){ 
 				resp.sendRedirect("publications");
 				return;

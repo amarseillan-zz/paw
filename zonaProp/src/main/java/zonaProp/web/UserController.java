@@ -1,6 +1,5 @@
 package zonaProp.web;
 
-import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.Cookie;
@@ -11,10 +10,8 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import zonaProp.model.repo.DuplicatedUserException;
@@ -28,7 +25,6 @@ import zonaProp.web.command.validator.LoginUserFormValidator;
 import zonaProp.web.command.validator.UserFormValidator;
 
 @Controller
-@SessionAttributes("userId")
 public class UserController {
 	LoginUserFormValidator lufv;
 	UserRepo users;
@@ -43,9 +39,9 @@ public class UserController {
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
-	public ModelAndView publications(@ModelAttribute("userId") int ui) {
+	public ModelAndView publications(HttpSession s) {
 
-		User u = users.get(ui);
+		User u = users.get((Integer)s.getAttribute("userId"));
 
 		ModelAndView mav = new ModelAndView();
 
@@ -180,18 +176,14 @@ public class UserController {
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
-	public void logout(HttpSession s,	HttpServletResponse resp) {
+	public String logout(HttpServletResponse resp, HttpSession s) {
 		s.setAttribute("userId", null);
 		s.invalidate();
 		Cookie c = new Cookie("userid", null);
 		c.setMaxAge(0);
 		resp.addCookie(c);
-		try {
-			resp.sendRedirect("login");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		return "redirect:../user/login";
+
 	}
 
 }

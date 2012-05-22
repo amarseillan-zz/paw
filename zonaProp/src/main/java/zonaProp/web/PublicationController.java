@@ -6,15 +6,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import zonaProp.mailing.MailingService;
@@ -38,7 +37,6 @@ import zonaProp.web.command.validator.PublicationFormValidator;
 import zonaProp.web.command.validator.SearchFormValidator;
 
 @Controller
-@SessionAttributes("userId")
 public class PublicationController {
 
 	PublicationFormValidator pfv;
@@ -145,9 +143,11 @@ public class PublicationController {
 	@RequestMapping(method = RequestMethod.POST)
 	protected ModelAndView uploadPhoto(
 			@RequestParam("publicationId") Publication p, PhotoForm pF,
-			Errors errors, @ModelAttribute("userId") int ui) {
-
-		if (p.getUserId() != ui) {
+			Errors errors, HttpSession s) {
+		
+		User u = users.get((Integer)s.getAttribute("userId"));
+		
+		if (p.getUserId() != u.getId()) {
 			return null;
 		}
 		photofv.validate(pF, errors);
@@ -201,11 +201,15 @@ public class PublicationController {
 	protected ModelAndView deletePhoto(
 			@RequestParam("publicationId") Publication p,
 			@RequestParam("imageId") Photo photo,
-			@ModelAttribute("userId") int ui) {
-		ModelAndView mav = new ModelAndView();
-		if (p.getUserId() != ui) {
-			return null;
-		}
+			 HttpSession s) {
+			
+			User u = users.get((Integer)s.getAttribute("userId"));
+			
+			if (p.getUserId() != u.getId()) {
+				return null;
+			}
+			
+			ModelAndView mav = new ModelAndView();
 		p.deletePhoto(photo);
 		mav.addObject("publication", p);
 		mav.addObject("photoForm", new PhotoForm());
@@ -235,13 +239,13 @@ public class PublicationController {
 
 	@RequestMapping(method = RequestMethod.POST)
 	public ModelAndView saveChanges(PublicationForm pf, Errors errors,
-			@ModelAttribute("userId") int ui) {
+			HttpSession s) {
 
 		pfv.validate(pf, errors);
 
 		ModelAndView mav = new ModelAndView();
 
-		User publisher = users.get(ui);
+		User publisher = users.get((Integer)s.getAttribute("userId"));
 
 		if (errors.hasErrors()) {
 			mav.addObject("publicationForm", pf);
@@ -278,11 +282,15 @@ public class PublicationController {
 	protected ModelAndView deleteEnv(
 			@RequestParam("publicationId") Publication p,
 			@RequestParam("envId") Environment e,
-			@ModelAttribute("userId") int ui) {
-		ModelAndView mav = new ModelAndView();
-		if (p.getUserId() != ui) {
+			 HttpSession s) {
+		
+		User u = users.get((Integer)s.getAttribute("userId"));
+		
+		if (p.getUserId() != u.getId()) {
 			return null;
 		}
+		
+		ModelAndView mav = new ModelAndView();
 		p.deleteEnvironment(e);
 		mav.addObject("publicationForm", new PublicationForm(p));
 		mav.addObject("services", PropertyServices.values());
@@ -294,9 +302,11 @@ public class PublicationController {
 	@RequestMapping(method = RequestMethod.POST)
 	protected ModelAndView addEnvironment(
 			@RequestParam("publicationId") Publication p, EnvironmentForm ef,
-			Errors errors, @ModelAttribute("userId") int ui) {
-
-		if (p.getUserId() != ui) {
+			Errors errors,  HttpSession s) {
+		
+		User u = users.get((Integer)s.getAttribute("userId"));
+		
+		if (p.getUserId() != u.getId()) {
 			return null;
 		}
 		efv.validate(ef, errors);

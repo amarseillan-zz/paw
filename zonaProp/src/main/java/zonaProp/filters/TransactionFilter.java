@@ -28,6 +28,7 @@ public class TransactionFilter extends OncePerRequestFilter {
 			throws ServletException, IOException {
 		try {
 
+			System.out.println("HOLA ESTAMOS EN EL TRANSACTION FILTER " + request.getSession().getAttribute("userId"));
 			// Starting a database transaction
 			sessionFactory.getCurrentSession().beginTransaction();
 

@@ -10,6 +10,7 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -25,6 +26,7 @@ public class Publication extends PersistentEntity {
 	private int environments;
 
 	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name="publicationId")
 	private List<Environment> environmentList;
 
 	private double covered;

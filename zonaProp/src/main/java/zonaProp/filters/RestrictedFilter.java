@@ -21,9 +21,13 @@ public class RestrictedFilter extends OncePerRequestFilter {
 		System.out.println(req.getContextPath());
 		System.out.println(req.getRequestURI());
 		if(req.getRequestURI().matches(".*/bin.*") || req.getRequestURI().matches(".*/css.*") || req.getRequestURI().matches(".*/imgs.*")){
+
+			System.out.println("restrictedFilter: antes de doFilter");
 			filterChain.doFilter(req, resp);
 		}else{
-				resp.sendRedirect("/zonaProp/bin/publication/search");
+
+			System.out.println("restrictedFilter: antes de sendredirect");
+			resp.sendRedirect("/zonaProp/bin/publication/search");
 		}
 	}
 
