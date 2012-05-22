@@ -75,7 +75,10 @@
 		<c:forEach var="env" items="${publicationForm.environmentList}">
 			<div class="control-group">
 				<div class="controls">
-					${env.type.name} de ${env.width}x${env.depth}. <a href="">Eliminar</a><br/>
+					<label class="control-label">${env.type.name} de ${env.width}x${env.depth}.</label>
+					<div class="controls">
+						<button type="submit">Eliminar</button>
+					</div>
 				</div>
 			</div>
 		</c:forEach>
