@@ -147,7 +147,10 @@ public class PublicationController {
 			@RequestParam("publicationId") Publication p, PhotoForm pF,
 			Errors errors, @ModelAttribute("userId") int ui) {
 
-		if (p.getUserId() != ui) {
+		
+		User user = users.get(ui);
+
+		if (p.belongsTo(user)) {
 			return null;
 		}
 		photofv.validate(pF, errors);
@@ -200,7 +203,10 @@ public class PublicationController {
 			@RequestParam("imageId") Photo photo,
 			@ModelAttribute("userId") int ui) {
 		ModelAndView mav = new ModelAndView();
-		if (p.getUserId() != ui) {
+		
+		User user = users.get(ui);
+
+		if (p.belongsTo(user)) {
 			return null;
 		}
 		p.deletePhoto(photo);
@@ -277,7 +283,9 @@ public class PublicationController {
 			@RequestParam("envId") Environment e,
 			@ModelAttribute("userId") int ui) {
 		ModelAndView mav = new ModelAndView();
-		if (p.getUserId() != ui) {
+		User user = users.get(ui);
+
+		if (p.belongsTo(user)) {
 			return null;
 		}
 		p.deleteEnvironment(e);
@@ -291,7 +299,9 @@ public class PublicationController {
 			@RequestParam("publicationId") Publication p, EnvironmentForm ef,
 			Errors errors, @ModelAttribute("userId") int ui) {
 
-		if (p.getUserId() != ui) {
+		User user = users.get(ui);
+
+		if (p.belongsTo(user)) {
 			return null;
 		}
 		efv.validate(ef, errors);
