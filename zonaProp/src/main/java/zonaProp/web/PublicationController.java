@@ -153,7 +153,7 @@ public class PublicationController {
 
 		User u = users.get((Integer) s.getAttribute("userId"));
 
-		if (p.belongsTo(u)) {
+		if (!p.belongsTo(u)) {
 			return null;
 		}
 		photofv.validate(pF, errors);
@@ -213,7 +213,7 @@ public class PublicationController {
 
 		ModelAndView mav = new ModelAndView();
 
-		if (p.belongsTo(u)) {
+		if (!p.belongsTo(u)) {
 			return null;
 		}
 		p.deletePhoto(photo);
@@ -291,7 +291,7 @@ public class PublicationController {
 
 		User u = users.get((Integer) s.getAttribute("userId"));
 
-		if (p.belongsTo(u)) {
+		if (!p.belongsTo(u)) {
 			return null;
 		}
 
@@ -310,7 +310,7 @@ public class PublicationController {
 
 		User u = users.get((Integer) s.getAttribute("userId"));
 
-		if (p.belongsTo(u)) {
+		if (!p.belongsTo(u)) {
 			return null;
 		}
 		efv.validate(ef, errors);
