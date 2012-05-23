@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 public class EncodingFilter implements Filter{
 
 	public void destroy() {
-		// TODO Auto-generated method stub
 		
 	}
 

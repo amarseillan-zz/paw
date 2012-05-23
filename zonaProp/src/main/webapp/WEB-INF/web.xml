@@ -16,22 +16,14 @@
 		<url-pattern>/bin/*</url-pattern>
 	</servlet-mapping>
 
-<!-- 	<servlet>
-	    <servlet-name>ErrorPage</servlet-name>
-	    <servlet-class>zonaProp.web.ErrorPage</servlet-class>
-	</servlet>
-	<servlet-mapping>
-	    <servlet-name>ErrorPage</servlet-name>
-	    <url-pattern>/bin/errorPage</url-pattern> 
-	</servlet-mapping>-->
-<!-- 	<filter>
+ 	<filter>
  		<filter-name>ErrorFilter</filter-name>
  		<filter-class>zonaProp.filters.ErrorFilter</filter-class>
  	</filter>
  	<filter-mapping> 
  		<filter-name>ErrorFilter</filter-name> 
  		<url-pattern>/*</url-pattern> 
- 	</filter-mapping>  -->
+ 	</filter-mapping>
 	<filter>
  		<filter-name>transactionFilter</filter-name> 
   		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class> 

@@ -20,7 +20,7 @@ public class ErrorFilter extends OncePerRequestFilter {
 		try{
 			filterChain.doFilter(req, resp);
 		}catch(Exception e){
-			resp.sendRedirect("errorPage");
+			resp.sendRedirect("../error/view");
 		}
 	}
 

@@ -17,7 +17,6 @@ public class SearchForm {
 	String pageSize = null;
 	
 	public SearchForm() {
-		// TODO Auto-generated constructor stub
 	}
 	
 	public SearchForm(String max, String min, OperationType operationType,
