@@ -1,11 +1,9 @@
 package zonaProp.web;
 
-import java.io.IOException;
-import java.io.OutputStream;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -169,31 +167,6 @@ public class PublicationController {
 		mav.setViewName("publication/editPhotos");
 		mav.addObject("publication", p);
 		return mav;
-	}
-
-	@RequestMapping(method = RequestMethod.GET)
-	public void viewPhoto(@RequestParam("imageId") Photo photo,
-			HttpServletResponse resp) {
-		if (photo == null) {
-			return;
-		}
-		resp.setContentType("image/jpeg");
-		resp.setHeader("Content-Disposition", "inline; filename=\"imagen"
-				+ photo.getId() + "\"");
-		OutputStream output = null;
-		try {
-			output = resp.getOutputStream();
-			resp.setContentLength(photo.getSize());
-			output.write(photo.getData());
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		} finally {
-			try {
-				output.close();
-			} catch (Exception e) {
-				throw new RuntimeException(e);
-			}
-		}
 	}
 
 	@RequestMapping(method = RequestMethod.GET)

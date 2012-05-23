@@ -7,7 +7,7 @@
 		<c:forEach items="${publication.photos}" var="photo">	
 			<tr>
 				<td>						
-					<img width="200" src="<c:url value="viewPhoto"><c:param name="imageId" value="${photo.id}" /></c:url>" /> </img>							
+					<img class="image" src="<c:url value="../photo/view"><c:param name="imageId" value="${photo.id}" /></c:url>" />							
 				</td>				
 				<td>					
 					<form  method="POST" action="deletePhoto">

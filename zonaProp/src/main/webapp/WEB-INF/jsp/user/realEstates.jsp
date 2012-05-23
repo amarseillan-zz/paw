@@ -11,7 +11,7 @@
 		<div class="well" >
 			<table>	<tbody>
 				<tr>
-				<td><img width="200" src="<c:url value="../publication/viewPhoto"><c:param name="imageId" value="${realEstate.photo.id}" /></c:url>" /> </img></td>
+				<td><img class="image" src="<c:url value="../photo/view"><c:param name="imageId" value="${realEstate.photo.id}" /></c:url>" /></td>
 				<td><h3>${realEstate.companyName}</h3>
 				<br><h5>Cantidad de avisos: <c:out value="${realEstate.activePublicationsQuantity}"/> <h5>
 				<br>

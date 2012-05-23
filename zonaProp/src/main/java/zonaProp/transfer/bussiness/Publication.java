@@ -16,6 +16,7 @@ import javax.persistence.OneToMany;
 
 import zonaProp.validators.LengthValidator;
 import zonaProp.validators.NotNullValidator;
+import zonaProp.validators.PositiveValidator;
 
 @Entity
 public class Publication extends PersistentEntity {
@@ -90,22 +91,27 @@ public class Publication extends PersistentEntity {
 	}
 
 	private void setPrice(double price) {
+		new PositiveValidator("precio").check(price);
 		this.price = price;
 	}
 
 	private void setEnvironments(int environments) {
+		new PositiveValidator("ambientes").check(environments);
 		this.environments = environments;
 	}
 
 	private void setCovered(double covered) {
+		new PositiveValidator("superficie cubierta").check(covered);
 		this.covered = covered;
 	}
 
 	private void setUncovered(double uncovered) {
+		new PositiveValidator("superficie descubierta").check(uncovered);
 		this.uncovered = uncovered;
 	}
 
 	private void setAge(int age) {
+		new PositiveValidator("antiguedad").check(age);
 		this.age = age;
 	}
 

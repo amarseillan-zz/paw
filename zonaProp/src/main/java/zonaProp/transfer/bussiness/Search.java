@@ -1,5 +1,7 @@
 package zonaProp.transfer.bussiness;
 
+import zonaProp.validators.PositiveValidator;
+
 public class Search {
 	private Double min = null;
 	private Double max = null;
@@ -20,10 +22,14 @@ public class Search {
 	}
 
 	private void setMin(Double min) {
+		if(min!=null)
+			new PositiveValidator("minimo").check(min);
 		this.min = min;
 	}
 
 	private void setMax(Double max) {
+		if(max!=null)
+			new PositiveValidator("maximo").check(max);
 		this.max = max;
 	}
 
