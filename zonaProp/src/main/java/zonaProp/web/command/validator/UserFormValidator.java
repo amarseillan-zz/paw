@@ -13,6 +13,7 @@ import zonaProp.validators.FieldValidator;
 import zonaProp.validators.FileExtensionValidator;
 import zonaProp.validators.FileSizeValidator;
 import zonaProp.validators.LengthValidator;
+import zonaProp.validators.MailFormatValidator;
 import zonaProp.web.command.UserForm;
 
 @Component
@@ -28,6 +29,7 @@ public class UserFormValidator implements Validator {
 	private FieldValidator<String> lastNameV = new LengthValidator("lastname",
 			3, 20);
 	private FieldValidator<String> emailV = new LengthValidator("email", 3, 20);
+	private FieldValidator<String> emailFV = new MailFormatValidator("email");
 	private FieldValidator<String> phoneV = new LengthValidator("phone", 3, 20);
 	private FieldValidator<CommonsMultipartFile> fileSizeValidator = new FileSizeValidator(
 			"fileData", 5000000);
@@ -54,6 +56,7 @@ public class UserFormValidator implements Validator {
 		usernameV.appendError(errors, form.getUsername());
 		passwordV.appendError(errors, form.getPassword());
 		emailV.appendError(errors, form.getEmail());
+		emailFV.appendError(errors, form.getEmail());
 		phoneV.appendError(errors, form.getPhone());
 
 		if (form.getUserType() == UserType.PRIVATEUSER) {

@@ -93,7 +93,9 @@ public class UserController {
 				s.setAttribute("userId", user.getId());
 				mav = new ModelAndView("redirect:../publication/search");
 			} catch (DuplicatedUserException e) {
-				//TODO hacer que se cargue un error de que ya est� en uso ese nombre
+					errors.rejectValue("username", "duplicatedUser");	
+					mav = new ModelAndView();
+					mav.addObject("userForm", uf);
 			}
 		} else {
 			mav = new ModelAndView();

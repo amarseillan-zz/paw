@@ -10,6 +10,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import zonaProp.validators.LengthValidator;
+import zonaProp.validators.MailFormatValidator;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
@@ -75,6 +76,7 @@ public abstract class User extends PersistentEntity {
 
 	private void setEmail(String email) {
 		new LengthValidator("mail", 3, 40).check(email);
+		new MailFormatValidator("mail").check(email);
 		this.email = email;
 	}
 
