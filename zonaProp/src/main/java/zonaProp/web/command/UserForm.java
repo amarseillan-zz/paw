@@ -4,11 +4,11 @@ import java.io.IOException;
 
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
-import zonaProp.transfer.bussiness.Photo;
-import zonaProp.transfer.bussiness.PrivatePerson;
-import zonaProp.transfer.bussiness.RealEstate;
-import zonaProp.transfer.bussiness.User;
-import zonaProp.transfer.bussiness.UserType;
+import zonaProp.model.photo.Photo;
+import zonaProp.model.user.PrivatePerson;
+import zonaProp.model.user.RealEstate;
+import zonaProp.model.user.User;
+import zonaProp.model.user.UserType;
 
 public class UserForm {
 	

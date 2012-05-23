@@ -8,7 +8,7 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
-import zonaProp.transfer.bussiness.UserType;
+import zonaProp.model.user.UserType;
 import zonaProp.validators.FieldValidator;
 import zonaProp.validators.FileExtensionValidator;
 import zonaProp.validators.FileSizeValidator;

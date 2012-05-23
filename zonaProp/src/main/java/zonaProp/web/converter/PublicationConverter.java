@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
-import zonaProp.model.repo.PublicationRepo;
-import zonaProp.transfer.bussiness.Publication;
+import zonaProp.model.publication.Publication;
+import zonaProp.model.publication.PublicationRepo;
 
 
 

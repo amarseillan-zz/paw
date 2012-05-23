@@ -4,9 +4,9 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import zonaProp.transfer.bussiness.Photo;
-import zonaProp.transfer.bussiness.PrivatePerson;
-import zonaProp.transfer.bussiness.RealEstate;
+import zonaProp.model.photo.Photo;
+import zonaProp.model.user.PrivatePerson;
+import zonaProp.model.user.RealEstate;
 
 public class UserTest {
 	

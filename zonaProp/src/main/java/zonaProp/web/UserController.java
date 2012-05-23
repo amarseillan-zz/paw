@@ -14,11 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import zonaProp.model.repo.DuplicatedUserException;
-import zonaProp.model.repo.UserRepo;
-import zonaProp.transfer.bussiness.RealEstate;
-import zonaProp.transfer.bussiness.User;
-import zonaProp.transfer.bussiness.UserType;
+import zonaProp.model.user.DuplicatedUserException;
+import zonaProp.model.user.RealEstate;
+import zonaProp.model.user.User;
+import zonaProp.model.user.UserRepo;
+import zonaProp.model.user.UserType;
 import zonaProp.web.command.LoginUserForm;
 import zonaProp.web.command.UserForm;
 import zonaProp.web.command.validator.LoginUserFormValidator;

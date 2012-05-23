@@ -1,9 +1,9 @@
 package zonaProp.web.command;
 
-import zonaProp.transfer.bussiness.OperationType;
-import zonaProp.transfer.bussiness.PropertyType;
-import zonaProp.transfer.bussiness.Search;
-import zonaProp.transfer.bussiness.User;
+import zonaProp.model.Search;
+import zonaProp.model.publication.OperationType;
+import zonaProp.model.publication.PropertyType;
+import zonaProp.model.user.User;
 
 public class SearchForm {
 

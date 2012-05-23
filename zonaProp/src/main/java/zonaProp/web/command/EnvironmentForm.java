@@ -1,7 +1,7 @@
 package zonaProp.web.command;
 
-import zonaProp.transfer.bussiness.Environment;
-import zonaProp.transfer.bussiness.EnvironmentType;
+import zonaProp.model.publication.Environment;
+import zonaProp.model.publication.EnvironmentType;
 
 public class EnvironmentForm {
 

@@ -1,8 +1,8 @@
 package zonaProp.web.command;
 
 
-import zonaProp.model.repo.UserRepo;
-import zonaProp.transfer.bussiness.User;
+import zonaProp.model.user.User;
+import zonaProp.model.user.UserRepo;
 
 
 

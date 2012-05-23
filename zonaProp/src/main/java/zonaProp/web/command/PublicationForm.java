@@ -3,11 +3,11 @@ package zonaProp.web.command;
 import java.util.ArrayList;
 import java.util.List;
 
-import zonaProp.transfer.bussiness.Environment;
-import zonaProp.transfer.bussiness.OperationType;
-import zonaProp.transfer.bussiness.PropertyServices;
-import zonaProp.transfer.bussiness.PropertyType;
-import zonaProp.transfer.bussiness.Publication;
+import zonaProp.model.publication.Environment;
+import zonaProp.model.publication.OperationType;
+import zonaProp.model.publication.PropertyServices;
+import zonaProp.model.publication.PropertyType;
+import zonaProp.model.publication.Publication;
 
 public class PublicationForm {
 

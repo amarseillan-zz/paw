@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
-import zonaProp.model.repo.UserRepo;
-import zonaProp.transfer.bussiness.User;
+import zonaProp.model.user.User;
+import zonaProp.model.user.UserRepo;
 
 
 

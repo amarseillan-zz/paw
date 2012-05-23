@@ -1,6 +1,6 @@
 package zonaProp.web.command;
 
-import zonaProp.transfer.bussiness.Comment;
+import zonaProp.model.publication.Comment;
 
 
 public class CommentForm {

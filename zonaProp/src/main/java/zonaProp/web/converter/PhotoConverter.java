@@ -5,8 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
-import zonaProp.model.repo.PhotoRepo;
-import zonaProp.transfer.bussiness.Photo;
+import zonaProp.model.photo.Photo;
+import zonaProp.model.photo.PhotoRepo;
 
 @Component
 public class PhotoConverter  implements Converter<String, Photo>{

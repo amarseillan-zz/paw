@@ -3,8 +3,8 @@ package zonaProp.mailing;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import zonaProp.transfer.bussiness.Comment;
-import zonaProp.transfer.bussiness.User;
+import zonaProp.model.publication.Comment;
+import zonaProp.model.user.User;
 
 @Component
 public class MailingService {

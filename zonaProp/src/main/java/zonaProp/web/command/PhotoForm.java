@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
-import zonaProp.transfer.bussiness.Photo;
+import zonaProp.model.photo.Photo;
 
 
 
