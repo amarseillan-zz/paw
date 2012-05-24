@@ -2,11 +2,11 @@
 <%@ include file="../header.jsp" %>
 
 
-<c:if test="${empty pList}">
+<c:if test="${resultPage.pages == 0}">
 	<h2>No se encontraron publicaciones</h2>
 </c:if>
 
-<c:if test="${not empty pList}">
+<c:if test="${resultPage.pages != 0}">
 	<h2>Publicaciones encontradas</h2>
 	
 	<table class="table table-striped">
@@ -21,7 +21,7 @@
 		</tr>
 		</thead>
 		<tbody>
-		<c:forEach items="${pList}" var="publication">
+		<c:forEach items="${resultPage.publications}" var="publication">
 			<tr>
 			<td>${publication.operationType.name}</td>
 			<td>${publication.propertyType.name}</td>
@@ -39,14 +39,14 @@
 		</c:forEach>
 		</tbody>
 	</table>
-	<c:forEach items="${sFList}" var="searchForm">
-	<c:if test="${not empty searchForm.publisher}">
-		<a href="searchResults?propertyType=${searchForm.propertyType}&operationType=${searchForm.operationType}&min=${searchForm.min}&max=${searchForm.max}&ascending=${searchForm.ascending}&_ascending=on&pageSize=${searchForm.pageSize}&page=${searchForm.page}&publisher=${searchForm.publisher.id}"><c:if test="${searchForm.page == sf.page}"><b></c:if>${searchForm.page}<c:if test="${searchForm.page == sf.page}"></b></c:if></a>
+	<c:forEach var="page" begin="0" end="${resultPage.pages -1}" step="1">
+		<c:if test="${not empty searchForm.publisher}">
+			<a href="searchResults?propertyType=${searchForm.propertyType}&operationType=${searchForm.operationType}&min=${searchForm.min}&max=${searchForm.max}&ascending=${searchForm.ascending}&_ascending=on&pageSize=${searchForm.pageSize}&page=${page}&publisher=${searchForm.publisher.id}"><c:if test="${page == searchForm.page}"><b></c:if>${page+1}<c:if test="${searchForm.page == page}"></b></c:if></a>
 		</c:if>
 		<c:if test="${empty searchForm.publisher}">
-			<a href="searchResults?propertyType=${searchForm.propertyType}&operationType=${searchForm.operationType}&min=${searchForm.min}&max=${searchForm.max}&ascending=${searchForm.ascending}&_ascending=on&pageSize=${searchForm.pageSize}&page=${searchForm.page}"><c:if test="${searchForm.page == sf.page}"><b></c:if>${searchForm.page}<c:if test="${searchForm.page == sf.page}"></b></c:if></a>
-			</c:if>
-		</c:forEach>
+			<a href="searchResults?propertyType=${searchForm.propertyType}&operationType=${searchForm.operationType}&min=${searchForm.min}&max=${searchForm.max}&ascending=${searchForm.ascending}&_ascending=on&pageSize=${searchForm.pageSize}&page=${page}"><c:if test="${searchForm.page == page}"><b></c:if>${page+1}<c:if test="${searchForm.page == page}"></b></c:if></a>
+		</c:if>
+	</c:forEach>
 </c:if>
 
 <form class="form-horizontal" method="GET" action="search">

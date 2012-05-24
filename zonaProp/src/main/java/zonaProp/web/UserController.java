@@ -18,9 +18,9 @@ import zonaProp.model.user.DuplicatedUserException;
 import zonaProp.model.user.RealEstate;
 import zonaProp.model.user.User;
 import zonaProp.model.user.UserRepo;
-import zonaProp.model.user.UserType;
 import zonaProp.web.command.LoginUserForm;
 import zonaProp.web.command.UserForm;
+import zonaProp.web.command.UserType;
 import zonaProp.web.command.validator.LoginUserFormValidator;
 import zonaProp.web.command.validator.UserFormValidator;
 
@@ -84,7 +84,6 @@ public class UserController {
 		ufv.validate(uf, errors);
 		User user = null;
 
-		// List<String> errors = new UserFormValidator().check(uf);
 		mav = null;
 		if (!errors.hasErrors()) {
 			user = uf.build();

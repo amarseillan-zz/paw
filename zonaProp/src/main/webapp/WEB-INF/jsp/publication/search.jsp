@@ -5,6 +5,7 @@
 						
 						<form:form class="form-horizontal" method="GET" action="searchResults" commandName="searchForm">
 						<div class="error"><form:errors path="*" /></div>
+							<form:input type="hidden" path="page"/>
 							<fieldset>
 								<div class="control-group">
 									<label class="control-label" for="type">Tipo de propiedad</label>

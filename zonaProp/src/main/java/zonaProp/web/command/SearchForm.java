@@ -1,8 +1,8 @@
 package zonaProp.web.command;
 
-import zonaProp.model.Search;
 import zonaProp.model.publication.OperationType;
 import zonaProp.model.publication.PropertyType;
+import zonaProp.model.publication.Search;
 import zonaProp.model.user.User;
 
 public class SearchForm {
@@ -13,15 +13,15 @@ public class SearchForm {
 	PropertyType propertyType = null;
 	User publisher = null;
 	boolean ascending = true;
-	String page = null;
+	int page = 0;
 	String pageSize = null;
-	
+
 	public SearchForm() {
 	}
-	
+
 	public SearchForm(String max, String min, OperationType operationType,
 			PropertyType propertyType, User publisher, boolean ascending,
-			String page, String pageSize) {
+			int page, String pageSize) {
 		super();
 		this.max = max;
 		this.min = min;
@@ -83,33 +83,27 @@ public class SearchForm {
 		this.propertyType = propertyType;
 	}
 
-	public Integer getPageValue(){
-		return this.page==null || this.page.isEmpty() ? 1 : Integer.parseInt(this.page);
-	}
-	
-	public String getPage(){
+	public int getPage() {
 		return page;
 	}
-	
-	public void setPage(String page){
+
+	public void setPage(int page) {
 		this.page = page;
 	}
-	
-	public String getPageSize(){
+
+	public String getPageSize() {
 		return pageSize;
 	}
-	
-	public Integer getPageSizeValue(){
-		return this.pageSize==null || this.pageSize.isEmpty() ? 50 : Integer.parseInt(this.pageSize);
-	}
-	
-	public void setPageSize(String pageSize){
+
+	public void setPageSize(String pageSize) {
 		this.pageSize = pageSize;
 	}
-	
+
 	public Search build() {
-		return new Search(min==null || min.isEmpty() ? null : Double.parseDouble(min),
-				max==null || max.isEmpty() ? null : Double.parseDouble(max), operationType,
-				propertyType, ascending, publisher);
+		return new Search(min == null || min.isEmpty() ? null : Double
+				.parseDouble(min), max == null || max.isEmpty() ? null : Double
+				.parseDouble(max), operationType, propertyType, ascending,
+				publisher, page, pageSize == null || pageSize.isEmpty() ? 30
+						: Integer.parseInt(pageSize));
 	}
 }

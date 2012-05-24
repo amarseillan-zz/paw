@@ -8,7 +8,6 @@ import zonaProp.model.photo.Photo;
 import zonaProp.model.user.PrivatePerson;
 import zonaProp.model.user.RealEstate;
 import zonaProp.model.user.User;
-import zonaProp.model.user.UserType;
 
 public class UserForm {
 	

@@ -2,7 +2,6 @@ package zonaProp.model.publication;
 
 import java.util.List;
 
-import zonaProp.model.Search;
 import zonaProp.model.photo.Photo;
 
 
@@ -16,12 +15,12 @@ public interface PublicationRepo {
 	public List<Publication> getAll();
 
 	/**
-	 * Obtiene la publicaci—n con un determinado id.
+	 * Obtiene la publicaciï¿½n con un determinado id.
 	 */
 	public Publication get(int id);
 	
 	/**
-	 * Almacena una nueva publicaci—n.
+	 * Almacena una nueva publicaciï¿½n.
 	 */
 	public void add(Publication user);
 
@@ -30,7 +29,7 @@ public interface PublicationRepo {
 	 * 
 	 * Devuelve la lista de las publicaciones que cumplan con el criterio @search
 	 */
-	public List<Publication> getSome(Search search);
+	public ResultPage getSome(Search search);
 
 
 	

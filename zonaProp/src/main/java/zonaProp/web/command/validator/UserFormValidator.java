@@ -8,13 +8,13 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
-import zonaProp.model.user.UserType;
 import zonaProp.validators.FieldValidator;
 import zonaProp.validators.FileExtensionValidator;
 import zonaProp.validators.FileSizeValidator;
 import zonaProp.validators.LengthValidator;
 import zonaProp.validators.MailFormatValidator;
 import zonaProp.web.command.UserForm;
+import zonaProp.web.command.UserType;
 
 @Component
 public class UserFormValidator implements Validator {

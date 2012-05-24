@@ -1,8 +1,7 @@
 package zonaProp.web;
 
 
-import java.util.ArrayList;
-import java.util.List;
+
 
 import javax.servlet.http.HttpSession;
 
@@ -14,13 +13,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import zonaProp.mailing.MailingService;
+import zonaProp.model.mailing.MailingService;
 import zonaProp.model.photo.Photo;
 import zonaProp.model.publication.Environment;
 import zonaProp.model.publication.EnvironmentType;
 import zonaProp.model.publication.PropertyServices;
 import zonaProp.model.publication.Publication;
 import zonaProp.model.publication.PublicationRepo;
+import zonaProp.model.publication.ResultPage;
 import zonaProp.model.user.User;
 import zonaProp.model.user.UserRepo;
 import zonaProp.web.command.CommentForm;
@@ -77,35 +77,15 @@ public class PublicationController {
 		sfv.validate(sf, errors);
 
 		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("searchForm", sf);
 
 		if (errors.hasErrors()) {
-			mav.addObject("searchForm", sf);
 			mav.setViewName("publication/search");
 			return mav;
 		} else {
-			List<Publication> pList = publications.getSome(sf.build());
-
-			int fromIndex = (sf.getPageValue() - 1) * sf.getPageSizeValue();
-			int toIndex = sf.getPageValue() * sf.getPageSizeValue();
-
-			fromIndex = (fromIndex > 0 && fromIndex <= toIndex && fromIndex < pList
-					.size()) ? fromIndex : 0;
-			toIndex = (toIndex > 0 && toIndex < pList.size() && toIndex >= fromIndex) ? toIndex
-					: pList.size();
-
-			List<SearchForm> sFList = new ArrayList<SearchForm>();
-
-			for (int i = 0; i < pList.size() / sf.getPageSizeValue()
-					+ (pList.size() % sf.getPageSizeValue() == 0 ? 0 : 1); i++) {
-				SearchForm s = new SearchForm(sf.getMax(), sf.getMin(),
-						sf.getOperationType(), sf.getPropertyType(),
-						sf.getPublisher(), sf.isAscending(),
-						String.valueOf(i + 1), sf.getPageSize());
-				sFList.add(s);
-			}
-			mav.addObject("sf", sf);
-			mav.addObject("sFList", sFList);
-			mav.addObject("pList", pList.subList(fromIndex, toIndex));
+			ResultPage resultPage = publications.getSome(sf.build());
+			mav.addObject("resultPage", resultPage);
 			return mav;
 		}
 
