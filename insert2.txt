@@ -41,12 +41,12 @@ INSERT INTO PROPERTY_SERVICES (publication_id, services) SELECT publicationid,
 DELETE FROM PROPERTY_SERVICES WHERE SERVICES like 'mark';
 
 
-INSERT INTO ENVIRONMENT (depth, "type", width, publicationid) values (2, 1, 5, 1);
-INSERT INTO ENVIRONMENT (depth, "type", width, publicationid) values (2, 1, 5, 2);
-INSERT INTO ENVIRONMENT (depth, "type", width, publicationid) values (2, 2, 5, 3);
-INSERT INTO ENVIRONMENT (depth, "type", width, publicationid) values (2, 2, 5, 1);
-INSERT INTO ENVIRONMENT (depth, "type", width, publicationid) values (4, 2, 2, 5);
-INSERT INTO ENVIRONMENT (depth, "type", width, publicationid) values (7, 3, 5, 1);
+INSERT INTO ENVIRONMENT (depth, "type", width, publicationid) values (2, 1, 5, 10000);
+INSERT INTO ENVIRONMENT (depth, "type", width, publicationid) values (2, 1, 5, 10002);
+INSERT INTO ENVIRONMENT (depth, "type", width, publicationid) values (2, 2, 5, 10003);
+INSERT INTO ENVIRONMENT (depth, "type", width, publicationid) values (2, 2, 5, 10000);
+INSERT INTO ENVIRONMENT (depth, "type", width, publicationid) values (4, 2, 2, 10005);
+INSERT INTO ENVIRONMENT (depth, "type", width, publicationid) values (7, 3, 5, 10000);
 
 
 
