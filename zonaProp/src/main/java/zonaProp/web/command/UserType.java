@@ -1,4 +1,4 @@
-package zonaProp.model.user;
+package zonaProp.web.command;
 
 public enum UserType {
 	PRIVATEUSER, REALESTATE;

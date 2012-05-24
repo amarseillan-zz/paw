@@ -1,4 +1,4 @@
-package zonaProp.mailing;
+package zonaProp.model.mailing;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -17,7 +17,7 @@ public class MailingService {
 	
 	public void contact(Comment c, User u){
 		
-		sendMailTLS.send(c.getEmail(), u.getEmail(), "Coment— en una de tus propiedades "
+		sendMailTLS.send(c.getEmail(), u.getEmail(), "Comentï¿½ en una de tus propiedades "
 				+ c.getName(), "mail del comentante: " + c.getEmail() + "\ntel: " + c.getPhone()
 				+ "\ncomentario:\n" + c.getComment());
 

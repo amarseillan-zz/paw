@@ -1,4 +1,4 @@
-package zonaProp.mailing;
+package zonaProp.model.mailing;
 
 import java.util.Properties;
 import java.util.concurrent.ExecutorService;
