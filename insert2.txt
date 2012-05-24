@@ -1,0 +1,59 @@
+INSERT INTO SYS_USER(id, email, "password", dtype, phone, username, lastname, "name", companyname, photo_id)
+select userid, email, "password", 'PrivatePerson', phone, nick, lastname, "name", null, null from OLD_SYS_USER;
+
+
+
+INSERT INTO PUBLICATION (id, "access", active, address, age, city, covered, description, environments, operationtype, price,
+ propertytype, reserved, uncovered, publisher_id)
+SELECT publicationid, 0, active, address, age, city, covered, description,environments, operation_type-1, price, "type"-1, false, uncovered, userid FROM OLD_PUBLICATION;
+
+INSERT INTO PROPERTY_SERVICES (publication_id, services) SELECT publicationid, 
+	       CASE WHEN cable=true THEN 'CABLE'
+	            ELSE 'mark'
+	       END
+	    FROM OLD_PUBLICATION;
+INSERT INTO PROPERTY_SERVICES (publication_id, services) SELECT publicationid, 
+	       CASE WHEN phone=true THEN 'PHONE'
+	            ELSE 'mark'
+	       END
+	    FROM OLD_PUBLICATION;
+INSERT INTO PROPERTY_SERVICES (publication_id, services) SELECT publicationid, 
+	       CASE WHEN pool=true THEN 'POOL'
+	            ELSE 'mark'
+	       END
+	    FROM OLD_PUBLICATION;
+INSERT INTO PROPERTY_SERVICES (publication_id, services) SELECT publicationid, 
+	       CASE WHEN living=true THEN 'LIVING'
+	            ELSE 'mark'
+	       END
+	    FROM OLD_PUBLICATION;
+INSERT INTO PROPERTY_SERVICES (publication_id, services) SELECT publicationid, 
+	       CASE WHEN paddle=true THEN 'PADDLE'
+	            ELSE 'mark'
+	       END
+	    FROM OLD_PUBLICATION;
+INSERT INTO PROPERTY_SERVICES (publication_id, services) SELECT publicationid, 
+	       CASE WHEN barbecue=true THEN 'BARBACUE'
+	            ELSE 'mark'
+	       END
+	    FROM OLD_PUBLICATION;
+
+DELETE FROM PROPERTY_SERVICES WHERE SERVICES like 'mark';
+
+
+INSERT INTO ENVIRONMENT (depth, "type", width, publicationid) values (2, 1, 5, 1);
+INSERT INTO ENVIRONMENT (depth, "type", width, publicationid) values (2, 1, 5, 2);
+INSERT INTO ENVIRONMENT (depth, "type", width, publicationid) values (2, 2, 5, 3);
+INSERT INTO ENVIRONMENT (depth, "type", width, publicationid) values (2, 2, 5, 1);
+INSERT INTO ENVIRONMENT (depth, "type", width, publicationid) values (4, 2, 2, 5);
+INSERT INTO ENVIRONMENT (depth, "type", width, publicationid) values (7, 3, 5, 1);
+
+
+
+DROP TABLE OLD_OPERATION_TYPE;
+DROP TABLE OLD_PHOTO;
+DROP TABLE OLD_PROPERTY_TYPE;
+DROP TABLE OLD_PUBLICATION;
+DROP TABLE OLD_SYS_USER;
+
+

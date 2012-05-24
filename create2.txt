@@ -1,0 +1,149 @@
+
+-- Table: photo
+
+-- DROP TABLE photo;
+
+CREATE TABLE photo
+(
+  id serial NOT NULL,
+  data bytea,
+  CONSTRAINT photo_pkey PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE photo OWNER TO paw;
+
+
+
+
+
+-- Table: sys_user
+
+-- DROP TABLE sys_user;
+
+CREATE TABLE sys_user
+(
+  id serial NOT NULL,
+  email character varying(255),
+  "password" character varying(255),
+  dtype character varying(31) NOT NULL,
+  phone character varying(255),
+  username character varying(255),
+  lastname character varying(255),
+  "name" character varying(255),
+  companyname character varying(255),
+  photo_id integer,
+  CONSTRAINT sys_user_pkey PRIMARY KEY (id),
+  CONSTRAINT fk74a81dfdc596a56 FOREIGN KEY (photo_id)
+      REFERENCES photo (id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE sys_user OWNER TO paw;
+
+
+-- Table: publication
+
+-- DROP TABLE publication;
+
+CREATE TABLE publication
+(
+  id serial NOT NULL,
+  "access" integer NOT NULL,
+  active boolean NOT NULL,
+  address character varying(255),
+  age integer NOT NULL,
+  city character varying(255),
+  covered double precision NOT NULL,
+  description character varying(255),
+  environments integer NOT NULL,
+  operationtype integer,
+  price double precision NOT NULL,
+  propertytype integer,
+  reserved boolean NOT NULL,
+  uncovered double precision NOT NULL,
+  publisher_id integer,
+  CONSTRAINT publication_pkey PRIMARY KEY (id),
+  CONSTRAINT fk23254a0c9c299124 FOREIGN KEY (publisher_id)
+      REFERENCES sys_user (id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE publication OWNER TO paw;
+
+
+
+-- Table: publication_photo
+
+-- DROP TABLE publication_photo;
+
+CREATE TABLE publication_photo
+(
+  publication_id integer NOT NULL,
+  photos_id integer NOT NULL,
+  CONSTRAINT fk2205421f25cfc9a7 FOREIGN KEY (photos_id)
+      REFERENCES photo (id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT fk2205421fdfbae10 FOREIGN KEY (publication_id)
+      REFERENCES publication (id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT publication_photo_photos_id_key UNIQUE (photos_id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE publication_photo OWNER TO paw;
+
+
+
+-- Table: property_services
+
+-- DROP TABLE property_services;
+
+CREATE TABLE property_services
+(
+  publication_id integer NOT NULL,
+  services character varying(255),
+  CONSTRAINT fk51302388dfbae10 FOREIGN KEY (publication_id)
+      REFERENCES publication (id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE property_services OWNER TO paw;
+
+
+
+
+
+-- Table: environment
+
+-- DROP TABLE environment;
+
+CREATE TABLE environment
+(
+  id serial NOT NULL,
+  depth integer NOT NULL,
+  "type" integer,
+  width integer NOT NULL,
+  publicationid integer,
+  CONSTRAINT environment_pkey PRIMARY KEY (id),
+  CONSTRAINT fk5e4ad9f3a138f249 FOREIGN KEY (publicationid)
+      REFERENCES publication (id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE environment OWNER TO paw;
+
+
+
+
+
