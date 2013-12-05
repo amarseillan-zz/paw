@@ -14,9 +14,9 @@ Execution mode
 
 Technologies
 ============
- -Java
- -Spring
- -Spring MVC
- -Maven
- -PostreSQL
- -Git
+ + Java
+ + Spring
+ + Spring MVC
+ + Maven
+ + PostreSQL
+ + Git
